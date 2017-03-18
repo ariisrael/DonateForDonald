@@ -4,50 +4,43 @@ module.exports = {
         name: 'American Civil Liberties Union Foundation',
         site: 'www.aclu.org',
         alias: ['ACLU'],
-        twitter: ['@ACLU'],
-        deductible: true        
+        twitter: ['@ACLU']    
     }, {
         ein: '52-1481896',
         name: 'Human Rights Campaign Foundation',
         alias: ['HRC'],
         site: 'www.hrc.org',
-        twitter: ['@HRC'],
-        deductible: true
+        twitter: ['@HRC']
     }, {
         ein: '13-2654926',
         name: 'Natural Resources Defense Council',
         site: 'www.nrdc.org',
         alias: ['NRDC'],
-        twitter: ['@NRDC'],
-        deductible: true
+        twitter: ['@NRDC']
     }, {
         ein: '13-1644147',
         name: 'Planned Parenthood Foundation of America',
         alias: ['PP', 'PPFA'],
         twitter: ['@PPFA', '@PPact'],
-        site: 'www.plannedparenthood.org',
-        deductible: true
+        site: 'www.plannedparenthood.org'
     }, {
         ein: '13-1818723',
         name: 'Anti-Defamation League',
         alias: ['ADL'],
         site: 'www.adl.org',
-        twitter: ['@ADL_National'],
-        deductible: true
+        twitter: ['@ADL_National']
     }, {
         ein: '95-4539765',
         name: 'National Immigration Law Center',
         alias: ['NILC'],
         twitter: ['@NILC_org'],
-        site: 'www.nilc.org',
-        deductible: true
+        site: 'www.nilc.org'
     }, {
         ein: '22-6082880',
         twitter: ['@theCCR'],
         name: 'Center for Constitutional Rights',
         alias: ['CCR'],
-        site: 'www.ccrjustice.org',
-        deductible: true
+        site: 'www.ccrjustice.org'
     }, {
         ein: '13-1655255',
         name: 'NAACP Legal Defense and Educational Fund',
@@ -241,7 +234,6 @@ module.exports = {
         name: 'Mercy Corps',
         site: 'https://www.mercycorps.org/',
         twitter: ['@mercycorps'],
-        deductible: true 
     }, {
         ein: '23-7069110',
         name: 'Oxfam America',
