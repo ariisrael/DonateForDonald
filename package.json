@@ -11,7 +11,11 @@
     "nodemon": "nodemon --debug index"
   },
   "license": "ISC",
-  "keywords": ["trump", "twitter", "donations"],
+  "keywords": [
+    "trump",
+    "twitter",
+    "donations"
+  ],
   "dependencies": {
     "async": "^2.1.5",
     "babel-core": "^6.23.1",
@@ -61,13 +65,22 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "supertest": "^3.0.0"
-  }, 
+  },
   "homepage": "www.donatefordonald.org",
-  "contributors": ["Ari Israel", "Greg Meyer"],
-  "repository": {"type": "git", "url": "https://github.com/ariisrael/DonateForDonald.git"}
+  "contributors": [
+    "Ari Israel",
+    "Greg Meyer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ariisrael/DonateForDonald.git"
+  }
 }

@@ -58,6 +58,9 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# ESLint Config
+.eslintrc.js
+
 # Env
 .env
 
