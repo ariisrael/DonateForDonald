@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="panel">
+    <div class="panel-body">
+      {{#if messages.success}}
+        <div role="alert" class="alert alert-success">
+          {{#each messages.success}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if messages.error}}
+        <div role="alert" class="alert alert-danger">
+          {{#each messages.error}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <form method="POST" action="/account?_method=PUT" class="form-horizontal">
+        <legend>My Profile</legend>
+        <div class="form-group">
+          <label for="name" class="col-sm-3">Full Name</label>
+          <div class="col-sm-7">
+            <input type="text" name="name" id="name" class="form-control" value="{{user.name}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-3">Email Address</label>
+          <div class="col-sm-7">
+            <input type="email" name="email" id="email" class="form-control" value="{{user.email}}">
+          </div>
+        </div>
+        <div class="form-group">
+           <label for="phone" class="col-sm-3">Cell Phone</label>
+           <div class="col-sm-7">
+            <input type="tel" name="phone" id="phone" placeholder="(123) 456-7890" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-4">
+            <button type="submit" class="btn btn-success">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <form method="POST" action="/account?_method=PUT" class="form-horizontal">
+        <legend>Change Password</legend>
+        <div class="form-group">
+          <label for="password" class="col-sm-3">New Password</label>
+          <div class="col-sm-7">
+            <input type="password" name="password" id="password" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirm" class="col-sm-3">Confirm Password</label>
+          <div class="col-sm-7">
+            <input type="password" name="confirm" id="confirm" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-3">
+            <button type="submit" class="btn btn-success">Change Password</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <legend>Linked Accounts</legend>
+        <div class="form-group">
+          <div class="col-sm-4">
+          {{#if user.facebook}}
+            <p><a href="/unlink/facebook" class="text-danger">Unlink my Facebook account</a></p>
+          {{else}}
+            <p><a href="/auth/facebook" class="btn btn-facebook"><i class="fa fa-facebook"></i> Link my Facebook account</a></p>
+          {{/if}}
+          {{#if user.twitter}}
+            <p><a href="/unlink/twitter" class="text-danger">Unlink my Twitter account</a></p>
+          {{else}}
+            <p><a href="/auth/twitter" class="btn btn-twitter"><i class="fa fa-twitter"></i> Link my Twitter account</a></p>
+          {{/if}}
+          {{#if user.google}}
+            <p><a href="/unlink/google" class="text-danger">Unlink my Google account</a></p>
+          {{else}}
+            <p><a href="/auth/google" class="btn btn-google"><i class="fa fa-google"></i> Link my Google account</a></p>
+          {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-body">
+      <form method="POST" action="/account?_method=DELETE" class="form-horizontal">
+        <legend>Delete Account</legend>
+        <div class="form-group">
+          <p class="col-sm-9">You can delete your account, but keep in mind this action is irreversible.</p>
+          <div class="col-sm-9">
+            <button type="submit" class="btn btn-danger">Delete my account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
