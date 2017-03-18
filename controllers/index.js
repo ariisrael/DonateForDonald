@@ -1,9 +1,16 @@
 // Export all controllers
-modules.exports = {
-    charities: require('./charities'),
-    triggers: require('./triggers'),
-    users: require('./users'),
-    donations: require('./donations'),
-    tweets: require('./tweets'),
-    home: require('./home')
-}
+const charitiesController = require('./charities');
+const triggersController = require('./triggers');
+const usersController = require('./users');
+const donationsController = require('./donations');
+const tweetsController = require('./tweets');
+const homeController = require('./home');
+
+module.exports = {
+  charities: charitiesController,
+  triggers: triggersController,
+  users: usersController,
+  donations: donationsController,
+  tweets: tweetsController,
+  home: homeController,
+};
