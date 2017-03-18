@@ -4,13 +4,14 @@ const Schema = mongoose.Schema;
 
 var charitySchema = new Schema({
   name: { type: String, unique: true, required: true },
-  alias: [String],
+  alias: String,
   twitter: [String],
   logo: String,
   website: String,
-  ein: { type: String, unique: true, required: true },
-  taxDeductible: { type: Boolean, default: true }
+  ein: { type: String, unique: true, required: true }
 });
+
+charitySchema.index({'name': 'text'}, {'alias': 'text'});
 
 const Charity = mongoose.model('Charity', charitySchema);
 
