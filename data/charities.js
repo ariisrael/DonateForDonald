@@ -1,32 +1,31 @@
-module.exports = { 
-    charities: [{
+var charities = [{
         ein: '13-3871360',
         name: 'American Civil Liberties Union Foundation',
         site: 'www.aclu.org',
-        alias: ['ACLU'],
+        alias: 'ACLU',
         twitter: ['@ACLU']    
     }, {
         ein: '52-1481896',
         name: 'Human Rights Campaign Foundation',
-        alias: ['HRC'],
+        alias: 'HRC',
         site: 'www.hrc.org',
         twitter: ['@HRC']
     }, {
         ein: '13-2654926',
         name: 'Natural Resources Defense Council',
         site: 'www.nrdc.org',
-        alias: ['NRDC'],
+        alias: 'NRDC',
         twitter: ['@NRDC']
     }, {
         ein: '13-1644147',
         name: 'Planned Parenthood Foundation of America',
-        alias: ['PP', 'PPFA'],
+        alias: 'PPFA',
         twitter: ['@PPFA', '@PPact'],
         site: 'www.plannedparenthood.org'
     }, {
         ein: '13-1818723',
         name: 'Anti-Defamation League',
-        alias: ['ADL'],
+        alias: 'ADL',
         site: 'www.adl.org',
         twitter: ['@ADL_National']
     }, {
@@ -44,13 +43,13 @@ module.exports = {
     }, {
         ein: '13-1655255',
         name: 'NAACP Legal Defense and Educational Fund',
-        alias: ['LDF'],
+        alias: 'LDF',
         site: 'www.naacpldf.org',
         twitter: ['@NAACP_LDF', '@NAACP']
     }, {
         ein: '77-0646756',
         name: 'Council on American-Islamic Relations Foundation',
-        alias: ['CAIR'],
+        alias: 'CAIR',
         site: 'www.cair.org',
         twitter: ['@CAIRNational']
     }, {
@@ -67,7 +66,7 @@ module.exports = {
     }, {
         ein: '52-1343924',
         name: 'Government Accountability Project',
-        alias: ['GAP'],
+        alias: 'GAP',
         twitter: ['@GovAcctProj'],
         site: 'www.whistleblower.org'
     }, {
@@ -88,7 +87,7 @@ module.exports = {
     }, {
         ein: '13-3081500',
         name: 'Committee to Protect Journalists',
-        alias: ['CPJ'],
+        alias: 'CPJ',
         site: 'www.cpj.org',
         twitter: ['@pressfreedom']
     }, {
@@ -99,14 +98,13 @@ module.exports = {
     }, {
         ein: '31-1580204',
         name: 'Clinton Foundation',
-        alias: ['Clinton Global Initiative', 'CF'],
+        alias: 'CF',
         twitter: ['@ClintonFdn', '@HillaryClinton'],
         site: 'www.clintonfoundation.org'
     }, {
         ein: '13-1760110',
         twitter: ['@UNICEF'],
         name: 'United States Fund for UNICEF',
-        alias: ['UNICEF'],
         site: 'www.unicefusa.org'
     }, {
         ein: '20-2370934',
@@ -129,20 +127,20 @@ module.exports = {
     }, {
         ein: '52-1477004',
         name: 'National Organization for Women Foundation',
-        alias: ['NOW'],
+        alias: 'NOW',
         site: 'www.now.org',
         twitter: ['@NationalNOW']
     }, {
         ein: '46-2216565',
         name: 'United We Dream',
         site: 'http://unitedwedream.org/',
-        alias: ['UWD'],
+        alias: 'UWD',
         twitter: ['@UNITEDWEDREAM']       
     }, {
         ein: '52-1662800',
         name: 'United Nations High Commissioner for Refugees',
         site: 'http://www.unrefugees.org/',
-        alias: ['UNHCR', 'UN Refugee Agency', 'USA for UNHCR'],
+        alias: 'UNHCR',
         twitter: ['@Refugees', '@unhcr', '@UNRefugeeAgency']
     }, {
         ein: '95-4681287',
@@ -153,13 +151,13 @@ module.exports = {
         ein: '77-0071852',
         name: 'Black Lives Matter',
         site: 'http://blacklivesmatter.com/',
-        alias: ['BLM', 'IDEX'],
+        alias: 'BLM',
         twitter: '@Blklivesmatter'
     }, {
         ein: '94-6069890',
         name: 'Sierra Club Foundation',
         site: 'http://www.sierraclubfoundation.org',
-        alias: ['SCF'],
+        alias: 'SCF',
         twitter: ['@SierraClub']
     }, {
         ein: '13-2875808',
@@ -175,19 +173,19 @@ module.exports = {
     }, {
         ein: '74-1563270',
         name: 'Mexican American Legal Defense and Educational Fund',
-        alias: ['MALDEF'],
+        alias: 'MALDEF',
         site: 'www.maldef.org/',
         twitter: ['@MALDEF']
     }, {
         ein: '04-2535767',
         name: 'Union of Concerned Scientists',
-        alias: ['UCSUSA'],
+        alias: 'UCSUSA',
         site: 'www.ucsusa.org/',
         twitter: ['@UCSUSA']
     }, {
         ein: '11-6107128',
         name: 'Environmental Defense Fund',
-        alias: ['EDF'],
+        alias: 'EDF',
         site: 'https://www.edf.org/',
         twitter: ['@EnvDefenseFund']
     }, {
@@ -203,7 +201,7 @@ module.exports = {
     }, {
         ein: '52-1218336',
         name: 'People for the Ethical Treatment of Animals',
-        alias: ['PETA'],
+        alias: 'PETA',
         site: 'http://www.peta.org/',
         twitter: ['@peta']     
     }, {
@@ -221,7 +219,7 @@ module.exports = {
     }, {
         ein: '13-5660870',
         name: 'International Rescue Committee',
-        alias: ['IRC'],
+        alias: 'IRC',
         site: 'https://www.rescue.org/',
         twitter: ['@theIRC']
     }, {
@@ -247,8 +245,21 @@ module.exports = {
     }, {
         ein: '13-5563422',
         name: 'Catholic Relief Services',
-        alias: ['CRS'],
+        alias: 'CRS',
         site: 'www.crs.org/',
         twitter: ['@catholicrelief']
     }
-]};
+];
+
+$(document).ready(function() {
+    var charitiesOptions = "";
+    charities.forEach(function(charity) {
+        var html = `<div class="item" data-value="${charity.ein}">${charity.name}`
+        if(charity.alias) {
+            html += ` (${charity.alias})`;
+        } 
+        html += "</div>";
+        charitiesOptions.push(html)
+    });
+    $(charitiesOptions).appendTo("#charities");
+});

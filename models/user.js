@@ -6,16 +6,28 @@ const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-var UserTriggerSchema = new Schema({
-    triggerId: { ref: 'Trigger', type: ObjectId, index: true, required: true },
-    amount: { type: Number, min: 0, required: true },
-    charityId: { ref: 'Charity', type: ObjectId, required: true },
-    active: { type: Boolean, default: false }
+const ActivitySchema = new Schema({
+    tweetId: ObjectId,
+    amount: Number,
+    date: { type: Date, default: new Date() },
+}); 
+
+const DonationSchema = new Schema({
+    triggerId: ObjectId, 
+    wager: Number,
+    charity: ObjectId,
+    active: Boolean,
+    activity: [ActivitySchema],
 });
 
-var UserSchema = new Schema({
-    name: { type: String, trim: true },
-    email: { type: String, required: true},
+const BalanceSchema = new Schema({
+    charity: { ref: 'Charity', type: ObjectId }, 
+    amount: { type: Number, required: true, default: 0, min: 0 },
+});
+
+const UserSchema = new Schema({
+    name: { type: String, trim: true, },
+    email: { type: String, required: true, },
     phone: String,
     password: String,
     passwordResetToken: String,
@@ -23,16 +35,16 @@ var UserSchema = new Schema({
     facebook: String,
     twitter: String,
     google: String,
-    triggers: [UserTriggerSchema],
-    confirm: Boolean,
-    admin: {
-        type: Boolean,
-        default: false
-    }
-}, { toJSON: { virtuals: true }});
+    donations: [DonationSchema],
+    balances: [BalanceSchema],
+    admin: { type: Boolean, default: false, },
+    monthlyLimit: { type: Number, min: 0, },
+    paymentToken: String,
+    billingDate: Date,
+}, { toJSON: { virtuals: true, }, });
 
 UserSchema.pre('save', function (next) {
-    var user = this;
+    const user = this;
     if (!user.isModified('password')) { return next(); }
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(user.password, salt, null, function (err, hash) {
@@ -49,11 +61,11 @@ UserSchema.methods.comparePassword = function (password, cb) {
 };
 
 UserSchema.options.toJSON = {
-    transform: function (doc, ret, options) {
+    transform (doc, ret, options) {
         delete ret.password;
         delete ret.passwordResetToken;
         delete ret.passwordResetExpires;
-    }
+    },
 };
 
 const User = mongoose.model('User', UserSchema);

@@ -4,18 +4,15 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 var TweetSchema = new Schema({
-  twitterId: { type: String, required: true },
-  text: { type: String, required: true },
+  _id: String,
+  tweetId: String,
+  text: String,
   postedAt: Date,
-  analyzed: Boolean,
-  triggers: [{ ref: 'Trigger', type: ObjectId }],
+  hashtags: [String],
+  tagged: [String],
   link: String,
-  meta: {
-    favorites: Number,
-    retweets: Number
-  }
 });
 
+TweetSchema.index({text: 'text'});
 const Tweet = mongoose.model('Tweet', TweetSchema);
-
 module.exports = exports = Tweet;
