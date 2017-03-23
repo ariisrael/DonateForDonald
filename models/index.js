@@ -5,4 +5,4 @@ exports.Trigger = require('./trigger');
 exports.Tweet = require('./tweet');
 exports.User = require('./user');
 exports.Donation = require('./donation');
-exports.Transaction = require('./transaction');
+exports.Payment = require('./payment');
