@@ -1,16 +1,8 @@
 // Export all controllers
-const charitiesController = require('./charities');
-const triggersController = require('./triggers');
-const usersController = require('./users');
-const donationsController = require('./donations');
-const tweetsController = require('./tweets');
-const homeController = require('./home');
 
-module.exports = {
-  charities: charitiesController,
-  triggers: triggersController,
-  users: usersController,
-  donations: donationsController,
-  tweets: tweetsController,
-  home: homeController,
-};
+exports.charities = require('./charities');
+exports.triggers = require('./triggers');
+exports.users = require('./users');
+exports.donations = require('./donations');
+exports.tweets = require('./tweets');
+exports.payments = require('./payments');
