@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
 
 const PaymentSchema = new Schema({
-    date: Date,
     charityId: ObjectId,
     triggerId: ObjectId,
     userId: ObjectId,
