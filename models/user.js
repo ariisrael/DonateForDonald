@@ -6,28 +6,10 @@ const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const ActivitySchema = new Schema({
-    tweetId: ObjectId,
-    amount: Number,
-    date: { type: Date, default: new Date() },
-}); 
-
-const DonationSchema = new Schema({
-    triggerId: ObjectId, 
-    wager: Number,
-    charity: ObjectId,
-    active: Boolean,
-    activity: [ActivitySchema],
-});
-
-const BalanceSchema = new Schema({
-    charity: { ref: 'Charity', type: ObjectId }, 
-    amount: { type: Number, required: true, default: 0, min: 0 },
-});
-
 const UserSchema = new Schema({
     name: { type: String, trim: true, },
     email: { type: String, required: true, },
+    image: String,
     phone: String,
     password: String,
     passwordResetToken: String,
@@ -35,13 +17,12 @@ const UserSchema = new Schema({
     facebook: String,
     twitter: String,
     google: String,
-    donations: [DonationSchema],
-    balances: [BalanceSchema],
     admin: { type: Boolean, default: false, },
     monthlyLimit: { type: Number, min: 0, },
-    paymentToken: String,
-    billingDate: Date,
-}, { toJSON: { virtuals: true, }, });
+    paymenttoken: String,
+    billDate: Date,
+    notification: Boolean,
+}, { toJSON: { virtuals: true, } });
 
 UserSchema.pre('save', function (next) {
     const user = this;
@@ -69,5 +50,4 @@ UserSchema.options.toJSON = {
 };
 
 const User = mongoose.model('User', UserSchema);
-
-module.exports = exports = User;
+module.exports = User;

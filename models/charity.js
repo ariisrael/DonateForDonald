@@ -9,4 +9,4 @@ var charitySchema = new Schema({
 });
 const Charity = mongoose.model('Charity', charitySchema);
 
-module.exports = exports = Charity;
+module.exports = Charity;
