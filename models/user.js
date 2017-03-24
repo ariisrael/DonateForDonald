@@ -22,8 +22,8 @@ const UserSchema = new Schema({
   notification: Boolean,
 }, { toJSON: { virtuals: true } });
 
-UserSchema.pre('save', (next) => {
-  const user = this;
+UserSchema.pre('save', function(next) {
+  var user = this;
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
