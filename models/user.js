@@ -1,52 +1,49 @@
 const mongoose = require('../config/mongo');
-
-const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
-    name: { type: String, trim: true, },
-    email: { type: String, required: true, },
-    image: String,
-    phone: String,
-    password: String,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
-    facebook: String,
-    twitter: String,
-    google: String,
-    admin: { type: Boolean, default: false, },
-    monthlyLimit: { type: Number, min: 0, },
-    paymenttoken: String,
-    billDate: Date,
-    notification: Boolean,
-}, { toJSON: { virtuals: true, } });
+  firstName: { type: String, trim: true },
+  lastName: { type: String, trim: true },
+  email: { type: String, required: true },
+  picture: String,
+  phone: String,
+  password: String,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  facebook: String,
+  twitter: String,
+  google: String,
+  admin: { type: Boolean, default: false },
+  monthlyLimit: { type: Number, min: 0 },
+  paymenttoken: String,
+  billDate: Date,
+  notification: Boolean,
+}, { toJSON: { virtuals: true } });
 
-UserSchema.pre('save', function (next) {
-    const user = this;
-    if (!user.isModified('password')) { return next(); }
-    bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(user.password, salt, null, function (err, hash) {
-            user.password = hash;
-            next();
-        });
+UserSchema.pre('save', (next) => {
+  const user = this;
+  if (!user.isModified('password')) { return next(); }
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
+      user.password = hash;
+      next();
     });
+  });
+  return true;
 });
 
-UserSchema.methods.comparePassword = function (password, cb) {
-    bcrypt.compare(password, this.password, function (err, isMatch) {
-        cb(err, isMatch);
-    });
+UserSchema.methods.comparePassword = (password, cb) => {
+  bcrypt.compare(password, this.password, (err, isMatch) => cb(err, isMatch));
 };
 
 UserSchema.options.toJSON = {
-    transform (doc, ret, options) {
-        delete ret.password;
-        delete ret.passwordResetToken;
-        delete ret.passwordResetExpires;
-    },
+  transform(doc, ret) {
+    delete ret.password; // eslint-disable-line no-param-reassign
+    delete ret.passwordResetToken; // eslint-disable-line no-param-reassign
+    delete ret.passwordResetExpires; // eslint-disable-line no-param-reassign
+  },
 };
 
 const User = mongoose.model('User', UserSchema);

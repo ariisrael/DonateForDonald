@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const TriggerSchema = new Schema({
-  name: { type: String, trim: true, },
-  keywords: { type: [String], required: true, },
+  name: { type: String, trim: true },
+  keywords: { type: [String], required: true },
   charityId: ObjectId,
   userId: ObjectId,
-  amount: { type: Number, min: 1, },
+  amount: { type: Number, min: 1 },
 });
 
 TriggerSchema.index({ '$**': 'text' });
