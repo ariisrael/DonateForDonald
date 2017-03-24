@@ -1,7 +1,7 @@
 const mongoose = require('../config/mongo');
 
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.ObjectId;
+const ObjectId = Schema.ObjectId;
 
 const PaymentSchema = new Schema({
   charityId: ObjectId,
