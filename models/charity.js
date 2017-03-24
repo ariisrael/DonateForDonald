@@ -2,16 +2,11 @@ const mongoose = require('../config/mongo');
 
 const Schema = mongoose.Schema;
 
-var charitySchema = new Schema({
-  name: { type: String, unique: true, required: true },
-  alias: [String],
+const charitySchema = new Schema({
+  name: String,
   twitter: [String],
-  logo: String,
-  website: String,
-  ein: { type: String, unique: true, required: true },
-  taxDeductible: { type: Boolean, default: true }
+  ein: String,
 });
 
 const Charity = mongoose.model('Charity', charitySchema);
-
-module.exports = exports = Charity;
+module.exports = Charity;
