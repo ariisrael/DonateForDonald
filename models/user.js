@@ -25,7 +25,7 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function(next) {
   var user = this;
   if (!user.isModified('password')) { return next(); }
-  bcrypt.genSalt(10, (err, salt) => {
+  bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
       user.password = hash;
       next();
@@ -34,7 +34,7 @@ UserSchema.pre('save', function(next) {
   return true;
 });
 
-UserSchema.methods.comparePassword = (password, cb) => {
+UserSchema.methods.comparePassword = function(password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => cb(err, isMatch));
 };
 
