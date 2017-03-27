@@ -3,6 +3,7 @@ var getAndSaveTweets = require('./saveTweets')
 var updateTweets = require('./updateTweets')
 var analyzeTweets = require('./analyzeTweets').analyzeTweets
 var findDonors = require('./triggers')
+var popularTerms = require('popularTerms')
 
 const tenMinutes = 600000
 
@@ -18,6 +19,12 @@ workerEmitter.on('tweetSavingDone', () => {
   console.log('finished saving tweets')
   console.log('running analysis')
   analyzeTweets()
+})
+
+popularTerms(function() {
+  setTimeout(function() {
+    popularTerms()
+  }, tenMinutes)
 })
 
 workerEmitter.on('scheduleTweetGrabbing', () => {
