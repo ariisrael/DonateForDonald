@@ -1,6 +1,6 @@
 const keyword = require('./gramophone');
 const Twit = require('twit');
- 
+
 var T = new Twit({
   consumer_key:         'HSjDtq7x7IjkrcHzEbyMT8QvN',
   consumer_secret:      'V3ewc1zexgaY8A37pDZaLLT0zJ51VZpBsnUAmnfOWcf1zv694y',
@@ -16,11 +16,11 @@ var cap = {};
 var blacklist = [
   'https',
   'amp',
-  'rt', 
+  'rt',
   'rep',
-  'year', 
+  'year',
   'years',
-  'coming', 
+  'coming',
   'time',
   'times',
   'day',
@@ -92,15 +92,5 @@ function getPopularTerms(callback) {
     callback(null, popularTerms)
   });
 }
-getPopularTerms((err, results) => {
-  var printed = {};
-  results.forEach((result) => {
-    if(!printed[result]) {
-console.log(`5 ${result}`);
-    }
-      
-    printed[result] = true;
-  });
-});
 
 module.exports = getPopularTerms;
