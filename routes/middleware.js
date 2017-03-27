@@ -8,6 +8,10 @@ app.use(function (req, res, next) {
     res.locals = {};
   }
   res.locals.env = process.env.NODE_ENV
+
+  // Setup a query
+  res.locals.query = {}
+
   next()
 })
 

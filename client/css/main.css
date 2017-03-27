@@ -4,8 +4,23 @@
 /* ------------------------- */
 .logo-header {
   height: 40px !important;
+}
+
+.logo-header-not-logged-in {
   position: relative;
   top: -10px;
+}
+
+a.navbar-brand {
+  display: block;
+}
+.navbar-header {
+  height: 100%;
+}
+
+.user-picture {
+  padding-right: 5px;
+  width: 40px !important;
 }
 
 .forgot-pass {

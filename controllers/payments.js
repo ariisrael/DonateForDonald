@@ -3,20 +3,24 @@ const Payment = models.Payment;
 
 module.exports = {
     index: (req, res) => {
-        Payment.find({}, (err, payments) => {
+        var query = req.locals.query
+        Payment.find(query, (err, payments) => {
             if(err) return console.error(err);
             res.json(payments);
         });
     },
     update: (req, res) => {
-        var query = { _id: req.params.id };
+        var query = req.locals.query
+        query.id = req.params.id
         Payment.update(query, req.body, {}, (err, num) => {
             if(err) return console.error(err);
             res.json(num);
         });
     },
     read: (req, res) => {
-        Payment.findById(req.params.id, (err, payment) => {
+        var query = req.locals.query
+        query.id = req.params.id
+        Payment.find(query, (err, payment) => {
             if(err) return console.error(err);
             res.json(payment);
         });

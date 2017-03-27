@@ -3,29 +3,45 @@ const Trigger = models.Trigger;
 
 module.exports = {
     index: (req, res) => {
-        Trigger.find({}, (err, triggers) => {
+        var query = req.locals.query
+        Trigger.find(params, (err, triggers) => {
             if(err) return console.error(err);
             res.json(triggers);
         });
     },
     read: (req, res) => {
-        Trigger.findById(req.params.id, (err, trigger) => {
+        var query = req.locals.query
+        query.id = req.params.id
+        Trigger.find(params, (err, trigger) => {
             if(err) return console.error(err);
             res.json(trigger);
         });
     },
     create: (req, res) => {
         var trigger = new Trigger(req.body);
+        trigger.userId = req.user.id
         trigger.save((err) => {
             if(err) return console.error(err);
         });
     },
     update: (req, res) => {
-        Trigger.findById(req.params.id, (err, trigger) => {
-            for(key in req.body) {
+        var query = req.locals.query
+        query.id = req.params.id
+        Trigger.find({
+          id: req.params.id,
+          userId: req.user.id
+        }, (err, trigger) => {
+            if (trigger) {
+              for(key in req.body) {
                 trigger[key] = req.body[key]
+              }
+            } else {
+              var trigger = new Trigger(req.body);
             }
-            trigger.save();
+            trigger.userId = req.user.id
+            trigger.save((err) => {
+              if(err) return console.error(err);
+            });
         });
     },
     destroy: (req, res) => {

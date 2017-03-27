@@ -42,11 +42,24 @@ exports.ensureAuthenticated = function(req, res, next) {
 
 exports.ensureAuthorized = function(req, res, next) {
   var id = (req.params.id || req.params.userId);
-  if(id === req.user.id || req.user.admin) {
+  if (id === req.user.id || req.user.admin) {
     next();
   } else {
     res.redirect('/login');
   }
+}
+
+exports.userQuery = function(req, res, next) {
+  if (!res.locals) {
+    res.locals = {};
+  }
+  if (!res.locals.query) {
+    res.locals.query = {}
+  }
+  if (!req.user.admin && req.user.id) {
+    res.locals.query.userId = req.user.id
+  }
+  next();
 }
 
 exports.ensureAdmin = function(req, res, next) {
@@ -270,7 +283,7 @@ exports.triggers = {
         if(err) console.error(err);
       })
     });
-  }, 
+  },
   read: (req, res) => {
     User.findById(req.params.userId, (err, user) => {
       user.triggers.forEach((t) => {
