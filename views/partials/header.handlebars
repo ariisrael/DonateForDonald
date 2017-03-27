@@ -1,19 +1,25 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <a href="/" class="navbar-brand"><img class="logo-header" src="/images/profile.jpg" /></a>
+      <a href="/" class="navbar-brand clearfix">
+        <img class="logo-header {{#unless user}} {{#unless user.picture}} logo-header-not-logged-in {{/unless}} {{/unless}}" src="/images/profile.jpg" />
+      </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
     {{#if user}}
       <li class="dropdown">
         <a href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
           {{#if user.picture}}
-            <img src="{{user.picture}}" style="padding-right: 5px">
+            <img src="{{user.picture}}" class="user-picture">
           {{/if}}
           {{#if user.name}}
+             <span>
              {{user.name}}
+             </span>
           {{else}}
+             <span>
              {{user.email}}
+             </span>
           {{/if}}
           <i class="caret"></i>
         </a>

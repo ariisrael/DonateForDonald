@@ -13,10 +13,11 @@ const PaymentController = controllers.payments;
 const ADMIN_ONLY = UserController.ensureAdmin;
 const USER_ONLY = UserController.ensureAuthorized;
 const LOGIN_ONLY = UserController.ensureAuthenticated;
+const USER_QUERY = UserController.userQuery
 
 var api = express.Router();
 
-api.get('/triggers', TriggerController.index);
+api.get('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.index);
 api.get('/users', ADMIN_ONLY, UserController.index);
 api.get('/charities', CharityController.index);
 api.get('/tweets', TweetController.index);
@@ -24,14 +25,14 @@ api.get('/payments', ADMIN_ONLY, PaymentController.index);
 api.get('/donations', ADMIN_ONLY, DonationController.index);
 
 api.get('/triggers/:id', TriggerController.read);
-api.get('/users/:id', USER_ONLY, UserController.read);
+api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);
 api.get('/charities/:id', CharityController.read);
 api.get('/tweets/:id', TweetController.read);
-api.get('/donations/:id', ADMIN_ONLY, DonationController.read);
-api.get('/payments/:id', ADMIN_ONLY, PaymentController.read);
+api.get('/donations/:id', LOGIN_ONLY, USER_QUERY, DonationController.read);
+api.get('/payments/:id', LOGIN_ONLY, USER_QUERY, PaymentController.read);
 
 api.post('/charities', ADMIN_ONLY, CharityController.create);
-api.post('/triggers', LOGIN_ONLY, TriggerController.create);
+api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);
 api.post('/tweets', ADMIN_ONLY, TweetController.create);
 api.post('/donations', ADMIN_ONLY, DonationController.create);
 api.post('/payments', ADMIN_ONLY, PaymentController.create);

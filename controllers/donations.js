@@ -9,7 +9,8 @@ module.exports = {
         });
     },
     update: (req, res) => {
-        var query = { _id: req.params.id };
+        var query = req.locals.query;
+        query.id = req.params.id
         Donation.update(query, req.body, {}, (err, num) => {
             if(err) return console.error(err);
             res.json(num);

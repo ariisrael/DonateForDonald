@@ -64,7 +64,7 @@ gulp.task('favicon', ['clean'], () => {
 gulp.task('build', ['clean', 'scripts', 'vendorStyles', 'vendorScripts', 'styles', 'favicon', 'images'])
 
 gulp.task('watch', () => {
-  gulp.watch('client/*','client/**/*', ['build'])
+  gulp.watch(['client/*','client/**/*'], ['scripts', 'vendorStyles', 'vendorScripts', 'styles', 'favicon', 'images'])
 })
 
 gulp.task('default', ['build'])
