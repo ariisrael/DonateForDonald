@@ -3,6 +3,7 @@ const Donation = models.Donation;
 
 module.exports = {
     index: (req, res) => {
+        var query = req.locals.query;
         Donation.find({}, (err, donations) => {
             if(err) return console.error(err);
             res.json(donations);
@@ -17,7 +18,9 @@ module.exports = {
         });
     },
     read: (req, res) => {
-        Donation.findById(req.params.id, (err, user) => {
+        var query = req.locals.query;
+        query.id = req.params.id
+        Donation.findOne(query, (err, user) => {
             if(err) return console.error(err);
             res.json(user);
         });
