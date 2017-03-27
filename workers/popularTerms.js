@@ -46,6 +46,3 @@ function findPopularTerms(cb) {
 }
 
 module.exports = findPopularTerms
-findPopularTerms(function(err) {
-  console.error(err)
-})
