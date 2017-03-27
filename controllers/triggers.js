@@ -12,7 +12,7 @@ module.exports = {
     read: (req, res) => {
         var query = req.locals.query
         query.id = req.params.id
-        Trigger.find(params, (err, trigger) => {
+        Trigger.findOne(params, (err, trigger) => {
             if(err) return console.error(err);
             res.json(trigger);
         });
@@ -27,7 +27,7 @@ module.exports = {
     update: (req, res) => {
         var query = req.locals.query
         query.id = req.params.id
-        Trigger.find({
+        Trigger.findOne({
           id: req.params.id,
           userId: req.user.id
         }, (err, trigger) => {

@@ -20,7 +20,7 @@ module.exports = {
     read: (req, res) => {
         var query = req.locals.query
         query.id = req.params.id
-        Payment.find(query, (err, payment) => {
+        Payment.findOne(query, (err, payment) => {
             if(err) return console.error(err);
             res.json(payment);
         });

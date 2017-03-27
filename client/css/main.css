@@ -14,13 +14,10 @@
 a.navbar-brand {
   display: block;
 }
-.navbar-header {
-  height: 100%;
-}
 
 .user-picture {
   padding-right: 5px;
-  width: 40px !important;
+  height: 40px !important;
 }
 
 .forgot-pass {
