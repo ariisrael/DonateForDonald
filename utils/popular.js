@@ -12,6 +12,7 @@ var users = {};
 var hashtags = {};
 var cap = {};
 
+
 var blacklist = [
   'https',
   'amp',
@@ -32,7 +33,11 @@ var blacklist = [
   'join',
   'yesterday',
   'prime minister shinzo abe',
-  'prime minister abe'
+  'prime minister abe',
+  'fake news media',
+  'prime minister',
+  'tonight',
+  'morning'
 ];
 function getPopularTerms(callback) {
   T.get('statuses/user_timeline', { screen_name: 'realDonaldTrump', count: 200, tweet_mode: 'extended' }, function(err, data, response) {
@@ -87,5 +92,15 @@ function getPopularTerms(callback) {
     callback(null, popularTerms)
   });
 }
+getPopularTerms((err, results) => {
+  var printed = {};
+  results.forEach((result) => {
+    if(!printed[result]) {
+console.log(`5 ${result}`);
+    }
+      
+    printed[result] = true;
+  });
+});
 
 module.exports = getPopularTerms;
