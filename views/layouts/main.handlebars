@@ -7,11 +7,13 @@
 <title>Donate For Donald</title>
 <link rel="stylesheet" href="/css/vendor.css">
 <link rel="stylesheet" href="/css/app.css">
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
 {{> header}}
 {{{body}}}
+<canvas id="cloud"></canvas>
 {{> footer}}
 
 {{!-- <script src="/js/lib/jquery.js"></script> --}}
@@ -19,6 +21,10 @@
 <script src="/js/vendor.js"></script>
 <script src="/js/app.js"></script>
 
+<script src="/js/wordcloud.js"></script>
+<script> 
+WordCloud(document.getElementById('cloud'), { list: list } );
+</script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
