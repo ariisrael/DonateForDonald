@@ -77,7 +77,7 @@ function getPopularTerms(callback) {
         var ws = w.split(" ");
         var output = "";
         ws.forEach((word, i) => {
-          if(!(ws.length > 1 && i === 0) && users[word]) {
+          if(users[word]) {
             output += ("@" + users[word].name);
           } else if (hashtags[w]) {
             output += ("#" + hashtags[word].name);
@@ -92,5 +92,11 @@ function getPopularTerms(callback) {
     callback(null, popularTerms)
   });
 }
+
+getPopularTerms(function(err, terms) {
+  terms.forEach((t) => {
+    console.log(t);
+  });
+});
 
 module.exports = getPopularTerms;
