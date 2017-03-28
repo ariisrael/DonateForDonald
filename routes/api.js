@@ -9,7 +9,7 @@ const DonationController = controllers.donations;
 const TweetController = controllers.tweets;
 const CharityController = controllers.charities;
 const PaymentController = controllers.payments;
-const PopularTermsController = controllers.popularTerms;
+const TermsController = controllers.terms;
 
 const ADMIN_ONLY = UserController.ensureAdmin;
 const USER_ONLY = UserController.ensureAuthorized;
@@ -24,7 +24,7 @@ api.get('/charities', CharityController.index);
 api.get('/tweets', TweetController.index);
 api.get('/payments', ADMIN_ONLY, PaymentController.index);
 api.get('/donations', ADMIN_ONLY, DonationController.index);
-api.get('/popularterms', PopularTermsController.index)
+api.get('/terms', TermsController.index)
 
 api.get('/triggers/:id', TriggerController.read);
 api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);

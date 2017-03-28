@@ -7,7 +7,7 @@ exports.users = require('./users');
 exports.donations = require('./donations');
 exports.tweets = require('./tweets');
 exports.payments = require('./payments');
-exports.popularTerms = require('./popularTerms');
+exports.terms = require('./terms');
 
 // Pages
 exports.home = require('./home');

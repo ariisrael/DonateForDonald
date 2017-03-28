@@ -1,9 +1,9 @@
 const models = require('../models');
-const Payment = models.PopularTerm;
+const Term = models.Term;
 
 module.exports = {
   index: (req, res) => {
-    popularTerms.find({}, 'term', (err, terms) => {
+    Term.find({}, (err, terms) => {
       if (err) {
         console.error(err)
         return res.json([])
