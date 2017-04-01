@@ -13,6 +13,5 @@ module.exports = {
       }
       res.json(terms)
     })
-
   }
 }

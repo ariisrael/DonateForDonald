@@ -37,7 +37,30 @@ var blacklist = [
   'fake news media',
   'prime minister',
   'tonight',
-  'morning'
+  'morning',
+  'don',
+  'll',
+  've',
+  'doesn',
+  'people',
+  'hey',
+  'caign',
+  'nashville tennessee',
+  'president',
+  'president obama',
+  'ppl',
+  'didn',
+  'work',
+  'working',
+  'gt gt gt gt',
+  'al',
+  'couldn',
+  'believes single source',
+  'ms',
+  'washinon',
+  'http',
+  'https',
+  'ht'
 ];
 function getPopularTerms(callback) {
   T.get('statuses/user_timeline', { screen_name: 'realDonaldTrump', count: 200, tweet_mode: 'extended' }, function(err, data, response) {
@@ -65,7 +88,7 @@ function getPopularTerms(callback) {
             hashtags[h.text.toLowerCase()]['count'] = 1;
           }
         });
-        words.push(d.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, ''));
+        words.push(d.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').replace('https', ''));
     });
     words.join(' ').split(' ').forEach((word) => {
       cap[word.toLowerCase()] = word;
@@ -86,17 +109,26 @@ function getPopularTerms(callback) {
           }
           output += " ";
         });
-        popularTerms.push(output.trim());
+        var outputTerm = output.replace(/gt/g, '').replace(/amp/g, '').replace(/RT/g, '').replace(/cc/g, '').trim();
+        var already = false;
+        popularTerms.forEach((term) => {
+          if(term.indexOf(outputTerm) > 0) {
+            already = true;
+            return false;
+          }
+        });
+        if(outputTerm !== '' && popularTerms.indexOf(outputTerm) < 0 && !already) {
+          popularTerms.push(outputTerm);
+        }
       }
     });
     callback(null, popularTerms)
   });
 }
 
-getPopularTerms(function(err, terms) {
-  terms.forEach((t) => {
-    console.log(t);
-  });
+getPopularTerms((err, terms) => {
+  if(err) return console.log(err);
+  console.log(terms);
 });
 
 module.exports = getPopularTerms;

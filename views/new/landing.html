@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Responsive view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Site information  -->
+  <title>Donate For Donald</title>
+  <meta name="description" content="When Trump goes low, go high - automatically. Create triggers to donate to charity when Donald tweets specific phrases!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Arianna Israel">
+
+  <!-- Load favicon  -->
+  <link rel="apple-touch-icon" href="img/profile.jpg">
+  <link rel="shortcut icon" href="img/profile.jpg" type="image/jpg">
+
+  <!-- Load stylesheets  -->
+  <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" integrity="sha256-5+W3JHnvGYIJkVxUBsw+jBi9+pOlu9enPX3vZapXj5M=" crossorigin="anonymous" />
+  <!-- Load vendor scripts -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>  <!-- Semantic UI -->
+</head>
+
+<!-- Page -->
+
+<body class="site">
+  <header>
+    <!-- Navigation -->
+    <nav class="ui squared menu">
+      <!-- Logo -->
+      <div class="item">
+        <a href="#">
+          <img src="img/profile.jpg" class="logo" />
+        </a>
+      </div>
+      <!-- Login -->
+      <div class="right menu">
+        <div class="item login js-login">
+          <button class="ui button primary text">Login</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="landing-left">
+      <img src="img/color-mask.PNG" />
+    </section>
+    <section class="landing-right">
+      <div>
+        <h1 class="headline">When Trump goes low, you go high. <br><span>Automatically. Even at 3AM.</span></h1>
+        <p class="subheader"> Pick the Trumpism you <i>hate</i>, the charity you <i>love</i>, and the amount per tweet - even reply to his tweet
+          with your donation. Weather the next tweetstorm and turn his Fox-fueled anger into something good. <span class="hashtag"><a href="#">#DonateForDonald</a></span></p>
+      </div>
+
+
+      <div class="ui form landing-form">
+        <div class="center triggers js-select-trigger">
+          <div class="ui massive dropdown labeled fluid inline search icon basic button">
+            <i class="quote left icon"></i>
+            <span class="text">Trigger</span>
+            <div class="menu">
+              <div class="item">fake news</div>
+              <div class="item">great</div>
+              <div class="item">#maga</div>
+              <div class="item">healthcare</div>
+              <div class="item">Obama</div>
+              <div class="item">election</div>
+              <div class="item">@VP Pence</div>
+            </div>
+          </div>
+        </div>
+        <div class="center charities js-select-charity">
+
+          <div class="ui massive dropdown labeled fluid inline basic search icon button">
+            <i class="heart icon"></i>
+            <span class="text">Charity</span>
+            <div class="menu" id="charities">
+            </div>
+          </div>
+          <br>
+
+          <!-- Choose amount -->
+          <div class="choose-amount js-amounts">
+            <a class="ui huge toggle button amount-1">$1</a>
+            <a class="ui huge toggle button amount-5">$5</a>
+            <a class="ui huge toggle button amount-10">$10</a>
+            <span class="dollar-sign greyed-out">$</span>
+            <div class="ui labeled huge input amount-other js-amount-other">
+              <a class="ui huge toggle button label">
+                  Other
+                </a>
+              <input type="text" placeholder="25" disabled></input>
+            </div>
+          </div>
+          <!-- End choose amount -->
+
+          <!-- Landing CTAs -->
+          <div class="two-buttons">
+
+            <!-- CTA: View Tweets -->
+            <div class="left-button">
+              <button class="ui basic icon massive button fluid js-tweets">
+                  <i class="twitter icon"></i> View Tweets
+                </button>
+            </div>
+            <!-- End CTA: View Tweets -->
+
+            <!-- CTA: Donate -->
+            <div class="right-button js-donate">
+              <button class="ui massive icon primary button fluid">
+                  <i class="lightning icon"></i> Donate
+                </button>
+            </div>
+            <!-- End CTA: Donate -->
+
+          </div>
+          <!-- End landing CTAs -->
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="ui left sidebar overlay wrapper tweet-drawer js-tweet-drawer">
+
+      <div class="drawer-controls">
+        <a class="ui fluid massive primary button icon squared">
+          <i class="twitter icon" style="position: relative; left: -5px"></i> fake news <span class="tweet-count">(100)</span>
+          <button class="ui button primary mini icon js-close-tweets" id="close-tweets" style="float: right; top: -2px; position: relative"><i style="position: relative; top: -2px" class="ui large cancel icon"></i></button>
+        </a>
+      </div>
+      <div class="tweets ui one column divided grid long">
+        <div class="item row">
+          <div class="column">
+            <div class="tweet-embed">
+              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+                <a href="https://twitter.com/realDonaldTrump/status/846854703183020032"></a>
+              </blockquote>
+            </div>
+            <div class="tweet-triggers js-tweet-triggers">
+              <div class="ui tag large labels">
+                <a class="ui label">fake news</a>
+                <a class="ui label">Russia</a>
+                <a class="ui label">totally</a>
+              </div>
+            </div>
+            <div class="tweet-divider">
+            </div>
+          </div>
+
+        </div>
+        <div class="item row">
+          <div class="column">
+            <div class="ui tweet-embed">
+              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+                <a href="https://twitter.com/realDonaldTrump/status/844886082663698436"></a>
+              </blockquote>
+            </div>
+            <div class="tweet-triggers js-tweet-triggers">
+              <div class="ui tag large labels">
+                <a class="ui label">fake news</a>
+                <a class="ui label">Russia</a>
+                <a class="ui label">totally</a>
+              </div>
+            </div>
+            <div class="tweet-divider">
+            </div>
+          </div>
+        </div>
+        <div class="item row">
+          <div class="column">
+            <div class="ui tweet-embed">
+
+              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+                <a href="https://twitter.com/realDonaldTrump/status/832230758299340800"></a>
+              </blockquote>
+            </div>
+            <div class="tweet-triggers js-tweet-triggers ">
+              <div class="ui tag large labels">
+              <div class="ui tag large labels">
+                <a class="ui label">fake news</a>
+                <a class="ui label">Russia</a>
+                <a class="ui label">totally</a>
+              </div>
+            </div>
+            <div class="tweet-divider">
+            </div>
+          </div>
+        </div>
+        <div class="item row">
+          <div class="column">
+            <div class="ui tweet-embed">
+
+              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+                <a href="https://twitter.com/realDonaldTrump/status/832230758299340800"></a>
+              </blockquote>
+            </div>
+            <div class="tweet-triggers js-tweet-triggers">
+              <div class="ui tag large labels">
+              <div class="ui tag large labels">
+                <a class="ui label">fake news</a>
+                <a class="ui label">Russia</a>
+                <a class="ui label">totally</a>
+              </div>
+            </div>
+            <div class="tweet-divider">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- 
+  <footer>
+    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
+</span>
+    <div style="display: inline-block; float: right">
+
+      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
+      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
+
+      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
+
+    </div>
+  </footer>
+  -->
+  <!-- Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-92825533-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script src="js/charities.js"></script>
+  <script src="js/triggers.js"></script>
+  <!-- Load custom scripts -->
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <script sync src="https://platform.twitter.com/widgets.js"></script>
+
+</body>
+
+</html>

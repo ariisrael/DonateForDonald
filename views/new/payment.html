@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Responsive view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Site information  -->
+  <title>Donate For Donald</title>
+  <meta name="description" content="When Trump goes low, go high - automatically. Create triggers to donate to charity when Donald tweets specific phrases!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Arianna Israel">
+
+  <!-- Load favicon  -->
+  <link rel="apple-touch-icon" href="img/profile.jpg">
+  <link rel="shortcut icon" href="img/profile.jpg" type="image/jpg">
+
+  <!-- Load stylesheets  -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" integrity="sha256-5+W3JHnvGYIJkVxUBsw+jBi9+pOlu9enPX3vZapXj5M="
+    crossorigin="anonymous" />
+  <!-- Load vendor scripts -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+  <!-- Semantic UI -->
+</head>
+
+<!-- Page -->
+<script>
+  $(document).ready(function () {
+    $('main').fadeIn('1000');
+  });
+</script>
+
+<body class="site">
+  <header>
+    <!-- Navigation -->
+    <nav class="ui squared menu">
+      <!-- Logo -->
+      <div class="item">
+        <a href="#">
+          <img src="img/profile.jpg" class="logo" />
+        </a>
+      </div>
+      <!-- Login -->
+      <div class="right menu">
+        <div class="ui pointing dropdown link item">
+          Arianna Israel
+          <i class="dropdown icon"></i>
+          <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
+            <div class="item">
+              <i class="icon lightning"></i> Triggers
+            </div>
+            <div class="item">
+              <i class="icon usd"></i> Donations
+            </div>
+            <div class="item">
+              <i class="icon settings"></i> Account
+            </div>
+            <div class="item">
+              <i class="icon credit card alternative"></i> Payment
+            </div>
+            <div class="item">
+              <i class="icon mobile"></i> Notifications
+            </div>
+            <div class="item">
+              <i class="icon users"></i> Permissions
+            </div>
+            <div class="divider"></div>
+            <div class="js-logout logout">
+              <button class="ui button fluid large primary">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="ui text container web-form">
+      <h1>Enter your payment information
+      </h1>
+      <div class="ui subheader">Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
+        receipts at the end of each month. Payment processing fees are <a href="/faq/payment" class="forgot-pass">2.9% + $0.30 per donation</a>.
+        </div>
+      <form class="ui large form">
+        <div class="two fields">
+          <div class="field">
+            
+            <label>First Name</label>
+            <div class="ui corner labeled input">
+
+            <input placeholder="First Name" type="text">
+                                       <div class="ui corner label">
+    <i class="asterisk icon"></i>
+  </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <div class="ui corner labeled input">
+
+            <input placeholder="Last Name" type="text">
+                                       <div class="ui corner label">
+    <i class="asterisk icon"></i>
+  </div>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Credit Card Number</label>
+<div class="ui corner labeled input">
+
+          <input type="text" name="card-number" placeholder="Credit Card Number">
+                                     <div class="ui corner label">
+    <i class="asterisk icon"></i>
+  </div>
+  </div>
+        </div>
+        <div class="two fields">
+
+          <div class="field">
+            <label>
+            Expiration Date
+          </label>
+<div class="ui corner labeled input">
+
+            <input type="text" name="expiration-date" placeholder="MM/YYYY">
+                           <div class="ui corner label">
+    <i class="asterisk icon"></i>
+  </div>
+  </div>
+          </div>
+          <div class="field">
+            <label>Security Code</label>
+<div class="ui corner labeled input">
+            <input type="text" name="security-code" placeholder="CVV">
+               <div class="ui corner label">
+    <i class="asterisk icon"></i>
+  </div>
+  </div>
+          </div>
+          </div>
+        <div class="field">
+          <label>
+            Monthly Limit
+          </label>
+          <div>
+          <span style="font-size: 80%; position: relative; top: -5px; margin-bottom: 10px; color: #999; line-height: 110%">Enter the maximum amount to donate per month before turning off all triggers</span>
+          </div>
+          <div>
+              <div class="ui corner labeled input">
+          <input type="text" placeholder="Optional">
+          </div>
+        </div>
+        <div style="margin-top: 30px">
+          <button class="ui primary massive button fluid" type="submit">Save</button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+  <!-- 
+  <footer>
+    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
+</span>
+    <div style="display: inline-block; float: right">
+
+      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
+      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
+
+      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
+
+    </div>
+  </footer>
+  -->
+  <!-- Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-92825533-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script src="js/charities.js"></script>
+  <script src="js/triggers.js"></script>
+  <!-- Load custom scripts -->
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <script sync src="https://platform.twitter.com/widgets.js"></script>
+
+</body>
+
+</html>
