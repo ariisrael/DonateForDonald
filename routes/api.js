@@ -32,6 +32,7 @@ api.get('/charities/:id', CharityController.read);
 api.get('/tweets/:id', TweetController.read);
 api.get('/donations/:id', LOGIN_ONLY, USER_QUERY, DonationController.read);
 api.get('/payments/:id', LOGIN_ONLY, USER_QUERY, PaymentController.read);
+api.get('/tweets/search', TweetController.find);
 
 api.post('/charities', ADMIN_ONLY, CharityController.create);
 api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);

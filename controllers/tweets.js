@@ -14,6 +14,23 @@ module.exports = {
             res.json(tweet);
         });
     },
+    find: (req, res) => {
+      query = req.params.q
+      Tweet.find(
+        { $text : { $search : q } },
+        { score : { $meta: "textScore" } }
+      )
+      .sort({ score : { $meta : 'textScore' } })
+      .exec((err, tweets) => {
+        if (err) {
+          console.error(err)
+        }
+        if (!tweets) {
+          tweets = []
+        }
+        res.json(tweets)
+      })
+    },
     create: (req, res) => {
         var tweet = new Tweet(req.body);
         tweet.save((err) => {
