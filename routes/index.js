@@ -15,6 +15,7 @@ const TriggerController = controllers.triggers;
 const DonationController = controllers.donations;
 const TweetController = controllers.tweets;
 const CharityController = controllers.charities;
+const PaymentController = controllers.payments;
 
 app.use('/api', require('./api'));
 
@@ -35,6 +36,8 @@ app.get('/logout', UserController.logout);
 app.get('/forgot', UserController.forgotGet);
 app.post('/forgot', UserController.forgotPost);
 
+app.get('/payment', PaymentController.view)
+
 app.get('/reset/:token', UserController.resetGet);
 app.post('/reset/:token', UserController.resetPost);
 
@@ -48,4 +51,3 @@ app.get('/auth/google/callback', passport.authenticate('google', { successRedire
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
-

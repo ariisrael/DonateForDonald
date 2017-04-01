@@ -77,7 +77,7 @@ exports.loginGet = function(req, res) {
   if (req.user) {
     return res.redirect('/');
   }
-  res.render('account/login', {
+  res.render('login', {
     title: 'Log in'
   });
 };

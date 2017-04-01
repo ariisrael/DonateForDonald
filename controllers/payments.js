@@ -2,6 +2,9 @@ const models = require('../models');
 const Payment = models.Payment;
 
 module.exports = {
+    view: (req, res) => {
+      res.render('payment')
+    },
     index: (req, res) => {
         var query = req.locals.query
         Payment.find(query, (err, payments) => {
