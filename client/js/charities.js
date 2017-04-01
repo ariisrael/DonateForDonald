@@ -3,7 +3,7 @@ var charities = [{
         name: 'American Civil Liberties Union Foundation',
         site: 'www.aclu.org',
         alias: 'ACLU',
-        twitter: ['@ACLU']    
+        twitter: ['@ACLU']
     }, {
         ein: '52-1481896',
         name: 'Human Rights Campaign Foundation',
@@ -135,7 +135,7 @@ var charities = [{
         name: 'United We Dream',
         site: 'http://unitedwedream.org/',
         alias: 'UWD',
-        twitter: ['@UNITEDWEDREAM']       
+        twitter: ['@UNITEDWEDREAM']
     }, {
         ein: '52-1662800',
         name: 'United Nations High Commissioner for Refugees',
@@ -146,7 +146,7 @@ var charities = [{
         ein: '95-4681287',
         name: 'The Trevor Project',
         site: 'http://www.thetrevorproject.org/',
-        twitter: ['@TrevorProject']    
+        twitter: ['@TrevorProject']
     }, {
         ein: '77-0071852',
         name: 'Black Lives Matter',
@@ -203,13 +203,13 @@ var charities = [{
         name: 'People for the Ethical Treatment of Animals',
         alias: 'PETA',
         site: 'http://www.peta.org/',
-        twitter: ['@peta']     
+        twitter: ['@peta']
     }, {
         ein: '52-1693387',
         name: 'World Wildlife Fund',
         alias: 'WWF',
         site: 'https://www.worldwildlife.org/',
-        twitter: ['@WWF']    
+        twitter: ['@WWF']
     }, {
         ein: '13-3433452',
         name: 'Doctors Without Borders',
@@ -263,7 +263,7 @@ $(document).ready(function() {
         var html = `<div class="item" data-value="${charity.ein}">${charity.name}`
         if(charity.alias) {
             html += `<span style="color: #999"> (${charity.alias})</span>`;
-        } 
+        }
         html += "</div>";
         charitiesOptions += html;
     });

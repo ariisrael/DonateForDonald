@@ -16,11 +16,11 @@ gulp.task('scripts', ['clean'], () =>
       'client/js/**/*.js',
       'client/js/**/*.jsx'
     ])
-        .pipe(babel({
-            presets: ['es2015', 'react']
-        }))
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('public/js'))
+    .pipe(babel({
+        presets: ['es2015', 'react']
+    }))
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('public/js'))
 )
 
 gulp.task('vendorScripts', ['clean'], () =>
