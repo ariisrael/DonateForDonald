@@ -188,6 +188,9 @@ button.primary:hover {
         width: 103%;
     }
 
+.share-text {
+    display: none !important;
+}
 
 
     .login-button {
@@ -207,6 +210,7 @@ button.primary:hover {
 .mobile-label {
     margin-top: 20px !important;
 }
+
 
     .landing-form .left-button {
         display: none !important;
