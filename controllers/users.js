@@ -121,19 +121,14 @@ exports.logout = function(req, res) {
  * GET /signup
  */
 exports.signupGet = function(req, res) {
-  if (req.user) {
-    return res.redirect('/');
-  }
-  res.render('account/signup', {
-    title: 'Sign up'
-  });
+  res.redirect('/login');
 };
 
 /**
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
-  req.assert('name', 'Name cannot be blank').notEmpty();
+  console.log(req)
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);

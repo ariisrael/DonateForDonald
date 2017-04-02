@@ -5,27 +5,32 @@
       <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
       </a>
         <br>
-<form class="ui massive form" style="padding-bottom: 20px;">
+<form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 20px;">
 
   <div class="field">
-    <input type="text" class="ui input massive"name="email" placeholder="Email">
+    <input type="text" class="ui input massive" name="email" placeholder="Email">
   </div>
   <div class="field">
     <input type="password" name="password" placeholder="Password">
   </div>
 
   <a class="forgot-pass" href="/reset" style="float: right; font-size: 75%; position: relative; top: -5px">Forgot Password</a>
-  <button class="ui primary massive button login-button" type="submit">Log In</button>
+  <button type='submit' class="ui primary massive button login-button" type="submit">
+    Log In
+  </button>
 
-  <button class="ui massive basic button signup-button" type="submit">Sign Up</button>
+  <button type='submit' class="ui massive basic button signup-button" type="submit">
+    Sign Up
+  </button>
 
 
   </form>
   <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
-    <button class="fluid ui button facebook massive icon"><i class="ui icon facebook"></i> Use Facebook</button>
+    <a class="fluid ui button facebook massive icon" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
   </div>
       </div>
   </main>
+
   <!--
   <footer>
     <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>

@@ -20,7 +20,7 @@ const PaymentController = controllers.payments;
 app.use('/api', require('./api'));
 
 app.get('/', PageController.landing);
-app.get('/login', PageController.login);
+app.get('/login', UserController.loginGet);
 app.get('/payment', UserController.ensureAuthenticated, PageController.payment);
 app.get('/reset', PageController.reset);
 app.get('/settings', UserController.ensureAuthenticated, PageController.settings);
@@ -38,7 +38,6 @@ app.get('/tweets', PageController.tweets);
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
 app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
 app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);
-
 
 app.get('/signup', UserController.signupGet);
 app.post('/signup', UserController.signupPost);
