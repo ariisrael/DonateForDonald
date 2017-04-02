@@ -34,9 +34,15 @@ $(".js-maximum-toggle")
     .on('click', function () {
       if ($('.js-tweet-drawer').hasClass('visible')) {
         $(this).html('<i class="twitter icon"></i> View Tweets');
+                $('main').css('overflow-y', 'auto');
+
       } else {
         // Switch button to hide tweets
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
+        $('main').css('overflow-y', 'hidden');
+        $('body').css('overflow-y', 'hidden');
+                $('html').css('overflow-y', 'hidden');
+
       }
       $('.js-nav').removeClass('visible');
       // Open drawer w/ tweet list
