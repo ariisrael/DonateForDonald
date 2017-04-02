@@ -38,14 +38,17 @@ $(".js-maximum-toggle")
         // Switch button to hide tweets
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
       }
+      $('.js-nav').removeClass('visible');
       // Open drawer w/ tweet list
       $('.js-tweet-drawer').toggleClass('visible');
+
     });
 // User clicked 'x' to close tweets
   $('.js-close-tweets')
     .on('click', function () {
       $('.js-tweet-drawer').removeClass('visible');
       $('.js-tweets').html('<i class="twitter icon"></i> View Tweets');
+      $('.js-nav').addClass('visible');
     });
 // User selected dropdown option
   $('.selection').dropdown({

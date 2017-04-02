@@ -11,6 +11,10 @@ html,body {
     margin: 0 auto;
 }
 
+
+    .tweet-drawer {
+        width: 40% !important;;
+    }
 .squared {
     border-radius: 0px !important;
 }
@@ -151,6 +155,9 @@ button.primary:hover {
 
 .landing-page {
     height: 100% !important;
+} 
+nav {
+    z-index: -1 !important;
 }
 
 .landing-form > .charities {
@@ -195,9 +202,25 @@ button.primary:hover {
         width: 103%;
     }
 
+    .tweet-drawer {
+        z-index: 999 !important;
+        width: 100% !important;
+    }
+
+    
+.two-buttons > div.left-button {
+    padding-right: 0px;
+}
+
+.two-buttons > div.right-button {
+    margin-top: 10px;
+    padding-left: 0px;
+}
+
 .share-text {
     display: none !important;
 }
+
 
 
     .login-button {
@@ -206,6 +229,8 @@ button.primary:hover {
         position: relative; 
         top: 15px;
     }
+
+
 
     .signup-button {
         display: block;
@@ -220,7 +245,9 @@ button.primary:hover {
 
 
     .landing-form .left-button {
-        display: none !important;
+        display: block !important;
+        width: 100% !important;
+        margin-top: 20px;
     }
 
 .new-line {
@@ -307,7 +334,7 @@ left: 30px !important;
 /* Drawer */
 .tweet-drawer {
     background-color: rgba(255,255,255,0.95);
-    min-width: 550px;
+    width: 100%;
     min-height: 200px;
     overflow-x: hidden;
 }
