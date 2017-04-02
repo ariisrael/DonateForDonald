@@ -7,6 +7,7 @@ const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 const Tweet = require('../models/tweet')
 const Trigger = require('../models/trigger')
 const Donation = require('../models/donation')
+const User = require('../models/user')
 
 const donateNow = require('../utils/donate')
 
@@ -37,40 +38,61 @@ saveTweet(tweet) {
     if (err) {
       return console.log(err)
     }
-    // do analysis here
-    Trigger.find().exec((err, triggers) => {
-      if (err || !triggers || !triggers.length) {
-        if (err) {
-          console.log('error grabbing triggers', err)
-        } else {
-          console.log('there are no triggers')
-        }
-      }
+    analyzeTweet(t)
+  })
+}
 
-      triggers.forEach((trigger) => {
-        var m = false
-        for (keyword in triggers.keywords) {
-          var re = new RegExp(keyword)
-          if (re.exec(tweet.text)) {
-            m = true
-            break
+analyzeTweet(tweet) {
+  User.find().exec((err, users) => {
+    users.forEach((user) => {
+      Trigger.find({
+        userId: user.id
+      }).exec((err, triggers) => {
+        if (err || !triggers || !triggers.length) {
+          if (err) {
+            return console.log('error grabbing triggers', err)
+          } else {
+            return console.log('there are no triggers')
           }
-          if (m) {
-            var donation = new Donation({
-              userId: trigger.userId,
-              triggerId: trigger.id,
-              amount: trigger.amount,
-              tweetId: tweet.id
-            })
-            donation.save((err) => {
-              if (err) {
-                return console.error(err)
-              }
-              donateNow(donation)
-            })
+        }
+
+        var donation;
+        for (trigger in triggers) {
+          // loop through the keywords
+          for (keyword in trigger.keywords) {
+            var re = new RegExp(keyword)
+            // check if there's a match
+            // a potential optimization is to create only
+            // a single regex for all keywords
+            if (re.exec(tweet.text)) {
+              donation = makeDonation(user, trigger, tweet)
+              // on a single tweet, we only want to donate once per user,
+              // so we break out of the loop
+              break
+            }
+          }
+          // similarly, we break out of this loop if we have a donation already
+          if (donation) {
+            break
           }
         }
       })
     })
   })
+}
+
+makeDonation(user, trigger, tweet) {
+  donation = new Donation({
+    userId: user.id,
+    triggerId: trigger.id,
+    amount: trigger.amount,
+    tweetId: tweet.id
+  })
+  donation.save((err, donation) => {
+    if (err) {
+      return console.error(err)
+    }
+    donateNow(user, trigger, tweet, donation)
+  })
+  return donation
 }
