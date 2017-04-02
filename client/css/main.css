@@ -188,6 +188,8 @@ button.primary:hover {
         width: 103%;
     }
 
+
+
     .login-button {
         display: block; 
         width: 100%;
@@ -209,6 +211,11 @@ button.primary:hover {
     .landing-form .left-button {
         display: none !important;
     }
+
+.new-line {
+    display: block;
+    margin-top: 20px;
+}
 
     .landing-form .right-button {
         width: 100%;
