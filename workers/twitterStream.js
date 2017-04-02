@@ -8,6 +8,8 @@ const Tweet = require('../models/tweet')
 const Trigger = require('../models/trigger')
 const Donation = require('../models/donation')
 
+const donateNow = require('../utils/donate')
+
 // Create new stream filtering statuses by user (including retweets, replies)
 var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
 
@@ -64,6 +66,7 @@ saveTweet(tweet) {
               if (err) {
                 return console.error(err)
               }
+              donateNow(donation)
             })
           }
         }
