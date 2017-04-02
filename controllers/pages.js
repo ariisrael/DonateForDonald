@@ -16,7 +16,7 @@ exports.landing = function(req, res) {
   res.render('landing', {
     title: 'Home',
         email: null,
-    picture: null,
+    picture: "https://myspace.com/common/images/user.png",
     name:  null,
   });
   }
