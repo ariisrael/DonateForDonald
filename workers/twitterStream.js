@@ -34,7 +34,7 @@ function getFullText(tweet) {
   return tweet.text;
 }
 
-saveTweet(tweet) {
+function saveTweet(tweet) {
   new t = Tweet(tweet)
   t.save((err) => {
     if (err) {
@@ -44,7 +44,7 @@ saveTweet(tweet) {
   })
 }
 
-analyzeTweet(tweet) {
+function analyzeTweet(tweet) {
   User.find().exec((err, users) => {
     users.forEach((user) => {
       Trigger.find({
@@ -81,6 +81,6 @@ analyzeTweet(tweet) {
       })
     })
   })
-  
+
   popularTerms()
 }
