@@ -1,48 +1,97 @@
-<div class="container">
-  <div class="panel">
-    <div class="panel-heading">
-      <h3 class="panel-title">Contact</h3>
-    </div>
-    <div class="panel-body">
-      {{#if messages.success}}
-        <div role="alert" class="alert alert-success">
-          {{#each messages.success}}
-            <div>{{msg}}</div>
-          {{/each}}
-        </div>
-      {{/if}}
-      {{#if messages.error}}
-        <div role="alert" class="alert alert-danger">
-          {{#each messages.error}}
-            <div>{{msg}}</div>
-          {{/each}}
-        </div>
-      {{/if}}
-      <form method="POST" class="form-horizontal">
-        <div class="form-group">
-          <label for="name" class="col-sm-2">Name</label>
-          <div class="col-sm-8">
-            <input type="text" name="name" id="name" class="form-control" autofocus>
+<!-- Page -->
+<script>
+  $(document).ready(function () {
+    $('main').fadeIn('1000');
+  });
+
+</script>
+<style>
+  html {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+</style>
+
+<body class="site" style="max-height: 100%">
+  <header>
+    <!-- Navigation -->
+    <nav class="ui squared menu">
+      <!-- Logo -->
+      <div class="item">
+        <a href="#">
+          <img src="/images/profile.jpg" class="logo" />
+        </a>
+      </div>
+      <!-- Login -->
+      <div class="right menu">
+        <div class="ui pointing dropdown link item">
+          Arianna Israel
+          <i class="dropdown icon"></i>
+          <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
+            <div class="item">
+              <i class="icon lightning"></i> Triggers
+            </div>
+            <div class="item">
+              <i class="icon usd"></i> Donations
+            </div>
+            <div class="item">
+              <i class="icon settings"></i> Account
+            </div>
+            <div class="item">
+              <i class="icon credit card alternative"></i> Payment
+            </div>
+            <div class="item">
+              <i class="icon mobile"></i> Notifications
+            </div>
+            <div class="item">
+              <i class="icon users"></i> Permissions
+            </div>
+            <div class="js-logout logout" style="padding: 10px">
+              <button class="ui button fluid large primary">Logout</button>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="email" class="col-sm-2">Email</label>
-          <div class="col-sm-8">
-            <input type="email" name="email" id="email" class="form-control">
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="ui text container web-form">
+      <h1>Contact us
+      </h1>
+      <div class="ui subheader">Send a message below or email us at <a href="/faq/payment" class="forgot-pass">team@donatefordonald.org</a>.
+      </div>
+      <form class="ui large form">
+        <div class="field">
+          <label>Email</label>
+          <div class="ui input fluid">
+            <input type="text" placeholder="Email">
           </div>
         </div>
-        <div class="form-group">
-          <label for="message" class="col-sm-2">Body</label>
-          <div class="col-sm-8">
-            <textarea name="message" id="message" rows="7" class="form-control"></textarea>
+        <div class="field">
+          <label>Message</label>
+          <div class="ui input fluid">
+            <textarea placeholder="Message"></textarea>
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-8">
-            <button type="submit" class="btn btn-success">Send</button>
-          </div>
+        <div style="margin-top: 20px">
+          <button class="ui primary massive button fluid" type="submit">Send</button>
         </div>
+
       </form>
     </div>
-  </div>
-</div>
+  </main>
+  <!--
+  <footer>
+    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
+</span>
+    <div style="display: inline-block; float: right">
+
+      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
+      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
+
+      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
+
+    </div>
+  </footer>
+  -->
