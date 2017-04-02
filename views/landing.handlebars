@@ -168,7 +168,14 @@
 </main>
 
 <script>
-  landing = true;
+  $(document).ready(function() {
+    jQuery.getJSON('/api/terms', function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var html = '<div class="item">' + data[i].term + '</div>'
+        $('.js-select-trigger .js-fill').append(html)
+      }
+    })
+  })
 </script>
 
 <!--
