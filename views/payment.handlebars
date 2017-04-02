@@ -3,6 +3,7 @@
   $(document).ready(function () {
     $('main').fadeIn('1000');
   });
+
 </script>
 
 <body class="site">
@@ -54,77 +55,70 @@
       </h1>
       <div class="ui subheader">Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
         receipts at the end of each month. Payment processing fees are <a href="/faq/payment" class="forgot-pass">2.9% + $0.30 per donation</a>.
-        </div>
+      </div>
       <form class="ui large form">
         <div class="two fields">
           <div class="field">
 
             <label>First Name</label>
-            <div class="ui corner labeled input">
 
             <input placeholder="First Name" type="text">
-                                       <div class="ui corner label">
-    <i class="asterisk icon"></i>
-  </div>
-            </div>
+
           </div>
           <div class="field">
             <label>Last Name</label>
-            <div class="ui corner labeled input">
 
             <input placeholder="Last Name" type="text">
-                                       <div class="ui corner label">
-    <i class="asterisk icon"></i>
-  </div>
-            </div>
           </div>
         </div>
-        <div class="field">
-          <label>Credit Card Number</label>
-<div class="ui corner labeled input">
-
-          <input type="text" name="card-number" placeholder="Credit Card Number">
-                                     <div class="ui corner label">
-    <i class="asterisk icon"></i>
-  </div>
-  </div>
-        </div>
+    <div class="fields">
+      <div class="seven wide field" style="padding: 20px auto">
+        <label>Card Number</label>
+        <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+      </div>
+      <div class="three wide field"  style="padding: 20px auto">
+        <label>CVC</label>
+        <input type="text" name="card[cvc]" maxlength="4" placeholder="CVC">
+      </div>
+      <br>
+      <div class="six wide field"  style="padding: 20px auto">
+        <label>Expiration</label>
         <div class="two fields">
-
-          <div class="field">
-            <label>
-            Expiration Date
-          </label>
-<div class="ui corner labeled input">
-
-            <input type="text" name="expiration-date" placeholder="MM/YYYY">
-                           <div class="ui corner label">
-    <i class="asterisk icon"></i>
-  </div>
-  </div>
+          <div class="field" style="padding: 20px auto">
+            <select class="ui fluid search dropdown" name="card[expire-month]">
+            <option value="">Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
           </div>
-          <div class="field">
-            <label>Security Code</label>
-<div class="ui corner labeled input">
-            <input type="text" name="security-code" placeholder="CVV">
-               <div class="ui corner label">
-    <i class="asterisk icon"></i>
-  </div>
-  </div>
+          <div class="field"  style="padding: 20px auto">
+            <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
           </div>
-          </div>
+        </div>
+        </div>
+        </div>
         <div class="field">
-<div class="ui toggle checkbox" style="background-color: #fff">
-  <input type="checkbox" name="maximum">
-  <label>Set a maximum amount to donate per month</label>
-</div>
+          <div class="ui toggle huge checkbox" style="background-color: #fff">
+            <input class="huge" type="checkbox" name="maximum">
+            <label style="font-size: 16px; color: #555">Set a maximum amount to donate per month</label>
+          </div>
         </div>
         <div style="margin-top: 30px">
           <button class="ui primary massive button fluid" type="submit">Save</button>
         </div>
 
-      </form>
-    </div>
+        </form>
+      </div>
   </main>
   <!--
   <footer>
