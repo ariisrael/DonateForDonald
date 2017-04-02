@@ -24,3 +24,9 @@ exports.contact = function(req, res) {
     title: 'Contact'
   });
 }
+
+exports.reset = function(req, res) {
+  res.render('reset', {
+    title: 'Reset'
+  });
+}
