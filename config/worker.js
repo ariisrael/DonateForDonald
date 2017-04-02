@@ -14,12 +14,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 var mongoose = require('./mongo')
-var twitterClient = require('./twitter').twitter
+var twitter = require('./twitter')
 var EventEmitter = require('events')
 var workerEmitter = new EventEmitter();
 
 module.exports = {
   db: mongoose.connection,
-  twitterClient: twitterClient,
-  workerEmitter: workerEmitter
+  twitterClient: twitter.twitter,
+  workerEmitter: workerEmitter,
+  twitterCreds: {
+    consumer_key: twitter.consumerKey,
+    consumer_secret: twitter.consumerSecret,
+    access_token_key: twitter.access_token_key,
+    access_token_secret: twitter.access_token_secret,
+  }
 }

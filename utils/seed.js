@@ -5,8 +5,10 @@ if (process.env.NODE_ENV !== 'production') {
 const models = require('../models')
 const Tweet = models.Tweet
 
+const config = require('../config/worker')
+
 const Twitter = require('twit'); // Twitter API
-const T = new Twitter(config.twitter);
+const T = new Twitter(config.twitterCreds);
 
 mongoose.connection.once('open', function() {
   seedTweets()

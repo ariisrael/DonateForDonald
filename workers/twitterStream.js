@@ -1,7 +1,7 @@
-const config = require('./config.js'); // Credentials
+const config = require('../config/worker'); // Credentials
 
 const Twitter = require('twit'); // Twitter API
-const T = new Twitter(config.twitter);
+const T = new Twitter(config.twitterCreds);
 const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 
 const models = require('../models')

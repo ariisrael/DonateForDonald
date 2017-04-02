@@ -23,4 +23,6 @@ module.exports = {
   twitter: twitterClient,
   consumerKey: twitterAPICredentials.consumer_key,
   consumerSecret: twitterAPICredentials.consumer_secret,
+  access_token_key: twitterAPICredentials.access_token_key,
+  access_token_secret: twitterAPICredentials.access_token_secret
 }
