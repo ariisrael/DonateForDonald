@@ -1,15 +1,34 @@
 /**
  * GET /
  */
+
+
+
 exports.landing = function(req, res) {
-  res.render('landing', {
-    title: 'Home'
+  if(req.user) {
+      res.render('landing', {
+    title: 'Home',
+        email: (req.user.email) ? req.user.email : null,
+    picture: (req.user.picture) ? req.user.picture : null,
+    name: (req.user.name) ? req.user.name : null,
   });
+  } else {
+  res.render('landing', {
+    title: 'Home',
+        email: null,
+    picture: null,
+    name:  null,
+  });
+  }
 };
 
 exports.payment = function(req, res) {
+  console.log(req.user);
   res.render('payment', {
-    title: 'Payment'
+    title: 'Payment',
+    email: (req.user.email) ? req.user.email : null,
+    picture: (req.user.picture) ? req.user.picture : null,
+    name: (req.user.name) ? req.user.name : null,
   });
 }
 
