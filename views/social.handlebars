@@ -1,0 +1,116 @@
+<!-- Page -->
+<script>
+  $(document).ready(function () {
+    $('main').fadeIn('1000');
+  });
+
+</script>
+<style>
+  html {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+</style>
+
+<body class="site" style="max-height: 100%">
+  <header>
+    <!-- Navigation -->
+    <nav class="ui squared menu">
+      <!-- Logo -->
+      <div class="item">
+        <a href="/">
+          <img src="/images/profile.jpg" class="logo" />
+        </a>
+      </div>
+      <!-- Login -->
+      <div class="right menu">
+        <div class="ui pointing dropdown link item">
+          Arianna Israel
+          <i class="dropdown icon"></i>
+          <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
+            <div class="item">
+              <i class="icon lightning"></i> Triggers
+            </div>
+            <div class="item">
+              <i class="icon usd"></i> Donations
+            </div>
+            <div class="item">
+              <a href="/settings" style="color:#555">
+                <i class="icon settings"></i> Settings
+              </a>
+            </div>
+            <div class="item">
+              <a href="/payment" style="color:#555">
+                <i class="icon credit card alternative"></i> Payment</a>
+            </div>
+
+            <div class="js-logout logout" style="padding: 10px">
+              <button class="ui button fluid large primary">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="ui text container web-form">
+      <h1>Respond to Donald's Tweet
+      </h1>
+      <div class="ui subheader">
+        When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given
+        more to charity than he ever has - and tag the charity too. <a class="forgot-pass">#DonateForDonald</a>
+      </div>
+      <form class="ui large form">
+
+        <div class="field">
+
+          <label>Tweet text <span style="font-weight: 400; color: #888">(0/140)</span></label>
+
+          <textarea rows="4"></textarea>
+
+        </div>
+        <div class="field">
+          <label>Ingredients </label>
+          <div class="horizontal list ui">
+            <div class="item">
+              <a class="ui icon huge label">
+                <i class="icon plus"></i> Charity
+              </a>
+            </div>
+        <div class="item">
+          <a class="ui icon huge label">
+            <i class="icon plus"></i> Amount
+          </a>
+        </div>
+    <div class="item">
+      <a class="ui icon huge label">
+        <i class="icon plus"></i> Trigger
+      </a>
+    </div>
+
+    </div>
+    <div>
+<a class="ui twitter icon massive fluid button" href="/twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter" ></i> Confirm</a>
+    </div>
+    <div class="nothanks">
+      <a href="#" style="float: right">Skip <i class="ui icon right chevron"></i></a>
+    </div>
+
+    </form>
+    </div>
+  </main>
+  <!--
+  <footer>
+    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
+</span>
+    <div style="display: inline-block; float: right">
+
+      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
+      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
+
+      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
+
+    </div>
+  </footer>
+  -->
