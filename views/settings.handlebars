@@ -1,0 +1,128 @@
+<!-- Page -->
+<script>
+  $(document).ready(function () {
+    $('main').fadeIn('1000');
+  });
+
+</script>
+<style>
+  html {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+</style>
+
+<body class="site" style="max-height: 100%">
+  <header>
+    <!-- Navigation -->
+    <nav class="ui squared menu">
+      <!-- Logo -->
+      <div class="item">
+        <a href="#">
+          <img src="/images/profile.jpg" class="logo" />
+        </a>
+      </div>
+      <!-- Login -->
+      <div class="right menu">
+        <div class="ui pointing dropdown link item">
+          Arianna Israel
+          <i class="dropdown icon"></i>
+          <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
+            <div class="item">
+              <i class="icon lightning"></i> Triggers
+            </div>
+            <div class="item">
+              <i class="icon usd"></i> Donations
+            </div>
+            <div class="item">
+              <i class="icon settings"></i> Account
+            </div>
+            <div class="item">
+              <i class="icon credit card alternative"></i> Payment
+            </div>
+            <div class="item">
+              <i class="icon mobile"></i> Notifications
+            </div>
+            <div class="item">
+              <i class="icon users"></i> Permissions
+            </div>
+            <div class="js-logout logout" style="padding: 10px">
+              <button class="ui button fluid large primary">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="ui text container web-form">
+      <h1>Settings
+      </h1>
+      <h3>Change Password</h3>
+      <form class="ui large form">
+        <div class="field">
+          <label>New Password</label>
+          <div class="ui input" style="width: 350px">
+            <input type="password" placeholder="New Password">
+          </div>
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <div class="ui input" style="width: 350px">
+            <input type="password" placeholder="Confirm Password">
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <button class="ui primary button" type="submit">Update</button>
+        </div>
+
+      </form>
+      <div class="ui divider"></div>
+      <h3>Update Email</h3>
+      <form class="ui large form">
+        <div class="field">
+          <label>Current Email</label>
+          <p>arianna.israel@nyu.edu</p>
+        </div>
+        <div class="field">
+          <label>New Email</label>
+          <div class="ui input" style="width: 350px">
+            <input type="text" placeholder="Email">
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <button class="ui primary button" type="submit">Update</button>
+        </div>
+
+      </form>
+      <div class="ui divider"></div>
+      <h3>Social Accounts</h3>
+     <div class="ui buttons">
+       <button class="ui button facebook icon" style="border-radius: 3px"><i class="facebook icon"></i> Link my Facebook account</i></button>
+       <button class="ui button twitter icon" style="margin-left: 10px; border-radius: 3px;"><i class="twitter icon"></i> Link my Twitter account</i></button>
+       </div> 
+
+      <div class="ui divider"></div>
+      <h3>Delete Account</h3>
+      <form class="ui large form">
+        <div style="margin-top: 20px">
+          <button class="ui red button" type="submit">Delete</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <!--
+  <footer>
+    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
+</span>
+    <div style="display: inline-block; float: right">
+
+      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
+      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
+
+      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
+
+    </div>
+  </footer>
+  -->
