@@ -155,8 +155,16 @@ button.primary:hover {
     top: -2px;
 }
 
+.landing-page {
+    height: 100% !important;
+}
+
 .landing-form > .charities {
     padding-top: 10px;
+}
+
+.main-landing {
+    height: 100% !important;
 }
 
 .amounts {
