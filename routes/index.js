@@ -19,11 +19,21 @@ const PaymentController = controllers.payments;
 
 app.use('/api', require('./api'));
 
-app.get('/', PageController.index);
+app.get('/', PageController.landing);
 app.get('/login', PageController.login);
-app.get('/payment', PageController.payments);
+app.get('/payment', PageController.payment);
 app.get('/reset', PageController.reset);
-
+app.get('/settings', PageController.settings);
+app.get('/notifications', PageController.notifications);
+app.get('/terms', PageController.terms);
+app.get('/social', PageController.social);
+app.get('/contact', PageController.contact);
+app.get('/donations', PageControllers.donations);
+app.get('/triggers', PageController.triggers);
+app.get('/leaderboard', PageController.leaderboard);
+app.get('/charities', PageController.charities);
+app.get('/faq', PageController.faq);
+app.get('/tweets', PageController.tweets);
 
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
 app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
