@@ -14,41 +14,7 @@
 </style>
 
 <body class="site" style="max-height: 100%">
-  <header>
-    <!-- Navigation -->
-    <nav class="ui squared menu">
-      <!-- Logo -->
-      <div class="item">
-        <a href="/">
-          <img src="/images/profile.jpg" class="logo" />
-        </a>
-      </div>
-      <!-- Login -->
-      <div class="right menu">
-        <div class="ui pointing dropdown link item">
-          Arianna Israel
-          <i class="dropdown icon"></i>
-          <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
-            <div class="item">
-              <i class="icon lightning"></i> Triggers
-            </div>
-            <div class="item">
-              <i class="icon usd"></i> Donations
-            </div>
-            <div class="item"><a href="/settings" style="color:#555">
-              <i class="icon settings"></i> Settings
-            </div>
-            <div class="item"><a href="/payment" style="color: #444">
-              <i class="icon credit card alternative"></i> Payment</a>
-            </div>
-            <div class="js-logout logout" style="padding: 10px">
-              <a href="/logout" class="ui button fluid large primary">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
+ {{> header}}
   <main>
     <div class="ui text container web-form">
       <h1>Account Settings
