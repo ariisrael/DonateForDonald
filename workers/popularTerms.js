@@ -18,13 +18,11 @@ function findPopularTerms(options, cb) {
         } else {
           query.term = t.term
         }
-        console.log(query)
         PopularTerm.findOne(query, function(err, term) {
           if (err) {
             console.error(err)
           }
           if (!term) {
-            console.log(t)
             if (t.constructor === String) {
               term = new PopularTerm({term: t})
             } else {
