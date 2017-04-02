@@ -151,6 +151,10 @@ button.primary:hover {
     width: 100%;
 }
 
+.field {
+    border-bottom: none !important;
+}
+
 .amount-1, .amount-5, .amount-10{
     padding: auto !important;
 }
