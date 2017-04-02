@@ -4,12 +4,13 @@ const Twitter = require('twit'); // Twitter API
 const T = new Twitter(config.twitter);
 const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 
-const Tweet = require('../models/tweet')
-const Trigger = require('../models/trigger')
-const Donation = require('../models/donation')
-const User = require('../models/user')
+const models = require('../models')
+const Tweet = models.Tweet
+const Trigger = models.Trigger
+const Donation = models.Donation
+const User = models.User
 
-const donateNow = require('../utils/donate')
+var makeDonation = require('./donate')
 
 // Create new stream filtering statuses by user (including retweets, replies)
 var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
@@ -79,20 +80,4 @@ analyzeTweet(tweet) {
       })
     })
   })
-}
-
-makeDonation(user, trigger, tweet) {
-  donation = new Donation({
-    userId: user.id,
-    triggerId: trigger.id,
-    amount: trigger.amount,
-    tweetId: tweet.id
-  })
-  donation.save((err, donation) => {
-    if (err) {
-      return console.error(err)
-    }
-    donateNow(user, trigger, tweet, donation)
-  })
-  return donation
 }

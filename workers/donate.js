@@ -1,5 +1,9 @@
 const request = require('request');
-var PANDAPAY = require('../config/pandapay');
+
+const PANDAPAY = require('../config/pandapay');
+
+const models = require('../models')
+const Donation = models.Donation
 
 var mode = 'test'
 if (process.env.NODE_ENV === 'production') {
@@ -8,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/donations';
 
-module.exports = function(user, trigger, tweet, donation) {
+function donationRequest(user, trigger, tweet, donation) {
   var body = {
     source: user.paymenttoken,
     platform_fee: PANDAPAY.fee,
@@ -34,3 +38,21 @@ module.exports = function(user, trigger, tweet, donation) {
     })
   });
 }
+
+function makeDonation(user, trigger, tweet) {
+  donation = new Donation({
+    userId: user.id,
+    triggerId: trigger.id,
+    amount: trigger.amount,
+    tweetId: tweet.id
+  })
+  donation.save((err, donation) => {
+    if (err) {
+      return console.error(err)
+    }
+    donateNow(user, trigger, tweet, donation)
+  })
+  return donation
+}
+
+module.exports = exports = makeDonation
