@@ -13,13 +13,13 @@
 <body class="site" style="max-height: 100%">
   {{> header}}
   <main>
-    <div class="ui text container web-form">
-      <h1>Payment Information
+    <div class="ui text container web-form" style="max-width: 400px">
+      <h1 style="max-width: 600px; margin: 0px auto; padding: 0px">{{title}}
       </h1>
-      <div class="ui subheader">Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
+      <div class="ui subheader" style="max-width: 600px; margin: 10px auto 20px auto">Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
         receipts at the end of each month. Payment processing fees are <a href="/faq/payment" class="forgot-pass">2.9% + $0.30 per donation</a>.
       </div>
-      <form class="ui large form">
+      <form class="ui large form" style="max-width: 600px; margin: 0 auto">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="two fields">
           <div class="field">

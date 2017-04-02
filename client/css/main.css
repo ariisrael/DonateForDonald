@@ -35,7 +35,7 @@ body {
 }
 
 .web-form {
-     width: 100%; max-width: 600px; width: 600px; margin: 5% auto
+     width: 100%; max-width: 500px; width: 500px; margin: 5% auto
 }
 
 .forgot-pass {
@@ -297,7 +297,7 @@ left: 30px !important;
 
 
     main {
-        margin-top: 20px;
+        margin-top: 0px;
     }
 }
 @media only screen and (max-width: 800px) {
