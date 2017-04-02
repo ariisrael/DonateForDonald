@@ -4,6 +4,9 @@ require('./session')
 
 // this is our generic middleware that's applied to everything
 app.use(function (req, res, next) {
+  // res.locals is always passed to the template,
+  // so ones that should be accessible from almost any template are set here
+
   if (!res.locals) {
     res.locals = {};
   }
@@ -16,7 +19,7 @@ app.use(function (req, res, next) {
       admin: (req.user.admin) ? req.user.admin : null,
     }
   }
-
+  
   // Setup a query
   res.locals.query = {}
 
