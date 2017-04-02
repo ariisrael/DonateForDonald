@@ -15,6 +15,11 @@ module.exports = {
         });
     },
     find: (req, res) => {
+      /*
+        This will search tweets, ranking by how close the match is
+        make sure this endpoint is rate limited,
+        it might make the database unhappy if we don't
+      */
       query = req.params.q
       Tweet.find(
         { $text : { $search : q } },
