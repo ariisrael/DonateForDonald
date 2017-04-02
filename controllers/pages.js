@@ -9,7 +9,7 @@ exports.landing = function(req, res) {
       res.render('landing', {
     title: 'Home',
         email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : null,
+    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
   });
   } else {
@@ -26,7 +26,7 @@ exports.payment = function(req, res) {
   res.render('payment', {
     title: 'Payment',
     email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : null,
+    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
     csrfToken: req.csrfToken()
   });
@@ -56,14 +56,14 @@ exports.settings = function(req, res) {
       res.render('settings', {
     title: 'Settings',
         email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : null,
+    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
   });
   } else {
   res.render('settings', {
     title: 'Settings',
         email: null,
-    picture: null,
+    picture: "https://myspace.com/common/images/user.png",
     name:  null,
   });
   }
