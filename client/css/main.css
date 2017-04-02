@@ -188,7 +188,7 @@ button.primary:hover {
 }
 
 @media only screen and (max-width: 500px) {
-    .headline {font-size: 18px !important; font-weight: 700;
+    .headline {font-size: 22px !important; font-weight: 700;
     padding-top: 0px !important}
     .subheader {
         font-size: 14px;
