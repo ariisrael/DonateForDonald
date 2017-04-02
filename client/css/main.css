@@ -126,6 +126,11 @@ button.primary:hover {
 }
 
 
+.landing-form .selected-amount {
+    background-color: #00aced !important;
+    color: #fff !important;
+}
+
 .dollar-sign {
     color: #999;
     font-size: 20px;
