@@ -2,82 +2,55 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-var config = require('../config/worker')
+const models = require('../models')
+const Tweet = models.Tweet
 
-var Trigger = require('../models/trigger')
-var Charity = require('../models/charity')
-var db = config.db
-var getAndSaveTweets = require('../workers/saveTweets')
-var analyzeTweets = require('../workers/analyzeTweets').analyzeTweets
+var T = new Twit({
+  consumer_key:         'HSjDtq7x7IjkrcHzEbyMT8QvN',
+  consumer_secret:      'V3ewc1zexgaY8A37pDZaLLT0zJ51VZpBsnUAmnfOWcf1zv694y',
+  access_token:         '18880271-oMmdZ5mxjYe8PKnoEYe4j1FyDz6Wu4YoYOvHh5h8O',
+  access_token_secret:  'uVeE5gM4z7i0L7HMLxndcUyyfzsNCbwluqJmEIv9cM7AU'
+});
 
-var done = 0;
-var triggersDone = 0;
-
-var trigs = [{
-    name: 'maga',
-    words: ['maga', 'MAGA', 'Make America Great Again']
-  }, {
-    name: 'insults',
-    words: ['failing']
-  }, {
-    name: 'fake news',
-    words: ['FAKE NEWS', 'fake news', 'lying media', 'nytimes']
-  }, {
-    name: 'sad',
-    words: ['SAD']
-  }, {
-    name: '',
-    words: ['']
-  }]
-
-config.workerEmitter.on('scheduleTweetGrabbing', () =>{
-  process.exit()
-})
-
-config.workerEmitter.on('tweetSavingDone', () => {
-  done++;
-  if (done == 2) {
-    analyzeTweets()
+var seedTweets() {
+  var query = {
+    screen_name: 'realDonaldTrump',
+    count: 1000,
+    tweet_mode: 'extended'
   }
-})
-
-config.workerEmitter.on('triggerSaved', (newTrigger) => {
-  triggersDone++;
-  if (triggersDone == trigs.length) {
-    config.workerEmitter.emit('triggerSavingDone')
+  if (options) {
+    query.count = options.count;
   }
-})
-
-config.workerEmitter.on('triggerSavingDone', () => {
-  done++;
-  if (done == 2) {
-    analyzeTweets()
-  }
-})
-
-function seed() {
-  db.once('open', function() {
-    for (var i = 0; i < trigs.length; i++) {
-      saveTrigger(trigs[i])
+  T.get('statuses/user_timeline', query, function(err, data, response) {
+    if (err) {
+      return console.error(err)
     }
-    getAndSaveTweets()
+    data.forEach((d) => {
+      var text = getFullText(tweet);
+      var id = tweet.id;
+      var date = tweet.created_at;
+    })
   })
 }
 
-function saveTrigger(t) {
-  Trigger.findOne({name: t.name}, (err, trigger) => {
-    if (!trigger) {
-      var newTrigger = new Trigger(t)
-      newTrigger.save(function(err) {
-        if (err) {
-          console.log(t.name, err)
-        }
-        config.workerEmitter.emit('triggerSaved', newTrigger)
-      })
-    } else {
-      config.workerEmitter.emit('triggerSaved', trigger)
+function saveTweet(tweet) {
+  Tweet.find(tweet.id, (err, tweet) => {
+    if (err) {
+      return console.error(err)
     }
+    if (tweet) return;
+
+    Tweet.create(tweet, (err, t) => {
+      if (err) {
+        return console.error(err)
+      }
+    })
   })
 }
 
-seed()
+function getFullText(tweet) {
+  if (tweet.truncated && tweet.extended_tweets && tweet.extended_tweet.full_text) {
+    return tweet.extended_tweet.full_text;
+  }
+  return tweet.text;
+}
