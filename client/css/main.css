@@ -185,8 +185,23 @@ button.primary:hover {
     padding-top: 0px !important}
     .subheader {
         font-size: 14px;
-        width: 103%
+        width: 103%;
     }
+
+    .login-button {
+        display: block; 
+        width: 100%;
+        position: relative; 
+        top: 15px;
+    }
+
+    .signup-button {
+        display: block;
+        width: 100%;
+        position: relative; 
+        top: 25px !important;
+    }
+
 .mobile-label {
     margin-top: 20px !important;
 }
