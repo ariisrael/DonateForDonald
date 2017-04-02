@@ -16,6 +16,13 @@ $(document).ready(function () {
       $("input", this).prop('disabled', false);
       $(".dollar-sign").removeClass("greyed-out");
     });
+
+// User toggles maximum monthly donation 
+$(".js-maximum-toggle")
+  .on('click', function() {
+    $('.js-maximum-amount').toggleClass('disabled');
+  });
+
 // User started typing other amount
   $(".js-amount-other input")
     .on('focus', function () {
