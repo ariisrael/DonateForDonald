@@ -35,7 +35,7 @@ function getFullText(tweet) {
 }
 
 function saveTweet(tweet) {
-  new t = new Tweet(tweet)
+  var t = new Tweet(tweet)
   t.save((err) => {
     if (err) {
       return console.log(err)
