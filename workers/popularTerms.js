@@ -1,10 +1,12 @@
-require('dotenv').config()
+var _ = require('lodash')
 var popularTerms = require('../utils/popular')
 var PopularTerm = require('../models/popularTerm')
 
-function findPopularTerms(cb) {
+function findPopularTerms(options, cb) {
   if (!cb) cb = function(){}
-  popularTerms(function(err, terms) {
+  var opts = {count: 1000}
+  var options = _.merge(opts, options)
+  popularTerms(options, function(err, terms) {
     if (err) {
       return cb(err)
     }

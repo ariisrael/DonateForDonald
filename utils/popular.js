@@ -62,7 +62,7 @@ var blacklist = [
   'https',
   'ht'
 ];
-function getPopularTerms(callback, options) {
+function getPopularTerms(options, callback) {
   var query = {
     screen_name: 'realDonaldTrump',
     count: 1000,
