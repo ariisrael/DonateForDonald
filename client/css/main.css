@@ -94,6 +94,8 @@ button.primary:hover {
     text-decoration: none !important;
 }
 
+
+
 .two-buttons {
     padding-top: 30px;
 }
@@ -185,6 +187,10 @@ button.primary:hover {
         font-size: 14px;
         width: 103%
     }
+.mobile-label {
+    margin-top: 20px !important;
+}
+
     .landing-form .left-button {
         display: none !important;
     }
