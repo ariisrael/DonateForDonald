@@ -6,7 +6,7 @@ const ObjectId = Schema.ObjectId;
 const TriggerSchema = new Schema({
   name: { type: String, trim: true },
   keywords: { type: [String], required: true },
-  charityId: ObjectId,
+  charityId: String, // Charity IDs are eins
   userId: ObjectId,
   amount: { type: Number, min: 1 },
 });
