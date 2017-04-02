@@ -10,7 +10,7 @@ require('./middleware');
 require('./auth');
 
 const UserController = controllers.users;
-const HomeController = controllers.home;
+const PageController = controllers.pages;
 const TriggerController = controllers.triggers;
 const DonationController = controllers.donations;
 const TweetController = controllers.tweets;
@@ -19,7 +19,7 @@ const PaymentController = controllers.payments;
 
 app.use('/api', require('./api'));
 
-app.get('/', HomeController.index);
+app.get('/', PageController.index);
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
 app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
 app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);

@@ -45,15 +45,15 @@ a.forgot-pass:hover {
 
 .headline {
     font-weight: 400;
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .subheader {
-    margin: 20px auto;
+    margin: 18px auto;
     display: block;
-    line-height: 160%;
+    line-height: 150%;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: #888;
 }
 
@@ -147,6 +147,18 @@ button.primary:hover {
     padding-top: 10px;
 }
 
+.amount-other {
+
+}
+
+.amounts {
+    width: 100%;
+}
+
+.amount-1, .amount-5, .amount-10{
+    padding: auto !important;
+}
+
 .amount-other > input {
     padding-left: 40px !important;
 }
@@ -155,9 +167,56 @@ button.primary:hover {
     z-index: 999 !important;
 }
 
+
 .amount-other > a.label {
     padding-left: 30px;
     padding-right: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+    .headline {font-size: 18px !important; font-weight: 700;
+    padding-top: 0px !important}
+    .subheader {
+        font-size: 14px;
+        width: 103%
+    }
+    .landing-form .left-button {
+        display: none !important;
+    }
+
+    .landing-form .right-button {
+        width: 100%;
+    }
+
+    .amounts > a {
+        border-right: 1px solid #888;
+    }
+    
+    .amounts {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .tweet-drawer {
+        width: 100% !important;
+    }
+    .landing-right {
+        padding-right: 10px !important;
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+    main {
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .landing-left {
+        display: none;
+    }
+
+    .landing-right {
+        width: 100% !important;
+        padding-left: 10px;
+    }
 }
 
 .amount-other {
@@ -169,7 +228,7 @@ button.primary:hover {
 }
 
 .amount-other > a {
-    padding: auto 30px !important;
+    padding: auto 10px !important;
 }
 
 .amount-other > input {
@@ -242,7 +301,7 @@ button.primary:hover {
 .landing-right > div {
     margin: 0 auto;
     padding-top: 6%;
-    max-width: 500px
+    max-width: 500px;
 }
 
 .headline > span {
@@ -268,4 +327,21 @@ footer a.item {
 main {
   height: 100% !important;
   width: 100%
+}
+
+.landing-right {
+    padding-right: 20px;
+}
+
+.landing-left > img {
+    height: 100% !important;
+    width: 95% !important; 
+}
+
+.landing-left {
+    width: 50% !important;
+    margin-top: 2% !important;
+}
+body {
+    width: 100%;
 }

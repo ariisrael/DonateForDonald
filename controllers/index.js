@@ -10,4 +10,4 @@ exports.payments = require('./payments');
 exports.terms = require('./terms');
 
 // Pages
-exports.home = require('./home');
+exports.pages = require('./pages');
