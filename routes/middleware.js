@@ -8,6 +8,14 @@ app.use(function (req, res, next) {
     res.locals = {};
   }
   res.locals.env = process.env.NODE_ENV
+  if (req.user) {
+    res.locals.user = {
+      email: (req.user.email) ? req.user.email : null,
+      picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
+      name: (req.user.name) ? req.user.name : null,
+      admin: (req.user.admin) ? req.user.admin : null,
+    }
+  }
 
   // Setup a query
   res.locals.query = {}
