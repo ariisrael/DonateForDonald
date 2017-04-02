@@ -1,0 +1,15 @@
+{
+  "script": "app",
+  "ext": "js",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ignore": ["build/**",
+             "public/**",
+             "node_modules/**",
+             "gulpfile.js",
+             "client/**",
+             "test/**",
+             "views/**",
+             "bower_components"]
+}
