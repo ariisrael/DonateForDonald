@@ -21,19 +21,21 @@
       <!-- Login -->
       <div class="right menu">
         {{#if email}}
-        <div class="ui pointing dropdown link item"> 
+        <div class="ui pointing dropdown link item" style="border-left: none;"> 
           {{#if picture}}
           <img src="{{picture}}" class="user-picture" style="display:inline-block; border-radius: 100%; max-height: 40px; margin-right: 10px"/>
           {{/if}}
           {{name}}
           <i class="dropdown icon"></i>
           <div class="menu js-user-menu user-menu" style="min-width: 175px; width: 175px; font-size: 18px">
+            <a href="/triggers" style="color:#555">
             <div class="item">
               <i class="icon lightning"></i> Triggers
-            </div>
+            </div></a>
+            <a href="/donations" style="color:#555">
             <div class="item">
               <i class="icon usd"></i> Donations
-            </div>
+            </div></a>
             <a href="/settings" style="color:#555"><div class="item">
               <i class="icon settings"></i> Settings
             </div>
