@@ -5,12 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
 const models = require('../models')
 const Tweet = models.Tweet
 
-var T = new Twit({
-  consumer_key:         'HSjDtq7x7IjkrcHzEbyMT8QvN',
-  consumer_secret:      'V3ewc1zexgaY8A37pDZaLLT0zJ51VZpBsnUAmnfOWcf1zv694y',
-  access_token:         '18880271-oMmdZ5mxjYe8PKnoEYe4j1FyDz6Wu4YoYOvHh5h8O',
-  access_token_secret:  'uVeE5gM4z7i0L7HMLxndcUyyfzsNCbwluqJmEIv9cM7AU'
-});
+const Twitter = require('twit'); // Twitter API
+const T = new Twitter(config.twitter);
 
 mongoose.connection.once('open', function() {
   seedTweets()
