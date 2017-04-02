@@ -172,7 +172,7 @@ button.primary:hover {
 }
 
 .amount-other > input {
-    padding-left: 40px !important;
+    padding-left: 100px !important;
 }
 
 .menu {
@@ -267,7 +267,7 @@ left: 30px !important;
 }
 
 .amount-other {
-    width: 100px;
+    width: 200px;
     position: relative;
     left: -15px;
     height: 51.5px;
