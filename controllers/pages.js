@@ -23,12 +23,12 @@ exports.landing = function(req, res) {
 };
 
 exports.payment = function(req, res) {
-  console.log(req.user);
   res.render('payment', {
     title: 'Payment',
     email: (req.user.email) ? req.user.email : null,
     picture: (req.user.picture) ? req.user.picture : null,
     name: (req.user.name) ? req.user.name : null,
+    csrfToken: req.csrfToken()
   });
 }
 
@@ -40,7 +40,8 @@ exports.notifications = function(req, res) {
 
 exports.contact = function(req, res) {
   res.render('contact', {
-    title: 'Contact'
+    title: 'Contact',
+    csrfToken: req.csrfToken()
   });
 }
 
