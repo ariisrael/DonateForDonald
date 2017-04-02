@@ -12,6 +12,10 @@ var T = new Twit({
   access_token_secret:  'uVeE5gM4z7i0L7HMLxndcUyyfzsNCbwluqJmEIv9cM7AU'
 });
 
+mongoose.connection.once('open', function() {
+  seedTweets()
+})
+
 var seedTweets() {
   var query = {
     screen_name: 'realDonaldTrump',
