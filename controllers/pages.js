@@ -7,8 +7,8 @@ exports.index = function(req, res) {
   });
 };
 
-exports.payments = function(req, res) {
-  res.render('payments', {
+exports.payment = function(req, res) {
+  res.render('payment', {
     title: 'Payment'
   });
 }

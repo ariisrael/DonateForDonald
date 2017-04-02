@@ -21,7 +21,8 @@ app.use('/api', require('./api'));
 
 app.get('/', PageController.index);
 app.get('/login', PageController.login);
-app.get('/payments', PageController.payments);
+app.get('/payment', PageController.payments);
+app.get('/reset', PageController.reset);
 
 
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
