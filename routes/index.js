@@ -20,6 +20,10 @@ const PaymentController = controllers.payments;
 app.use('/api', require('./api'));
 
 app.get('/', PageController.index);
+app.get('/login', PageController.login);
+app.get('/payments', PageController.payments);
+
+
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
 app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
 app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);
