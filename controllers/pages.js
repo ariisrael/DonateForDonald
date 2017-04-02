@@ -13,6 +13,12 @@ exports.payment = function(req, res) {
   });
 }
 
+exports.notifications = function(req, res) {
+  res.render('notifications', {
+    title: 'Notifications'
+  });
+}
+
 exports.login = function(req, res) {
   res.render('login', {
     title: 'Login'
@@ -79,3 +85,8 @@ exports.tweets = function(req, res) {
   })
 }
 
+exports.leaderboard = function(req, res) {
+  res.render('leaderboard', {
+    title: 'Leaderboard'
+  })
+}

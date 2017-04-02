@@ -28,7 +28,7 @@ app.get('/notifications', UserController.ensureAuthenticated,PageController.noti
 app.get('/terms', PageController.terms);
 app.get('/social', UserController.ensureAuthenticated, PageController.social);
 app.get('/contact', PageController.contact);
-app.get('/donations', UserController.ensureAuthenticated,PageControllers.donations);
+app.get('/donations', UserController.ensureAuthenticated,PageController.donations);
 app.get('/triggers', UserController.ensureAuthenticated, PageController.triggers);
 app.get('/leaderboard', PageController.leaderboard);
 app.get('/charities', PageController.charities);
