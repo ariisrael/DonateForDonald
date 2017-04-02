@@ -39,7 +39,7 @@ exports.payment = function(req, res) {
 exports.notifications = function(req, res) {
   res.render('notifications', {
     title: 'Notifications'
-    
+
   });
 }
 
@@ -77,19 +77,19 @@ exports.settings = function(req, res) {
 }
 
 exports.terms = function(req, res) {
-  res.render('Terms', {
+  res.render('terms', {
     title: 'terms'
   });
 }
 
 exports.donations = function(req, res) {
-  res.render('Donations', {
+  res.render('donations', {
     title: 'donations'
   });
 }
 
 exports.faq = function(req, res) {
-  res.render('FAQ', {
+  res.render('faq', {
     title: 'faq'
   });
 }
