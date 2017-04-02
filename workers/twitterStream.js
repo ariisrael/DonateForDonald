@@ -11,6 +11,7 @@ const Donation = models.Donation
 const User = models.User
 
 var makeDonation = require('./donate')
+var popularTerms = require('./popularTerms')
 
 // Create new stream filtering statuses by user (including retweets, replies)
 var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
@@ -80,4 +81,6 @@ analyzeTweet(tweet) {
       })
     })
   })
+  
+  popularTerms()
 }

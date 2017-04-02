@@ -62,8 +62,16 @@ var blacklist = [
   'https',
   'ht'
 ];
-function getPopularTerms(callback) {
-  T.get('statuses/user_timeline', { screen_name: 'realDonaldTrump', count: 200, tweet_mode: 'extended' }, function(err, data, response) {
+function getPopularTerms(callback, options) {
+  var query = {
+    screen_name: 'realDonaldTrump',
+    count: 1000,
+    tweet_mode: 'extended'
+  }
+  if (options) {
+    query.count = options.count;
+  }
+  T.get('statuses/user_timeline', query, function(err, data, response) {
     if(err) {
       callback(err, null);
     }
@@ -125,10 +133,5 @@ function getPopularTerms(callback) {
     callback(null, popularTerms)
   });
 }
-
-getPopularTerms((err, terms) => {
-  if(err) return console.log(err);
-  console.log(terms);
-});
 
 module.exports = getPopularTerms;
