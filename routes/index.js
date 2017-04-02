@@ -4,6 +4,7 @@ const controllers = require('../controllers');
 const express = require('express');
 const _ = require('lodash');
 const passport = require('passport');
+const csurf = require('csurf')
 
 // Require middleware before routes
 require('./middleware');
@@ -17,17 +18,19 @@ const TweetController = controllers.tweets;
 const CharityController = controllers.charities;
 const PaymentController = controllers.payments;
 
+const csrfProtection = csurf({ cookie: true })
+
 app.use('/api', require('./api'));
 
 app.get('/', PageController.landing);
-app.get('/login', UserController.loginGet);
-app.get('/payment', UserController.ensureAuthenticated, PageController.payment);
+app.get('/login', csrfProtection, UserController.loginGet);
+app.get('/payment', csrfProtection, UserController.ensureAuthenticated, PageController.payment);
 app.get('/reset', PageController.reset);
 app.get('/settings', UserController.ensureAuthenticated, PageController.settings);
 app.get('/notifications', UserController.ensureAuthenticated,PageController.notifications);
 app.get('/terms', PageController.terms);
 app.get('/social', UserController.ensureAuthenticated, PageController.social);
-app.get('/contact', PageController.contact);
+app.get('/contact', csrfProtection, PageController.contact);
 app.get('/donations', UserController.ensureAuthenticated,PageController.donations);
 app.get('/triggers', UserController.ensureAuthenticated, PageController.triggers);
 app.get('/leaderboard', PageController.leaderboard);
@@ -39,11 +42,11 @@ app.get('/account', UserController.ensureAuthenticated, UserController.accountGe
 app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
 app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);
 
-app.get('/signup', UserController.signupGet);
-app.post('/signup', UserController.signupPost);
+app.get('/signup', csrfProtection, UserController.signupGet);
+app.post('/signup', csrfProtection, UserController.signupPost);
 
-app.get('/login', UserController.loginGet);
-app.post('/login', UserController.loginPost);
+app.get('/login', csrfProtection, UserController.loginGet);
+app.post('/login', csrfProtection, UserController.loginPost);
 
 app.get('/logout', UserController.logout);
 

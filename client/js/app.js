@@ -13,15 +13,4 @@ $(document).ready(function() {
     $('#login-form').attr('action', '/signup')
     $('#login-form').submit()
   })
-
-  if (landing) {
-    jQuery.getJSON('/api/terms', function(data) {
-      for (var i = 0; i < data.length; i++) {
-        var html = '<div class="item">' + data[i].term + '</div>'
-        $('.js-select-trigger .js-fill').append(html)
-      }
-    })
-  }
-
-
 })

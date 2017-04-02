@@ -78,7 +78,8 @@ exports.loginGet = function(req, res) {
     return res.redirect('/');
   }
   res.render('login', {
-    title: 'Log in'
+    title: 'Log in',
+    csrfToken: req.csrfToken()
   });
 };
 
@@ -92,6 +93,8 @@ exports.loginPost = function(req, res, next) {
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
+
+  console.log(errors)
 
   if (errors) {
     req.flash('error', errors);
