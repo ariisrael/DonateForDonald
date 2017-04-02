@@ -298,6 +298,15 @@ left: 30px !important;
         margin-top: 20px;
     }
 }
+@media only screen and (max-width: 800px) {
+        .tweet-drawer {
+        z-index: 999 !important;
+        width: 100% !important;
+        max-width: 500px !important; 
+    }
+
+}
+
 @media only screen and (max-width: 900px) {
     .landing-left {
         display: none;
