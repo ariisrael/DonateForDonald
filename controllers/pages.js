@@ -51,9 +51,21 @@ exports.reset = function(req, res) {
 }
 
 exports.settings = function(req, res) {
+ if(req.user) {
+      res.render('settings', {
+    title: 'Settings',
+        email: (req.user.email) ? req.user.email : null,
+    picture: (req.user.picture) ? req.user.picture : null,
+    name: (req.user.name) ? req.user.name : null,
+  });
+  } else {
   res.render('settings', {
-    title: 'Settings'
-  })
+    title: 'Settings',
+        email: null,
+    picture: null,
+    name:  null,
+  });
+  }
 }
 
 exports.terms = function(req, res) {
