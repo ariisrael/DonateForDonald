@@ -89,6 +89,11 @@ button.primary:hover {
 
 /* Landing */
 
+.field {
+    border-bottom: none !important;
+    text-decoration: none !important;
+}
+
 .two-buttons {
     padding-top: 30px;
 }
