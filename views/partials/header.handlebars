@@ -48,6 +48,12 @@
               <i class="icon credit card alternative"></i> Payment
             </div>
             </a>
+            {{#if admin}}
+            <a href="/admin" style="color:#555"><div class="item">
+              <i class="icon lab"></i> Admin
+            </div>
+            </a>
+            {{/if}}
             <div class="js-logout logout" style="padding: 10px">
               <a href="/logout" class="ui button fluid large primary">Logout</a>
             </div>

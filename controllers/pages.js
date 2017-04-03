@@ -11,6 +11,7 @@ exports.landing = function(req, res) {
         email: (req.user.email) ? req.user.email : null,
     picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
+    admin: (req.user.admin) ? req.user.admin : null,
   });
   } else {
   res.render('landing', {
@@ -18,6 +19,7 @@ exports.landing = function(req, res) {
         email: null,
     picture: "https://myspace.com/common/images/user.png",
     name:  null,
+    admin: false,
   });
   }
 };
@@ -28,13 +30,16 @@ exports.payment = function(req, res) {
     email: (req.user.email) ? req.user.email : null,
     picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
-    csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
+        admin: (req.user.admin) ? req.user.admin : null,
+
   });
 }
 
 exports.notifications = function(req, res) {
   res.render('notifications', {
     title: 'Notifications'
+    
   });
 }
 
@@ -58,6 +63,8 @@ exports.settings = function(req, res) {
         email: (req.user.email) ? req.user.email : null,
     picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
     name: (req.user.name) ? req.user.name : null,
+        admin: (req.user.admin) ? req.user.admin : null,
+
   });
   } else {
   res.render('settings', {
