@@ -115,7 +115,7 @@ button.primary:hover {
 
 .landing-form {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 20px;
 }
 .greyed-out {
     color: #ddd !important;
@@ -199,7 +199,7 @@ nav {
 
 @media only screen and (max-width: 500px) {
     .headline {font-size: 22px !important; font-weight: 700;
-    padding-top: 0px !important}
+    padding-top: 10px !important}
     .subheader {
         font-size: 14px;
         width: 103%;
@@ -222,6 +222,10 @@ nav {
     margin-bottom: 0px !important;
 }
     
+
+.two-buttons {
+    position: relative; top: -10px;
+}
 .two-buttons > div.left-button {
     padding-right: 0px;
 }
@@ -261,7 +265,6 @@ nav {
     .landing-form .left-button {
         display: block !important;
         width: 100% !important;
-        margin-top: 20px;
     }
 
 .new-line {
