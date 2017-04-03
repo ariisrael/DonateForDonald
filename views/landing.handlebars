@@ -172,20 +172,17 @@
   var blacklist = [];
   $(document).ready(function() {
     jQuery.getJSON('/api/terms', function(data) {
-      var blHtml = '';
       for (var i = 0; i < data.length; i++) {
         
-        if(blacklist.indexOf(data[i].term.toLowerCase()) < 0) {
-          var html += '<div class="item">' + data[i].term + '</div>';
-                $('.js-select-trigger .js-fill').append(html);
-
-        }
+          var html = '<div class="item">' + data[i].term + '</div>';
+         $('.js-select-trigger .js-fill').append(html);
       }
       var wlHtml = '';
     whitelist.forEach(function(term) {
-      wlHtml += '<div class="item">' + term + '</div>';   
+      wlHtml = '<div class="item">' + term + '</div>';   
+          $('.js-select-trigger .js-fill').append(wlHtml);
+
     });
-    $('.js-select-trigger .js-fill').append(wlHtml);
     })
     
   })
