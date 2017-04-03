@@ -117,7 +117,7 @@ function getPopularTerms(options, callback) {
           }
           output += " ";
         });
-        var outputTerm = output.replace(/gt/g, '').replace(/amp/g, '').replace(/RT/g, '').replace(/cc/g, '').trim();
+        var outputTerm = output.replace(/gt /g, '').replace(/ gt/g, '').replace(/amp/g, '').replace(/RT/g, '').replace(/cc/g, '').trim();
         var already = false;
         popularTerms.forEach((term) => {
           if(term.indexOf(outputTerm) > 0) {
