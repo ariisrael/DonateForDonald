@@ -168,13 +168,24 @@
 </main>
 
 <script>
+  var blacklist = ['washinon'];
+  var whitelist = ['Ocare'];
   $(document).ready(function() {
     jQuery.getJSON('/api/terms', function(data) {
+      var blHtml = '';
       for (var i = 0; i < data.length; i++) {
-        var html = '<div class="item">' + data[i].term + '</div>'
-        $('.js-select-trigger .js-fill').append(html)
+        
+        if(blacklist.indexOf(data[i].toLowerCase()) < 0) {
+          blHtml += '<div class="item">' + data[i].term + '</div>';
+        }
       }
+      $('.js-select-trigger .js-fill').append(blHtml);
     })
+    var wlHtml = '';
+    whitelist.forEach(function(term) {
+      wlHtml += '<div class="item">' + data[i].term + '</div>';   
+    });
+    $('.js-select-trigger .js-fill').append(wlHtml);
   })
 </script>
 
