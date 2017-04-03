@@ -55,6 +55,12 @@ $(".js-maximum-toggle")
       $('.js-tweet-drawer').removeClass('visible');
       $('.js-tweets').html('<i class="twitter icon"></i> View Tweets');
       $('.js-nav').addClass('visible');
+      $('main').css('overflow-y', 'auto');
+        $('body').css('overflow-y', 'auto');
+                $('body').css('overflow-x', 'hidden');
+
+                $('html').css('overflow-y', 'auto');
+                $('html').css('overflow-x', 'hidden');
     });
 // User selected dropdown option
   $('.selection').dropdown({
