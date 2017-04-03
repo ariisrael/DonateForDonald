@@ -172,16 +172,18 @@
   var blacklist = [];
   $(document).ready(function() {
     jQuery.getJSON('/api/terms', function(data) {
+      var postedTerms = []
       for (var i = 0; i < data.length; i++) {
-        
+          postedTerms.push(data.term.toLowerCase());
           var html = '<div class="item">' + data[i].term + '</div>';
          $('.js-select-trigger .js-fill').append(html);
       }
       var wlHtml = '';
     whitelist.forEach(function(term) {
+      if(postedTerms.indexOf(term.toLowerCase()) < 0) {
       wlHtml = '<div class="item">' + term + '</div>';   
           $('.js-select-trigger .js-fill').append(wlHtml);
-
+      }
     });
     })
     
