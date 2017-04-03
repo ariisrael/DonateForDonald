@@ -9,7 +9,9 @@
   html {
     height: 100% !important;
   }
-  </style>
+
+</style>
+
 <body class="site" style="max-height: 100%">
   {{> header}}
   <main>
@@ -19,75 +21,74 @@
       <div class="ui subheader" style="max-width: 600px; margin: 10px auto 20px auto">Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
         receipts at the end of each month. Payment processing fees are <a href="/faq/payment" class="forgot-pass">2.9% + $0.30 per donation</a>.
       </div>
-      <form class="ui large form" style="max-width: 600px; margin: 0 auto">
+      <form class="ui large form" id="payment-form" style="max-width: 600px; margin: 0 auto">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="two fields">
           <div class="field">
 
             <label>First Name</label>
 
-            <input placeholder="First Name" type="text">
+            <input placeholder="First Name" type="text" name="first_name" data-panda="first_name">
 
           </div>
           <div class="field">
             <label>Last Name</label>
 
-            <input placeholder="Last Name" type="text">
+            <input placeholder="Last Name" name="last_name" type="text" data-panda="last_name">
           </div>
         </div>
-    <div class="fields">
-      <div class="seven wide field" style="padding: 20px auto">
-        <label>Card Number</label>
-        <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
+        <div class="fields">
+          <div class="seven wide field" style="padding: 20px auto">
+            <label>Card Number</label>
+            <input type="text" name="credit_card" maxlength="16" placeholder="Card #" data-panda="credit_card">
+          </div>
+          <div class="three wide field" style="padding: 20px auto">
+            <label class="mobile-label">CVV</label>
+            <input type="text" name="cvv" maxlength="4" placeholder="CVV" data-panda="cvv">
+          </div>
+          <br>
+          <div class="six wide field" style="padding: 20px auto">
+            <label class="mobile-label">Expiration</label>
+            <input type="text" name="expiration" maxlength="7" placeholder="MM/YYYY" data-panda="expiration">
+          </div>
+        </div>
+    </div>
+    <div class="maximum field" style="margin: 10px auto; max-width: 600px">
+      <div class="ui toggle inline checkbox js-maximum-toggle">
+        <input type="checkbox" name="public">
+        <label style="padding-right: 7px;">Set monthly limit</label>
       </div>
-      <div class="three wide field"  style="padding: 20px auto">
-        <label class="mobile-label">CVC</label>
-        <input type="text" name="card[cvc]" maxlength="4" placeholder="CVC">
+      <div class="ui labeled inline mini input disabled js-maximum-amount">
+        <div class="ui basic label">$</div>
+        <input type="text" placeholder="100" style="width: 70px" maxlength="4">
       </div>
-      <br>
-      <div class="six wide field"  style="padding: 20px auto">
-        <label class="mobile-label">Expiration</label>
-        <div class="two fields">
-          <div class="field" style="padding: 20px auto">
-            <select class="ui fluid search dropdown" name="card[expire-month]">
-            <option value="">Month</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          </div>
-          <div class="field"  style="padding: 20px auto">
-            <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
-          </div>
-        </div>
-        </div>
-        </div>
-        <div class="maximum" style="margin: 10px auto;">
-          <div class="ui toggle inline checkbox js-maximum-toggle">
-  <input type="checkbox" name="public">
-  <label style="padding-right: 7px;">Set monthly limit</label>
-</div>
-          <div class="ui labeled inline mini input disabled js-maximum-amount">
-  <div class="ui basic label">$</div>
-  <input type="text" placeholder="100" style="width: 70px" maxlength="4">
-</div>
-        </div>
-        <div style="margin-top: 20px">
-          <button class="ui primary massive button fluid save-payment-btn" type="submit">Save</button>
-        </div>
+    </div>
+    <div style="max-width: 600px; margin: 20px auto">
+      <button class="ui primary massive button fluid save-payment-btn" type="submit">Save</button>
+    </div>
 
-        </form>
-      </div>
+    </form>
+    </div>
   </main>
+  <script src="//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js"></script>
+
+  <script>
+    Panda.init('pk_test_DGoDgSY4_9eNPYwXWQyNKg', 'payment-form');
+
+    Panda.on('success', function (cardToken) {
+      // You now have a token you can use to refer to that credit card later.
+      // This token is used in PandaPay API calls for creating donations and grants
+      // so that you don't have to worry about security concerns with dealing with
+      // credit card data.
+      console.log(cardToken);
+    });
+
+    Panda.on('error', function (errors) {
+      // errors is a human-readable list of things that went wrong
+      //  (invalid card number, missing last name, etc.)
+      console.log(errors);
+    });
+  </script>
   <!--
   <footer>
     <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
