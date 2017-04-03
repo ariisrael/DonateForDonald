@@ -172,9 +172,9 @@
   var blacklist = [];
   $(document).ready(function() {
     jQuery.getJSON('/api/terms', function(data) {
-      var postedTerms = []
+      var postedTerms = [];
       for (var i = 0; i < data.length; i++) {
-          postedTerms.push(data.term.toLowerCase());
+          postedTerms.push(data[i].term.toLowerCase());
           var html = '<div class="item">' + data[i].term + '</div>';
          $('.js-select-trigger .js-fill').append(html);
       }
