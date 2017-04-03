@@ -2,44 +2,22 @@
  * GET /
  */
 
-
-
 exports.landing = function(req, res) {
-  if(req.user) {
-      res.render('landing', {
-    title: 'Home',
-        email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
-    name: (req.user.name) ? req.user.name : null,
-    admin: (req.user.admin) ? req.user.admin : null,
-  });
-  } else {
   res.render('landing', {
     title: 'Home',
-        email: null,
-    picture: "https://myspace.com/common/images/user.png",
-    name:  null,
-    admin: false,
   });
-  }
 };
 
 exports.payment = function(req, res) {
   res.render('payment', {
     title: 'Payment',
-    email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
-    name: (req.user.name) ? req.user.name : null,
     csrfToken: req.csrfToken(),
-        admin: (req.user.admin) ? req.user.admin : null,
-
   });
 }
 
 exports.notifications = function(req, res) {
   res.render('notifications', {
     title: 'Notifications'
-
   });
 }
 
@@ -57,23 +35,9 @@ exports.reset = function(req, res) {
 }
 
 exports.settings = function(req, res) {
- if(req.user) {
-      res.render('settings', {
-    title: 'Settings',
-        email: (req.user.email) ? req.user.email : null,
-    picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
-    name: (req.user.name) ? req.user.name : null,
-        admin: (req.user.admin) ? req.user.admin : null,
-
-  });
-  } else {
   res.render('settings', {
     title: 'Settings',
-        email: null,
-    picture: "https://myspace.com/common/images/user.png",
-    name:  null,
   });
-  }
 }
 
 exports.terms = function(req, res) {
