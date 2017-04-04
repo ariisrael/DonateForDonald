@@ -10,7 +10,6 @@ html,body {
 .center {
     margin: 0 auto;
 }
-
 .understated {
     text-transform: uppercase; 
     font-size: 80%; 
@@ -38,12 +37,6 @@ nav > .share-buttons > .facebook {
 
 .user-menu > .logout {
     padding: 10px
-}
-
-main {
-    position: relative;
-    top: -80px;
-    padding-top: 80px;
 }
 
 .nav > .right > .dropdown > img {
@@ -116,6 +109,10 @@ a.forgot-pass:hover {
 
 .hide-overflow {
     overflow-y: hidden!important;
+}
+
+.main-landing {
+    height: 100%;
 }
 
 /* Overrides */
