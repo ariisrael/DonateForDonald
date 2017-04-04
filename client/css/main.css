@@ -39,7 +39,7 @@ main {
 
 .nav > .right > .dropdown > img {
     display:inline-block; 
-    border-radius: 100%; 
+    border-radius: 100% !important; 
     max-height: 40px; 
     margin-right: 10px
 }
@@ -302,6 +302,11 @@ nav {
         display: block !important;
         width: 100% !important;
     }
+
+    img.user-picture {
+        border-radius: 100% !important;
+    }
+
 
 .new-line {
     display: block;
