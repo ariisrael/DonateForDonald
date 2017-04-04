@@ -23,7 +23,7 @@ stream.on('tweet', function (tweet) {
     var text = getFullText(tweet);
     var id = tweet.id;
     var date = tweet.created_at;
-    saveTweet({text: text, id: id, date: date})
+    saveTweet({text: text, id: id, _id: id, date: date})
   }
 });
 
