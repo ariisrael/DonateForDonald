@@ -108,6 +108,7 @@ function loadTweets(term) {
     console.log('Adding new tweets...');
     if(data && data.length !== 0) {
       data.forEach(function(d) {
+        console.log(tweetHtml(d.twitter_id));
         $('.tweets').append(tweetHtml(d.twitter_id));
       });
       updateTweetCount(data.length);
