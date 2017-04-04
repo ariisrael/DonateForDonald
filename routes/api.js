@@ -26,13 +26,13 @@ api.get('/payments', ADMIN_ONLY, PaymentController.index);
 api.get('/donations', ADMIN_ONLY, DonationController.index);
 api.get('/terms', TermsController.index)
 
+api.get('/tweets/search', TweetController.find);
 api.get('/triggers/:id', TriggerController.read);
 api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);
 api.get('/charities/:id', CharityController.read);
 api.get('/tweets/:id', TweetController.read);
 api.get('/donations/:id', LOGIN_ONLY, USER_QUERY, DonationController.read);
 api.get('/payments/:id', LOGIN_ONLY, USER_QUERY, PaymentController.read);
-api.get('/tweets/search', TweetController.find);
 
 api.post('/charities', ADMIN_ONLY, CharityController.create);
 api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);

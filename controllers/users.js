@@ -131,13 +131,13 @@ exports.signupGet = function(req, res) {
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
-  console.log(req)
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
+  console.log(errors)
 
   if (errors) {
     req.flash('error', errors);
@@ -176,10 +176,12 @@ exports.accountGet = function(req, res) {
  * Update profile information OR change password.
  */
 exports.accountPut = function(req, res, next) {
+  console.log(req.body)
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
-  } else {
+  }
+  if (req.body.email) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });
@@ -188,16 +190,24 @@ exports.accountPut = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
+    console.log(errors)
     req.flash('error', errors);
-    return res.redirect('/account');
+    return res.redirect('/settings');
   }
 
   User.findById(req.user.id, function(err, user) {
+    if (err) {
+      req.flash('error', ['Something went wrong, please try again']);
+      res.redirect('/settings')
+    }
     if ('password' in req.body) {
       user.password = req.body.password;
-    } else {
-      user.email = req.body.email;
-      user.name = req.body.name;
+    }
+    if (req.body.email) {
+      user.email = req.body.email
+    }
+    if (req.body.name) {
+      user.name = req.body.name
     }
     user.save(function(err) {
       if ('password' in req.body) {
@@ -207,7 +217,7 @@ exports.accountPut = function(req, res, next) {
       } else {
         req.flash('success', { msg: 'Your profile information has been updated.' });
       }
-      res.redirect('/account');
+      res.redirect('/settings');
     });
   });
 };
