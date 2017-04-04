@@ -2,13 +2,13 @@
     <!-- Navigation -->
     <nav class="ui squared menu js-nav">
       <!-- Logo -->
-      <div class="item">
-        <a href="/">
+      <div class="item drawer-hide">
+        <a href="/" style="z-index: 999">
           <img src="/images/profile.jpg" class="logo" />
         </a>
       </div>
       <!-- Share buttons -->
-      <div class="item share-buttons">
+      <div class="item share-buttons drawer-hide" style="z-index: 999">
         <!-- Facebook -->
         <a class="ui button facebook icon" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//www.donatefordonald.org">
           <i class="facebook icon"></i>
@@ -75,7 +75,7 @@
         </div>
         {{else}}
         <!-- Login button -->
-        <div class="login js-login">
+        <div class="login js-login item">
           <a class="ui button primary text login" href="/login">Login</a>
         </div>
         {{/if}}

@@ -35,7 +35,6 @@ $(".js-maximum-toggle")
       if ($('.js-tweet-drawer').hasClass('visible')) {
         $(this).html('<i class="twitter icon"></i> View Tweets');
                 $('main').css('overflow-y', 'auto');
-                $('.share-buttons').css('display', '');
 
       } else {
         // Switch button to hide tweets
@@ -43,7 +42,7 @@ $(".js-maximum-toggle")
         $('main').css('overflow-y', 'hidden');
         $('body').css('overflow-y', 'hidden');
                 $('html').css('overflow-y', 'hidden');
-                $('.share-buttons').css('display', 'none')
+
       }
       $('.js-nav').removeClass('visible');
       // Open drawer w/ tweet list
@@ -53,13 +52,10 @@ $(".js-maximum-toggle")
 // User clicked 'x' to close tweets
   $('.js-close-tweets')
     .on('click', function () {
-
       $('.js-tweet-drawer').removeClass('visible');
       $('.js-tweets').html('<i class="twitter icon"></i> View Tweets');
       $('.js-nav').addClass('visible');
       $('main').css('overflow-y', 'auto');
-                            $('.share-buttons').css('display', '')
-
         $('body').css('overflow-y', 'auto');
                 $('body').css('overflow-x', 'hidden');
 

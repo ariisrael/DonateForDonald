@@ -13,8 +13,11 @@ html,body {
 
 
     .tweet-drawer {
-        width: 40% !important;;
+        width: 35% !important;;
     }
+.tweet-controls {
+    z-index: 999 !important;
+}
 .squared {
     border-radius: 0px !important;
 }
@@ -46,10 +49,6 @@ main {
     border-radius: 100% !important; 
     max-height: 40px; 
     margin-right: 10px
-}
-
-.share-buttons {
-    z-index: 888 !important;
 }
 
 nav > .login {
