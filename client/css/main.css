@@ -31,10 +31,13 @@ nav > .share-buttons > .facebook {
     padding: 10px
 }
 
+.landing-form {
+    z-index: 999 !important;
+}
+
 main {
     position: relative;
     top: -80px;
-    z-index: -1;
     padding-top: 80px;
 }
 
@@ -58,6 +61,10 @@ nav > .login {
     min-width: 175px;
     width: 175px; 
     font-size: 18px
+}
+
+input {
+    z-index: 999;
 }
 
 .user-menu > a {
