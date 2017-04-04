@@ -49,7 +49,7 @@ main {
 }
 
 .share-buttons {
-    z-index: 999 !important;
+    z-index: 888 !important;
 }
 
 nav > .login {
@@ -232,7 +232,7 @@ nav {
 }
 
 .menu {
-    z-index: 999 !important;
+    z-index: 888 !important;
 }
 
 
