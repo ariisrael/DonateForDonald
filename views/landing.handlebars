@@ -99,7 +99,7 @@
   var blacklist = ['washinon'];
   $(document).ready(function () {
 
-    jQuery.getJSON('/api/tweets/search?q=fake+news', function(data) {
+    jQuery.getJSON('/api/tweets/search?q=fake', function(data) {
       console.log(data);
     })
     jQuery.getJSON('/api/terms', function (data) {
