@@ -112,6 +112,7 @@ function loadTweets(term) {
         $('.tweets').append(tweetHtml(d.twitter_id));
       });
       updateTweetCount(data.length);
+      twttr.widgets.load();
     } else {
       $('.tweets').append('<p style="text-align: center; font-size: 20px; margin-top: 30px">No tweets</p>')
       updateTweetCount(0);
