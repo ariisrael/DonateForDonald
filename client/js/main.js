@@ -108,7 +108,7 @@ function loadTweets(term) {
     console.log('Adding new tweets...');
     if(data && data.length !== 0) {
       data.forEach(function(d) {
-        console.log(tweetHtml(d.twitter_id));
+        console.log('Appending', tweetHtml(d.twitter_id));
         $('.tweets').append(tweetHtml(d.twitter_id));
       });
       updateTweetCount(data.length);
@@ -137,5 +137,8 @@ function twitterUrl(id) {
 }
 
 function tweetHtml(id) {
-  return '<div class="tweet-embed"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a></blockquote></div>'
+  console.log('Generating html for', id)
+  var html = '<div class="tweet-embed"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a></blockquote></div>';
+  console.log(html);
+  return html;
 }
