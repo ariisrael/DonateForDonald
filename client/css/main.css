@@ -63,10 +63,6 @@ nav > .login {
     font-size: 18px
 }
 
-input {
-    z-index: 999;
-}
-
 .user-menu > a {
     color:#555;
 }
