@@ -14,7 +14,7 @@ mongoose.connection.once('open', function() {
   seedTweets()
 })
 
-var seedTweets() {
+function seedTweets() {
   var query = {
     screen_name: 'realDonaldTrump',
     count: 2000,
