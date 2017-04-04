@@ -3,10 +3,10 @@ var Twitter = require('twitter')
 if (process.env.NODE_ENV !== 'production' && !process.env.TWITTER_CONSUMER_KEY) {
   // Twitter app credentials for @DonateForDonald
   var twitterAPICredentials = {
-    consumer_key:'OO8grc53jt7Y3ytgpROcaNE1f',
-    consumer_secret: 'zf4dbwtWrms9BeA8dZP3bfspFYOYnIC0MqTALmRolGKcNJgaEV',
-    access_token: '812155024705015810-OyHYxP0VGSK2VJSQU2tr84ebGuH0VWU',
-    access_token_secret:  'B3RoPM9OVrbua2OY8jjw9V7I6JhCtEyQhWwrvAGJFq970',
+    consumer_key:'wNNSmSwpnumnvVW6qOWwaFHW5',
+    consumer_secret: 'VlCPlSP3DL6okBhUNvA0oKknNWFQMGRm7SOBVpAvAERgETXFCt',
+    access_token: '18880271-CoGsLW04GUOVVs4YHfN0mUKimwLRF1g2GGeDx8eD7',
+    access_token_secret:  'OQIoOLmJKqrungjHyLkBZNlSG0anYGuxIeDS9zPYGweyY',
   }
 } else {
   var twitterAPICredentials = {

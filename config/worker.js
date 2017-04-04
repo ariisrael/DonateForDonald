@@ -25,7 +25,8 @@ module.exports = {
   twitterCreds: {
     consumer_key: twitter.consumerKey,
     consumer_secret: twitter.consumerSecret,
-    access_token: twitter.access_token_key,
+    // access_token: twitter.access_token_key,
+    access_token_key: twitter.access_token_key,
     access_token_secret: twitter.access_token_secret,
   }
 }
