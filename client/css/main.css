@@ -11,7 +11,13 @@ html,body {
     margin: 0 auto;
 }
 
-
+.understated {
+    text-transform: uppercase; 
+    font-size: 80%; 
+    margin-left: 5px; 
+    color: rgba(255,255,255, 0.7);
+    text-decoration: underline
+}
     .tweet-drawer {
         width: 35% !important;;
     }
@@ -32,10 +38,6 @@ nav > .share-buttons > .facebook {
 
 .user-menu > .logout {
     padding: 10px
-}
-
-.landing-form {
-    z-index: 999 !important;
 }
 
 main {
@@ -180,12 +182,16 @@ button.primary:hover {
     font-size: 20px;
     position: relative;
     left: 140px;
-    z-index: 888;
+    z-index: 222 !important;
 }
 
 .drawer-controls > a > i.twitter {
     position: relative;
     left: -5px;
+}
+
+.user-dropdown {
+    z-index: 999 !important;
 }
 
 .drawer-controls > a > button {

@@ -9,7 +9,7 @@ $(document).ready(function () {
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
     });
-// User clicked other amount input
+  // User clicked other amount input
   $(".js-amount-other")
     .on('click', function () {
       // Enable text field
@@ -17,31 +17,31 @@ $(document).ready(function () {
       $(".dollar-sign").removeClass("greyed-out");
     });
 
-// User toggles maximum monthly donation 
-$(".js-maximum-toggle")
-  .on('click', function() {
-    $('.js-maximum-amount').toggleClass('disabled');
-  });
+  // User toggles maximum monthly donation 
+  $(".js-maximum-toggle")
+    .on('click', function () {
+      $('.js-maximum-amount').toggleClass('disabled');
+    });
 
-// User started typing other amount
+  // User started typing other amount
   $(".js-amount-other input")
     .on('focus', function () {
       // Clear placeholder text when user clicks input
       $(this).prop("placeholder", "");
     });
-// User clicked 'View Tweets'
+  // User clicked 'View Tweets'
   $('.js-tweets')
     .on('click', function () {
       if ($('.js-tweet-drawer').hasClass('visible')) {
         $(this).html('<i class="twitter icon"></i> View Tweets');
-                $('main').css('overflow-y', 'auto');
+        $('main').css('overflow-y', 'auto');
 
       } else {
         // Switch button to hide tweets
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
         $('main').css('overflow-y', 'hidden');
         $('body').css('overflow-y', 'hidden');
-                $('html').css('overflow-y', 'hidden');
+        $('html').css('overflow-y', 'hidden');
 
       }
       $('.js-nav').removeClass('visible');
@@ -49,48 +49,48 @@ $(".js-maximum-toggle")
       $('.js-tweet-drawer').toggleClass('visible');
 
     });
-// User clicked 'x' to close tweets
+  // User clicked 'x' to close tweets
   $('.js-close-tweets')
     .on('click', function () {
       $('.js-tweet-drawer').removeClass('visible');
       $('.js-tweets').html('<i class="twitter icon"></i> View Tweets');
       $('.js-nav').addClass('visible');
       $('main').css('overflow-y', 'auto');
-        $('body').css('overflow-y', 'auto');
-                $('body').css('overflow-x', 'hidden');
+      $('body').css('overflow-y', 'auto');
+      $('body').css('overflow-x', 'hidden');
 
-                $('html').css('overflow-y', 'auto');
-                $('html').css('overflow-x', 'hidden');
+      $('html').css('overflow-y', 'auto');
+      $('html').css('overflow-x', 'hidden');
     });
-// User selected dropdown option
+  // User selected dropdown option
   $('.selection').dropdown({
-      onChange: function (value) {
-        $('.demo.icon').popup({ transition: value }).popup('toggle');
-      }
-    });
+    onChange: function (value) {
+      $('.demo.icon').popup({ transition: value }).popup('toggle');
+    }
+  });
 
-// Update tweet count
-$('.js-tweet-count').text();
+  // Update tweet count
+  $('.js-tweet-count').text();
 
-// User clicked 'donate' button
-  $('.js-donate button').on('click', function() {
+  // User clicked 'donate' button
+  $('.js-donate button').on('click', function () {
     console.log('Donate button clicked');
   })
-// User clicked 'login' button
-  $('.js-login button').on('click', function() {
+  // User clicked 'login' button
+  $('.js-login button').on('click', function () {
     console.log('Login button clicked');
   });
-// User clicked tweet tag in drawer
-  $('.js-tweet-triggers > .labels > a').on('click', function() {
+  // User clicked tweet tag in drawer
+  $('.js-tweet-triggers > .labels > a').on('click', function () {
     var tag = $(this).text().trim();
     console.log(tag + ' tag clicked');
   });
-// User selected a trigger from the dropdown
-  $('.js-select-trigger .item').on('click', function() {
+  // User selected a trigger from the dropdown
+  $('.js-select-trigger .item').on('click', function () {
     console.log('Selected', $(this).text().trim());
   });
-// User selected a charity from dropdown
-  $('.js-select-charity .item').on('click', function() {
+  // User selected a charity from dropdown
+  $('.js-select-charity .item').on('click', function () {
     console.log('Selected', $(this).text().trim());
   });
 });

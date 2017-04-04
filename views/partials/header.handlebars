@@ -24,7 +24,7 @@
       <div class="right menu">
         <!-- Logged in view -->
         {{#if user}}
-        <div class="ui pointing dropdown link item" style="border-left: none;">
+        <div class="ui pointing dropdown link item" style="border-left: none; z-index: 999">
           <!-- Profile picture -->
           {{#if user.picture}}
           <img src="{{user.picture}}" class="user-picture" style="border-radius: 100%; margin-right: 10px"/>
@@ -34,7 +34,7 @@
                     {{user.name}}
           {{/if}}
           <i class="dropdown icon"></i>
-          <div class="menu js-user-menu user-menu">
+          <div class="menu js-user-menu user-menu" style="z-index: 999">
             <a href="/triggers">
               <div class="item">
                 <i class="icon lightning"></i> Triggers
