@@ -86,11 +86,55 @@ $(document).ready(function () {
     console.log(tag + ' tag clicked');
   });
   // User selected a trigger from the dropdown
-  $('.js-select-trigger .item').on('click', function () {
-    console.log('Selected', $(this).text().trim());
+  $('.js-select-trigger').on('click', 'div.item', function () {
+    var term = $(this).text().trim();
+    loadTweets(term);
+    console.log('Selected', term);
   });
   // User selected a charity from dropdown
   $('.js-select-charity .item').on('click', function () {
     console.log('Selected', $(this).text().trim());
   });
 });
+
+function loadTweets(term) {
+  var url = 'api/tweets/search?q=' + encodeURIComponent(term);
+  console.log('URL:', url);
+  jQuery.getJSON(url, function(data) {
+    console.log('Term', term);
+    console.log('Data:', data);
+    console.log('Emptying tweets...');
+    $('.tweets').empty();
+    console.log('Adding new tweets...');
+    if(data && data.length !== 0) {
+      data.forEach(function(d) {
+        $('.tweet').append(tweetHtml(d.twitter_id));
+      });
+      updateTweetCount(data.length);
+    } else {
+      $('.tweets').append('<p style="text-align: center; font-size: 20px; margin-top: 30px">No tweets</p>')
+      updateTweetCount(0);
+    }
+    updateTweetTerm(term);
+  });
+}
+
+function updateTweetTerm(term) {
+  console.log('Updating tweet term to', term);
+  $('.js-tweet-term').empty();
+  $('.js-tweet-term').text(term);
+}
+
+function updateTweetCount(num) {
+  console.log('Setting tweet count to', num);
+  $('.js-tweet-count').empty();
+  $('.js-tweet-count').text(num);
+}
+
+function twitterUrl(id) {
+  return "https://twitter.com/realDonaldTrump/status/" + id
+}
+
+function tweetHtml(id) {
+  return '<div class="tweet-embed"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a></blockquote></div>'
+}
