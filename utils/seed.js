@@ -17,7 +17,7 @@ mongoose.connection.once('open', function() {
 var seedTweets() {
   var query = {
     screen_name: 'realDonaldTrump',
-    count: 1000,
+    count: 2000,
     tweet_mode: 'extended'
   }
   if (options) {
@@ -27,22 +27,25 @@ var seedTweets() {
     if (err) {
       return console.error(err)
     }
-    data.forEach((d) => {
+    data.forEach((d, index) => {
       var text = getFullText(tweet);
       var id = tweet.id;
       var date = tweet.created_at;
+      saveTweet({text: text, id: id, date: date}, index)
     })
   })
 }
 
-function saveTweet(tweet) {
-  Tweet.find(tweet.id, (err, tweet) => {
+function saveTweet(tweet, index) {
+  Tweet.find(tweet.id, (err, t) => {
+    console.log(index)
     if (err) {
       return console.error(err)
     }
-    if (tweet) return;
+    if (t) return;
 
     Tweet.create(tweet, (err, t) => {
+      console.log(index)
       if (err) {
         return console.error(err)
       }
