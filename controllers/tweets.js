@@ -25,7 +25,7 @@ module.exports = {
         return res.json([])
       }
       Tweet.find(
-        { $text : { $search : query } },
+        { $text : { $search : '"' + query + '""' } },
         { score : { $meta: "textScore" } }
       )
       .sort({ score : { $meta : 'textScore' } })
