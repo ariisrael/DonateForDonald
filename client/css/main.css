@@ -24,11 +24,17 @@ html,body {
 }
 
 nav > .share-buttons > .facebook {
-    margin-right: 10px;
+    margin-right: 10px !important;
 }
 
 .user-menu > .logout {
     padding: 10px
+}
+
+main {
+    position: relative;
+    top: -80px;
+    padding-top: 80px;
 }
 
 .nav > .right > .dropdown > img {
