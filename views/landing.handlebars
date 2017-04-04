@@ -85,75 +85,51 @@
           <button class="ui button primary mini icon js-close-tweets" id="close-tweets" style="float: right; top: -2px; position: relative"><i style="position: relative; top: -2px" class="ui large cancel icon"></i></button>
         </a>
       </div>
-      <div class="tweets ui one column divided grid long">
-        <div class="item row">
-          <div class="column">
-            <div class="tweet-embed">
-              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
-                <a href="https://twitter.com/realDonaldTrump/status/846854703183020032"></a>
-              </blockquote>
-            </div>
-            <div class="tweet-triggers js-tweet-triggers">
-              <div class="ui tag large labels">
-                <a class="ui label">fake news</a>
-                <a class="ui label">Russia</a>
-                <a class="ui label">totally</a>
-              </div>
-            </div>
-            <div class="tweet-divider">
-            </div>
-          </div>
-
+      <div class="tweets">
+        <div class="tweet-embed">
+          <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+            <a href="https://twitter.com/realDonaldTrump/status/846854703183020032"></a>
+          </blockquote>
         </div>
-        <div class="item row">
-          <div class="column">
-            <div class="ui tweet-embed">
-              <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
-                <a href="https://twitter.com/realDonaldTrump/status/844886082663698436"></a>
-              </blockquote>
-            </div>
-            <div class="tweet-triggers js-tweet-triggers">
-              <div class="ui tag large labels">
-                <a class="ui label">fake news</a>
-                <a class="ui label">Russia</a>
-                <a class="ui label">totally</a>
-              </div>
-            </div>
-            <div class="tweet-divider">
-            </div>
-          </div>
+
+        <div class="tweet-embed">
+          <blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none">
+            <a href="https://twitter.com/realDonaldTrump/status/844886082663698436"></a>
+          </blockquote>
         </div>
       </div>
     </div>
-  </main>
+</div>
+</main>
 
-  <script>
-    var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam'];
-    var blacklist = ['washinon'];
-    $(document).ready(function () {
-      jQuery.getJSON('/api/terms', function (data) {
-        var postedTerms = [];
-        for (var i = 0; i < data.length; i++) {
-          postedTerms.push(data[i].term.toLowerCase());
-          var html = '<div class="item">' + data[i].term + '</div>';
-          if (blacklist.indexOf(data[i].term.toLowerCase()) < 0) {
-            $('.js-select-trigger .js-fill').append(html);
+<script>
+  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam'];
+  var blacklist = ['washinon'];
+  $(document).ready(function () {
+    jQuery.getJSON('/api/terms', function (data) {
+      var postedTerms = [];
+      for (var i = 0; i < data.length; i++) {
+        postedTerms.push(data[i].term.toLowerCase());
+        var html = '<div class="item">' + data[i].term + '</div>';
+        if (blacklist.indexOf(data[i].term.toLowerCase()) < 0) {
+          $('.js-select-trigger .js-fill').append(html);
 
-          }
         }
-        var wlHtml = '';
-        whitelist.forEach(function (term) {
-          if (postedTerms.indexOf(term.toLowerCase()) < 0) {
-            wlHtml = '<div class="item">' + term + '</div>';
-            $('.js-select-trigger .js-fill').append(wlHtml);
-          }
-        });
-      })
-
+      }
+      var wlHtml = '';
+      whitelist.forEach(function (term) {
+        if (postedTerms.indexOf(term.toLowerCase()) < 0) {
+          wlHtml = '<div class="item">' + term + '</div>';
+          $('.js-select-trigger .js-fill').append(wlHtml);
+        }
+      });
     })
-  </script>
 
-  <!--
+  })
+
+</script>
+
+<!--
 <footer>
   <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
 </span>
@@ -167,5 +143,5 @@
   </div>
 </footer>
 -->
-  <!-- Load vendor scripts -->
-  </div>
+<!-- Load vendor scripts -->
+</div>

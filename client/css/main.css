@@ -293,9 +293,8 @@ nav {
         top: 25px !important;
     }
 
-.mobile-label {
-    margin-top: 20px !important;
-}
+
+
 
 
 
@@ -348,17 +347,7 @@ left: 30px !important;
     }
 
     .tweet-embed {
-        padding-top: 5px !important;
         margin-top: 0px !important;
-        position: relative !important;
-        top: -20px !important;
-    }
-
-    .tweet-triggers {
-        margin: 0px !important;
-        padding: 0px 0px 5px 0px !important;
-        position: relative;
-        top: -10px;
     }
 }
 
@@ -421,10 +410,6 @@ left: 30px !important;
     border-radius: 0px !important;
 }
 
-.drawer-controls {
-    margin-bottom: 20px;
-}
-
 .hashtag a {
     color: #00aced;
     display: inline-block;
@@ -460,17 +445,6 @@ left: 30px !important;
 .headline > span {
     color: #00aced;
     font-weight: 700;
-}
-
-.tweet-triggers {
-    margin: 0 auto;
-    max-width: 90%;
-    padding: 10px 0px 20px 0px;
-}
-
-.tweet-divider {
-  border-bottom: 1px solid #eee;
- width: 100%;
 }
 
 footer a.item {
