@@ -25,30 +25,33 @@
       <h1>{{title}}
       </h1>
       <h3>Change Password</h3>
-      <form class="ui large form">
+
+      <form method="post" action="/account" class="ui large form">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="field">
           <label>New Password</label>
           <div class="ui input">
-            <input type="password" placeholder="New Password">
+            <input type="password" name="password" placeholder="New Password">
           </div>
         </div>
         <div class="field">
           <label>Confirm Password</label>
           <div class="ui input">
-            <input type="password" placeholder="Confirm Password">
+            <input type="password" name="confirm" placeholder="Confirm Password">
           </div>
         </div>
         <div style="margin-top: 20px">
           <button class="ui primary button" type="submit">Update</button>
         </div>
-
       </form>
+
       <div class="ui divider"></div>
       <h3>Update Email</h3>
-      <form class="ui large form">
+      <form method="post" action="/account" class="ui large form">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="field">
           <label>Current Email</label>
-          <p>{{user.email}}</p>
+          <p>{{#if user}}{{user.email}}{{/if}}</p>
         </div>
         <div class="field">
           <label>New Email</label>
@@ -66,17 +69,25 @@
      <div class="ui buttons">
        <button class="ui button facebook icon" style="border-radius: 3px"><i class="facebook icon"></i> Facebook</i></button>
        <button class="ui button twitter icon" style="margin-left: 10px; border-radius: 3px;"><i class="twitter icon"></i> Twitter</i></button>
-       </div> 
+       </div>
 
       <div class="ui divider"></div>
       <h3>Delete Account</h3>
-      <form class="ui large form delete-account-form js-delete-account-form">
+      <form method="post" action="/account" class="ui large form delete-account-form js-delete-account-form">
+      <form method="post" action="/account" class="ui large form">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div style="margin-top: 20px">
           <button class="ui red button icon delete-account-btn" type="submit"><i class="icon trash"></i>Delete My Account <b class="understated">Permanently</b></button>
         </div>
       </form>
     </div>
   </main>
+
+  <script>
+
+  </script>
+
+
   <!--
   <footer>
     <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>

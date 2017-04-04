@@ -26,7 +26,7 @@ app.get('/', PageController.landing);
 app.get('/login', csrfProtection, UserController.loginGet);
 app.get('/payment', csrfProtection, UserController.ensureAuthenticated, PageController.payment);
 app.get('/reset', PageController.reset);
-app.get('/settings', UserController.ensureAuthenticated, PageController.settings);
+app.get('/settings', csrfProtection, UserController.ensureAuthenticated, PageController.settings);
 app.get('/notifications', UserController.ensureAuthenticated,PageController.notifications);
 app.get('/terms', PageController.terms);
 app.get('/social', UserController.ensureAuthenticated, PageController.social);
@@ -39,8 +39,10 @@ app.get('/faq', PageController.faq);
 app.get('/tweets', PageController.tweets);
 
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
-app.put('/account', UserController.ensureAuthenticated, UserController.accountPut);
-app.delete('/account', UserController.ensureAuthenticated, UserController.accountDelete);
+// You cannot use put in a form, only via javascript
+app.post('/account', csrfProtection, UserController.ensureAuthenticated, UserController.accountPut);
+// you cannot use delete from a form, only via javascript
+app.post('/delete-account', csrfProtection, UserController.ensureAuthenticated, UserController.accountDelete);
 
 app.get('/signup', csrfProtection, UserController.signupGet);
 app.post('/signup', csrfProtection, UserController.signupPost);

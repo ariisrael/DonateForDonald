@@ -20,9 +20,12 @@ module.exports = {
         make sure this endpoint is rate limited,
         it might make the database unhappy if we don't
       */
-      query = req.params.q
+      var query = res.locals.query.q
+      if (!query) {
+        return res.json([])
+      }
       Tweet.find(
-        { $text : { $search : q } },
+        { $text : { $search : query } },
         { score : { $meta: "textScore" } }
       )
       .sort({ score : { $meta : 'textScore' } })

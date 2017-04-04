@@ -1,4 +1,5 @@
 var app = require('../index')
+const url = require("url")
 
 require('./session')
 
@@ -19,9 +20,13 @@ app.use(function (req, res, next) {
       admin: (req.user.admin) ? req.user.admin : null,
     }
   }
-  
+
   // Setup a query
   res.locals.query = {}
+
+  var parsedUrl = url.parse(req.url, true)
+  var query = parsedUrl.query;
+  if (query) res.locals.query = query
 
   next()
 })

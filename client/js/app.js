@@ -13,4 +13,11 @@ $(document).ready(function() {
     $('#login-form').attr('action', '/signup')
     $('#login-form').submit()
   })
+
+  $('header a.login').on('click', function(event) {
+    event.preventDefault()
+    var path = window.location.pathname
+    var query = '?redirect=' + encodeURIComponent(path)
+    window.location = '/login' + query
+  })
 })
