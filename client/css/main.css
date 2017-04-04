@@ -34,6 +34,7 @@ nav > .share-buttons > .facebook {
 main {
     position: relative;
     top: -80px;
+    z-index: -1;
     padding-top: 80px;
 }
 
@@ -42,6 +43,10 @@ main {
     border-radius: 100% !important; 
     max-height: 40px; 
     margin-right: 10px
+}
+
+.share-buttons {
+    z-index: 999 !important;
 }
 
 nav > .login {
