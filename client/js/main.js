@@ -99,16 +99,10 @@ $(document).ready(function () {
 
 function loadTweets(term) {
   var url = 'api/tweets/search?q=' + encodeURIComponent(term);
-  console.log('URL:', url);
   jQuery.getJSON(url, function(data) {
-    console.log('Term', term);
-    console.log('Data:', data);
-    console.log('Emptying tweets...');
     $('.tweets').empty();
-    console.log('Adding new tweets...');
     if(data && data.length !== 0) {
       data.forEach(function(d) {
-        console.log('Appending', tweetHtml(d._id));
         $('.tweets').append(tweetHtml(d._id));
       });
       updateTweetCount(data.length);
@@ -136,9 +130,9 @@ function landingDonate() {
 }
 
 function updateTweetCount(num) {
-  console.log('Setting tweet count to', num);
   $('.js-tweet-count').empty();
-  $('.js-tweet-count').text(num);
+  var number = '('+ num + ')';
+  $('.js-tweet-count').text(number);
 }
 
 function twitterUrl(id) {
@@ -146,8 +140,6 @@ function twitterUrl(id) {
 }
 
 function tweetHtml(id) {
-  console.log('Generating html for', id)
   var html = '<div class="tweet-embed"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a></blockquote></div>';
-  console.log(html);
   return html;
 }
