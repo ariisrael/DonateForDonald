@@ -1,6 +1,7 @@
 var app = require('../index')
 const url = require("url")
 const User = require('../models/user')
+const _ = require('lodash')
 
 require('./session')
 
@@ -24,22 +25,20 @@ app.use(function(req, res, next) {
     res.locals = {};
   }
   res.locals.env = process.env.NODE_ENV
-  if (req.user) {
-    res.locals.user = {
-      email: (req.user.email) ? req.user.email : null,
-      picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
-      name: (req.user.name) ? req.user.name : null,
-      admin: (req.user.admin) ? req.user.admin : null,
-      facebook: (req.user.facebook) ? req.user.facebook : null,
-      twitter: (req.user.twitter) ? req.user.twitter : null,
-    }
-  } else {
-    res.locals.user = null
-  }
-  next()
 })
 
 app.use(function(req, res, next) {
-  res.locals.user = req.user;
+  if (!res.locals) {
+    res.locals = {};
+  }
+  if (req.user) {
+    res.locals.user = _.cloneDeep(req.user)
+    res.locals.user.id = req.user.id
+    res.locals.user._id = undefined
+    res.locals.user.updatedAt = undefined
+    res.locals.user.createdAt = undefined
+    res.locals.user.admin = undefined
+    res.locals.user.__v = undefined
+  }
   next();
 });
