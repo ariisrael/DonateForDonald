@@ -127,11 +127,24 @@ function landingDonate() {
   var amount = ($('amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   var userTrigger = {
-    "charity": charity,
-    "trigger": trigger,
+    "charityId": charity,
+    "name": trigger,
     "amount": amount
   }
-  localStorage.setItem('userTrigger', JSON.stringify(userTrigger));
+  if(user) { // User signed in, store in db
+    console.log('User logged in');
+    jQuery.post({
+        url: '/api/triggers',
+        data: userTrigger,
+        success: function(data) {
+          console.log('Posted', data);
+        },
+        dataType: "json"
+      });
+  }
+  else { // The user is not signed in 
+    localStorage.setItem('trigger', JSON.stringify(userTrigger));
+  }
 }
 
 function updateTweetCount(num) {
