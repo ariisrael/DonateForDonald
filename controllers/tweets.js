@@ -21,14 +21,16 @@ module.exports = {
         it might make the database unhappy if we don't
       */
       var query = res.locals.query.q
+      var params = { $text : { $search : '"' + query + '""' } }
       if (!query) {
         return res.json([])
       }
       Tweet.find(
-        { $text : { $search : '"' + query + '""' } },
+        params,
         { score : { $meta: "textScore" } }
       )
       .sort({ score : { $meta : 'textScore' } })
+      .limit(50)
       .exec((err, tweets) => {
         if (err) {
           console.error(err)
@@ -36,7 +38,12 @@ module.exports = {
         if (!tweets) {
           tweets = []
         }
-        res.json(tweets)
+        Tweet.count(params, (err, count) => {
+          res.json({
+              tweets: tweets,
+              count: count
+            })
+        })
       })
     },
     create: (req, res) => {

@@ -17,7 +17,7 @@ $(document).ready(function () {
       $(".dollar-sign").removeClass("greyed-out");
     });
 
-  // User toggles maximum monthly donation 
+  // User toggles maximum monthly donation
   $(".js-maximum-toggle")
     .on('click', function () {
       $('.js-maximum-amount').toggleClass('disabled');
@@ -101,11 +101,11 @@ function loadTweets(term) {
   var url = 'api/tweets/search?q=' + encodeURIComponent(term);
   jQuery.getJSON(url, function(data) {
     $('.tweets').empty();
-    if(data && data.length !== 0) {
-      data.forEach(function(d) {
+    if(data.tweets && data.tweets.length !== 0) {
+      data.tweets.forEach(function(d) {
         $('.tweets').append(tweetHtml(d._id));
       });
-      updateTweetCount(data.length);
+      updateTweetCount(data.count);
       twttr.widgets.load();
     } else {
       $('.tweets').append('<p style="text-align: center; font-size: 20px; margin-top: 30px">No tweets</p>')
@@ -126,7 +126,6 @@ function landingDonate() {
   var trigger = $('input[name=trigger]').val().trim();
   var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
-  console.log(amount);
   var userTrigger = {
     "charityId": charity,
     "name": trigger,
@@ -143,12 +142,13 @@ function landingDonate() {
         dataType: "json"
       });
   }
-  else { // The user is not signed in 
+  else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
   }
 }
 
 function updateTweetCount(num) {
+  console.log(num)
   $('.js-tweet-count').empty();
   var number = '('+ num + ')';
   $('.js-tweet-count').text(number);
