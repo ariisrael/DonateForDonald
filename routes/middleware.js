@@ -1,7 +1,6 @@
 var app = require('../index')
 const url = require("url")
 const User = require('../models/user')
-const _ = require('lodash')
 
 require('./session')
 
@@ -24,22 +23,21 @@ app.use(function(req, res, next) {
   if (!res.locals) {
     res.locals = {};
   }
+  if (req.user) {
+    res.locals.user = {
+      email: (req.user.email) ? req.user.email : null,
+      picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
+      name: (req.user.name) ? req.user.name : null,
+      admin: (req.user.admin) ? req.user.admin : null,
+      facebook: (req.user.facebook) ? req.user.facebook : null,
+      twitter: (req.user.twitter) ? req.user.twitter : null,
+      id: (req.user._id) ? req.user._id : null,
+      donations: (req.user.donations) ? req.user.donations : null,
+      triggers: (req.user.triggers) ? req.user.triggers : null,
+    }
+  } else {
+    res.locals.user = null
+  }
   res.locals.env = process.env.NODE_ENV
   next()
 })
-
-app.use(function(req, res, next) {
-  if (!res.locals) {
-    res.locals = {};
-  }
-  if (req.user) {
-    res.locals.user = _.cloneDeep(req.user)
-    res.locals.user.id = req.user.id
-    res.locals.user._id = undefined
-    res.locals.user.updatedAt = undefined
-    res.locals.user.createdAt = undefined
-    res.locals.user.admin = undefined
-    res.locals.user.__v = undefined
-  }
-  next();
-});
