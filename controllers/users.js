@@ -94,10 +94,7 @@ exports.loginPost = function(req, res, next) {
 
   var errors = req.validationErrors();
 
-  console.log(errors)
-
   if (errors) {
-    req.flash('error', errors);
     return res.redirect('/login');
   }
 
@@ -106,6 +103,7 @@ exports.loginPost = function(req, res, next) {
       req.flash('error', info);
       return res.redirect('/login')
     }
+
     req.logIn(user, function(err) {
       res.redirect('/');
     });
@@ -176,7 +174,6 @@ exports.accountGet = function(req, res) {
  * Update profile information OR change password.
  */
 exports.accountPut = function(req, res, next) {
-  console.log(req.body)
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
@@ -185,17 +182,18 @@ exports.accountPut = function(req, res, next) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });
+    req.assert('email', 'Emails must match').equals(req.body.confirm_email);
   }
 
   var errors = req.validationErrors();
 
   if (errors) {
-    console.log(errors)
+    console.error(errors)
     req.flash('error', errors);
     return res.redirect('/settings');
   }
 
-  User.findById(req.user.id, function(err, user) {
+  User.findOne({ email: req.user.email }, function(err, user) {
     if (err) {
       req.flash('error', ['Something went wrong, please try again']);
       res.redirect('/settings')

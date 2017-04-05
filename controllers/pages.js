@@ -36,6 +36,7 @@ exports.reset = function(req, res) {
 exports.settings = function(req, res) {
   res.render('settings', {
     title: 'Settings',
+    csrfToken: req.csrfToken()
   });
 }
 

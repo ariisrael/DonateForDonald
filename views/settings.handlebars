@@ -3,7 +3,7 @@
   html {
     height: 100% !important;
   }
-  
+
   button {
     margin-bottom: 25px !important;
   }
@@ -19,8 +19,29 @@
       <div>
         <h3>Social Accounts</h3>
         <div class="ui buttons">
-        <button class="ui button facebook icon" style="border-radius: 3px"><i class="facebook icon"></i> Link Facebook</i></button>
-        <button class="ui button twitter icon" style="margin-left: 10px; border-radius: 3px;"><i class="twitter icon"></i> Link Twitter</i></button>
+          <a href="/auth/facebook">
+            <button class="ui button facebook icon"
+            style="border-radius: 3px">
+              <i class="facebook icon"></i>
+              {{#if user.facebook}}
+                Relink Facebook
+              {{else}}
+                Link Facebook
+              {{/if}}
+            </button>
+          </a>
+
+        <a href="/auth/twitter">
+          <button class="ui button twitter icon"
+          style="margin-left: 10px; border-radius: 3px;">
+            <i class="twitter icon"></i>
+            {{#if user.twitter}}
+              Relink Twitter
+            {{else}}
+              Link Twitter
+            {{/if}}
+          </button>
+        </a>
       </div>
       <form id="" class="ui large form" method="post" action="/account">
         <h3>Update Email</h3>
@@ -32,13 +53,13 @@
         <div class="field">
           <label>New Email</label>
           <div class="ui input fluid">
-            <input type="email" placeholder="New Email">
+            <input type="email" name="confirm" placeholder="New Email">
           </div>
         </div>
         <div class="field">
           <label>Confirm Email</label>
           <div class="ui input fluid">
-            <input type="email" placeholder="Confirm Email">
+            <input type="email" name="confirm_email" placeholder="Confirm Email">
           </div>
         </div>
         <div class="field">
@@ -52,13 +73,13 @@
         <div class="field">
           <label>New Password</label>
           <div class="ui input fluid">
-            <input type="password" placeholder="New Password">
+            <input type="password" name="password" placeholder="New Password">
           </div>
         </div>
         <div class="field">
           <label>Confirm Password</label>
           <div class="ui input fluid">
-            <input type="password" placeholder="Confirm Password">
+            <input type="password" name="confirm" placeholder="Confirm Password">
           </div>
         </div>
         <div class="field">
@@ -77,6 +98,7 @@
   </main>
 
   <script>
+
 
   </script>
 

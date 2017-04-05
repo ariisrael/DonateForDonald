@@ -47,7 +47,6 @@ app.post('/delete-account', csrfProtection, UserController.ensureAuthenticated, 
 app.get('/signup', csrfProtection, UserController.signupGet);
 app.post('/signup', csrfProtection, UserController.signupPost);
 
-app.get('/login', csrfProtection, UserController.loginGet);
 app.post('/login', csrfProtection, UserController.loginPost);
 
 app.get('/logout', UserController.logout);
