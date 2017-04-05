@@ -91,6 +91,14 @@ $(document).ready(function () {
     loadTweets(term);
     console.log('Selected', term);
   });
+  // User selected a trigger from the dropdown
+  $('.js-select-trigger').on('keyup', function (e) {
+    if (e.which === 13) {
+      var term = $('input[name=trigger]').val()
+      loadTweets(term);
+      console.log('Selected', term);
+    }
+  });
   // User selected a charity from dropdown
   $('.js-select-charity .item').on('click', function () {
     console.log('Selected', $(this).text().trim());
