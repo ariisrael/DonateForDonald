@@ -93,18 +93,19 @@
 </main>
 
 <script>
-  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama'];
-  var blacklist = ['washinon'];
+  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs'];
+  var blacklist = ['washinon', 'jobs jobs jobs'];
   $(document).ready(function () {
 
     jQuery.getJSON('/api/terms', function (data) {
       var postedTerms = [];
       for (var i = 0; i < data.length; i++) {
-        postedTerms.push(data[i].term.toLowerCase());
         var html = '<div class="js-trigger-item item">' + data[i].term + '</div>';
-        if (blacklist.indexOf(data[i].term.toLowerCase()) < 0) {
+        if (blacklist.indexOf(data[i].term.toLowerCase()) < 0 && postedTerms.indexOf(data[i].term.toLowerCase()) < 0) {
           $('.js-select-trigger .js-fill').append(html);
-
+          postedTerms.push(data[i].term.toLowerCase());
+        } else {
+          console.log(data[i].term, 'already there');
         }
       }
       var wlHtml = '';
