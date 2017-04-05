@@ -22,7 +22,8 @@ exports.read = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  var query = { _id: req.params.id };
+  var id = req.params.id;
+  var query = { _id: id };
   User.update(query, req.body, {}, (err, num) => {
     if(err) return console.error(err);
     res.json(num);
@@ -159,7 +160,7 @@ exports.signupPost = function(req, res, next) {
     });
     user.save(function(err) {
       req.logIn(user, function(err) {
-        res.redirect('/');
+        res.redirect('/payment');
       });
     });
   });
