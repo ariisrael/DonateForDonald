@@ -93,7 +93,7 @@
 </main>
 
 <script>
-  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs'];
+  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice'];
   var blacklist = ['washinon', 'jobs jobs jobs'];
   $(document).ready(function () {
 
@@ -104,8 +104,6 @@
         if (blacklist.indexOf(data[i].term.toLowerCase()) < 0 && postedTerms.indexOf(data[i].term.toLowerCase()) < 0) {
           $('.js-select-trigger .js-fill').append(html);
           postedTerms.push(data[i].term.toLowerCase());
-        } else {
-          console.log(data[i].term, 'already there');
         }
       }
       var wlHtml = '';
