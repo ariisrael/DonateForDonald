@@ -32,22 +32,22 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.set('port', (process.env.PORT || 5000));
 
 app.set('views', './views');
-const hbs = exphbs.create({
+const handlebars = exphbs.create({
   defaultLayout: 'main',
   helpers: {
-    ifeq(a, b, options) {
+    ifeq: function(a, b, options) {
       if (a === b) {
         return options.fn(this);
       }
       return options.inverse(this);
     },
-    toJSON(object) {
+    toJSON: function(object) {
       return JSON.stringify(object);
     },
   },
 });
 
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 // import the config

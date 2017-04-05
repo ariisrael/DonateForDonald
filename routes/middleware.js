@@ -33,6 +33,8 @@ app.use(function(req, res, next) {
       facebook: (req.user.facebook) ? req.user.facebook : null,
       twitter: (req.user.twitter) ? req.user.twitter : null,
     }
+  } else {
+    res.locals.user = null
   }
   next()
 })
