@@ -18,6 +18,7 @@ module.exports = {
         });
     },
     create: (req, res) => {
+        console.log(req.body);
         var trigger = new Trigger(req.body);
         trigger.userId = req.user.id
         trigger.save((err) => {

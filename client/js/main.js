@@ -124,8 +124,9 @@ function updateTweetTerm(term) {
 function landingDonate() {
   var charity = $('input[name=charity]').val().trim();
   var trigger = $('input[name=trigger]').val().trim();
-  var amount = ($('amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
+  var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
+  console.log(amount);
   var userTrigger = {
     "charityId": charity,
     "name": trigger,
