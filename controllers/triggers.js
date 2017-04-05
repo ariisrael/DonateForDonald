@@ -23,6 +23,11 @@ module.exports = {
         trigger.userId = req.user.id
         trigger.save((err) => {
             if(err) return console.error(err);
+            if(req.user.paymentToken) {
+                res.redirect('/social')
+            } else {
+                res.redirect('/payment')
+            }
         });
     },
     update: (req, res) => {
