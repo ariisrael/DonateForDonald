@@ -47,6 +47,7 @@
     "huba-gramophone": "0.0.4",
     "lodash": "~0.8.2",
     "mailchimp-api": "^2.0.7",
+    "mailgun-js": "^0.9.1",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.5",
     "mongoose-findorcreate": "^1.0.0",
