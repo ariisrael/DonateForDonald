@@ -21,7 +21,7 @@ stream.on('tweet', function (tweet) {
   // Only parse tweets from @realDonaldTrump
   if (tweet.user.id === TRUMP_USER_ID) {
     var text = getFullText(tweet);
-    var id = tweet.id;
+    var id = tweet.id_str;
     var date = tweet.created_at;
     saveTweet({text: text, id: id, _id: id, date: date})
   }

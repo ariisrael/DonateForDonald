@@ -36,7 +36,7 @@ function seedTweets(max_id) {
     console.log(data.length)
     data.forEach((t, index) => {
       var text = getFullText(t);
-      var id = t.id;
+      var id = t.id_str;
       var date = t.created_at;
       saveTweet({text: text, id: id, _id: id, date: date}, index)
       if (index === 196) {
