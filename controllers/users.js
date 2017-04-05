@@ -105,7 +105,12 @@ exports.loginPost = function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
-      res.redirect('/');
+      console.log(user);
+      if(!(user.paymentToken)) {
+        res.redirect('/payment');
+      } else {
+        res.redirect('/triggers');
+      }
     });
   })(req, res, next);
 };

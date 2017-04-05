@@ -17,7 +17,7 @@ const UserSchema = new Schema({
   google: String,
   admin: { type: Boolean, default: false },
   monthlyLimit: { type: Number, min: 0 },
-  paymenttoken: String,
+  paymentToken: String,
   billDate: Date,
   notification: Boolean,
 }, { toJSON: { virtuals: true } });
