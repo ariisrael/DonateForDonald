@@ -102,9 +102,11 @@ function loadTweets(term) {
   jQuery.getJSON(url, function(data) {
     $('.tweets').empty();
     if(data.tweets && data.tweets.length !== 0) {
-      data.tweets.forEach(function(d) {
-        $('.tweets').append(tweetHtml(d._id));
-      });
+      var tweetsHTML = ""
+      for (var i = 0; i < data.tweets.length; i++) {
+        tweetsHTML += tweetHtml(data.tweets[i]._id)
+      }
+      $('.tweets').append(tweetsHTML);
       updateTweetCount(data.count);
       twttr.widgets.load();
     } else {
