@@ -10,6 +10,5 @@ const TriggerSchema = new Schema({
   amount: { type: Number, min: 1 },
 });
 
-TriggerSchema.index({ '$**': 'text' });
 const Trigger = mongoose.model('Trigger', TriggerSchema);
 module.exports = Trigger;

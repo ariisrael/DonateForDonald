@@ -25,15 +25,19 @@ app.use(function(req, res, next) {
   }
   if (req.user) {
     res.locals.user = {
-      email: (req.user.email) ? req.user.email : null,
+      email: (req.user.email) ? req.user.email : undefined,
       picture: (req.user.picture) ? req.user.picture : "https://myspace.com/common/images/user.png",
-      name: (req.user.name) ? req.user.name : null,
-      admin: (req.user.admin) ? req.user.admin : null,
-      facebook: (req.user.facebook) ? req.user.facebook : null,
-      twitter: (req.user.twitter) ? req.user.twitter : null,
-      id: (req.user._id) ? req.user._id : null,
-      donations: (req.user.donations) ? req.user.donations : null,
-      triggers: (req.user.triggers) ? req.user.triggers : null,
+      name: (req.user.name) ? req.user.name : undefined,
+      admin: (req.user.admin) ? req.user.admin : undefined,
+      facebook: (req.user.facebook) ? req.user.facebook : undefined,
+      twitter: (req.user.twitter) ? req.user.twitter : undefined,
+      id: (req.user._id) ? req.user._id : undefined,
+      donations: (req.user.donations) ? req.user.donations : undefined,
+      triggers: (req.user.triggers) ? req.user.triggers : undefined,
+      phone: (req.user.phone) ? req.user.phone : undefined,
+      monthlyLimit: (req.user.monthlyLimit) ? req.user.monthlyLimit : undefined,
+      paymenttoken: (req.user.paymenttoken) ? req.user.paymenttoken : undefined,
+      notification: (req.user.notification) ? req.user.notification : undefined,
     }
   } else {
     res.locals.user = null
