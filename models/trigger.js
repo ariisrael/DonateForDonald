@@ -8,6 +8,7 @@ const TriggerSchema = new Schema({
   charityId: String, // Charity IDs are eins
   userId: ObjectId,
   amount: { type: Number, min: 1 },
+  social: Boolean,
 });
 
 const Trigger = mongoose.model('Trigger', TriggerSchema);

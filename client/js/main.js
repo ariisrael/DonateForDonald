@@ -141,6 +141,7 @@ function landingDonate() {
     "name": trigger,
     "amount": amount
   }
+  console.log(user)
   if(user) { // User signed in, store in db
     console.log('User logged in');
     jQuery.post({
@@ -148,6 +149,11 @@ function landingDonate() {
         data: userTrigger,
         success: function(data) {
           console.log('Posted', data);
+          if(user.paymentToken) {
+            window.location.replace('/social');
+          } else {
+            window.location.replace('/payment');
+          }
         },
         dataType: "json"
       });
