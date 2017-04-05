@@ -15,17 +15,18 @@
       <div class="ui form landing-form">
         <div class="center triggers js-select-trigger">
           <div class="ui huge dropdown labeled fluid inline search icon basic button">
+          <input type="hidden" name="trigger">
             <i class="quote left icon"></i>
-            <span class="text">Trigger</span>
+            <div class="default text">Trigger</div>
             <div class="menu js-fill">
             </div>
           </div>
         </div>
         <div class="center charities js-select-charity">
-
           <div class="ui huge dropdown labeled fluid inline basic search icon button">
+           <input type="hidden" name="charity">
             <i class="heart icon"></i>
-            <span class="text">Charity</span>
+            <div class="default text">Charity</div>
             <div class="menu" id="charities">
             </div>
           </div>
@@ -42,7 +43,7 @@
               <a class="ui huge toggle button label">
                   Other
                 </a>
-              <input type="number" placeholder="25" min="1" max="9999" disabled></input>
+              <input type="number" name="amount" placeholder="25" min="1" max="9999" disabled></input>
             </div>
             </span>
           </div>
@@ -54,14 +55,14 @@
 
             <!-- CTA: Donate -->
             <div class="left-button js-donate">
-              <button class="ui huge icon primary button fluid">
+              <button class="ui huge icon primary button fluid" onclick="landingDonate()">
                 <i class="lightning icon"></i> Donate
               </button>
             </div>
             <!-- End CTA: Donate -->
             <!-- CTA: View Tweets -->
             <div class="right-button">
-              <button class="ui basic icon huge button fluid js-tweets">
+              <button class="ui basic icon huge button fluid js-tweets" >
                 <i class="twitter icon"></i> View Tweets
               </button>
             </div>
@@ -76,7 +77,6 @@
     </section>
 
     <div class="ui left sidebar overlay wrapper tweet-drawer js-tweet-drawer" style="z-index: 999; margin: 0px; padding: 0px">
-
       <div class="drawer-controls">
         <a class="ui fluid massive primary button icon squared">
           <i class="twitter icon" style="position: relative; left: -5px"></i><span class="js-tweet-term" style="color: #fff">fake news</span><span class="tweet-count">(<span class="js-tweet-count" style="margin: 0px; padding: 0px">100</span>)</span>
@@ -116,19 +116,3 @@
   })
 
 </script>
-
-<!--
-<footer>
-  <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
-</span>
-  <div style="display: inline-block; float: right">
-
-    <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
-    <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
-
-    <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
-
-  </div>
-</footer>
--->
-<!-- Load vendor scripts -->

@@ -108,8 +108,8 @@ function loadTweets(term) {
     console.log('Adding new tweets...');
     if(data && data.length !== 0) {
       data.forEach(function(d) {
-        console.log('Appending', tweetHtml(d.twitter_id));
-        $('.tweets').append(tweetHtml(d.twitter_id));
+        console.log('Appending', tweetHtml(d._id));
+        $('.tweets').append(tweetHtml(d._id));
       });
       updateTweetCount(data.length);
       twttr.widgets.load();
@@ -125,6 +125,14 @@ function updateTweetTerm(term) {
   console.log('Updating tweet term to', term);
   $('.js-tweet-term').empty();
   $('.js-tweet-term').text(term);
+}
+
+function landingDonate() {
+  var charity = $('input[name=charity]').val().trim();
+  var trigger = $('input[name=trigger]').val().trim();
+  var amount = ($('amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
+  amount = amount.replace('$', '').trim();
+  console.log(charity, trigger, amount);
 }
 
 function updateTweetCount(num) {

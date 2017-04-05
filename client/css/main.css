@@ -19,7 +19,7 @@ body {
     text-decoration: underline
 }
 .tweet-drawer {
-    width: 35% !important;
+    width: 40% !important;
     ;
 }
 .tweet-controls {
@@ -348,7 +348,6 @@ nav {
 .tweet-drawer {
     background-color: rgba(255, 255, 255, 0.95);
     width: 100%;
-    min-height: 200px;
     overflow-x: hidden;
 }
 .drawer-controls > button {
