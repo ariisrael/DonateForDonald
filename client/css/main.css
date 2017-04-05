@@ -153,7 +153,7 @@ button.primary:hover {
     color: #999;
     font-size: 20px;
     position: relative;
-    left: 140px;
+    left: 110px;
     z-index: 222 !important;
 }
 .drawer-controls > a > i.twitter {
@@ -196,14 +196,14 @@ nav {
     padding: auto !important;
 }
 .amount-other > input {
-    padding-left: 40px !important;
+    padding-left: 30px !important;
 }
 .menu {
     z-index: 888 !important;
 }
 .amount-other > a.label {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 @media only screen and (max-width: 500px) {
     .headline {
@@ -312,7 +312,7 @@ nav {
     }
 }
 .amount-other {
-    width: 100px;
+    width: 120px;
     position: relative;
     left: -15px;
     height: 51.5px;
