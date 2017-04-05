@@ -31,6 +31,9 @@ function getFullText(tweet) {
   if (tweet.truncated && tweet.extended_tweets && tweet.extended_tweet.full_text) {
     return tweet.extended_tweet.full_text;
   }
+  if (tweet.full_text) {
+    return tweet.full_text
+  }
   return tweet.text;
 }
 
