@@ -126,7 +126,12 @@ function landingDonate() {
   var trigger = $('input[name=trigger]').val().trim();
   var amount = ($('amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
-  console.log(charity, trigger, amount);
+  var userTrigger = {
+    "charity": charity,
+    "trigger": trigger,
+    "amount": amount
+  }
+  localStorage.setItem('userTrigger', JSON.stringify(userTrigger));
 }
 
 function updateTweetCount(num) {
