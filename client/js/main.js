@@ -149,7 +149,7 @@ function landingDonate() {
         data: userTrigger,
         success: function(data) {
           console.log('Posted', data);
-          if(user.paymentToken) {
+          if(user.paymentToken || user.monthlyLimit) {
             window.location.replace('/social');
           } else {
             window.location.replace('/payment');
