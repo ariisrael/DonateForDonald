@@ -19,11 +19,15 @@ var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
 // Connect to Twitter API and start streaming
 stream.on('tweet', function (tweet) {
   // Only parse tweets from @realDonaldTrump
+  console.log("new tweet: ", tweet)
+  console.log(tweet.user.id === TRUMP_USER_ID)
   if (tweet.user.id === TRUMP_USER_ID) {
     var text = getFullText(tweet);
     var id = tweet.id_str;
     var date = tweet.created_at;
-    saveTweet({text: text, id: id, _id: id, date: date})
+    var t = {text: text, id: id, _id: id, date: date}
+    console.log("about to save tweet: ", t)
+    saveTweet(t)
   }
 });
 
@@ -39,7 +43,9 @@ function getFullText(tweet) {
 
 function saveTweet(tweet) {
   var t = new Tweet(tweet)
+  console.log("saving tweet: ", t)
   t.save((err) => {
+    console.log("saved tweet: ", t)
     if (err) {
       return console.log(err)
     }
