@@ -1,33 +1,29 @@
 {{> header}}
 
-<div class="ui text container">
-  {{#each triggers}}
-    <div>
-      <div class="ui form landing-form">
-        <div class="center js-select-trigger">
-          <div class="ui huge dropdown labeled fluid inline icon basic button">
-          <input type="hidden" name="trigger">
-            <i class="quote left icon"></i>
-            <div class="default text">{{this.name}}</div>
-            <div class="menu js-fill">
-            </div>
-          </div>
+<div class="ui text container web-form">
+  <h1>Triggers</h1>
+  <div class="ui cards stackable">
+    {{#each triggers}}
+    <div class="ui card">
+      <div class="content">
+        <div class="right floated medium ui"><a href="#" style="color: inherit; position: relative; top: -5px"><i class="trash icon"></i></a></div>
+        <div class="header">
+          {{this.name}}
         </div>
-          <div class="center js-select-charity">
-            <div class="ui huge dropdown labeled fluid inline basic icon button">
-             <input type="hidden" name="charity">
-              <i class="heart icon"></i>
-              <div class="default text">{{this.charityId.name}}</div>
-              </div>
-            </div>
-            <div class="center js-select-charity">
-              <div class="ui huge dropdown labeled fluid inline basic icon button">
-                <input type="hidden" name="charity">
-                <i class="dollar icon"></i>
-                <div class="default text">{{this.amount}}</div>
-              </div>
-            </div>
+        <div class="meta">
+          ${{this.amount}} to {{this.charityId.name}}
         </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          <i class="usd icon"></i>
+        100 donated
+      </span>
+        <span>
+        <i class="twitter icon"></i>
+        10 Tweets
+      </span>
+      </div>
     </div>
-  {{/each}}
-</div>
+    {{/each}}
+  </div>
