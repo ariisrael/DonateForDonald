@@ -2,6 +2,10 @@
  * GET /
  */
 
+const models = require('../models');
+const Trigger = models.Trigger;
+const Charity = models.Charity;
+
 exports.landing = function(req, res) {
   res.render('landing', {
   });
@@ -65,8 +69,21 @@ exports.social = function(req, res) {
 }
 
 exports.triggers = function(req, res) {
-  res.render('triggers', {
-    title: 'Triggers'
+  var response = {
+    title: 'Triggers',
+    triggers: []
+  }
+  Trigger.find({
+    userId: req.user.id
+  }).populate('charityId').exec((err, triggers) => {
+      if (err) {
+        console.error(err);
+      }
+      console.log(triggers)
+      if (triggers && triggers.length) {
+        response.triggers = triggers
+      }
+      res.render('triggers', response);
   });
 }
 
