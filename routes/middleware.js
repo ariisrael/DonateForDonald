@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
       triggers: (req.user.triggers) ? req.user.triggers : undefined,
       phone: (req.user.phone) ? req.user.phone : undefined,
       monthlyLimit: (req.user.monthlyLimit) ? req.user.monthlyLimit : undefined,
-      paymenttoken: (req.user.paymenttoken) ? req.user.paymenttoken : undefined,
+      paymentToken: (req.user.paymentToken) ? req.user.paymentToken : undefined,
       notification: (req.user.notification) ? req.user.notification : undefined,
     }
   } else {
