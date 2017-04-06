@@ -11,7 +11,6 @@ const db = config.db
 const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 
 const Twitter = require('twitter'); // Twitter API
-console.log(config.twitterCreds)
 const T = new Twitter(config.twitterCreds);
 
 db.once('open', function() {
