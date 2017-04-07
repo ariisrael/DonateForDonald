@@ -77,7 +77,7 @@ passport.use(new FacebookStrategy({
             facebook: profile.id
           });
           newUser.save(function(err) {
-            done(err, newUser);
+            done(err, newUser, {newUser: true});
           });
         }
       });

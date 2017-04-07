@@ -5,8 +5,6 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 
-const welcomeEmail = require('../utils/email').welcomeEmail
-
 const User = models.User;
 
 exports.index = (req, res) => {
@@ -160,22 +158,14 @@ exports.signupPost = function(req, res, next) {
       email: req.body.email,
       password: req.body.password
     });
-    crypto.randomBytes(16, function(err, buf) {
-      var token = buf.toString('hex');
-      user.confirmationToken = token;
-      user.confirmationTokenExpires = Date.now() + 86400000; // expire in 1 day
-      user.save(function(err) {
-        var name = user.name
-        if (!name) name = user.email
-        welcomeEmail(name, user.email, token, (err, body) => {
-          req.logIn(user, function(err) {
-            res.redirect('/payment');
-          });
-        })
+    user.save(function(err) {
+      req.logIn(user, function(err) {
+        res.redirect('/payment');
       });
     });
   });
 };
+
 
 exports.confirmEmail = function(req, res) {
   if (req.isAuthenticated()) {

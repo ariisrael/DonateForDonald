@@ -62,7 +62,27 @@ app.post('/reset/:token', UserController.resetPost);
 app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.unlink);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
+app.get('/auth/facebook/callback', function(req, res, next) {
+  passport.authenticate('facebook', function(err, user, info) {
+    if (err || !user) {
+      return res.redirect('/login')
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+        return res.redirect('/login')
+      }
+      if (info && info.newUser) {
+        if(!(user.paymentToken)) {
+          return res.redirect('/payment');
+        } else {
+          return res.redirect('/triggers');
+        }
+      } else {
+        return res.redirect('/')
+      }
+    })
+  })(req, res, next);
+});
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
 app.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));

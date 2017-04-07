@@ -9,9 +9,6 @@ exports.welcomeEmail = function (name, email, token, callback) {
     email: email,
     baseUrl: app.get('baseUrl')
   }
-  data.forEach((k, v) => {
-    params[k] = v
-  })
   app.render('email/welcome', params, (err, html) => {
     console.log(err)
     var data = {

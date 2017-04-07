@@ -1,6 +1,7 @@
 const mongoose = require('../config/mongo');
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
+const welcomeEmail = require('../utils/email').welcomeEmail
 
 const Schema = mongoose.Schema;
 
@@ -35,6 +36,24 @@ UserSchema.pre('save', function(next) {
     });
   });
   return true;
+});
+
+UserSchema.pre('save', function(next) {
+  var user = this
+  if (user.emailConfirmed || user.confirmationToken) {
+    return next();
+  }
+  crypto.randomBytes(16, function(err, buf) {
+    var token = buf.toString('hex');
+    user.confirmationToken = token;
+    user.confirmationTokenExpires = Date.now() + 86400000; // expire in 1 day
+    var name = user.name
+    if (!name) name = user.email
+    welcomeEmail(name, user.email, token, (err, body) => {
+      next()
+    })
+  });
+  return true
 });
 
 UserSchema.methods.comparePassword = function(password, cb) {
