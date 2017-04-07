@@ -176,6 +176,8 @@ exports.confirmEmail = function(req, res) {
         return res.redirect('/');
       }
       user.emailConfirmed = true
+      user.confirmationToken = undefined
+      user.confirmationTokenExpires = undefined
       user.save((err) => {
         if (err) {
           req.flash('error', { msg: 'Something went wrong, please try again.' });
