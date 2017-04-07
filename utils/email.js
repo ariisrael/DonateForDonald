@@ -1,4 +1,4 @@
-var mailgun = require('../config/email')
+var mailgun = require('../config/mailgun')
 var app = require('../index')
 
 exports.welcomeEmail = function (name, email, token, callback) {

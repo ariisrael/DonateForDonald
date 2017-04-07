@@ -5,6 +5,8 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 
+const welcomeEmail = require('../utils/email').welcomeEmail
+
 const User = models.User;
 
 exports.index = (req, res) => {
