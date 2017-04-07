@@ -1,8 +1,14 @@
 {{> header}}
 
-<div class="ui text container web-form">
+<div class="ui container web-form">
+  <div class="ui cards">
     {{#each triggers}}
-    <div class="ui centered fluid card">
+    <div class="ui centered card">
+      {{#if this.charityId.image}}
+      <div class="image">
+      <img src="{{this.charityId.image}}">
+      </div>
+      {{/if}}
       <div class="content">
         <div class="right floated medium ui"><a href="#" style="color: inherit; position: relative; top: -5px"><i class="trash icon"></i></a></div>
         <div class="header">
@@ -19,9 +25,10 @@
       </span>
         <span>
         <i class="twitter icon"></i>
-        10 Tweets
+        10 tweets
       </span>
       </div>
     </div>
     {{/each}}
+    </div>
   </div>

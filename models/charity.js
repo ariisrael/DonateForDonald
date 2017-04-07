@@ -6,6 +6,7 @@ const charitySchema = new Schema({
   _id: String, // this is an ein
   name: String,
   twitter: [String],
+  image: String,
 });
 
 const Charity = mongoose.model('Charity', charitySchema);
