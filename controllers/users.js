@@ -158,13 +158,43 @@ exports.signupPost = function(req, res, next) {
       email: req.body.email,
       password: req.body.password
     });
-    user.save(function(err) {
-      req.logIn(user, function(err) {
-        res.redirect('/payment');
+    crypto.randomBytes(16, function(err, buf) {
+      var token = buf.toString('hex');
+      user.confirmationToken = token;
+      user.confirmationTokenExpires = Date.now() + 86400000; // expire in 1 day
+      user.save(function(err) {
+        var name = user.name
+        if (!name) name = user.email
+        welcomeEmail(name, user.email, token, (err, body) => {
+          req.logIn(user, function(err) {
+            res.redirect('/payment');
+          });
+        })
       });
     });
   });
 };
+
+exports.confirmEmail = function(req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  User.findOne({ confirmationToken: req.params.token })
+    .where('confirmationTokenExpires').gt(Date.now())
+    .exec(function(err, user) {
+      if (!user) {
+        req.flash('error', { msg: 'Confirmation token is invalid or has expired.' });
+        return res.redirect('/settings');
+      }
+      user.emailConfirmed = true
+      user.save((err) => {
+        if (err) {
+          req.flash('error', { msg: 'Something went wrong, please try again.' });
+        }
+        res.redirect('/settings')
+      })
+    });
+}
 
 /**
  * GET /account

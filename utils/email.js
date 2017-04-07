@@ -1,11 +1,17 @@
 var mailgun = require('../config/email')
 var app = require('../index')
 
-function welcomeEmail(name, email, callback) {
+exports.welcomeEmail = function (name, email, token, callback) {
   var params = {
     layout: 'email',
-    name: name
+    name: name,
+    token: token,
+    email: email,
+    baseUrl: app.get('baseUrl')
   }
+  data.forEach((k, v) => {
+    params[k] = v
+  })
   app.render('email/welcome', params, (err, html) => {
     console.log(err)
     var data = {
@@ -23,7 +29,7 @@ function welcomeEmail(name, email, callback) {
   })
 }
 
-function forgotEmail(name, email, callback) {
+exports.forgotEmail = function (name, email, data, callback) {
   var params = {
     layout: 'email',
     name: name
