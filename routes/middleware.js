@@ -38,6 +38,7 @@ app.use(function(req, res, next) {
       monthlyLimit: (req.user.monthlyLimit) ? req.user.monthlyLimit : undefined,
       paymentToken: (req.user.paymentToken) ? req.user.paymentToken : undefined,
       notification: (req.user.notification) ? req.user.notification : undefined,
+      emailConfirmed: (req.user.emailConfirmed) ? req.user.emailConfirmed : undefined,
     }
   } else {
     res.locals.user = null
