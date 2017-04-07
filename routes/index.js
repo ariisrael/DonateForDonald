@@ -37,7 +37,7 @@ app.get('/leaderboard', PageController.leaderboard);
 app.get('/charities', PageController.charities);
 app.get('/faq', PageController.faq);
 app.get('/tweets', PageController.tweets);
-app.get('/configm_email', UserController.confirmEmail)
+app.get('/confirm_email', UserController.confirmEmail)
 
 app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
 // You cannot use put in a form, only via javascript
