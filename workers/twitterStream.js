@@ -19,8 +19,8 @@ var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
 // Connect to Twitter API and start streaming
 stream.on('tweet', function (tweet) {
   // Only parse tweets from @realDonaldTrump
-  console.log("new tweet: ", tweet)
-  console.log(tweet.user.id === TRUMP_USER_ID)
+  console.log("new tweet: ", getFullText(tweet))
+  console.log("matches trump? ", tweet.user.id === TRUMP_USER_ID)
   if (tweet.user.id === TRUMP_USER_ID) {
     var text = getFullText(tweet);
     var id = tweet.id_str;
