@@ -168,22 +168,25 @@ exports.signupPost = function(req, res, next) {
 
 
 exports.confirmEmail = function(req, res) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
   User.findOne({ confirmationToken: req.params.token })
     .where('confirmationTokenExpires').gt(Date.now())
     .exec(function(err, user) {
       if (!user) {
         req.flash('error', { msg: 'Confirmation token is invalid or has expired.' });
-        return res.redirect('/settings');
+        return res.redirect('/');
       }
       user.emailConfirmed = true
       user.save((err) => {
         if (err) {
           req.flash('error', { msg: 'Something went wrong, please try again.' });
         }
-        res.redirect('/settings')
+        if (!req.isAuthenticated()) {
+          req.logIn(user, function(err) {
+            res.redirect('/');
+          });
+        } else {
+          res.redirect('/');
+        }
       })
     });
 }
