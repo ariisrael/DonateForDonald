@@ -5,7 +5,7 @@
       <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
       </a>
         <br>
-<form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 20px;">
+<form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
 
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <div class="field">
@@ -14,21 +14,22 @@
   <div class="field">
     <input type="password" name="password" placeholder="Password">
   </div>
-
-  <a class="forgot-pass" href="/reset" style="float: right; font-size: 75%; position: relative; top: -5px">Forgot Password</a>
-  <button type='submit' class="ui primary massive button login-button" type="submit">
-    Log In
-  </button>
-
-  <button type='submit' class="ui massive basic button signup-button" type="submit">
+ 
+<div class="ui two-buttons">
+  <button type='submit' class="ui massive primary button signup-button" type="submit">
     Sign Up
   </button>
-
-
+<button type='submit' class="ui basic massive button login-button" type="submit">
+    Log In
+  </button>
+</div>
   </form>
   <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
     <a class="fluid ui button facebook massive icon" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
   </div>
+  <a class="forgot-pass" href="/reset" style="float: right; margin-top: 20px; ">Forgot Password</a>
+
+   
       </div>
   </main>
 

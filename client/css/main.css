@@ -242,24 +242,28 @@ nav {
     .share-text {
         display: none !important;
     }
-    .login-button {
-        display: block;
-        width: 100%;
-        position: relative;
-        top: 15px;
-    }
-    .signup-button {
-        display: block;
-        width: 100%;
-        position: relative;
-        top: 25px !important;
-    }
+    
     .landing-form .left-button {
         display: block !important;
         width: 100% !important;
     }
     img.user-picture {
         border-radius: 100% !important;
+    }
+    .login-button {
+        display: inline-block;
+        padding: auto 5px !important;
+
+    }
+    .signup-button {
+        display: inline-block;
+        padding: auto 5px !important;
+
+    }
+    .forgot-pass {
+        display: block;
+        margin-bottom: 10px;
+        clear: both;
     }
     .new-line {
         display: block;
