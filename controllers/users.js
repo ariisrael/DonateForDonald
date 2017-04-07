@@ -171,8 +171,6 @@ exports.confirmEmail = function(req, res) {
   User.findOne({ confirmationToken: req.query.token })
     .where('confirmationTokenExpires').gt(new Date(Date.now()))
     .exec(function(err, user) {
-      console.log(err)
-      console.log(user)
       if (!user) {
         req.flash('error', { msg: 'Confirmation token is invalid or has expired.' });
         return res.redirect('/');
