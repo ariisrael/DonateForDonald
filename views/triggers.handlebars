@@ -1,7 +1,7 @@
 {{> header}}
 
 <div class="ui text container web-form">
-  <div class="ui items" style="position: relative; top: -30px;">
+  <div class="ui divided items" style="">
     {{#each triggers}}
 
     <div class="item">
@@ -12,22 +12,30 @@
       <div class="content">
 
 
-        <div class=" ui right floated small statistic">
+        <div class=" ui right floated horizontal small statistic">
 
-          <div class="value">
-            <i class="usd green icon"></i> {{this.amount}} </div>
+          <div class="value" style="position: relative; right: -8px">
+            <i class="usd green small icon" style="position: relative; top: -4px; right: -4px"></i>{{this.amount}}</div>
 
           <div class="label">
-            per tweet
+            / tweet
           </div>
         </div>
+        
         <div class="header">{{this.name}} </div>
-        <div class="meta">
+        {{#if this.active}}
+
+        <span style="font-size: 80%; padding-left: 7px; letter-spacing: 0.5px; position: relative; top: -1px; text-transform: uppercase; color: limegreen; font-weight: 700">(Active)</span>
+        {{else}}
+        <span style="font-size: 80%; padding-left: 10px; letter-spacing: 0.5px; position: relative; top: -1px; text-transform: uppercase; color: gray; font-weight: 700">(Inactive)</span>
+
+        {{/if}}
+        <div class="meta" style="position: relative; top: -10px">
 
           <span class="stay"> {{this.charityId.name}}</span>
         </div>
 
-        <div class="extra">
+        <div class="extra" style="position: relative; top: -15px">
           <div style="display: inline-block">
 
             <i class="blue twitter icon"></i> 10 tweets
@@ -37,7 +45,7 @@
           </div>
 
         </div>
-        <div class="left floated" style="padding-top: 27px">
+        <div class="left floated" style="margin-top: 28px">
           {{#if this.active}}
           <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> 
           {{else}}
