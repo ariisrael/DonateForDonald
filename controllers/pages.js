@@ -81,7 +81,7 @@ exports.triggers = function(req, res) {
       }
       console.log(triggers)
       if (triggers && triggers.length) {
-        response.triggers = triggers
+        response.triggers = triggers.reverse();
       }
       res.render('triggers', response);
   });
