@@ -1,5 +1,6 @@
 @import url("//fonts.googleapis.com/css?family=Lato:300,400,600,700,800%7CRaleway:100,300,600,700,800");
 /* Reset */
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One');
 
 html,
 body {
@@ -58,6 +59,14 @@ nav > .login {
 
 body {
     background-color: #ffffff;
+}
+
+.trigger-title {
+    font-family: 'Fugaz One', cursive !important;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 40px;
 }
 .site {
     /* Flexbox */
