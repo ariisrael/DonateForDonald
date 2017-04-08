@@ -31,6 +31,18 @@ stream.on('tweet', function (tweet) {
   }
 });
 
+stream.on('disconnect', function (disconnectMessage) {
+  console.log('disconnected: ', disconnectMessage)
+  stream.stop().start()
+})
+
+stream.on('error', function (error) {
+  console.log('errored: ', JSON.stringify(error))
+  // this is synchronous, no need to have a callback,
+  // but it returns this so the functions can be chained.
+  stream.stop().start()
+})
+
 function getFullText(tweet) {
   if (tweet.truncated && tweet.extended_tweets && tweet.extended_tweet.full_text) {
     return tweet.extended_tweet.full_text;
@@ -43,9 +55,9 @@ function getFullText(tweet) {
 
 function saveTweet(tweet) {
   var t = new Tweet(tweet)
-  console.log("saving tweet: ", t)
+  console.log("saving tweet: ", JSON.stringify(t))
   t.save((err) => {
-    console.log("saved tweet: ", t)
+    console.log("saved tweet: ", JSON.stringify(t))
     if (err) {
       return console.log(err)
     }
