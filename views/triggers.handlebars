@@ -1,34 +1,53 @@
 {{> header}}
 
-<div class="ui container web-form">
-  <div class="ui cards">
-    {{#each triggers}}
-    <div class="ui centered card">
-      {{#if this.charityId.image}}
-      <div class="image">
+<div class="ui text container web-form">
+<div class="ui divided items">
+      {{#each triggers}}
+
+  <div class="item">
+    <div class="ui small fluid image" style="border-radius: 3px">
       <img src="{{this.charityId.image}}">
-      </div>
-      {{/if}}
-      <div class="content">
-        <div class="right floated medium ui"><a href="#" style="color: inherit; position: relative; top: -5px"><i class="trash icon"></i></a></div>
-        <div class="header">
-          {{this.name}}
-        </div>
-        <div class="meta">
-          ${{this.amount}} to {{this.charityId.name}}
-        </div>
-      </div>
-      <div class="extra content">
-        <span class="right floated">
-          <i class="usd icon"></i>
-        100 donated
-      </span>
-        <span>
-        <i class="twitter icon"></i>
-        10 tweets
-      </span>
-      </div>
     </div>
-    {{/each}}
-    </div>
+
+    <div class="content">
+      
+
+  <div class=" ui right floated small statistic">
+    
+    <div class="value">
+      <i class="usd green icon"></i> {{this.amount}}    </div>
+
+       <div class="label">
+    per tweet
   </div>
+  </div>
+      <div class="header">{{this.name}} </div>
+      <div class="meta">
+        
+        <span class="stay"> {{this.charityId.name}}</span>
+      </div>
+
+      <div class="extra">
+                <div style="display: inline-block">
+
+                  <i class="blue twitter icon"></i>
+        10 tweets
+          </div>
+        <div style="display: inline-block">
+        <i class="green money icon"></i>
+        $121 donated
+        </div>
+
+      </div>
+          <div class="bottom aligned extra">
+         <button class="ui button icon labeled basic "><i class="icon write"></i> Edit</button>
+                  <button class="ui button icon labeled basic"><i class="icon trash"></i> Delete</button>
+ 
+    </div>
+      </div>
+     
+   
+  </div>
+  {{/each}}
+</div>
+</div>
