@@ -12,13 +12,21 @@ const charities = require('./data/charities')
 
 db.once('open', function() {
   charities.forEach((charity) => {
-    var c = new Charity({
-      _id: charity.ein,
-      twitter: charity.twitter,
-      name: charity.name
-    })
-    c.save((err) => {
-      console.log(err)
+    Charity.findOne({ _id: charity.ein }, (err, c) => {
+      if (c) {
+        return console.log('found: ', c)
+      }
+      if (err) {
+        return console.error('error: ', err)
+      }
+      var c = new Charity({
+        _id: charity.ein,
+        twitter: charity.twitter,
+        name: charity.name
+      })
+      c.save((err) => {
+        console.log(err)
+      })
     })
   })
 })
