@@ -210,6 +210,10 @@ nav {
         font-weight: 700;
         padding-top: 10px !important
     }
+
+    .charity-image {
+        display: none !important;
+    }
     .subheader {
         font-size: 14px;
         width: 103%;
