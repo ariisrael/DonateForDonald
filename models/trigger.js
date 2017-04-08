@@ -9,6 +9,7 @@ const TriggerSchema = new Schema({
   userId: ObjectId,
   amount: { type: Number, min: 1 },
   social: Boolean,
+  active: { type: Boolean, default: true }
 });
 
 TriggerSchema.set('toJSON', { virtuals: true });

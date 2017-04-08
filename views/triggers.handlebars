@@ -1,55 +1,57 @@
 {{> header}}
 
 <div class="ui text container web-form">
-<div class="ui items" style="position: relative; top: -30px;">
-      {{#each triggers}}
+  <div class="ui items" style="position: relative; top: -30px;">
+    {{#each triggers}}
 
-  <div class="item">
-    <div class="ui small fluid image charity-image" style="border-radius: 3px">
-      <img src="{{this.charityId.image}}">
-    </div>
-
-    <div class="content">
-      
-
-  <div class=" ui right floated small statistic">
-    
-    <div class="value">
-      <i class="usd green icon"></i> {{this.amount}}    </div>
-
-       <div class="label">
-    per tweet
-  </div>
-  </div>
-      <div class="header">{{this.name}} </div>
-      <div class="meta">
-        
-        <span class="stay"> {{this.charityId.name}}</span>
+    <div class="item">
+      <div class="ui small fluid image charity-image" style="border-radius: 3px">
+        <img src="{{this.charityId.image}}">
       </div>
 
-      <div class="extra">
-                <div style="display: inline-block">
+      <div class="content">
 
-                  <i class="blue twitter icon"></i>
-        10 tweets
+
+        <div class=" ui right floated small statistic">
+
+          <div class="value">
+            <i class="usd green icon"></i> {{this.amount}} </div>
+
+          <div class="label">
+            per tweet
           </div>
-        <div style="display: inline-block">
-        <i class="green money icon"></i>
-        $121 donated
+        </div>
+        <div class="header">{{this.name}} </div>
+        <div class="meta">
+
+          <span class="stay"> {{this.charityId.name}}</span>
         </div>
 
-      </div>
-          <div class="left floated" style="padding-top: 27px">
-                              <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button>
-         <button class="ui button small icon"><i class="icon write"></i> Edit</button>
-                  <button class="ui button small primary icon" ><i class="icon share"></i> Share</button>
+        <div class="extra">
+          <div style="display: inline-block">
 
- 
-    </div>
+            <i class="blue twitter icon"></i> 10 tweets
+          </div>
+          <div style="display: inline-block">
+            <i class="green money icon"></i> $121 donated
+          </div>
+
+        </div>
+        <div class="left floated" style="padding-top: 27px">
+          {{#if this.active}}
+          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> 
+          {{else}}
+          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button> 
+          {{/if}}
+          <button class="ui button small icon"><i class="icon write"></i> Edit</button>
+          <button class="ui button small primary icon"><i class="icon share"></i> Share</button>
+
+
+        </div>
       </div>
-     
-   
+
+
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
-</div>
 </div>
