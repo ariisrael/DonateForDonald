@@ -204,12 +204,19 @@ nav {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+
 @media only screen and (max-width: 500px) {
     .headline {
         font-size: 22px !important;
         font-weight: 700;
         padding-top: 10px !important
     }
+
+.trigger-actions {
+    margin-top: 10px !important;
+    padding-bottom: 20px;
+}
 
     .charity-image {
         display: none !important;

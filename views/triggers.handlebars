@@ -19,17 +19,10 @@
 
           <div class="label">
             / tweet
-          </div>
+          </div><br>
         </div>
         
-        <div class="header">{{this.name}} </div>
-        {{#if this.active}}
-
-        <span style="font-size: 80%; padding-left: 7px; letter-spacing: 0.5px; position: relative; top: -1px; text-transform: uppercase; color: limegreen; font-weight: 700">(Active)</span>
-        {{else}}
-        <span style="font-size: 80%; padding-left: 10px; letter-spacing: 0.5px; position: relative; top: -1px; text-transform: uppercase; color: gray; font-weight: 700">(Inactive)</span>
-
-        {{/if}}
+        <div class="header trigger-title" >{{this.name}} </div>
         <div class="meta" style="position: relative; top: -10px">
 
           <span class="stay"> {{this.charityId.name}}</span>
@@ -45,7 +38,7 @@
           </div>
 
         </div>
-        <div class="left floated" style="margin-top: 28px">
+        <div class="left floated trigger-actions" style="margin-top: 28px">
           {{#if this.active}}
           <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> 
           {{else}}
