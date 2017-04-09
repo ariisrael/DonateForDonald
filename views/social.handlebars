@@ -17,49 +17,35 @@
   {{> header}}
   <main>
     <div class="ui text container web-form">
-      <h1>Respond to Donald's Tweet
+      <h1>Reply to Donald's Tweet
       </h1>
       <div class="ui subheader">
         When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given
-        more to charity than he ever has - and tag the charity too. <a class="forgot-pass" href="https://twitter.com/search?q=%23DonateForDonald&src=typd&lang=en">#DonateForDonald</a>
+        more to charity than he ever has - and tag the charity too. 
       </div>
-      <form class="ui large form">
-
-        <div class="field">
-
-          <label>Tweet text <span style="font-weight: 400; color: #888">(0/140)</span></label>
-
-          <textarea rows="4"></textarea>
-
-        </div>
-        <div class="field">
-          <label>Ingredients </label>
-          <div class="horizontal list ui">
-            <div class="item">
-              <a class="ui icon large label">
-                <i class="icon plus"></i> Charity
-              </a>
-            </div>
-        <div class="item">
-          <a class="ui icon large label">
-            <i class="icon plus"></i> Amount
+      <div class="social-tweet"style="font-size: 16px; margin-top: 20px; margin-bottom: 20px; padding: 20px; border-radius: 3px; border: 1px solid #eee">
+           I donated
+           <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px">
+            <i class="icon usd"></i> Amount
           </a>
-        </div>
-    <div class="item">
-      <a class="ui icon large label">
-        <i class="icon plus"></i> Trigger
-      </a>
-    </div>
+           to
+          <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px">
+            <i class="icon heart"></i> Charity
+          </a>
+           for 
+           <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px">
+            <i class="icon left quote"></i> Trigger
+          </a> 
+          <a class="forgot-pass" href="https://twitter.com/search?q=%23DonateForDonald&src=typd&lang=en">#DonateForDonald</a>
+</div>
+      <div>
+        <a class="ui twitter icon massive fluid button" href="/twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Connect Twitter</a>
+      </div>
+      <div class="nothanks">
+        <a href="/triggers" style="float: right">Skip <i class="ui icon right chevron"></i></a>
+      </div>
 
-    </div>
-    <div>
-<a class="ui twitter icon massive fluid button" href="/twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter" ></i> Confirm</a>
-    </div>
-    <div class="nothanks">
-      <a href="/triggers" style="float: right">Skip <i class="ui icon right chevron"></i></a>
-    </div>
-
-    </form>
+      </form>
     </div>
   </main>
   <!--
