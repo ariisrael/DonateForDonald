@@ -171,4 +171,5 @@ function analyzePopularTerms(data, callback) {
   callback(null, popularTerms)
 }
 
-module.exports = getPopularTerms;
+module.exports.getPopularTerms = getPopularTerms;
+module.exports.analyzePopularTerms = analyzePopularTerms;

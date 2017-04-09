@@ -1,5 +1,5 @@
 var _ = require('lodash')
-var popularTerms = require('../utils/popular')
+var popularTerms = require('../utils/popular').getPopularTerms
 var PopularTerm = require('../models/term')
 
 function findPopularTerms(options, cb) {
