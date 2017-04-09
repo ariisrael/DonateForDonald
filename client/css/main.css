@@ -239,11 +239,7 @@ nav {
         width: 100% !important;
     }
     .save-payment-btn {
-        width: 110% !important;
-        margin: 0 auto;
-        position: relative;
-        left: -5%;
-        border-radius: 0px !important;
+        margin: 20px;
     }
     .web-form {
         margin-bottom: 0px !important;
