@@ -222,6 +222,10 @@ nav {
         padding-top: 10px !important
     }
 
+.mobile-field {
+    margin-top: 10px!important;
+}
+
 .trigger-actions {
     margin-top: 10px !important;
     padding-bottom: 20px;
