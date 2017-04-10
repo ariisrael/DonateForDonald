@@ -38,6 +38,9 @@ $(document).ready(function () {
 
       } else {
         // Switch button to hide tweets
+          var trigger = $('input[name=trigger]').val().trim();
+
+        loadTweets(trigger);
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
         $('main').css('overflow-y', 'hidden');
         $('body').css('overflow-y', 'hidden');
@@ -180,7 +183,6 @@ function noLinkReload() {
     var trigger = getClickedLabel($(this).attr('href'));
     $('input[name="trigger"]').val(trigger);
     $('.js-trigger-text').text(trigger);
-    loadTweets(trigger);
     console.log('Loaded', trigger);
   });
 }
