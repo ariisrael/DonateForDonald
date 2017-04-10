@@ -76,7 +76,8 @@ function analyzeTweet(tweet) {
     .exec((err, users) => {
       users.forEach((user) => {
         Trigger.find({
-          userId: user.id
+          userId: user.id,
+          active: true
         }).exec((err, triggers) => {
           if (err || !triggers || !triggers.length) {
             if (err) {
