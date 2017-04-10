@@ -80,6 +80,9 @@ $(document).ready(function () {
   $('.js-login button').on('click', function () {
     console.log('Login button clicked');
   });
+
+  noLinkReload();
+
   // User clicked tweet tag in drawer
   $('.js-tweet-triggers > .labels > a').on('click', function () {
     var tag = $(this).text().trim();
@@ -169,6 +172,13 @@ function updateTweetCount(num) {
   $('.js-tweet-count').empty();
   var number = '('+ num + ')';
   $('.js-tweet-count').text(number);
+}
+
+function noLinkReload() {
+  $('.js-word-cloud').on('click', 'a', function (event) {
+  event.preventDefault();
+  console.log('Clicked', $(this).text());
+});
 }
 
 function twitterUrl(id) {
