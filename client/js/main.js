@@ -178,7 +178,8 @@ function noLinkReload() {
   $('.js-word-cloud').on('click', 'a', function (event) {
     event.preventDefault();
     var trigger = getClickedLabel($(this).attr('href'));
-    $('input[name=trigger]').val(trigger);
+    $('input[name="trigger"]').val(trigger);
+    $('.js-trigger-text').text(trigger);
     loadTweets(trigger);
     console.log('Loaded', trigger);
   });
