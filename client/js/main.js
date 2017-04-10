@@ -176,9 +176,16 @@ function updateTweetCount(num) {
 
 function noLinkReload() {
   $('.js-word-cloud').on('click', 'a', function (event) {
-  event.preventDefault();
-  console.log('Clicked', $(this).text());
-});
+    event.preventDefault();
+    var trigger = getClickedLabel($(this).attr('href'));
+    $('input[name=trigger]').val(trigger);
+    loadTweets(trigger);
+    console.log('Loaded', trigger);
+  });
+}
+
+function getClickedLabel(text) {
+  return text.replace('?word=', '');
 }
 
 function twitterUrl(id) {
