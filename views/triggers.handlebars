@@ -2,6 +2,16 @@
 
 <div class="ui text container web-form">
   <div class="ui divided items" style="">
+      {{#if_not triggers}}
+      <div class="ui center aligned">
+        <div class="ui text container">
+          <h2 class="ui header no-triggers">
+            You have no triggers. <a href="/">Make some.</a>
+          <h2>
+        </div>
+      </div>
+      {{/if_not}}
+
     {{#each triggers}}
 
     <div class="item">
@@ -10,7 +20,6 @@
       </div>
 
       <div class="content">
-
 
         <div class=" ui right floated horizontal small statistic">
 
@@ -21,7 +30,7 @@
             / tweet
           </div><br>
         </div>
-        
+
         <div class="header trigger-title" >{{this.name}} </div>
         <div class="meta" style="position: relative; top: -10px">
 
@@ -40,9 +49,9 @@
         </div>
         <div class="left floated trigger-actions" style="margin-top: 20px">
           {{#if this.active}}
-          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> 
+          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button>
           {{else}}
-          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button> 
+          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button>
           {{/if}}
           <button class="ui button small icon"><i class="icon write"></i> Edit</button>
           <button class="ui button small primary icon"><i class="icon share"></i> Share</button>

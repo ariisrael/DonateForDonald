@@ -70,7 +70,7 @@ body {
 }
 .site {
     /* Flexbox */
-    
+
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -265,7 +265,7 @@ nav {
     .share-text {
         display: none !important;
     }
-    
+
     .landing-form .left-button {
         display: block !important;
         width: 100% !important;
@@ -359,7 +359,7 @@ nav {
 }
 .drawer-controls span {
     /* Count for tweets */
-    
+
     color: rgba(255, 255, 255, 0.7);
     padding: 0px 5px;
     font-weight: 400
@@ -430,4 +430,7 @@ main {
 }
 body {
     width: 100%;
+}
+.no-triggers {
+  text-align: center;
 }
