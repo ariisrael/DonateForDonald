@@ -37,15 +37,33 @@
         
 </div>
       <div>
-        <a class="ui twitter icon massive fluid button" href="/twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Connect Twitter</a>
+        <a class="ui twitter icon massive fluid button" href="/auth/twitter/social" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Connect Twitter</a>
       </div>
       <div class="nothanks">
-        <a href="/triggers" style="float: right">Skip <i class="ui icon right chevron"></i></a>
+        <a href="" style="float: right">Skip <i class="ui icon right chevron"></i></a>
       </div>
 
       </form>
     </div>
   </main>
+  <script> 
+
+    var rawTrigger = localStorage.getItem('trigger');
+    if(rawTrigger) {
+      var userTrigger = JSON.parse(rawTrigger);
+      jQuery.ajax({
+        type: 'post',
+        url: '/api/triggers',
+        data: userTrigger,
+        success: function() {
+          console.log('Trigger', userTrigger, 'stored');
+          localStorage.clear();
+        },
+        dataType: 'json'
+      })
+    }
+
+  </script>
   <!--
   <footer>
     <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
