@@ -1,3 +1,4 @@
+const app = require('../app')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
@@ -36,7 +37,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, passw
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: '/auth/facebook/callback',
+  callbackURL: app.get('baseUrl') + '/auth/facebook/callback',
   profileFields: ['name', 'email', 'gender', 'location'],
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
@@ -88,7 +89,7 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: '/auth/twitter/callback',
+  callbackURL: app.get('baseUrl') + '/auth/twitter/callback',
   passReqToCallback: true
 }, function(req, accessToken, tokenSecret, profile, done) {
   if (req.user) {
