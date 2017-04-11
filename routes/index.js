@@ -72,18 +72,23 @@ app.get('/auth/facebook/callback', function(req, res, next) {
       if (err) {
         return res.redirect('/login')
       }
-      if (info && info.newUser) {
-        if(!(user.paymentToken)) {
-          return res.redirect('/payment');
-        } else {
-          return res.redirect('/triggers');
-        }
-      } else {
-        return res.redirect('/')
+      if(!(user.paymentToken)) {
+        return res.redirect('/payment');
       }
+      if (!(user.twitter)) {
+        return res.redirect('/social');
+      }
+      return res.redirect('/')
     })
   })(req, res, next);
 });
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/triggers', failureRedirect: '/login' }));
+app.get('/auth/twitter/callback', function(req, res, next) {
+  passport.authenticate('twitter', function(err, user, info) {
+    if (err) {
+      return res.redirect('/account')
+    }
+    return res.redirect('/triggers')
+  })(req, res, next);
+});

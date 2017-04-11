@@ -5,6 +5,10 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 
+const emailUtils = require('../utils/email')
+const forgotEmail = emailUtils.forgotEmail
+const changedEmail = emailUtils.changedEmail
+
 const User = models.User;
 
 exports.index = (req, res) => {
@@ -409,26 +413,10 @@ exports.forgotPost = function(req, res, next) {
       });
     },
     function(token, user, done) {
-      var transporter = nodemailer.createTransport({
-        service: 'Mailgun',
-        auth: {
-          user: process.env.MAILGUN_USERNAME,
-          pass: process.env.MAILGUN_PASSWORD
-        }
-      });
-      var mailOptions = {
-        to: user.email,
-        from: 'support@donatefordonald.org',
-        subject: '✔ Reset your password to Donate For Donald',
-        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-      };
-      transporter.sendMail(mailOptions, function(err) {
-        req.flash('info', { msg: 'An email has been sent to ' + user.email + ' with further instructions.' });
-        res.redirect('/forgot');
-      });
+      forgotEmail(user.name || user.email, user.email, user.passwordResetToken, function(err, data) {
+        if (err) console.error(err)
+        res.redirect('/forgot')
+      })
     }
   ]);
 };
@@ -440,12 +428,12 @@ exports.resetGet = function(req, res) {
   if (req.isAuthenticated()) {
     return res.redirect('/');
   }
-  User.findOne({ passwordResetToken: req.params.token })
+  User.findOne({ passwordResetToken: req.query.token })
     .where('passwordResetExpires').gt(Date.now())
     .exec(function(err, user) {
       if (!user) {
         req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-        return res.redirect('/forgot');
+        return res.redirect('/reset');
       }
       res.render('account/reset', {
         title: 'Password Reset'
@@ -487,24 +475,10 @@ exports.resetPost = function(req, res, next) {
         });
     },
     function(user, done) {
-      var transporter = nodemailer.createTransport({
-        service: 'Mailgun',
-        auth: {
-          user: process.env.MAILGUN_USERNAME,
-          pass: process.env.MAILGUN_PASSWORD
-        }
-      });
-      var mailOptions = {
-        from: 'support@yourdomain.com',
-        to: user.email,
-        subject: 'Your Mega Boilerplate password has been changed',
-        text: 'Hello,\n\n' +
-        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
-      };
-      transporter.sendMail(mailOptions, function(err) {
-        req.flash('success', { msg: 'Your password has been changed successfully.' });
-        res.redirect('/account');
-      });
+      changedEmail(user.name || user.email, user.email, function(err, data) {
+        if (err) console.log(err)
+        res.redirect('/account')
+      })
     }
   ]);
 };
