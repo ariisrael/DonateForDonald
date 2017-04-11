@@ -9,7 +9,7 @@
 
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <div class="field">
-    <input type="text" class="ui input massive" name="email" placeholder="Email">
+    <input type="email" class="ui input massive" name="email" placeholder="Email">
   </div>
   <div class="field">
     <input type="password" name="password" placeholder="Password">
@@ -32,7 +32,69 @@
    
       </div>
   </main>
-
+  <script>
+$('#login-form')
+  .form({
+    on: 'blur',
+    fields: {
+      integer: {
+        identifier  : 'integer',
+        rules: [
+          {
+            type   : 'integer[1..100]',
+            prompt : 'Please enter an integer value'
+          }
+        ]
+      },
+      decimal: {
+        identifier  : 'decimal',
+        rules: [
+          {
+            type   : 'decimal',
+            prompt : 'Please enter a valid decimal'
+          }
+        ]
+      },
+      number: {
+        identifier  : 'number',
+        rules: [
+          {
+            type   : 'number',
+            prompt : 'Please enter a valid number'
+          }
+        ]
+      },
+      email: {
+        identifier  : 'email',
+        rules: [
+          {
+            type   : 'email',
+            prompt : 'Please enter a valid e-mail'
+          }
+        ]
+      },
+      url: {
+        identifier  : 'url',
+        rules: [
+          {
+            type   : 'url',
+            prompt : 'Please enter a url'
+          }
+        ]
+      },
+      regex: {
+        identifier  : 'regex',
+        rules: [
+          {
+            type   : 'regExp[/^[a-z0-9_-]{4,16}$/]',
+            prompt : 'Please enter a 4-16 letter username'
+          }
+        ]
+      }
+    }
+  })
+;
+</script>
   <!--
   <footer>
     <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
