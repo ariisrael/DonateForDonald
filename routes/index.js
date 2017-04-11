@@ -86,4 +86,11 @@ app.get('/auth/facebook/callback', function(req, res, next) {
 });
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/triggers', failureRedirect: '/login' }));
+app.get('/auth/twitter/callback', function(req, res, next) {
+  passport.authenticate('twitter', function(err, user, info) {
+    if (err) {
+      return res.redirect('/account')
+    }
+    return res.redirect('/triggers')
+  })(req, res, next);
+});
