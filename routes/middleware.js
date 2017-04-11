@@ -1,4 +1,4 @@
-var app = require('../index')
+var app = require('../app')
 const url = require("url")
 const User = require('../models/user')
 

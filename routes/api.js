@@ -1,6 +1,6 @@
 const express = require('express');
 
-const app = require('../index');
+const app = require('../app');
 const controllers = require('../controllers');
 
 const TriggerController = controllers.triggers;

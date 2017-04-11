@@ -1,4 +1,4 @@
-const app = require('../index');
+const app = require('../app');
 const controllers = require('../controllers');
 
 const express = require('express');
@@ -91,4 +91,3 @@ app.get('/auth/google/callback', passport.authenticate('google', { successRedire
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
 app.get('/twitter/social', passport.authenticate('twitter', { successRedirect: '/triggers', failureRedirect: '/login' }));
-

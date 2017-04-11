@@ -1,4 +1,4 @@
-var app = require('../index')
+var app = require('../app')
 var session = require('express-session')
 var cookieParser = require('cookie-parser')
 var passport = require('passport')

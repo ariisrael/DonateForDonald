@@ -7,4 +7,4 @@ if (process.env.NODE_ENV !== 'production') {
 const app = require('./app')
 module.exports = app
 
-require('./app/server')
+require('./settings')
