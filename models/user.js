@@ -18,6 +18,10 @@ const UserSchema = new Schema({
   emailConfirmed: { type: Boolean, default: false },
   facebook: String,
   twitter: String,
+  twitterCreds: {
+    accessToken: String,
+    accessTokenSecret: String
+  },
   google: String,
   admin: { type: Boolean, default: false },
   monthlyLimit: { type: Number, min: 0 },

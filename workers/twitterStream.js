@@ -105,7 +105,7 @@ function checkUserTriggers(user, tweet) {
   Trigger.find({
     userId: user.id,
     active: true
-  }).exec((err, triggers) => {
+  }).populate('charityId').exec((err, triggers) => {
     if (err || !triggers || !triggers.length) {
       if (err) {
         return console.log('error grabbing triggers', err)
