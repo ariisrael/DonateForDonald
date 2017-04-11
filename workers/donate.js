@@ -41,9 +41,10 @@ function donationRequest(user, trigger, tweet, donation) {
 
 function makeDonation(user, trigger, tweet) {
   donation = new Donation({
-    userId: user.id,
-    triggerId: trigger.id,
+    userId: user._id,
+    triggerId: trigger._id,
     amount: trigger.amount,
+    charityId: trigger.charityId,
     tweetId: tweet.id
   })
   donation.save((err, donation) => {

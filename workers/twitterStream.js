@@ -66,6 +66,8 @@ function saveTweet(tweet) {
 }
 
 function analyzeTweet(tweet) {
+  var date = new Date();
+  var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
 
   User
     .find({
@@ -75,41 +77,63 @@ function analyzeTweet(tweet) {
     })
     .exec((err, users) => {
       users.forEach((user) => {
-        Trigger.find({
-          userId: user.id,
-          active: true
-        }).exec((err, triggers) => {
-          if (err || !triggers || !triggers.length) {
-            if (err) {
-              return console.log('error grabbing triggers', err)
-            } else {
-              return console.log('there are no triggers')
-            }
-          }
-
-          var donation;
-          for (trigger in triggers) {
-            // loop through the keywords
-            for (keyword in trigger.keywords) {
-              var re = new RegExp(keyword)
-              // check if there's a match
-              // a potential optimization is to create only
-              // a single regex for all keywords
-              if (re.exec(tweet.text)) {
-                donation = makeDonation(user, trigger, tweet)
-                // on a single tweet, we only want to donate once per user,
-                // so we break out of the loop
-                break
+        if (user.monthlyLimit) {
+          Donation.aggregate([{
+              $match: {
+                createdAt: { $gte: firstDayOfMonth },
+                userId: user._id
               }
+            }, {
+              $group: {
+                _id: "total",
+                amount: { $sum: "$amount" }
+              }
+            }], (err, result) => {
+            if (result[0].amount < user.monthlyLimit) {
+              checkUserTriggers(user, tweet)
             }
-            // similarly, we break out of this loop if we have a donation already
-            if (donation) {
-              break
-            }
-          }
-        })
-      })
+          })
+        } else {
+          checkUserTriggers(user, tweet)
+        }
   })
 
   popularTerms()
+}
+
+function checkUserTriggers(user, tweet) {
+  Trigger.find({
+    userId: user.id,
+    active: true
+  }).exec((err, triggers) => {
+    if (err || !triggers || !triggers.length) {
+      if (err) {
+        return console.log('error grabbing triggers', err)
+      } else {
+        return console.log('there are no triggers')
+      }
+    }
+
+    var donation;
+    for (trigger in triggers) {
+      // loop through the keywords
+      for (keyword in trigger.keywords) {
+        var re = new RegExp(keyword)
+        // check if there's a match
+        // a potential optimization is to create only
+        // a single regex for all keywords
+        if (re.exec(tweet.text)) {
+          donation = makeDonation(user, trigger, tweet)
+          // on a single tweet, we only want to donate once per user,
+          // so we break out of the loop
+          break
+        }
+      }
+      // similarly, we break out of this loop if we have a donation already
+      if (donation) {
+        break
+      }
+    }
+  })
+})
 }
