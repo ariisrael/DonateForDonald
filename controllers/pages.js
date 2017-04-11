@@ -3,8 +3,11 @@
  */
 
 const models = require('../models');
+const mongoose = require('mongoose');
 const Trigger = models.Trigger;
 const Charity = models.Charity;
+const Donation = models.Donation;
+
 
 exports.landing = function(req, res) {
   res.render('landing', {
@@ -82,7 +85,17 @@ exports.triggers = function(req, res) {
       if (triggers && triggers.length) {
         response.triggers = triggers.reverse();
       }
-      res.render('triggers', response);
+      var id = new mongoose.Schema.ObjectId(req.user.id);
+      Donation.find({ userId: id }).exec((err, other) => {
+        console.log(err);
+        response.donations = other;
+        if(!response.donations) {
+          response.donations = [];
+        }
+        console.log(response);
+        res.render('triggers', response);
+      })
+      
   });
 }
 

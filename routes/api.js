@@ -23,7 +23,7 @@ api.get('/users', ADMIN_ONLY, UserController.index);
 api.get('/charities', CharityController.index);
 api.get('/tweets', TweetController.index);
 api.get('/payments', ADMIN_ONLY, PaymentController.index);
-api.get('/donations', ADMIN_ONLY, DonationController.index);
+api.get('/donations', LOGIN_ONLY, DonationController.index);
 api.get('/terms', TermsController.index)
 
 api.get('/tweets/search', TweetController.find);

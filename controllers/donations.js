@@ -3,11 +3,22 @@ const Donation = models.Donation;
 
 module.exports = {
     index: (req, res) => {
-        var query = req.locals.query;
+        if(!req.user.admin) {
+            console.log(req.user);
+            Donation.find({ userId: req.user._id }, function(err, result) {
+                console.log(result);
+                if(err) return console.log(err);
+                res.json(result);
+            })
+            console.log('not admin')
+        } else {
+var query = req.locals.query;
         Donation.find({}, (err, donations) => {
             if(err) return console.error(err);
             res.json(donations);
         });
+        }
+        
     },
     update: (req, res) => {
         var query = req.locals.query;
