@@ -153,20 +153,12 @@ function landingDonate() {
   var errors = validateTrigger(userTrigger);
   if(!errors) {
     if (user) { // User signed in, store in db
-      console.log('User logged in');
-      jQuery.post({
-        url: '/api/triggers',
-        data: userTrigger,
-        success: function (data) {
-          console.log('Posted', data);
-          if (user.paymentToken || user.monthlyLimit) {
-            window.location.replace('/social');
+      localStorage.setItem('trigger', JSON.stringify(userTrigger));
+if (user.paymentToken || user.monthlyLimit) {
+        window.location.replace('/social');
           } else {
-            window.location.replace('/payment');
+        window.location.replace('/payment');
           }
-       },
-        dataType: "json"
-      });
     }
     else { // The user is not signed in
       localStorage.setItem('trigger', JSON.stringify(userTrigger));
@@ -197,6 +189,8 @@ function validateTrigger(trigger) {
       id: "",
       prompt: "Type a trigger"
     });
+        $('.js-select-trigger input').addClass('error');
+
   }
   if(!trigger.amount) {
     errors.push({
