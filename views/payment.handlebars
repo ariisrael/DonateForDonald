@@ -73,21 +73,7 @@
   <script src="//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js"></script>
 
   <script>
-    var rawTrigger = localStorage.getItem('trigger');
-    if(rawTrigger) {
-      var userTrigger = JSON.parse(rawTrigger);
-      jQuery.ajax({
-        type: 'post',
-        url: '/api/triggers',
-        data: userTrigger,
-        success: function() {
-          console.log('Trigger', userTrigger, 'stored');
-          localStorage.clear();
-          window.location.replace("/social");
-        },
-        dataType: 'json'
-      })
-    }
+   
 
     Panda.init('pk_test_DGoDgSY4_9eNPYwXWQyNKg', 'payment-form');
 
@@ -108,7 +94,7 @@
         data: data,
         success: function() {
           console.log('Token', cardToken, 'stored');
-          window.location.replace("/triggers");
+          window.location.replace("/social");
         },
         dataType: 'json'
       })

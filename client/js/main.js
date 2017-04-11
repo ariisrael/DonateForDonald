@@ -101,7 +101,10 @@ $(document).ready(function () {
   $('.js-select-trigger').on('keyup', function (e) {
     if (e.which === 13) {
       var term = $('input[name=trigger]').val()
+      if($('.js-tweet-drawer').hasClass('visible')) {
       loadTweets(term);
+
+      }
       console.log('Selected', term);
     }
   });
@@ -183,6 +186,10 @@ function noLinkReload() {
     var trigger = getClickedLabel($(this).attr('href'));
     $('input[name="trigger"]').val(trigger);
     $('.js-trigger-text').text(trigger);
+          if($('.js-tweet-drawer').hasClass('visible')) {
+      loadTweets(term);
+
+      }
     console.log('Loaded', trigger);
   });
 }
