@@ -38,7 +38,7 @@ $(document).ready(function () {
 
       } else {
         // Switch button to hide tweets
-          var trigger = $('input[name=trigger]').val().trim();
+        var trigger = $('input[name=trigger]').val().trim();
 
         loadTweets(trigger);
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
@@ -101,8 +101,8 @@ $(document).ready(function () {
   $('.js-select-trigger').on('keyup', function (e) {
     if (e.which === 13) {
       var term = $('input[name=trigger]').val()
-      if($('.js-tweet-drawer').hasClass('visible')) {
-      loadTweets(term);
+      if ($('.js-tweet-drawer').hasClass('visible')) {
+        loadTweets(term);
 
       }
       console.log('Selected', term);
@@ -116,9 +116,9 @@ $(document).ready(function () {
 
 function loadTweets(term) {
   var url = 'api/tweets/search?q=' + encodeURIComponent(term);
-  jQuery.getJSON(url, function(data) {
+  jQuery.getJSON(url, function (data) {
     $('.tweets').empty();
-    if(data.tweets && data.tweets.length !== 0) {
+    if (data.tweets && data.tweets.length !== 0) {
       var tweetsHTML = ""
       for (var i = 0; i < data.tweets.length; i++) {
         tweetsHTML += tweetHtml(data.tweets[i]._id)
@@ -150,34 +150,64 @@ function landingDonate() {
     "name": trigger,
     "amount": amount
   }
-  console.log(user)
-  if(user) { // User signed in, store in db
-    console.log('User logged in');
-    jQuery.post({
+  var errors = validateTrigger(userTrigger);
+  if(!errors) {
+    if (user) { // User signed in, store in db
+      console.log('User logged in');
+      jQuery.post({
         url: '/api/triggers',
         data: userTrigger,
-        success: function(data) {
+        success: function (data) {
           console.log('Posted', data);
-          if(user.paymentToken || user.monthlyLimit) {
+          if (user.paymentToken || user.monthlyLimit) {
             window.location.replace('/social');
           } else {
             window.location.replace('/payment');
           }
-        },
+       },
         dataType: "json"
       });
-  }
-  else { // The user is not signed in
-    localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    window.location.replace("/login");
+    }
+    else { // The user is not signed in
+      localStorage.setItem('trigger', JSON.stringify(userTrigger));
+      window.location.replace("/login");
+    }
+  } else {
+    console.log('errors!');
   }
 }
 
 function updateTweetCount(num) {
   console.log(num)
   $('.js-tweet-count').empty();
-  var number = '('+ num + ')';
+  var number = '(' + num + ')';
   $('.js-tweet-count').text(number);
+}
+
+function validateTrigger(trigger) {
+  var errors = [];
+  if(!trigger.charityId || trigger.charityId.length !== 10) {
+    errors.push({
+      id: "",
+      prompt: "Choose a charity"
+    });
+  } 
+  if(!trigger.name || trigger.name.length === 0) {
+    errors.push({
+      id: "",
+      prompt: "Type a trigger"
+    });
+  }
+  if(!trigger.amount) {
+    errors.push({
+      id: "",
+      prompt: "Select an amount"
+    });
+  }
+  if(errors.length === 0) {
+    return false;
+  }
+  return errors;
 }
 
 function noLinkReload() {
@@ -186,10 +216,10 @@ function noLinkReload() {
     var trigger = getClickedLabel($(this).attr('href'));
     $('input[name="trigger"]').val(trigger);
     $('.js-trigger-text').text(trigger);
-          if($('.js-tweet-drawer').hasClass('visible')) {
+    if ($('.js-tweet-drawer').hasClass('visible')) {
       loadTweets(term);
 
-      }
+    }
     console.log('Loaded', trigger);
   });
 }
