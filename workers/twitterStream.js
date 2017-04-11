@@ -96,6 +96,7 @@ function analyzeTweet(tweet) {
         } else {
           checkUserTriggers(user, tweet)
         }
+      })
   })
 
   popularTerms()
