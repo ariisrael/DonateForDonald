@@ -9,6 +9,7 @@ const flash = require('express-flash');
 const compression = require('compression');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const _ = require('lodash');
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -52,7 +53,7 @@ const handlebars = exphbs.create({
       return JSON.stringify(object);
     },
     if_not: function(a, options) {
-      if (a) {
+      if (!a || _.isEmpty(a)) {
         return options.fn(this)
       }
     }

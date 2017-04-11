@@ -79,7 +79,6 @@ exports.triggers = function(req, res) {
       if (err) {
         console.error(err);
       }
-      console.log(triggers)
       if (triggers && triggers.length) {
         response.triggers = triggers.reverse();
       }
