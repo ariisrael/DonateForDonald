@@ -114,6 +114,10 @@ a.forgot-pass:hover {
 }
 /* Overrides */
 
+.message-text {
+    max-height: 200px;
+}
+
 .primary {
     background-color: #00aced !important;
 }
