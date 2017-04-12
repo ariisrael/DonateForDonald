@@ -10,6 +10,7 @@
   $('.js-close-nag').on('click', function () {
     $('.js-email-nag').css('display', 'none');
   });
+
 </script>
 {{/if_not}}
 <div class="ui text container web-form" style="margin-top: 40px">
@@ -61,12 +62,21 @@
           <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> {{else}}
           <button class="ui button small icon green"><i class="icon power"></i> Turn On</button> {{/if}}
           <button class="ui button small js-edit-button icon"><i class="icon write"></i> Edit</button>
-          <button class="ui button small primary icon"><i class="icon share"></i> Share</button>
+          <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>' data-position="right center"><i class="icon share"></i> Share</button>
         </div>
       </div>
     </div>
     {{/each}}
   </div>
+
+
+
+  <script>
+    $(document).ready(function () {
+      $('.js-share-button').popup();
+    })
+
+  </script>
 
   <script>
     $('.js-edit-button').on('click', function () {
@@ -102,16 +112,15 @@
           </div>
         </div>
       </form>
+    </div>
+    <div class="actions">
+      <div class="ui basic deny button">
+        Cancel
       </div>
-      <div class="actions">
-        <div class="ui basic deny button">
-          Cancel
-        </div>
-        <div class="ui positive right labeled icon button">
-          Save Changes
-          <i class="checkmark icon"></i>
-        </div>
+      <div class="ui positive right labeled icon button">
+        Save Changes
+        <i class="checkmark icon"></i>
       </div>
     </div>
   </div>
-  
+</div>
