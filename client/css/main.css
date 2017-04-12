@@ -111,6 +111,8 @@ a.forgot-pass:hover {
 }
 .main-landing {
     height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 /* Overrides */
 
