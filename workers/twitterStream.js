@@ -135,6 +135,5 @@ function checkUserTriggers(user, tweet) {
         break
       }
     }
-
   })
 }
