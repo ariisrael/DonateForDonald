@@ -226,6 +226,10 @@ nav {
         padding-top: 10px !important
     }
 
+    .main-landing {
+        overflow-y: auto !important;
+    }
+
 .mobile-field {
     margin-top: 10px!important;
 }
