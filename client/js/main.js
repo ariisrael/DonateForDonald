@@ -142,7 +142,7 @@ function landingDonate() {
   if (!errors) {
     if (user) { // User signed in, store in db
       localStorage.setItem('trigger', JSON.stringify(userTrigger));
-      if (user.paymentToken || user.monthlyLimit) {
+      if (user.paymentToken) {
         window.location.replace('/social');
       } else {
         window.location.replace('/payment');
