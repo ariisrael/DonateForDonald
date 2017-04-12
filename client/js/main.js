@@ -86,16 +86,10 @@ $(document).ready(function () {
 
   noLinkReload();
 
-  // User clicked tweet tag in drawer
-  $('.js-tweet-triggers > .labels > a').on('click', function () {
-    var tag = $(this).text().trim();
-    console.log(tag + ' tag clicked');
-  });
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('click', 'div.item', function () {
     var term = $(this).text().trim();
     loadTweets(term);
-    console.log('Selected', term);
   });
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('keyup', function (e) {
@@ -103,7 +97,6 @@ $(document).ready(function () {
       var term = $('input[name=trigger]').val()
       if ($('.js-tweet-drawer').hasClass('visible')) {
         loadTweets(term);
-
       }
     }
   });
@@ -204,17 +197,20 @@ function noLinkReload() {
   $('.js-word-cloud').on('click', 'a', function (event) {
     event.preventDefault();
     var trigger = getClickedLabel($(this).attr('href'));
-    $('input[name="trigger"]').val(trigger);
-    $('.js-trigger-text').text(trigger);
-    if ($('.js-tweet-drawer').hasClass('visible')) {
-      loadTweets(term);
-
+    if(trigger) {
+      $('input[name="trigger"]').val(trigger);
+      $('.js-trigger-text').text(trigger);
+      if ($('.js-tweet-drawer').hasClass('visible')) {
+        loadTweets(term);
+      }
     }
   });
 }
 
 function getClickedLabel(text) {
-  return text.replace('?word=', '');
+  if(text) {
+    return text.replace('?word=', '');
+  }
 }
 
 function twitterUrl(id) {
