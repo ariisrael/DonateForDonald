@@ -37,7 +37,11 @@
 
       </div>
       <div>
+        {{#if user.twitter}}
+        <a class="ui twitter icon massive fluid button connect-twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Continue</a>
+        {{else}}
         <a class="ui twitter icon massive fluid button connect-twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Connect Twitter</a>
+        {{/if}}
       </div>
       <a class="skip-link" style="cursor: pointer;float: right">Skip <i class="ui icon right chevron"></i></a>
 
@@ -45,22 +49,30 @@
     </div>
   </main>
   <script>
+    var redirectUrl = "/auth/twitter/callback";
+    if(user.twitter) {
+      redirectUrl = "/triggers";
+    }
     $('.connect-twitter').on('click', function (event) {
       event.preventDefault();
       var rawTrigger = localStorage.getItem('trigger');
-      var userTrigger = JSON.parse(rawTrigger);
-      userTrigger.social = true;
-      jQuery.ajax({
-        type: 'post',
-        url: '/api/triggers',
-        data: userTrigger,
-        success: function () {
-          console.log('Trigger', userTrigger, 'stored');
-          localStorage.clear();
-          window.location = "/auth/twitter/callback";
-        },
-        dataType: 'json'
-      });
+      if(rawTrigger) {
+        var userTrigger = JSON.parse(rawTrigger);
+        userTrigger.social = true;
+        jQuery.ajax({
+          type: 'post',
+          url: '/api/triggers',
+          data: userTrigger,
+          success: function () {
+            console.log('Trigger', userTrigger, 'stored');
+            localStorage.clear();
+            window.location = redirectUrl;
+          },
+          dataType: 'json'
+        });
+      } else {
+        window.location = '/triggers'
+      }
     });
     $('.skip-link').on('click', function (event) {
       event.preventDefault();

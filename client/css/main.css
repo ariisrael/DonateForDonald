@@ -63,9 +63,8 @@ body {
 
 .trigger-title {
     font-family: 'Bangers', cursive !important;
-
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     font-size: 26px !important;
 }
 .site {
