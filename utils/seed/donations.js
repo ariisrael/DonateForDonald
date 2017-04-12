@@ -23,17 +23,17 @@ db.once('open', function() {
                 console.log('trigger finding err', err)
             }
             users.forEach((user) => {
-                Trigger.find({userId: user.id}).populate('charityId').exec((err, triggers) => {
+                Trigger.find({userId: user.id}).exec((err, triggers) => {
                     if (err) {
                         console.log('trigger finding err', err)
                     }
                     triggers.forEach((trigger) => {
                         tweets.forEach((tweet) => {
                             var d = new Donation({
-                              userId: user.id, 
+                              userId: user.id,
                               triggerId: trigger.id,
                               amount: trigger.amount,
-                              charityId: trigger.charityId.id,
+                              charityId: trigger.charityId,
                               tweetId: tweet.id
                             })
                             console.log(d)
