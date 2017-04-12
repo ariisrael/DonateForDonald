@@ -12,13 +12,13 @@ module.exports = {
             })
             console.log('not admin')
         } else {
-var query = req.locals.query;
+        var query = req.locals.query;
         Donation.find({}, (err, donations) => {
             if(err) return console.error(err);
             res.json(donations);
         });
         }
-        
+
     },
     update: (req, res) => {
         var query = req.locals.query;

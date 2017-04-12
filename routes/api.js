@@ -16,6 +16,9 @@ const USER_ONLY = UserController.ensureAuthorized;
 const LOGIN_ONLY = UserController.ensureAuthenticated;
 const USER_QUERY = UserController.userQuery
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 var api = express.Router();
 
 api.get('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.index);
@@ -27,6 +30,7 @@ api.get('/donations', LOGIN_ONLY, DonationController.index);
 api.get('/terms', TermsController.index)
 
 api.get('/tweets/search', TweetController.find);
+api.post('/tweets/count', TweetController.count);
 api.get('/triggers/:id', TriggerController.read);
 api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);
 api.get('/charities/:id', CharityController.read);

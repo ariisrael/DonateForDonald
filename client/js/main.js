@@ -104,7 +104,7 @@ $(document).ready(function () {
 });
 
 function loadTweets(term) {
-  var url = 'api/tweets/search?q=' + encodeURIComponent(term);
+  var url = '/api/tweets/search?q=' + encodeURIComponent(term);
   jQuery.getJSON(url, function (data) {
     $('.tweets').empty();
     if (data.tweets && data.tweets.length !== 0) {
