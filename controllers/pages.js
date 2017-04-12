@@ -88,6 +88,7 @@ exports.triggers = function(req, res) {
       response.triggers = {}
       triggers.forEach((trigger) => {
         trigger.donations = 0
+        trigger.tweetsCount = 0
         response.triggers[trigger._id] = trigger
       })
       Donation.aggregate([
@@ -100,12 +101,16 @@ exports.triggers = function(req, res) {
             _id: "$triggerId",
             amount: {
               $sum: "$amount"
+            },
+            count: {
+              $sum: 1
             }
           }
         }
       ], (err, results) => {
         results.forEach((result) => {
           response.triggers[result._id].donations = result.amount
+          response.triggers[result._id].tweetsCount = result.count
         })
         res.render('triggers', response);
       })

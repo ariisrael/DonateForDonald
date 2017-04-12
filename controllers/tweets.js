@@ -47,28 +47,6 @@ module.exports = {
         })
       })
     },
-    count: (req, res) => {
-      /*
-        This is similar to the search API, but it only gets the count
-      */
-      var triggers = req.body
-      var response = {}
-
-      async.eachOfSeries(triggers, (name, triggerId, next) => {
-        var params = { $text : { $search : '"' + name + '""' } }
-        Tweet.count(params, (err, count) => {
-          if (err) {
-            console.error(err)
-          }
-          console.log(params)
-          console.log(count)
-          response[triggerId] = count
-          next()
-        })
-      }, function(err) {
-        res.json(response)
-      })
-    },
     create: (req, res) => {
         var tweet = new Tweet(req.body);
         tweet.save((err) => {

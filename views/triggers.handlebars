@@ -51,12 +51,8 @@
         </div>
 
         <div class="extra" style="position: relative; top: -15px">
-          <div style="display: inline-block" class="js-tweet-count-container">
-
-            <i class="blue twitter icon"></i>
-            <span class='js-tweet-count'>
-              <i class="fa fa-cog fa-spin fa-fw"></i>
-            </span> tweets
+          <div style="display: inline-block">
+            <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
           </div>
           <div style="display: inline-block">
             <i class="green money icon"></i> ${{this.donations}} donated
@@ -77,22 +73,3 @@
     {{/each}}
   </div>
 </div>
-
-<script>
-  $(document).ready(function() {
-    var triggers = {{{toJSON triggers}}}
-    var terms = {}
-    for (var triggerId in triggers) {
-      var trigger = triggers[triggerId]
-      terms[triggerId] = trigger.name
-    }
-
-    var url = '/api/tweets/count'
-    jQuery.post(url, terms, function(counts){
-      for (var triggerId in counts) {
-        var count = counts[triggerId]
-        $('.js-trigger-id-' + triggerId + ' .js-tweet-count').text(count)
-      }
-    })
-  })
-</script>
