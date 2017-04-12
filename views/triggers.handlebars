@@ -1,6 +1,20 @@
 {{> header}}
-
-<div class="ui text container web-form">
+      {{#if_not user.emailConfirmed }}
+<div class="ui inline js-email-nag" style="width:100%; padding: 10px; background-color: #1dcaff; color: #fff">
+  <div class="ui text container">
+  <p style="text-align: center">
+    Please confirm your email to start donating or <a href="#" style="color: #fff; text-decoration: underline; margin-right: 10px">request a new link</a> <a href="#" style="color: #f5f5f5;"><i class="close icon js-close-nag"></i></a>
+  </p>
+  </div>
+</div>
+<script>
+  $('.js-close-nag').on('click', function() {
+    $('.js-email-nag').css('display', 'none');
+  });
+  </script>
+  {{/if_not}}
+    
+<div class="ui text container web-form" style="margin-top: 40px">
   <div class="ui divided items" style="">
     {{#if_not triggers}}
       <div class="ui center aligned">
