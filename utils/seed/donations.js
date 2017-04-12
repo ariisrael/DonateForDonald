@@ -30,10 +30,10 @@ db.once('open', function() {
           triggers.forEach((trigger) => {
             tweets.forEach((tweet) => {
               var d = new Donation({
-                userId: user._id,
-                triggerId: trigger._id,
+                userId: user.id,
+                triggerId: trigger.id,
                 amount: trigger.amount,
-                charityId: trigger.charityId._id,
+                charityId: trigger.charityId.id,
                 tweetId: tweet.id
               })
               console.log(d)
