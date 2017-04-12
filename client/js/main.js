@@ -1,3 +1,7 @@
+$(document).click(function() {
+    document.activeElement.blur();
+});
+
 $(document).ready(function () {
   // Toggle amount selector buttons between active/inactive
   $(".toggle")
