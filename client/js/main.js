@@ -105,12 +105,10 @@ $(document).ready(function () {
         loadTweets(term);
 
       }
-      console.log('Selected', term);
     }
   });
   // User selected a charity from dropdown
   $('.js-select-charity .item').on('click', function () {
-    console.log('Selected', $(this).text().trim());
   });
 });
 
@@ -135,7 +133,6 @@ function loadTweets(term) {
 }
 
 function updateTweetTerm(term) {
-  console.log('Updating tweet term to', term);
   $('.js-tweet-term').empty();
   $('.js-tweet-term').text(term);
 }
@@ -151,21 +148,20 @@ function landingDonate() {
     "amount": amount
   }
   var errors = validateTrigger(userTrigger);
-  if(!errors) {
+  if (!errors) {
     if (user) { // User signed in, store in db
       localStorage.setItem('trigger', JSON.stringify(userTrigger));
-if (user.paymentToken || user.monthlyLimit) {
+      if (user.paymentToken || user.monthlyLimit) {
         window.location.replace('/social');
-          } else {
+      } else {
         window.location.replace('/payment');
-          }
+      }
     }
     else { // The user is not signed in
       localStorage.setItem('trigger', JSON.stringify(userTrigger));
       window.location.replace("/login");
     }
   } else {
-    console.log('errors!');
   }
 }
 
@@ -178,27 +174,27 @@ function updateTweetCount(num) {
 
 function validateTrigger(trigger) {
   var errors = [];
-  if(!trigger.charityId || trigger.charityId.length !== 10) {
+  if (!trigger.charityId || trigger.charityId.length !== 10) {
     errors.push({
       id: "",
       prompt: "Choose a charity"
     });
-  } 
-  if(!trigger.name || trigger.name.length === 0) {
+  }
+  if (!trigger.name || trigger.name.length === 0) {
     errors.push({
       id: "",
       prompt: "Type a trigger"
     });
-        $('.js-select-trigger input').addClass('error');
+    $('.js-select-trigger input').addClass('error');
 
   }
-  if(!trigger.amount) {
+  if (!trigger.amount) {
     errors.push({
       id: "",
       prompt: "Select an amount"
     });
   }
-  if(errors.length === 0) {
+  if (errors.length === 0) {
     return false;
   }
   return errors;
@@ -214,7 +210,6 @@ function noLinkReload() {
       loadTweets(term);
 
     }
-    console.log('Loaded', trigger);
   });
 }
 
