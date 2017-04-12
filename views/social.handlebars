@@ -21,9 +21,9 @@
       </h1>
       <div class="ui subheader">
         When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given
-        more to charity than he ever has - and tag the charity too. 
+        more to charity than he ever has - and tag the charity too.
       </div>
-      <div class="social-tweet"style="font-size: 16px; margin-top: 20px; padding: 20px 20px; border-radius: 3px; border: 1px solid #eee;"><span>
+      <div class="social-tweet" style="font-size: 16px; margin-top: 20px; padding: 20px 20px; border-radius: 3px; border: 1px solid #eee;"><span>
         Donated to 
           <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px;">
             <i class="icon heart"></i> Charity
@@ -32,22 +32,20 @@
            <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px">
             <i class="icon left quote"></i> Trigger
           </a>
-          <span><a href="#" style="padding-top: 10px; display: inline-block">#DonateForDonald</a></span> 
-          </span>
-        
-</div>
+          <span><a href="#" style="padding-top: 10px; display: inline-block">#DonateForDonald</a></span>
+        </span>
+
+      </div>
       <div>
         <a class="ui twitter icon massive fluid button connect-twitter" style="margin: 40px auto 40px auto; font-weight: 400"><i class="icon twitter"></i> Connect Twitter</a>
       </div>
-      <div class="nothanks">
-        <a class="skip-link" style="float: right">Skip <i class="ui icon right chevron"></i></a>
-      </div>
+      <a class="skip-link" style="cursor: pointer;float: right">Skip <i class="ui icon right chevron"></i></a>
 
       </form>
     </div>
   </main>
-  <script> 
-    $('.connect-twitter').on('click', function(event) {
+  <script>
+    $('.connect-twitter').on('click', function (event) {
       event.preventDefault();
       var rawTrigger = localStorage.getItem('trigger');
       var userTrigger = JSON.parse(rawTrigger);
@@ -56,7 +54,7 @@
         type: 'post',
         url: '/api/triggers',
         data: userTrigger,
-        success: function() {
+        success: function () {
           console.log('Trigger', userTrigger, 'stored');
           localStorage.clear();
           window.location = "/auth/twitter/callback";
@@ -64,26 +62,26 @@
         dataType: 'json'
       });
     });
-    $('.skip-link').on('click', function(event) {
+    $('.skip-link').on('click', function (event) {
       event.preventDefault();
-var rawTrigger = localStorage.getItem('trigger');
-    if(rawTrigger) {
-      var userTrigger = JSON.parse(rawTrigger);
-      jQuery.ajax({
-        type: 'post',
-        url: '/api/triggers',
-        data: userTrigger,
-        success: function() {
-          console.log('Trigger', userTrigger, 'stored');
-          localStorage.clear();
-          window.location = "/triggers";
-        },
-        dataType: 'json'
-      })
-    }
+      var rawTrigger = localStorage.getItem('trigger');
+      if (rawTrigger) {
+        var userTrigger = JSON.parse(rawTrigger);
+        jQuery.ajax({
+          type: 'post',
+          url: '/api/triggers',
+          data: userTrigger,
+          success: function () {
+            console.log('Trigger', userTrigger, 'stored');
+            localStorage.clear();
+            window.location = "/triggers";
+          },
+          dataType: 'json'
+        });
+      } else {
+        window.location = "/triggers";
+      }
     });
-    
-
   </script>
   <!--
   <footer>
