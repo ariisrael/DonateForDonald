@@ -28,9 +28,6 @@ $(document).ready(function () {
     .on('focus', function () {
       // Clear placeholder text when user clicks input
       $(this).prop("placeholder", "");
-	$(document).click(function() {
-    		document.activeElement.blur();
-	});
     });
   // User clicked 'View Tweets'
   $('.js-tweets')
@@ -92,9 +89,6 @@ $(document).ready(function () {
   $('.js-select-trigger').on('click', 'div.item', function () {
     var term = $(this).text().trim();
     loadTweets(term);
-	$(document).click(function() {
-    		document.activeElement.blur();
-	});
   });
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('keyup', function (e) {
@@ -107,9 +101,7 @@ $(document).ready(function () {
   });
   // User selected a charity from dropdown
   $('.js-select-charity .item').on('click', function () {
-	$(document).click(function() {
-    		document.activeElement.blur();
-	});
+
   });
 });
 
