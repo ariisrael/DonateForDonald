@@ -77,11 +77,9 @@ $(document).ready(function () {
 
   // User clicked 'donate' button
   $('.js-donate button').on('click', function () {
-    console.log('Donate button clicked');
   })
   // User clicked 'login' button
   $('.js-login button').on('click', function () {
-    console.log('Login button clicked');
   });
 
   noLinkReload();
@@ -159,7 +157,6 @@ function landingDonate() {
 }
 
 function updateTweetCount(num) {
-  console.log(num)
   $('.js-tweet-count').empty();
   var number = '(' + num + ')';
   $('.js-tweet-count').text(number);
