@@ -25,7 +25,7 @@
     </div>
     {{/if_not}} {{#each triggers}}
 
-    <div class="item js-trigger-id-{{this.id}}">
+    <div class="item js-trigger-item js-trigger-id-{{this.id}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
         <img src="{{this.charityId.image}}">
       </div>
@@ -58,9 +58,20 @@
 
         </div>
         <div class="left floated trigger-actions" style="margin-top: 20px">
-          {{#if this.active}}
-          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> {{else}}
-          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button> {{/if}}
+          <button class="ui button small icon red js-active-button
+            js-disable {{#if_not this.active}}hide{{/if_not}}"
+            data-id="{{this.id}}">
+            <i class="icon power"></i>
+            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+            Turn Off
+          </button>
+          <button class="ui button small icon green js-active-button
+            js-enable {{#if this.active}}hide{{/if}}"
+            data-id="{{this.id}}">
+            <i class="icon power"></i>
+            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+            <span class="text"> Turn On</span>
+          </button>
           <button class="ui button small js-edit-button icon"><i class="icon write"></i> Edit</button>
           <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
             data-position="right center"><i class="icon share"></i> Share</button>
@@ -71,17 +82,52 @@
   </div>
 
 
-
   <script>
     $(document).ready(function () {
-      $('.js-share-button').popup();
-    })
-  </script>
+      function updateTrigger(id, data, callback) {
+        var url = '/api/triggers/' + id
+        jQuery.ajax({
+          type: 'put',
+          url: url,
+          data: data,
+        })
+        .done(function(data, textStatus, jqXHR) {
+          callback(null, data)
+        })
+        .fail(function(data, textStatus, errorThrown) {
+          callback(errorThrown, data)
+        })
+      }
 
-  <script>
-    $('.js-edit-button').on('click', function () {
-      $('.ui.modal').modal('show');
-    });
+      $('.js-share-button').popup();
+
+      $('.js-edit-button').on('click', function () {
+        $('.ui.modal').modal('show');
+      });
+
+      $('.js-trigger-item .js-active-button').on('click', function(evt) {
+        var self = this;
+        var id = $(this).data('id')
+        $(this).find('.icon').toggleClass('hide')
+        $(this).toggleClass('disabled')
+        var data = {}
+        if ($(this).hasClass('js-disable')) {
+          data.active = false
+        } else {
+          data.active = true
+        }
+
+        updateTrigger(id, data, function(error, data) {
+          var classList = '.js-trigger-id-' + id + ' .js-active-button'
+          if (!error) {
+            $(classList).toggleClass('hide')
+          }
+          $(self).find('.icon').toggleClass('hide')
+          $(self).toggleClass('disabled')
+        })
+
+      })
+    })
   </script>
 
   <div class="ui small modal">
