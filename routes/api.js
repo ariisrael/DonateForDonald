@@ -44,7 +44,7 @@ api.post('/donations', ADMIN_ONLY, DonationController.create);
 api.post('/payments', ADMIN_ONLY, PaymentController.create);
 
 api.put('/charities/:id', ADMIN_ONLY, CharityController.update);
-api.put('/triggers/:id', ADMIN_ONLY, TriggerController.update);
+api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
 api.put('/tweets/:id', ADMIN_ONLY, TweetController.update);
 api.put('/users/:id', USER_ONLY, UserController.update);
 api.put('/donations/:id', ADMIN_ONLY, DonationController.update);

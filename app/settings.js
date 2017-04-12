@@ -34,9 +34,13 @@ const handlebars = exphbs.create({
       return JSON.stringify(object);
     },
     if_not: function(a, options) {
-      if (!a || _.isEmpty(a)) {
+      if (!a) {
         return options.fn(this)
       }
+      if (_.isObject(a) && _.isEmpty(a)) {
+        return options.fn(this)
+      }
+      return options.inverse(this)
     }
   },
 });

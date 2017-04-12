@@ -34,18 +34,19 @@ module.exports = {
         });
     },
     update: (req, res) => {
-        var query = req.locals.query
-        query.id = req.params.id
-        Trigger.findOne({
-            id: req.params.id,
-            userId: req.user.id
-        }, (err, trigger) => {
+      var query = {}
+      query._id = req.params.id || req.body.id
+      query.userId = req.user.id
+        Trigger.findOne(query, (err, trigger) => {
             if (trigger) {
                 for (key in req.body) {
+                    if (key === 'id' || key === '_id') {
+                      continue
+                    }
                     trigger[key] = req.body[key]
                 }
             } else {
-                var trigger = new Trigger(req.body);
+                return res.json({})
             }
             trigger.userId = req.user.id
             trigger.save((err) => {
