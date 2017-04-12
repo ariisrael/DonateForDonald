@@ -1,31 +1,28 @@
-{{> header}}
-      {{#if_not user.emailConfirmed }}
+{{> header}} {{#if_not user.emailConfirmed }}
 <div class="ui inline js-email-nag" style="width:100%; padding: 10px; background-color: #1dcaff; color: #fff">
   <div class="ui text container">
-  <p style="text-align: center">
-    Please confirm your email to start donating or <a href="#" style="color: #fff; text-decoration: underline; margin-right: 10px">request a new link</a> <a href="#" style="color: #f5f5f5;"><i class="close icon js-close-nag"></i></a>
-  </p>
+    <p style="text-align: center">
+      Please confirm your email to start donating or <a href="#" style="color: #fff; text-decoration: underline; margin-right: 10px">request a new link</a>      <a href="#" style="color: #f5f5f5;"><i class="close icon js-close-nag"></i></a>
+    </p>
   </div>
 </div>
 <script>
-  $('.js-close-nag').on('click', function() {
+  $('.js-close-nag').on('click', function () {
     $('.js-email-nag').css('display', 'none');
   });
-  </script>
-  {{/if_not}}
+</script>
+{{/if_not}}
 <div class="ui text container web-form" style="margin-top: 40px">
   <div class="ui divided items" style="">
     {{#if_not triggers}}
-      <div class="ui center aligned">
-        <div class="ui text container">
-          <h2 class="ui header no-triggers">
-            You have no triggers. <a href="/">Make some.</a>
+    <div class="ui center aligned">
+      <div class="ui text container">
+        <h2 class="ui header no-triggers">
+          You have no triggers. <a href="/">Make some.</a>
           <h2>
-        </div>
       </div>
-    {{/if_not}}
-
-    {{#each triggers}}
+    </div>
+    {{/if_not}} {{#each triggers}}
 
     <div class="item js-trigger-id-{{this.id}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
@@ -44,7 +41,7 @@
           </div><br>
         </div>
 
-        <div class="header trigger-title" >{{this.name}} </div>
+        <div class="header trigger-title">{{this.name}} </div>
         <div class="meta" style="position: relative; top: -10px">
 
           <span class="stay"> {{this.charityId.name}}</span>
@@ -61,15 +58,60 @@
         </div>
         <div class="left floated trigger-actions" style="margin-top: 20px">
           {{#if this.active}}
-          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button>
-          {{else}}
-          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button>
-          {{/if}}
-          <button class="ui button small icon"><i class="icon write"></i> Edit</button>
+          <button class="ui button small icon red"><i class="icon power"></i> Turn Off</button> {{else}}
+          <button class="ui button small icon green"><i class="icon power"></i> Turn On</button> {{/if}}
+          <button class="ui button small js-edit-button icon"><i class="icon write"></i> Edit</button>
           <button class="ui button small primary icon"><i class="icon share"></i> Share</button>
         </div>
       </div>
     </div>
     {{/each}}
   </div>
-</div>
+
+  <script>
+    $('.js-edit-button').on('click', function () {
+      $('.ui.modal').modal('show');
+    });
+  </script>
+
+  <div class="ui small modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Update Your Trigger
+    </div>
+    <div class="content">
+      <form class="ui form">
+        <div class="field">
+          <div class="field">
+            <label>Term</label>
+            <p>Fake News</p>
+          </div>
+          <label>Amount</label>
+          <input type="number" name="amount" placeholder="Amount">
+        </div>
+        <div class="field" style="margin-bottom: 20px">
+          <label>Charity</label>
+          <div class="js-select-charity">
+            <div class="ui dropdown labeled fluid inline basic search icon button">
+              <input type="hidden" name="charity">
+              <i class="heart icon"></i>
+              <div class="default text">Charity</div>
+              <div class="menu" id="charities">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+      <div class="actions">
+        <div class="ui basic deny button">
+          Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+          Save Changes
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
