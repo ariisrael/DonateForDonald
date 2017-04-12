@@ -13,8 +13,7 @@
   });
   </script>
   {{/if_not}}
-    
-<div class="ui text container web-form" style="margin-top: 20px">
+<div class="ui text container web-form" style="margin-top: 40px">
   <div class="ui divided items" style="">
     {{#if_not triggers}}
       <div class="ui center aligned">
@@ -28,7 +27,7 @@
 
     {{#each triggers}}
 
-    <div class="item">
+    <div class="item js-trigger-id-{{this.id}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
         <img src="{{this.charityId.image}}">
       </div>
@@ -52,12 +51,15 @@
         </div>
 
         <div class="extra" style="position: relative; top: -15px">
-          <div style="display: inline-block">
+          <div style="display: inline-block" class="js-tweet-count-container">
 
-            <i class="blue twitter icon"></i> 0 tweets
+            <i class="blue twitter icon"></i>
+            <span class='js-tweet-count'>
+              <i class="fa fa-cog fa-spin fa-fw"></i>
+            </span> tweets
           </div>
           <div style="display: inline-block">
-            <i class="green money icon"></i> $0 donated
+            <i class="green money icon"></i> ${{this.donations}} donated
           </div>
 
         </div>
@@ -69,13 +71,28 @@
           {{/if}}
           <button class="ui button small icon"><i class="icon write"></i> Edit</button>
           <button class="ui button small primary icon"><i class="icon share"></i> Share</button>
-
-
         </div>
       </div>
-
-
     </div>
     {{/each}}
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    var triggers = {{{toJSON triggers}}}
+    var terms = {}
+    for (var triggerId in triggers) {
+      var trigger = triggers[triggerId]
+      terms[triggerId] = trigger.name
+    }
+
+    var url = '/api/tweets/count'
+    jQuery.post(url, terms, function(counts){
+      for (var triggerId in counts) {
+        var count = counts[triggerId]
+        $('.js-trigger-id-' + triggerId + ' .js-tweet-count').text(count)
+      }
+    })
+  })
+</script>

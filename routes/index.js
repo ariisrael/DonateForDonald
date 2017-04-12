@@ -5,6 +5,7 @@ const express = require('express');
 const _ = require('lodash');
 const passport = require('passport');
 const csurf = require('csurf')
+const bodyParser = require('body-parser');
 
 // Require middleware before routes
 require('./middleware');
@@ -21,6 +22,8 @@ const PaymentController = controllers.payments;
 const csrfProtection = csurf({ cookie: true })
 
 app.use('/api', require('./api'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', PageController.landing);
 app.get('/login', csrfProtection, UserController.loginGet);

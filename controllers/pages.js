@@ -83,19 +83,32 @@ exports.triggers = function(req, res) {
         console.error(err);
       }
       if (triggers && triggers.length) {
-        response.triggers = triggers.reverse();
+        triggers = triggers.reverse();
       }
-      var id = new mongoose.Schema.ObjectId(req.user.id);
-      Donation.find({ userId: id }).exec((err, other) => {
-        console.log(err);
-        response.donations = other;
-        if(!response.donations) {
-          response.donations = [];
+      response.triggers = {}
+      triggers.forEach((trigger) => {
+        trigger.donations = 0
+        response.triggers[trigger._id] = trigger
+      })
+      Donation.aggregate([
+        {
+          $match: {
+            userId: req.user._id
+          }
+        }, {
+          $group: {
+            _id: "$triggerId",
+            amount: {
+              $sum: "$amount"
+            }
+          }
         }
-        console.log(response);
+      ], (err, results) => {
+        results.forEach((result) => {
+          response.triggers[result._id].donations = result.amount
+        })
         res.render('triggers', response);
       })
-      
   });
 }
 

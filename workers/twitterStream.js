@@ -119,6 +119,7 @@ function checkUserTriggers(user, tweet) {
     for (trigger in triggers) {
       // loop through the keywords
       for (keyword in trigger.keywords) {
+        keyword = escapeRegExp(keyword)
         var re = new RegExp(keyword)
         // check if there's a match
         // a potential optimization is to create only
@@ -136,4 +137,8 @@ function checkUserTriggers(user, tweet) {
       }
     }
   })
+}
+
+function escapeRegExp(s) {
+  return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 }
