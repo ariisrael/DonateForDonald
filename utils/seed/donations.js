@@ -36,7 +36,9 @@ db.once('open', function() {
                               charityId: trigger.charityId,
                               tweetId: tweet.id
                             })
-                            console.log(d)
+                            d.save((err) => {
+                              if (err) console.log('error ', JSON.stringify(err), ' in donation ', JSON.stringify(d))
+                            })
                         })
                     })
                 })
