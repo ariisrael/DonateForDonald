@@ -1,20 +1,14 @@
 {{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag" style="width:100%; padding: 10px; background-color: #1dcaff; color: #fff">
+<div class="ui inline js-email-nag email-nag">
   <div class="ui text container">
-    <p style="text-align: center">
-      Please confirm your email to start donating or <a href="#" style="color: #fff; text-decoration: underline; margin-right: 10px">request a new link</a>      <a href="#" style="color: #f5f5f5;"><i class="close icon js-close-nag"></i></a>
+    <p>
+      Please confirm your email to start donating or <a href="#" class="new-link">request a new link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
     </p>
   </div>
 </div>
-<script>
-  $('.js-close-nag').on('click', function () {
-    $('.js-email-nag').css('display', 'none');
-  });
-
-</script>
 {{/if_not}}
-<div class="ui text container web-form" style="margin-top: 20px">
-  <div class="ui divided items" style="">
+<div class="ui text container web-form triggers-page">
+  <div class="ui divided items">
     {{#if_not triggers}}
     <div class="ui center aligned">
       <div class="ui text container">
@@ -34,30 +28,29 @@
 
         <div class=" ui right floated horizontal small statistic">
 
-          <div class="value" style="position: relative; right: -8px">
-            <i class="usd green small icon" style="position: relative; top: -4px; right: -4px"></i>{{this.amount}}</div>
-
+          <div class="value">
+            <i class="usd green small icon"></i>{{this.amount}}</div>
           <div class="label">
             / tweet
           </div><br>
         </div>
 
         <div class="header trigger-title">{{this.name}} </div>
-        <div class="meta" style="position: relative; top: -10px">
+        <div class="meta">
 
           <span class="stay"> {{this.charityId.name}}</span>
         </div>
 
-        <div class="extra" style="position: relative; top: -15px">
-          <div style="display: inline-block">
+        <div class="extra">
+          <div>
             <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
           </div>
-          <div style="display: inline-block">
+          <div>
             <i class="green money icon"></i> ${{this.donations}} donated
           </div>
 
         </div>
-        <div class="left floated trigger-actions" style="margin-top: 20px">
+        <div class="left floated trigger-actions">
           <button class="ui button small icon red js-active-button
             js-disable {{#if_not this.active}}hide{{/if_not}}"
             data-id="{{this.id}}">
@@ -80,55 +73,6 @@
     </div>
     {{/each}}
   </div>
-
-
-  <script>
-    $(document).ready(function () {
-      function updateTrigger(id, data, callback) {
-        var url = '/api/triggers/' + id
-        jQuery.ajax({
-          type: 'put',
-          url: url,
-          data: data,
-        })
-        .done(function(data, textStatus, jqXHR) {
-          callback(null, data)
-        })
-        .fail(function(data, textStatus, errorThrown) {
-          callback(errorThrown, data)
-        })
-      }
-
-      $('.js-share-button').popup();
-
-      $('.js-edit-button').on('click', function () {
-        $('.ui.modal').modal('show');
-      });
-
-      $('.js-trigger-item .js-active-button').on('click', function(evt) {
-        var self = this;
-        var id = $(this).data('id')
-        $(this).find('.icon').toggleClass('hide')
-        $(this).toggleClass('disabled')
-        var data = {}
-        if ($(this).hasClass('js-disable')) {
-          data.active = false
-        } else {
-          data.active = true
-        }
-
-        updateTrigger(id, data, function(error, data) {
-          var classList = '.js-trigger-id-' + id + ' .js-active-button'
-          if (!error) {
-            $(classList).toggleClass('hide')
-          }
-          $(self).find('.icon').toggleClass('hide')
-          $(self).toggleClass('disabled')
-        })
-
-      })
-    })
-  </script>
 
   <div class="ui small modal">
     <i class="close icon"></i>
