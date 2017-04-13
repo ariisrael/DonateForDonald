@@ -1,18 +1,4 @@
-<!-- Page -->
-<script>
-  $(document).ready(function () {
-    $('main').fadeIn('1000');
-  });
-
-</script>
-<style>
-  html {
-    height: 100% !important;
-  }
-
-</style>
-
-<body class="site" style="max-height: 100%">
+<body class="site">
   {{> header}}
   <main>
     <div class="ui text container web-form">
@@ -37,28 +23,28 @@
           </div>
         </div>
         <div class="fields">
-          <div class="seven wide field" style="padding: 20px auto">
+          <div class="seven wide field mobile-field">
             <label>Card Number</label>
-            <input type="text" name="credit_card" maxlength="16" placeholder="Card #" data-panda="credit_card">
+            <input type="text" name="credit_card" maxlength="16" placeholder="Card Number" data-panda="credit_card">
           </div>
-          <div class="three wide field mobile-field" style="padding: 20px auto">
+          <div class="three wide field mobile-field">
             <label class="mobile-label">CVV</label>
             <input type="text" name="cvv" maxlength="4" placeholder="CVV" data-panda="cvv">
           </div>
           <br>
-          <div class="six wide field mobile-field" style="padding: 20px auto">
+          <div class="six wide field mobile-field">
             <label class="mobile-label">Expiration</label>
             <input type="text" name="expiration" maxlength="7" placeholder="MM/YYYY" data-panda="expiration">
           </div>
         </div>
-    <div class="maximum field" style="margin: 30px 0px">
-      <div class="ui toggle inline checkbox js-maximum-toggle" style="display: inline-block">
+    <div class="maximum field">
+      <div class="ui toggle inline checkbox js-maximum-toggle">
         <input type="checkbox" name="public">
-        <label style="padding-right: 7px;">Set monthly limit of </label>
+        <label>Set monthly limit of </label>
       </div>
-      <div class="ui labeled input disabled js-maximum-amount" style="max-width: 100px">
+      <div class="ui labeled input disabled js-maximum-amount">
         <div class="ui basic label">$</div>
-        <input type="text" placeholder="100" style="width: 130px" maxlength="4">
+        <input type="text" placeholder="100" maxlength="4">
       </div>
     </div>
       <button class="ui primary massive button fluid save-payment-btn js-save-payment" type="submit">Save</button>
@@ -70,7 +56,6 @@
 
   <script>
 
-
     Panda.init('pk_test_DGoDgSY4_9eNPYwXWQyNKg', 'payment-form');
 
     Panda.on('success', function (cardToken) {
@@ -81,7 +66,6 @@
       var data = { paymentToken: cardToken }
       if($('.js-maximum-amount input').val() && $('.js-maximum-amount input').val() !== 0 ) {
         var maximum = $('.js-maximum-amount input').val();
-        console.log(maximum);
         data.monthlyLimit = maximum;
       }
       jQuery.ajax({
@@ -89,7 +73,6 @@
         url: '/api/users/' + user.id,
         data: data,
         success: function() {
-          console.log('Token', cardToken, 'stored');
           window.location.replace("/social");
         },
         dataType: 'json'
@@ -102,17 +85,3 @@
       console.log(errors);
     });
   </script>
-  <!--
-  <footer>
-    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
-</span>
-    <div style="display: inline-block; float: right">
-
-      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
-      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
-
-      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
-
-    </div>
-  </footer>
-  -->
