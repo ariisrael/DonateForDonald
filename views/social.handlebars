@@ -33,3 +33,15 @@
       </form>
     </div>
   </main>
+
+<!-- Redirect users not in process of creating a trigger -->
+  <script>
+  $(document).ready(function() {
+    var rawTrigger = localStorage.getItem('trigger');
+    if(!rawTrigger) {
+      window.location = "/";
+    } else {
+      console.log(rawTrigger);
+    }
+  });
+  </script>
