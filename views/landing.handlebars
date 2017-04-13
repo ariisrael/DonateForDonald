@@ -4,9 +4,9 @@
     overflow-y: hidden;
   }
   </style>
-<main class="main-landing" style="overflow-x: hidden">
-  <section class="landing-left" style="position: relative; top: -80px;">
-    <div style="width: auto; height: 800px; z-index: -1" data-tagul-src="//cdn.wordart.com/json/m8k9mxvep085" class="js-word-cloud"></div>
+<main class="main-landing">
+  <section class="landing-left">
+    <div data-tagul-src="//cdn.wordart.com/json/m8k9mxvep085" class="js-word-cloud"></div>
   </section>
   <section class="landing-right">
     <div>
@@ -80,43 +80,16 @@
   <div class="ui left sidebar overlay wrapper tweet-drawer js-tweet-drawer" style="z-index: 999; margin: 0px; padding: 0px">
     <div class="drawer-controls">
       <a class="ui fluid massive primary button icon squared">
-        <div style="position: relative; left: 10px">
-          <i class="twitter icon"></i><span class="js-tweet-term" style="color: #fff"></span><span class=" tweet-count js-tweet-count"></span>
-          <button class="ui button primary mini icon js-close-tweets" id="close-tweets" style="float: right; top: -2px; position: relative"><i style="position: relative; top: -2px" class="ui large cancel icon"></i></button>
+        <div>
+          <i class="twitter icon"></i><span class="js-tweet-term tweet-term"></span><span class=" tweet-count js-tweet-count"></span>
+          <button class="ui button primary mini icon js-close-tweets" id="close-tweets"><i class="ui large cancel icon"></i></button>
         </div>
       </a>
     </div>
     <div class="tweets">
-      <p style="text-align: center; font-size: 20px; margin-top: 30px">Select a trigger to view tweets</p>
+      <p>Select a trigger to view tweets</p>
     </div>
   </div>
   </div>
 </main>
 {{> footer}}
-
-<script>
-  var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice', 'unmasking'];
-  var blacklist = ['washinon', 'jobs jobs jobs'];
-  $(document).ready(function () {
-
-    jQuery.getJSON('/api/terms', function (data) {
-      var postedTerms = [];
-      for (var i = 0; i < data.length; i++) {
-        var html = '<div class="js-trigger-item item">' + data[i].term + '</div>';
-        if (blacklist.indexOf(data[i].term.toLowerCase()) < 0 && postedTerms.indexOf(data[i].term.toLowerCase()) < 0) {
-          $('.js-select-trigger .js-fill').append(html);
-          postedTerms.push(data[i].term.toLowerCase());
-        }
-      }
-      var wlHtml = '';
-      whitelist.forEach(function (term) {
-        if (postedTerms.indexOf(term.toLowerCase()) < 0) {
-          wlHtml = '<div class="item js-trigger-item">' + term + '</div>';
-          $('.js-select-trigger .js-fill').append(wlHtml);
-        }
-      });
-    })
-
-  })
-
-</script>
