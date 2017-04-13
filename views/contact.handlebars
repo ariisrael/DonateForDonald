@@ -1,25 +1,10 @@
-<!-- Page -->
-<script>
-  $(document).ready(function () {
-    $('main').fadeIn('1000');
-  });
-
-</script>
-<style>
-  html {
-    height: 100% !important;
-    overflow: hidden !important;
-  }
-
-</style>
-
-<body class="site" style="max-height: 100%; overflow-y: auto">
+<body class="site">
   {{> header}}
   <main>
     <div class="ui text container web-form">
       <h1>{{title}}
       </h1>
-      <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org" class="forgot-pass" style="display: inline-block">team@donatefordonald.org</a>.</span>
+      <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org" class="forgot-pass">team@donatefordonald.org</a>.</span>
       </div>
       <form class="ui large form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -43,7 +28,7 @@
             <textarea placeholder="Message" name="message" rows="5"></textarea>
           </div>
         </div>
-        <div style="margin-top: 20px">
+        <div class="send-message js-send-message">
           <button class="ui primary massive button fluid" type="submit">Send</button>
         </div>
 

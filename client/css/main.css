@@ -9,6 +9,10 @@ body {
 }
 /* Utilities */
 
+.send-message {
+  margin: 20px 0px
+}
+
 .center {
     margin: 0 auto;
 }
