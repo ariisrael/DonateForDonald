@@ -115,6 +115,11 @@ a.forgot-pass:hover {
     margin: 0 auto;
 }
 
+.skip-link {
+  cursor: pointer;
+  float: right;
+}
+
 .connect-twitter-btn {
   margin: 30px auto;
 }

@@ -15,13 +15,12 @@
 <body class="site" style="max-height: 100%">
   {{> header}}
   <main>
-    <div class="ui text container web-form" style="max-width: 400px">
-      <h1 style="max-width: 600px; margin: 0px auto; padding: 0px">{{title}}
+    <div class="ui text container web-form">
+      <h1>{{title}}
       </h1>
-      <div class="ui subheader" style="max-width: 600px; margin: 10px auto 20px auto"><span>Donations are processed when a tweet containing your trigger is posted. Check your email for tax-deductible donation
-        receipts at the end of each month. Payment processing fees are <a style="display: inline-block" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 30 cents per donation</a>.</span>
+      <div class="ui subheader"><span>Donations are processed when a tweet containing your trigger is posted. Payment processing fees are <a style="display: inline-block" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 30 cents per donation</a> and tax-deductible donation receipts are emailed monthly.</span>
       </div>
-      <form class="ui large form" id="payment-form" style="max-width: 600px; margin: 0 auto">
+      <form class="ui large form" id="payment-form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="two fields">
           <div class="field">
@@ -52,20 +51,17 @@
             <input type="text" name="expiration" maxlength="7" placeholder="MM/YYYY" data-panda="expiration">
           </div>
         </div>
-    </div>
-    <div class="maximum field" style="margin: 10px auto; max-width: 600px; width: 100%; padding: 10px">
-      <div class="ui toggle inline checkbox js-maximum-toggle">
+    <div class="maximum field" style="margin: 30px 0px">
+      <div class="ui toggle inline checkbox js-maximum-toggle" style="display: inline-block">
         <input type="checkbox" name="public">
-        <label style="padding-right: 7px;">Set monthly limit</label>
+        <label style="padding-right: 7px;">Set monthly limit of </label>
       </div>
-      <div class="ui labeled inline mini input disabled js-maximum-amount">
+      <div class="ui labeled input disabled js-maximum-amount" style="max-width: 100px">
         <div class="ui basic label">$</div>
-        <input type="text" placeholder="100" style="width: 70px" maxlength="4">
+        <input type="text" placeholder="100" style="width: 130px" maxlength="4">
       </div>
     </div>
-    <div style="max-width: 600px;margin: 0 auto; padding: 10px;">
       <button class="ui primary massive button fluid save-payment-btn js-save-payment" type="submit">Save</button>
-    </div>
 
     </form>
     </div>
@@ -73,7 +69,7 @@
   <script src="//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js"></script>
 
   <script>
-   
+
 
     Panda.init('pk_test_DGoDgSY4_9eNPYwXWQyNKg', 'payment-form');
 
