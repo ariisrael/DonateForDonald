@@ -16,13 +16,14 @@
 <body class="site" style="max-height: 100%; overflow-y: auto">
   {{> header}}
   <main>
-    <div class="ui text container web-form" style="margin-top: 40px;">
+    <div class="ui text container web-form">
       <h1>{{title}}
       </h1>
       <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org" class="forgot-pass" style="display: inline-block">team@donatefordonald.org</a>.</span>
       </div>
       <form class="ui large form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="two fields">
         <div class="field">
           <label>Email</label>
           <div class="ui input fluid">
@@ -35,10 +36,11 @@
             <input type="text" placeholder="Subject" name="subject">
           </div>
         </div>
+      </div>
         <div class="field">
           <label>Message</label>
           <div class="ui input fluid">
-            <textarea placeholder="Message" name="message" rows="4"></textarea>
+            <textarea placeholder="Message" name="message" rows="5"></textarea>
           </div>
         </div>
         <div style="margin-top: 20px">
