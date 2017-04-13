@@ -114,6 +114,10 @@ a.forgot-pass:hover {
     max-width: 1500px;
     margin: 0 auto;
 }
+
+.connect-twitter-btn {
+  margin: 30px auto;
+}
 /* Overrides */
 
 .message-text {
