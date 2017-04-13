@@ -24,12 +24,12 @@
         more to charity than he ever has - and tag the charity too.
       </div>
       <div class="social-tweet" style="font-size: 16px; margin-top: 20px; padding: 20px 20px; border-radius: 3px; border: 1px solid #eee;"><span>
-        Donated to 
-          <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px;">
+        Donated to
+          <a class="ui icon large label js-charity-label" style="margin-left: 5px; margin-right: 5px;" data-inverted="">
             <i class="icon heart"></i> Charity
           </a>
-           for 
-           <a class="ui icon large label" style="margin-left: 5px; margin-right: 5px">
+           for
+           <a class="ui icon large label js-trigger-label" style="margin-left: 5px; margin-right: 5px" data-inverted="">
             <i class="icon left quote"></i> Trigger
           </a>
           <span><a href="#" style="padding-top: 10px; display: inline-block">#DonateForDonald</a></span>
@@ -49,6 +49,15 @@
     </div>
   </main>
   <script>
+    var rawTrigger = localStorage.getItem('trigger');
+    if(rawTrigger) {
+      var userTrigger = JSON.parse(rawTrigger);
+      console.log(userTrigger);
+      $('.js-trigger-label').attr('data-content', userTrigger.name);
+      $('.js-charity-label').attr('data-content', userTrigger.charityName);
+      $('.js-charity-label').popup();
+      $('.js-trigger-label').popup();
+    }
     var redirectUrl = "/auth/twitter/callback";
     if(user.twitter) {
       redirectUrl = "/triggers";
@@ -58,6 +67,7 @@
       var rawTrigger = localStorage.getItem('trigger');
       if(rawTrigger) {
         var userTrigger = JSON.parse(rawTrigger);
+        delete userTrigger.charityName;
         userTrigger.social = true;
         jQuery.ajax({
           type: 'post',
@@ -78,6 +88,7 @@
       event.preventDefault();
       var rawTrigger = localStorage.getItem('trigger');
       if (rawTrigger) {
+        delete userTrigger.charityName;
         var userTrigger = JSON.parse(rawTrigger);
         jQuery.ajax({
           type: 'post',
