@@ -1,27 +1,15 @@
-<!-- Page -->
-<style>
-  html {
-    height: 100% !important;
-  }
 
-  button {
-    margin-bottom: 25px !important;
-  }
-
-</style>
-
-<body class="site" style="max-height: 100%">
+<body class="site">
   {{> header}}
   <main>
-    <div class="ui text container" style="margin-top: 40px">
+    <div class="ui text container settings-page">
       <h1>{{title}}
       </h1>
       <div>
         <h3>Social</h3>
         <div class="ui buttons">
           <a href="/auth/facebook">
-            <button class="ui button facebook icon"
-            style="border-radius: 3px">
+            <button class="ui button facebook icon">
               <i class="facebook icon"></i>
               {{#if user.facebook}}
                 Relink Facebook
@@ -32,8 +20,7 @@
           </a>
 
         <a href="/auth/twitter">
-          <button class="ui button twitter icon"
-          style="margin-left: 10px; border-radius: 3px;">
+          <button class="ui button twitter icon">
             <i class="twitter icon"></i>
             {{#if user.twitter}}
               Relink Twitter
@@ -134,17 +121,3 @@
       </form>
     </div>
   </main>
-  <!--
-  <footer>
-    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
-</span>
-    <div style="display: inline-block; float: right">
-
-      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
-      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
-
-      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
-
-    </div>
-  </footer>
-  -->

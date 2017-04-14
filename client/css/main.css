@@ -48,6 +48,18 @@ color: #fff; text-decoration: underline; margin-right: 10px;
 color: #f5f5f5;
 }
 
+.settings-page {
+    margin-top: 40px;
+}
+
+.settings-page button {
+  margin-bottom: 25px !important;
+  border-radius: 3px;
+}
+
+.settings-page button.twitter {
+  margin-left: 10px;
+}
 
 .triggers-page {
   margin-top: 20px !important;
