@@ -23,6 +23,8 @@ const csrfProtection = csurf({ cookie: true })
 
 app.use('/api', require('./api'));
 
+// Don't enable this until after api, all api posts should be json decoded,
+// all other values should be body parser decoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', PageController.landing);
