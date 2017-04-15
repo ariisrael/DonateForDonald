@@ -245,6 +245,11 @@ a.forgot-pass:hover {
     margin: 0 auto;
 }
 
+.default {
+  color: #ccc !important;
+  font-weight: 400 !important;
+}
+
 .skip-link {
   cursor: pointer;
   float: right;
