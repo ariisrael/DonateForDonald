@@ -17,6 +17,7 @@ const LOGIN_ONLY = UserController.ensureAuthenticated;
 const USER_QUERY = UserController.userQuery
 
 const bodyParser = require('body-parser');
+// all of these should be json decoded, so load json body parser here
 app.use(bodyParser.json());
 
 var api = express.Router();
