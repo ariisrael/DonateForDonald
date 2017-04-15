@@ -240,6 +240,7 @@ a.forgot-pass:hover {
 }
 .main-landing {
     height: 100%;
+    overflow-y: hidden;
     max-width: 1500px;
     margin: 0 auto;
 }
