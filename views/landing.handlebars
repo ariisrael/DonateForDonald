@@ -51,6 +51,7 @@
         <script>
           $('.js-amount-other').on('click', function() {
               $('a', this).addClass('selected-amount');
+              $(".selected-amount").not($('a', this)).removeClass('selected-amount');
           });
         </script>
         <!-- End choose amount -->
