@@ -44,10 +44,15 @@
             <a class="ui huge toggle button label">
                   Other
                 </a>
-            <input type="number" name="amount" placeholder="25" min="1" max="9999" disabled></input>
+            <input type="number" name="amount" placeholder="25" min="1" max="9999"></input>
           </div>
           </span>
         </div>
+        <script>
+          $('.js-amount-other').on('click', function() {
+              $('a', this).addClass('selected-amount');
+          });
+        </script>
         <!-- End choose amount -->
 
         <!-- Landing CTAs -->

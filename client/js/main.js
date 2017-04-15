@@ -258,7 +258,6 @@ $(document).ready(function () {
     .on('click', function () {
       $(this).toggleClass('selected-amount');
       $(".selected-amount").not(this).removeClass('selected-amount');
-      $(".js-amount-other input").prop("disabled", true);
       $(".dollar-sign").addClass("greyed-out");
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
@@ -267,7 +266,6 @@ $(document).ready(function () {
   $(".js-amount-other")
     .on('click', function () {
       // Enable text field
-      $("input", this).prop('disabled', false);
       $(".dollar-sign").removeClass("greyed-out");
     });
 
@@ -315,7 +313,6 @@ $(document).ready(function () {
       $('main').css('overflow-y', 'auto');
       $('body').css('overflow-y', 'auto');
       $('body').css('overflow-x', 'hidden');
-
       $('html').css('overflow-y', 'auto');
       $('html').css('overflow-x', 'hidden');
     });
