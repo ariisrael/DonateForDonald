@@ -254,10 +254,12 @@ var charities = [{
 
 $(document).ready(function () {
   // Toggle amount selector buttons between active/inactive
+
   $(".toggle")
     .on('click', function () {
       $(this).toggleClass('selected-amount');
       $(".selected-amount").not(this).removeClass('selected-amount');
+
       $(".dollar-sign").addClass("greyed-out");
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
@@ -268,7 +270,6 @@ $(document).ready(function () {
       // Enable text field
       $(".dollar-sign").removeClass("greyed-out");
     });
-
   // User toggles maximum monthly donation
   $(".js-maximum-toggle")
     .on('click', function () {
@@ -396,11 +397,11 @@ $(document).ready(function () {
 
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('click', 'div.item', function () {
-    var term = $(this).text().trim();
-    loadTweets(term);
+    $('.js-tweets').css('border', 'inherit').removeClass('disabled');
   });
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('keyup', function (e) {
+    $('.js-tweets').css('border', 'inherit').removeClass('disabled');
     if (e.which === 13) {
       var term = $('input[name=trigger]').val()
       if ($('.js-tweet-drawer').hasClass('visible')) {
@@ -506,6 +507,18 @@ function validateTrigger(trigger) {
     return false;
   }
   return errors;
+}
+
+function deselectInput() {
+  $("input[name='amount']").css('border-top', '');
+  $("input[name='amount']").css('border-right', '');
+  $("input[name='amount']").css('border-bottom', '');
+}
+
+function selectInput() {
+  $("input[name='amount']").css('border-top', '1px solid #aaa');
+  $("input[name='amount']").css('border-right', '1px solid #aaa');
+  $("input[name='amount']").css('border-bottom', '1px solid #aaa');
 }
 
 function noLinkReload() {

@@ -330,6 +330,12 @@ button.primary:hover {
     background-color: #00aced !important;
     color: #fff !important;
 }
+
+.selected-input {
+  border-top: 1px solid #aaa !important;
+  border-right: 1px solid #aaa !important;
+  border-bottom: 1px solid #aaa !important;
+}
 .dollar-sign {
     color: #999;
     font-size: 20px;
@@ -387,6 +393,9 @@ nav {
     padding-right: 20px;
 }
 
+@media only screen and (min-width: 1500px) {
+  margin-top: 5%;
+}
 
 @media only screen and (max-width: 500px) {
     .headline {
