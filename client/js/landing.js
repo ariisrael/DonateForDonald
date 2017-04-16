@@ -1,6 +1,5 @@
 $(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
-
   $(".toggle")
     .on('click', function () {
       $(this).toggleClass('selected-amount');
@@ -40,7 +39,6 @@ $(document).ready(function() {
     .on('click', function () {
       if ($('.js-tweet-drawer').hasClass('visible')) {
         $(this).html('<i class="twitter icon"></i> View Tweets');
-        $('main').css('overflow-y', 'auto');
 
       } else {
         // Switch button to hide tweets
@@ -64,7 +62,6 @@ $(document).ready(function() {
       $('.js-tweet-drawer').removeClass('visible');
       $('.js-tweets').html('<i class="twitter icon"></i> View Tweets');
       $('.js-nav').addClass('visible');
-      $('main').css('overflow-y', 'auto');
       $('body').css('overflow-y', 'auto');
       $('body').css('overflow-x', 'hidden');
       $('html').css('overflow-y', 'auto');
@@ -73,7 +70,6 @@ $(document).ready(function() {
   // User selected dropdown option
   $('.selection').dropdown({
     onChange: function (value) {
-      validateLanding();
       $('.demo.icon').popup({ transition: value }).popup('toggle');
     }
   });
@@ -100,7 +96,8 @@ $(document).ready(function() {
     validateLanding();
   });
   // User selected a charity from dropdown
-  $('.js-select-charity .item').on('click', function () {
+  $('.js-select-charity').on('click', function () {
+    console.log('Selected charity');
     validateLanding();
   });
 
