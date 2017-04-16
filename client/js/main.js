@@ -346,7 +346,7 @@ $(document).ready(function () {
     $('.js-trigger-label').popup();
   }
   var redirectUrl = "/auth/twitter/callback";
-  if(user.twitter) {
+  if(user && user.twitter) {
     redirectUrl = "/triggers";
   }
 
