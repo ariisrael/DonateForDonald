@@ -8,7 +8,7 @@ $(document).ready(function() {
       $(".dollar-sign").addClass("greyed-out");
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
-      validateLanding();
+
     });
   // User clicked other amount input
   $(".js-amount-other")
@@ -260,4 +260,32 @@ function twitterUrl(id) {
 function tweetHtml(id, text) {
   var html = '<div class="tweet-embed pre-load"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a><div class="embedded-tweet"><div class="twitter-header-wrapper"><div class="twitter-img-wrapper"><img src="https://pbs.twimg.com/profile_images/1980294624/DJT_Headshot_V2_bigger.jpg" height=36px width=36px></div><div class="twitter-ident-wrapper"><span class="identity-name">Donald J. Trump</span> <br> <span class="screen-name">@realDonaldTrump</span></div></div><p>' + text + '</p></div></blockquote></div>';
   return html;
+}
+
+
+function getLandingInputs() {
+  var charity = $('input[name=charity]').val().trim();
+  var trigger = $('input[name=trigger]').val().trim();
+  var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
+  amount = amount.replace('$', '').trim();
+  console.log('\nCharity:', charity, '\nTrigger:', trigger, '\nAmount:', amount)
+  return {
+    charity: charity,
+    trigger: trigger,
+    amount: amount,
+  }
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function validateLanding() {
+  var inputs = getLandingInputs();
+  if (Object.keys(inputs).length === 3 && isNumeric(inputs.amount) && (inputs.charity.length === 10 && inputs.charity.indexOf('-')) && inputs.trigger.length > 0) {
+    console.log('Valid trigger\n', inputs);
+    enableDonate();
+  } else {
+    disableDonate();
+  }
 }
