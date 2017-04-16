@@ -23,17 +23,11 @@ $(document).ready(function() {
     });
 
   // User typing other amount (validate)
-  $(".js-amount-other input")
+  $(".mobile-amount")
     .on('keyup', function () {
       validateLanding();
     });
 
-  // User started typing other amount
-  $(".js-amount-other input")
-    .on('focus', function () {
-      // Clear placeholder text when user clicks input
-      $(this).prop("placeholder", "");
-    });
   // User clicked 'View Tweets'
   $('.js-tweets')
     .on('click', function () {
@@ -146,27 +140,20 @@ function landingDonate() {
       charityName = c.name;
     }
   });
-  var userTrigger = {
-    "charityId": charity,
-    "name": trigger,
-    "amount": amount,
-    "charityName": charityName
+  var userTrigger = getLandingInputs();
+  console.log(userTrigger);
+  userTrigger.charityName = charityName;
+  if (user) { // User signed in, store in db
+    localStorage.setItem('trigger', JSON.stringify(userTrigger));
+    if (user.paymentToken) {
+      window.location.replace('/social');
+    } else {
+      window.location.replace('/payment');
+    }
   }
-  var errors = validateTrigger(userTrigger);
-  if (!errors) {
-    if (user) { // User signed in, store in db
-      localStorage.setItem('trigger', JSON.stringify(userTrigger));
-      if (user.paymentToken) {
-        window.location.replace('/social');
-      } else {
-        window.location.replace('/payment');
-      }
-    }
-    else { // The user is not signed in
-      localStorage.setItem('trigger', JSON.stringify(userTrigger));
-      window.location.replace("/login");
-    }
-  } else {
+  else { // The user is not signed in
+    localStorage.setItem('trigger', JSON.stringify(userTrigger));
+    window.location.replace("/login");
   }
 }
 
@@ -264,7 +251,7 @@ function tweetHtml(id, text) {
 function getLandingInputs() {
   var charity = $('input[name=charity]').val().trim();
   var trigger = $('input[name=trigger]').val().trim();
-  var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
+  var amount = ($('.js-toggle-other').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   return {
     charity: charity,

@@ -1,9 +1,9 @@
- {{> header}}
+{{> header}}
 <style>
-  html {
-    overflow-y: hidden;
-  }
-  </style>
+html {
+  overflow-y: hidden;
+}
+</style>
 <main class="main-landing">
   <section class="landing-left" style="overflow-y: hidden">
     <div data-tagul-src="//cdn.wordart.com/json/m8k9mxvep085" class="js-word-cloud"></div>
@@ -13,76 +13,110 @@
       <h1 class="headline">When Trump goes low, you go high. <br><span>Automatically. Even at 5AM.</span></h1>
       <p class="subheader"> Pick the Trumpism you <i>hate</i>, the charity you <i>love</i>, and the amount per tweet. Weather the next tweetstorm
         and turn his Fox-fueled anger into something good. <span class="hashtag"><a href="https://twitter.com/search?q=%23DonateForDonald&src=typd&lang=en" >#DonateForDonald</a></span></p>
-    </div>
-    <div class="ui form landing-form">
-      <div class="center triggers js-select-trigger">
-        <div class="ui huge dropdown labeled fluid inline search icon basic button">
-          <input type="hidden" name="trigger">
-          <i class="quote left icon"></i>
-          <div class="default text js-trigger-text">Select a trigger</div>
-          <div class="menu js-fill">
-          </div>
-        </div>
       </div>
-      <div class="center charities js-select-charity">
-        <div class="ui huge dropdown labeled fluid inline basic search icon button">
-          <input type="hidden" name="charity">
-          <i class="heart icon"></i>
-          <div class="default text">Choose a charity</div>
-          <div class="menu" id="charities">
+      <div class="ui form landing-form">
+        <div class="center triggers js-select-trigger">
+          <div class="ui huge dropdown labeled fluid inline search icon basic button">
+            <input type="hidden" name="trigger">
+            <i class="quote left icon"></i>
+            <div class="default text js-trigger-text">Select a trigger</div>
+            <div class="menu js-fill">
+            </div>
           </div>
         </div>
-        <br>
-        <!-- Choose amount -->
-        <div class="choose-amount js-amounts">
-          <a class="ui huge toggle button amount-1">$1</a>
-          <a class="ui huge toggle button amount-5">$5</a>
-          <a class="ui huge toggle button amount-10">$10</a>
-          <span class="new-line">
-            <span class="dollar-sign greyed-out">$</span>
-          <div class="ui labeled huge input amount-other js-amount-other">
-            <a class="ui huge toggle button label">
-                  Other
-                </a>
-            <input type="number" name="amount" placeholder="25" min="1" max="9999"></input>
+        <div class="center charities js-select-charity">
+          <div class="ui huge dropdown labeled fluid inline basic search icon button">
+            <input type="hidden" name="charity">
+            <i class="heart icon"></i>
+            <div class="default text">Choose a charity</div>
+            <div class="menu" id="charities">
+            </div>
           </div>
-          </span>
-        </div>
-        <script>
+          <br>
+          <!-- Choose amount -->
+          <style>
+
+          input.mobile-amount {
+            border-left: none !important;
+            border-right: 1px solid #ddd !important;
+            border-top: 1px solid #ddd !important;
+            border-bottom: 1px solid #ddd !important;
+          }
+          @media only screen and (max-width: 480px) {
+            .mobile-responsive-input {
+              width: 30% !important;
+            }
+          }
+          </style>
+          <div class="choose-amount mobile-amounts js-amounts" style="width: 100%">
+
+            <a class="ui huge toggle button mobile-amt amount-1 fluid" style="width: 20%; display: inline-block">$1</a>
+            <a class="ui huge toggle button mobile-amt amount-5 fluid" style="width: 20%; display: inline-block">$5</a>
+            <a class="ui huge toggle button mobile-amt amount-10 fluid" style="width: 23%; display: inline-block">$10</a>
+            <div class="mobile-responsive-input" style="display: inline-block; margin-right: 0px; padding: 0px; width: 32%">
+              <a class="ui huge toggle mobile-amt button js-toggle-other fluid visible" style="margin-right: 0px;">
+                Other
+              </a>
+              <div class="js-mobile-input ui huge fluid labeled input"  style="height: 49px; position: relative; display: none;">
+                <div class="ui basic label" style="color: #bbb; padding-left: 10px; padding-right: 5px; font-weight: 400; border-right: none; position: relative; padding-top: 14px">$</div>
+                <input class="mobile-amount" type="number" name="amount" min="1" max="9999" style='padding-left: 0px; padding-right: 10px; outline: none; position: relative'></input>
+              </div>
+              <script>
+              $('.js-toggle-other').on('click', function() {
+                $('.js-mobile-input').transition('scale');
+                $(this).removeClass('visible').css('display', 'none');
+                $('.mobile-amount').focus();
+                $('.mobile-amount').attr('value', '');
+              });
+
+              $('.js-mobile-input').on('click', function(e) {
+                $(this).css('outline', 'none');
+              });
+              $('.mobile-amt').css('padding', '15px 25px');
+              $('.mobile-amt').not($('.js-toggle-other')).on('click', function() {
+                $('.js-mobile-input').css('display', 'none').removeClass('visible');
+                $('.js-toggle-other').css('display', '');
+                $('a.js-toggle-other').focusout().blur();
+              });
+              </script>
+            </div>
+          </div>
+          <script>
           $('.js-amount-other').on('click', function() {
-              $('a', this).addClass('selected-amount');
-              $(".selected-amount").not($('a', this)).removeClass('selected-amount');
+            $('a', this).addClass('selected-amount');
+            $(".selected-amount").not($('a', this)).removeClass('selected-amount');
           });
-        </script>
-        <!-- End choose amount -->
 
-        <!-- Landing CTAs -->
-        <div class="two-buttons">
+          </script>
+          <!-- End choose amount -->
+
+          <!-- Landing CTAs -->
+          <div class="two-buttons">
 
 
-          <!-- CTA: Donate -->
-          <div class="left-button js-donate">
-            <button class="ui huge icon button disabled fluid" onclick="landingDonate()">
+            <!-- CTA: Donate -->
+            <div class="left-button js-donate">
+              <button class="ui huge icon button disabled fluid" onclick="landingDonate()">
                 <i class="lightning icon"></i> Donate
               </button>
-          </div>
-          <!-- End CTA: Donate -->
-          <!-- CTA: View Tweets -->
-          <div class="right-button">
-            <button class="ui icon huge button basic disabled fluid js-tweets" style="border: 1px solid #ddd">
+            </div>
+            <!-- End CTA: Donate -->
+            <!-- CTA: View Tweets -->
+            <div class="right-button">
+              <button class="ui icon huge button basic disabled fluid js-tweets" style="border: 1px solid #ddd">
                 <i class="twitter icon"></i> View Tweets
               </button>
+            </div>
+            <!-- End CTA: View Tweets -->
+
           </div>
-          <!-- End CTA: View Tweets -->
+          <!-- End landing CTAs -->
 
         </div>
-        <!-- End landing CTAs -->
 
       </div>
-
-    </div>
-  </section>
-  <style>
+    </section>
+    <style>
     .pre-load {
       font-family: 'Helvetica' !important;
       font-size: 16px !important;
@@ -96,23 +130,25 @@
       font-size: 90%;
       font-weight: 300;
     }
-  </style>
-  <div class="ui left sidebar overlay wrapper tweet-drawer js-tweet-drawer" style="z-index: 999; margin: 0px; padding: 0px">
-    <div class="drawer-controls">
-      <a class="ui fluid massive primary button icon squared">
-        <div>
-          <i class="twitter icon"></i><span class="js-tweet-term tweet-term"></span><span class=" tweet-count js-tweet-count"></span>
-          <button class="ui button primary mini icon js-close-tweets" id="close-tweets"><i class="ui large cancel icon"></i></button>
-        </div>
-      </a>
-    </div>
-    <div class="tweets">
-      <div class="js-loading">
-        <img src="images/loading.gif" />
+
+
+    </style>
+    <div class="ui left sidebar overlay wrapper tweet-drawer js-tweet-drawer" style="z-index: 999; margin: 0px; padding: 0px">
+      <div class="drawer-controls">
+        <a class="ui fluid massive primary button icon squared">
+          <div>
+            <i class="twitter icon"></i><span class="js-tweet-term tweet-term"></span><span class=" tweet-count js-tweet-count"></span>
+            <button class="ui button primary mini icon js-close-tweets" id="close-tweets"><i class="ui large cancel icon"></i></button>
+          </div>
+        </a>
       </div>
-      <p>Select a trigger to view tweets</p>
+      <div class="tweets">
+        <div class="js-loading">
+          <img src="images/loading.gif" />
+        </div>
+        <p>Select a trigger to view tweets</p>
+      </div>
     </div>
-  </div>
   </div>
 </main>
 {{> footer}}
