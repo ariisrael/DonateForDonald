@@ -8,12 +8,13 @@ $(document).ready(function() {
       $(".dollar-sign").addClass("greyed-out");
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
-
+      validateLanding();
     });
   // User clicked other amount input
   $(".js-amount-other")
     .on('click', function () {
       // Enable text field
+      validateLanding();
       $(".dollar-sign").removeClass("greyed-out");
     });
   // User toggles maximum monthly donation
@@ -79,12 +80,12 @@ $(document).ready(function() {
 
   // Update tweet count
   $('.js-tweet-count').text();
-
   noLinkReload();
 
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('click', 'div.item', function () {
     $('.js-tweets').css('border', 'inherit').removeClass('disabled');
+    validateLanding();
   });
   // User selected a trigger from the dropdown
   $('.js-select-trigger').on('keyup click', function (e) {
@@ -97,10 +98,11 @@ $(document).ready(function() {
         loadTweets(term);
       }
     }
+    validateLanding();
   });
   // User selected a charity from dropdown
   $('.js-select-charity .item').on('click', function () {
-
+    validateLanding();
   });
 
 
@@ -275,6 +277,19 @@ function getLandingInputs() {
     amount: amount,
   }
 }
+
+function enableDonate() {
+  console.log('Enabling donate button');
+  $('.js-donate button').addClass('primary'); //blue
+  $('.js-donate button').removeClass('disabled'); //enabled
+}
+
+function disableDonate() {
+  console.log('Disabling donate button');
+  $('.js-donate button').removeClass('primary'); //blue
+  $('.js-donate button').addClass('disabled'); //enabled
+}
+
 
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
