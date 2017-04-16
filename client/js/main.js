@@ -263,6 +263,8 @@ $(document).ready(function () {
       $(".dollar-sign").addClass("greyed-out");
       $(".js-amount-other input").val("");
       $(".js-amount-other input").prop("placeholder", "25");
+      console.log('Button toggled, validating trigger');
+      validateLanding();
     });
   // User clicked other amount input
   $(".js-amount-other")
@@ -276,12 +278,20 @@ $(document).ready(function () {
       $('.js-maximum-amount').toggleClass('disabled');
     });
 
+
   // User started typing other amount
   $(".js-amount-other input")
     .on('focus', function () {
       // Clear placeholder text when user clicks input
       $(this).prop("placeholder", "");
     });
+
+    $(".js-amount-other input")
+      .on('keyup', function () {
+        // Clear placeholder text when user clicks input
+        console.log('Other amount typed, validating trigger');
+        validateLanding();
+      });
   // User clicked 'View Tweets'
   $('.js-tweets')
     .on('click', function () {
@@ -320,6 +330,8 @@ $(document).ready(function () {
   // User selected dropdown option
   $('.selection').dropdown({
     onChange: function (value) {
+      console.log('Dropdown item selected, validating trigger');
+      validateLanding();
       $('.demo.icon').popup({ transition: value }).popup('toggle');
 
 }
@@ -415,6 +427,7 @@ $(document).ready(function () {
   });
 });
 
+
 function loadTweets(term) {
   var url = '/api/tweets/search?q=' + encodeURIComponent(term);
   jQuery.getJSON(url, function (data) {
@@ -438,6 +451,45 @@ function loadTweets(term) {
 function updateTweetTerm(term) {
   $('.js-tweet-term').empty();
   $('.js-tweet-term').text(term);
+}
+
+function getLandingInputs() {
+  var charity = $('input[name=charity]').val().trim();
+  var trigger = $('input[name=trigger]').val().trim();
+  var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
+  amount = amount.replace('$', '').trim();
+  console.log('\nCharity:', charity, '\nTrigger:', trigger, '\nAmount:', amount)
+  return {
+    charity: charity,
+    trigger: trigger,
+    amount: amount,
+  }
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function validateLanding() {
+  var inputs = getLandingInputs();
+  if (Object.keys(inputs).length === 3 && isNumeric(inputs.amount) && (inputs.charity.length === 10 && inputs.charity.indexOf('-')) && inputs.trigger.length > 0) {
+    console.log('Valid trigger\n', inputs);
+    enableDonate();
+  } else {
+    disableDonate();
+  }
+}
+
+function enableDonate() {
+  console.log('Enabling donate button');
+  $('.js-donate button').addClass('primary'); //blue
+  $('.js-donate button').removeClass('disabled'); //enabled
+}
+
+function disableDonate() {
+  console.log('Disabling donate button');
+  $('.js-donate button').removeClass('primary'); //blue
+  $('.js-donate button').addClass('disabled'); //enabled
 }
 
 function landingDonate() {
