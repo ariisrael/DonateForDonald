@@ -74,8 +74,8 @@ html {
               });
               $('.mobile-amt').css('padding', '15px 25px');
               $('.mobile-amt').not($('.js-toggle-other')).on('click', function() {
-                $('.js-mobile-input').removeClass('visible')
-                $('.js-mobile-input').css('display', 'none');
+                $('.mobile-amount').removeClass('visible')
+                $('.mobile-amount').css('display', 'none');
                 $('.js-toggle-other').css('display', '');
                 $('a.js-toggle-other').focusout().blur();
               });
