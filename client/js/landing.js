@@ -124,7 +124,7 @@ function loadTweets(term) {
       }
       $('.tweets').append(tweetsHTML);
       twttr.widgets.load().then(function() {
-        $('.pre-load').removeClass('pre-load')
+        $('.tweets .pre-load').removeClass('pre-load')
       });
     } else {
       $('.tweets').append('<p style="text-align: center; font-size: 20px; margin-top: 30px">No tweets</p>')
@@ -270,6 +270,6 @@ function twitterUrl(id) {
 }
 
 function tweetHtml(id, text) {
-  var html = '<div class="tweet-embed pre-load"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a><div class="EmbeddedTweet-tweet"><p><b>Donald J. Trump</b> <br> @realDonaldTrump</p><p>' + text + '</p></div></blockquote></div>';
+  var html = '<div class="tweet-embed pre-load"><blockquote class="twitter-tweet tw-align-center" data-lang="en" data-conversation="none"><a class="tweet-link" href="' + twitterUrl(id) + '"></a><div class="embedded-tweet"><div class="twitter-header-wrapper"><div class="twitter-img-wrapper"><img src="https://pbs.twimg.com/profile_images/1980294624/DJT_Headshot_V2_bigger.jpg" height=36px width=36px></div><div class="twitter-ident-wrapper"><span class="identity-name">Donald J. Trump</span> <br> <span class="screen-name">@realDonaldTrump</span></div></div><p>' + text + '</p></div></blockquote></div>';
   return html;
 }

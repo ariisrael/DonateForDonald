@@ -1,9 +1,13 @@
-.pre-load .EmbeddedTweet-tweet {
+.pre-load .embedded-tweet {
   border-width: 1px;
   border-style: solid;
   border-color: rgb(225, 232, 237);
   border-image: initial;
   border-radius: 4px;
+  padding-top: 20px;
+  padding-bottom: 11.6px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .pre-load blockquote.twitter-tweet {
@@ -11,4 +15,28 @@
   margin-right: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.pre-load .identity-name {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.pre-load .twitter-img-wrapper {
+  float: left;
+  padding-right: 10px;
+}
+
+.pre-load .screen-name {
+  color: rgb(105, 120, 130);
+}
+
+.pre-load .twitter-ident-wrapper {
+  float: left;
+}
+
+.pre-load .twitter-header-wrapper {
+  height: 40px;
+  margin-bottom: 5px;
+  width: 100%;
 }
