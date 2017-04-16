@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
+const cleanCSS = require('gulp-clean-css')
 const sass = require('gulp-sass');
 const del = require('del')
 
@@ -9,8 +10,8 @@ gulp.task('clean-js', () => {
   return del(['public/js']);
 });
 
-gulp.task('scripts', ['clean-js'], () =>
-    gulp.src([
+gulp.task('scripts', ['clean-js'], () => {
+    var pipe = gulp.src([
       'client/js/*.js',
       'client/js/*.jsx',
       'client/js/**/*.js',
@@ -20,11 +21,16 @@ gulp.task('scripts', ['clean-js'], () =>
         presets: ['es2015', 'react']
     }))
     .pipe(concat('app.js'))
-    .pipe(gulp.dest('public/js'))
-)
 
-gulp.task('vendorScripts', ['clean-js'], () =>
-    gulp.src([
+    if (process.env.NODE_ENV === 'production') {
+      pipe = pipe.pipe(uglify())
+    }
+
+    return pipe.pipe(gulp.dest('public/js'))
+})
+
+gulp.task('vendorScripts', ['clean-js'], () => {
+    var pipe = gulp.src([
       'client/vendor/js/jquery.js',
       'client/vendor/js/bootstrap.js',
     ])
@@ -32,25 +38,44 @@ gulp.task('vendorScripts', ['clean-js'], () =>
             presets: ['es2015', 'react']
         }))
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest('public/js'))
-)
+
+        if (process.env.NODE_ENV === 'production') {
+          pipe = pipe.pipe(uglify())
+        }
+
+        return pipe.pipe(gulp.dest('public/js'))
+})
 
 gulp.task('clean-css', () => {
   return del(['public/css']);
 });
 
 gulp.task('styles', ['clean-css'], () => {
-  return gulp.src(['./client/css/*.css', './client/css/**/*.css', './client/css/*.scss'])
+  var pipe = gulp.src(['./client/css/*.css', './client/css/**/*.css', './client/css/*.scss'])
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('app.css'))
-    .pipe(gulp.dest('./public/css'));
+
+    if (process.env.NODE_ENV === 'production') {
+      pipe = pipe.pipe(cleanCSS({
+        compatibility: 'ie8'
+      }))
+    }
+
+    return pipe.pipe(gulp.dest('./public/css'));
 })
 
 gulp.task('vendorStyles', ['clean-css'], () => {
-  return gulp.src(['./client/vendor/css/*.css', './client/vendor/css/**/*.css', './client/vendor/css/*.scss'])
+  var pipe = gulp.src(['./client/vendor/css/*.css', './client/vendor/css/**/*.css', './client/vendor/css/*.scss'])
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('vendor.css'))
-    .pipe(gulp.dest('./public/css'));
+
+    if (process.env.NODE_ENV === 'production') {
+      pipe = pipe.pipe(cleanCSS({
+        compatibility: 'ie8'
+      }))
+    }
+
+    return pipe.pipe(gulp.dest('./public/css'));
 })
 
 gulp.task('clean-images', () => {
