@@ -226,6 +226,7 @@ var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama
 var blacklist = ['washinon', 'jobs jobs jobs'];
 $('.main-landing').ready(function () {
   jQuery.getJSON('/api/terms', function (data) {
+    $('.message').css('display', 'none');
     var postedTerms = [];
     for (var i = 0; i < data.length; i++) {
       var html = '<div class="js-trigger-item item" data-term="' + data[i].term + '">' + data[i].term + '</div>';
@@ -261,14 +262,10 @@ function tweetHtml(id, text) {
 
 
 function getLandingInputs() {
-  console.log($('input[name=charity]'))
-  console.log($('input[name=charity]').val())
-  console.log($('input[name=charity]')[0].value)
   var charity = $('input[name=charity]').val().trim();
   var trigger = $('input[name=trigger]').val().trim();
   var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
-  console.log('\nCharity:', charity, '\nTrigger:', trigger, '\nAmount:', amount)
   return {
     charity: charity,
     trigger: trigger,
@@ -277,13 +274,11 @@ function getLandingInputs() {
 }
 
 function enableDonate() {
-  console.log('Enabling donate button');
   $('.js-donate button').addClass('primary'); //blue
   $('.js-donate button').removeClass('disabled'); //enabled
 }
 
 function disableDonate() {
-  console.log('Disabling donate button');
   $('.js-donate button').removeClass('primary'); //blue
   $('.js-donate button').addClass('disabled'); //enabled
 }
@@ -296,7 +291,6 @@ function isNumeric(n) {
 function validateLanding() {
   var inputs = getLandingInputs();
   if (Object.keys(inputs).length === 3 && isNumeric(inputs.amount) && (inputs.charity.length === 10 && inputs.charity.indexOf('-')) && inputs.trigger.length > 0) {
-    console.log('Valid trigger\n', inputs);
     enableDonate();
   } else {
     disableDonate();
