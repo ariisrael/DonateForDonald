@@ -70,7 +70,29 @@ gulp.task('favicon', () => {
 gulp.task('build', ['scripts', 'vendorStyles', 'vendorScripts', 'styles', 'favicon', 'images'])
 
 gulp.task('watch', () => {
-  gulp.watch(['client/*','client/**/*'], ['scripts', 'vendorStyles', 'vendorScripts', 'styles', 'favicon', 'images'])
+  gulp.watch([
+    './client/css/*.css',
+    './client/css/**/*.css',
+    './client/css/*.scss',
+    './client/vendor/css/*.css',
+    './client/vendor/css/**/*.css',
+    './client/vendor/css/*.scss'
+  ], ['vendorStyles', 'styles'])
+
+  gulp.watch([
+    'client/js/*.js',
+    'client/js/*.jsx',
+    'client/js/**/*.js',
+    'client/js/**/*.jsx',
+    'client/vendor/js/jquery.js',
+    'client/vendor/js/bootstrap.js',
+  ], ['scripts', 'vendorScripts'])
+
+  gulp.watch([
+    ['client/favicon.ico'], ['favicon']
+  ])
+
+  gulp.watch(['client/images/*'], ['images'])
 })
 
 gulp.task('default', ['build'])
