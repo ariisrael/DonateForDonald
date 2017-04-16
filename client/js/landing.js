@@ -97,7 +97,6 @@ $(document).ready(function() {
   });
   // User selected a charity from dropdown
   $('.js-select-charity').on('click', function () {
-    console.log('Selected charity');
     validateLanding();
   });
 
@@ -262,6 +261,9 @@ function tweetHtml(id, text) {
 
 
 function getLandingInputs() {
+  console.log($('input[name=charity]'))
+  console.log($('input[name=charity]').val())
+  console.log($('input[name=charity]')[0].value)
   var charity = $('input[name=charity]').val().trim();
   var trigger = $('input[name=trigger]').val().trim();
   var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
