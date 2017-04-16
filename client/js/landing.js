@@ -93,7 +93,6 @@ $(document).ready(function() {
     if (e.which === 13 || e.which === 1) {
       var term = $('input[name=trigger]').val()
       $('input[name="trigger"]').val(term);
-      $('.js-trigger-text').text(term);
       if ($('.js-tweet-drawer').hasClass('visible')) {
         loadTweets(term);
       }
