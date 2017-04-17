@@ -15,7 +15,7 @@ exports.welcomeEmail = function (name, email, token, callback) {
       return callback(err, null)
     }
     var data = {
-      from: 'Donate for Donald <noreply@hackthecyber.com>',
+      from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
       subject: 'Welcome!!!',
       html: html
@@ -43,7 +43,7 @@ exports.forgotEmail = function (name, email, token, callback) {
       return callback(err, null)
     }
     var data = {
-      from: 'Donate for Donald <noreply@hackthecyber.com>',
+      from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
       subject: 'You forgot your password! Sad!',
       html: html
@@ -62,7 +62,6 @@ exports.changedEmail = function (name, email, callback) {
     layout: 'email',
     name: name,
     email: email,
-    token: token,
     baseUrl: app.get('baseUrl')
   }
   app.render('email/passwordChanged', params, (err, html) => {
@@ -71,9 +70,40 @@ exports.changedEmail = function (name, email, callback) {
       return callback(err, null)
     }
     var data = {
-      from: 'Donate for Donald <noreply@hackthecyber.com>',
+      from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
       subject: 'Your password has been changed',
+      html: html
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(error)
+      console.log(body);
+      callback(error, body)
+    });
+  })
+}
+
+exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
+  // allow this to be configurable
+  if (!app.get('sendDonationEmail')) return;
+  var params = {
+    layout: 'email',
+    name: name,
+    email: email,
+    tweetBody: tweetBody,
+    tweetID: tweetID,
+    baseUrl: app.get('baseUrl')
+  }
+  app.render('email/donated', params, (err, html) => {
+    if (err) {
+      console.log(err)
+      return callback(err, null)
+    }
+    var data = {
+      from: 'Donate for Donald <' + app.get('email') + '>',
+      to: email, // you need to register the email on mailgun since this is a test account
+      subject: "You just donated! You're a winner, not a loser.",
       html: html
     };
 

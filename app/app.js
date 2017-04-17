@@ -11,4 +11,19 @@ if (process.env.NODE_ENV !== 'production') {
   app.set('baseUrl', 'https://hackthecyber.herokuapp.com/')
 }
 
+// This is the testing email I've been using
+// in production we need a different one
+var email = 'noreply@donatefordonald.com'
+if (process.env.EMAIL) {
+  email = process.env.EMAIL
+}
+
+app.set('email', email)
+
+if (process.env.SEND_DONATION_EMAIL) {
+  app.set('sendDonationEmail', true)
+} else {
+  app.set('sendDonationEmail', false)
+}
+
 module.exports = app
