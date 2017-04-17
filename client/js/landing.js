@@ -254,8 +254,8 @@ function getLandingInputs() {
   var amount = ($('.js-toggle-other').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   return {
-    charity: charity,
-    trigger: trigger,
+    charityId: charity,
+    name: trigger,
     amount: amount,
   }
 }
