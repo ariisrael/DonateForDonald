@@ -62,10 +62,14 @@ module.exports = {
         });
     },
     destroy: (req, res) => {
-        findByIdAndRemove(req.params.id, (err, trigger) => {
-            if (err)
-                return console.error(err);
-            res.json(trigger);
-        });
+      var query = {}
+      query._id = req.params.id || req.body.id
+      query.userId = req.user.id
+      Trigger.find(query).remove().exec((err, trigger) => {
+        if (err) {
+          return console.error(err);
+        }
+        res.json(trigger);
+      })
     }
 }
