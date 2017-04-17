@@ -63,19 +63,18 @@ html {
               </div>
               <script>
               $('.js-toggle-other').on('click', function() {
-                $('.js-mobile-input').transition('scale');
-                $(this).removeClass('visible').css('display', 'none');
+                console.log('toggle input')
+                $('js-mobile-input').css('display', '')
+                $(this).css('display', 'none');
+                $('.js-mobile-input').css('display', '');
                 $('.mobile-amount').focus();
                 $('.mobile-amount').attr('value', '');
               });
 
-              $('.js-mobile-input').on('click', function(e) {
-                $(this).css('outline', 'none');
-              });
+
               $('.mobile-amt').css('padding', '15px 25px');
               $('.mobile-amt').not($('.js-toggle-other')).on('click', function() {
-                $('.mobile-amount').removeClass('visible')
-                $('.mobile-amount').css('display', 'none');
+                $('.js-mobile-input').css('display', 'none');
                 $('.js-toggle-other').css('display', '');
                 $('a.js-toggle-other').focusout().blur();
               });
