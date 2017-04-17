@@ -19,6 +19,8 @@ const TweetController = controllers.tweets;
 const CharityController = controllers.charities;
 const PaymentController = controllers.payments;
 
+const LOGIN_ONLY = UserController.ensureAuthenticated;
+
 const csrfProtection = csurf({ cookie: true })
 
 app.use('/api', require('./api'));
@@ -44,7 +46,10 @@ app.get('/faq', PageController.faq);
 app.get('/tweets', PageController.tweets);
 app.get('/confirm_email', UserController.confirmEmail)
 
-app.get('/account', UserController.ensureAuthenticated, UserController.accountGet);
+app.get('/account', LOGIN_ONLY, (req, res) => {
+  res.redirect('/settings')
+})
+
 // You cannot use put in a form, only via javascript
 app.post('/account', csrfProtection, UserController.ensureAuthenticated, UserController.accountPut);
 // you cannot use delete from a form, only via javascript

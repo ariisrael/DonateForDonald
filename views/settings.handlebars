@@ -19,6 +19,15 @@
             </button>
           </a>
 
+        {{#if user.facebook}}
+          <a href="/unlink/facebook" class="js-unlink-facebook">
+            <button class="ui button facebook icon" style="margin-left: 10px">
+              <i class="facebook icon"></i>
+              Unlink Facebook
+            </button>
+          </a>
+        {{/if}}
+
         <a href="/auth/twitter">
           <button class="ui button twitter icon" style="margin-left: 10px">
             <i class="twitter icon"></i>
@@ -29,7 +38,15 @@
             {{/if}}
           </button>
         </a>
+
+        <a href="/unlink/twitter" class="js-unlink-twitter {{#if_not user.twitter}}hide{{/if_not}}">
+          <button class="ui button twitter icon" style="margin-left: 10px">
+            <i class="twitter icon"></i>
+            Unlink Twitter
+          </button>
+        </a>
       </div>
+
       <form id="" class="ui large form" method="post" action="/account">
         <h3>Email</h3>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">

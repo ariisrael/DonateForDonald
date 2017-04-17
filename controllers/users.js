@@ -357,7 +357,7 @@ exports.unlink = function(req, res, next) {
         break;
       default:
         req.flash('error', { msg: 'Invalid OAuth Provider' });
-        return res.redirect('/account');
+        return res.redirect('/settings');
     }
     user.save(function(err) {
       req.flash('success', { msg: 'Your account has been unlinked.' });
@@ -478,7 +478,7 @@ exports.resetPost = function(req, res, next) {
     function(user, done) {
       changedEmail(user.name || user.email, user.email, function(err, data) {
         if (err) console.log(err)
-        res.redirect('/account')
+        res.redirect('/settings')
       })
     }
   ]);
