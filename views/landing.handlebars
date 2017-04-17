@@ -35,7 +35,12 @@ html {
           <br>
           <!-- Choose amount -->
           <style>
-
+          html {
+            overflow: hidden;
+          }
+          .main-landing {
+            overflow-y: auto;
+          }
           input.mobile-amount {
             border-left: none !important;
             border-right: 1px solid #ddd !important;
@@ -53,7 +58,7 @@ html {
             <a class="ui huge toggle button mobile-amt amount-1 fluid" style="width: 20%; display: inline-block">$1</a>
             <a class="ui huge toggle button mobile-amt amount-5 fluid" style="width: 20%; display: inline-block">$5</a>
             <a class="ui huge toggle button mobile-amt amount-10 fluid" style="width: 23%; display: inline-block">$10</a>
-            <div class="mobile-responsive-input" style="display: inline-block; margin-right: 0px; padding: 0px; width: 32%">
+            <div class="mobile-responsive-input" style="display: inline-block; margin-right: 0px; padding: 0px; width: 31.5%">
               <a class="ui huge toggle mobile-amt button js-toggle-other fluid visible" style="margin-right: 0px;">
                 Other
               </a>
