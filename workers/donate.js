@@ -2,6 +2,7 @@ const request = require('request');
 
 const PANDAPAY = require('../config/pandapay');
 var replyTweet = require('./tweetAtTrump')
+const donatedEmail = require('../utils/emails').donatedEmail
 
 const models = require('../models')
 const Donation = models.Donation
@@ -37,6 +38,9 @@ function donationRequest(user, trigger, tweet, donation) {
         return console.error(err)
       }
       replyTweet(user, tweet, trigger.charityId)
+      var userName = user.name || user.email
+      var userEmail = user.email
+      donatedEmail(userName, user.email, tweet.text, tweet._id)
     })
   });
 }
@@ -53,7 +57,7 @@ function makeDonation(user, trigger, tweet) {
     if (err) {
       return console.error(err)
     }
-    donateNow(user, trigger, tweet, donation)
+    donationRequest(user, trigger, tweet, donation)
   })
   return donation
 }
