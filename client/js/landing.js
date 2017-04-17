@@ -1,5 +1,14 @@
 $(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
+
+  var trigger = getUrlParameter('trigger');
+
+  if(trigger) {
+    $('.js-trigger-text').text(trigger).removeClass('default');
+    $('input[name="trigger"]').val(trigger.toLowerCase());
+    $('.left-button button').removeClass('disabled');
+  }
+
   $(".toggle")
     .on('click', function () {
       $(this).toggleClass('selected-amount');
@@ -128,6 +137,21 @@ function updateTweetTerm(term) {
   $('.js-tweet-term').empty();
   $('.js-tweet-term').text(term);
 }
+
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
 
 function landingDonate() {
   var charity = $('input[name=charity]').val().trim();
