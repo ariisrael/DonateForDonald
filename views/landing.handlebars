@@ -63,7 +63,6 @@ html {
               </div>
               <script>
               $('.js-toggle-other').on('click', function() {
-                console.log('toggle input')
                 $('js-mobile-input').css('display', '')
                 $(this).css('display', 'none');
                 $('.js-mobile-input').css('display', '');
@@ -90,21 +89,31 @@ html {
           </script>
           <!-- End choose amount -->
 
+          <style>
+            @media only screen and (max-width: 500px) {
+              .long-button-text {
+                display: none;
+              }
+            }
+
+          </style>
+
           <!-- Landing CTAs -->
           <div class="two-buttons">
 
 
             <!-- CTA: Donate -->
-            <div class="left-button js-donate">
-              <button class="ui huge icon button disabled fluid" onclick="landingDonate()">
-                <i class="lightning icon"></i> Donate
-              </button>
-            </div>
+
             <!-- End CTA: Donate -->
             <!-- CTA: View Tweets -->
-            <div class="right-button">
+            <div class="left-button">
               <button class="ui icon huge button basic disabled fluid js-tweets" style="border: 1px solid #ddd">
-                <i class="twitter icon"></i> View Tweets
+                <i class="twitter icon"></i> View<span class="long-button-text"> Tweets</span>
+              </button>
+            </div>
+            <div class="right-button js-donate">
+              <button class="ui huge icon button disabled fluid" onclick="landingDonate()">
+                <i class="lightning icon"></i> Donate
               </button>
             </div>
             <!-- End CTA: View Tweets -->

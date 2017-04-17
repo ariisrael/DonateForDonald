@@ -438,21 +438,11 @@ nav {
         position: relative;
         top: -10px;
     }
-    .two-buttons > div.left-button {
-        padding-right: 0px;
-    }
-    .two-buttons > div.right-button {
-        margin-top: 10px;
-        padding-left: 0px;
-    }
+
     .share-text {
         display: none !important;
     }
 
-    .landing-form .left-button {
-        display: block !important;
-        width: 100% !important;
-    }
     img.user-picture {
         border-radius: 100% !important;
     }
@@ -479,9 +469,7 @@ nav {
         position: relative !important;
         left: 30px !important;
     }
-    .landing-form .right-button {
-        width: 100%;
-    }
+
     .amounts > a {
         border-right: 1px solid #888;
     }
