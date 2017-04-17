@@ -277,7 +277,7 @@ function isNumeric(n) {
 
 function validateLanding() {
   var inputs = getLandingInputs();
-  if (Object.keys(inputs).length === 3 && isNumeric(inputs.amount) && (inputs.charity.length === 10 && inputs.charity.indexOf('-')) && inputs.trigger.length > 0) {
+  if (Object.keys(inputs).length === 3 && isNumeric(inputs.amount) && (inputs.charityId.length === 10 && inputs.charityId.indexOf('-')) && inputs.name.length > 0) {
     enableDonate();
   } else {
     disableDonate();
