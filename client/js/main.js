@@ -2,7 +2,7 @@ $(document).ready(function () {
   var rawTrigger = localStorage.getItem('trigger');
   if(rawTrigger) {
     var userTrigger = JSON.parse(rawTrigger);
-    $('.js-trigger-label').attr('data-content', userTrigger.name);
+    $('.js-trigger-label').attr('data-content', userTrigger.triggerName);
     $('.js-charity-label').attr('data-content', userTrigger.charityName);
     $('.js-charity-label').popup();
     $('.js-trigger-label').popup();
@@ -18,6 +18,8 @@ $(document).ready(function () {
     if(rawTrigger) {
       var userTrigger = JSON.parse(rawTrigger);
       delete userTrigger.charityName;
+      delete userTrigger.triggerName;
+
       userTrigger.social = true;
       jQuery.ajax({
         type: 'post',
@@ -41,6 +43,8 @@ $(document).ready(function () {
     if (rawTrigger) {
       var userTrigger = JSON.parse(rawTrigger);
       delete userTrigger.charityName;
+      delete userTrigger.triggerName;
+
       jQuery.ajax({
         type: 'post',
         url: '/api/triggers',

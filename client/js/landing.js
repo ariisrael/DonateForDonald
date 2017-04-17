@@ -135,6 +135,11 @@ function landingDonate() {
   var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   var charityName;
+  var triggerName;
+  if(trigger) {
+    triggerName = $('.js-trigger-text').text();
+    console.log('Capitalized', triggerName);
+  }
   charities.forEach(function(c) {
     if(c.ein === charity) {
       charityName = c.name;
@@ -143,6 +148,7 @@ function landingDonate() {
   var userTrigger = getLandingInputs();
   console.log(userTrigger)
   userTrigger.charityName = charityName;
+  userTrigger.triggerName = triggerName;
   if (user) { // User signed in, store in db
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
     if (user.paymentToken) {
