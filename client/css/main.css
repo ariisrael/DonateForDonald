@@ -442,18 +442,6 @@ nav {
   margin-top: 5%;
 }
 
-@media only screen and (min-width: 900px) {
-  .mobile-responsive-input {
-    width: 30% !important;
-  }
-}
-
-@media only screen and (min-width: 1015px) {
-  .mobile-responsive-input {
-    width: 31.5% !important;
-  }
-}
-
 @media only screen and (max-width: 500px) {
     .headline {
         font-size: 22px !important;
