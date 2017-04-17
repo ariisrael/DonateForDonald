@@ -74,7 +74,7 @@ letter-spacing: 1px;
 }
 
 .email-nag {
-width:100%; padding: 10px; background-color: #1dcaff; color: #fff;
+width:100%; padding: 10px; background-color: #00aced; color: #fff;
 }
 
 
@@ -610,7 +610,7 @@ nav {
 .landing-left > img {
     position: relative;
     margin-top: 6%;
-    height: auto;
+    height: 300px !important;
     width: 100%
 }
 .landing-left {
@@ -637,8 +637,12 @@ main {
 .landing-right {
     padding-right: 20px;
 }
+
+.no-triggers {
+	margin-top: 30px !important;
+}
 .landing-left > img {
-    height: 100% !important;
+    height: 80% !important;
     width: 95% !important;
 }
 .landing-left {
