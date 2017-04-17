@@ -2,6 +2,7 @@ $(document).ready(function () {
   var rawTrigger = localStorage.getItem('trigger');
   if(rawTrigger) {
     var userTrigger = JSON.parse(rawTrigger);
+    console.log(userTrigger);
     $('.js-trigger-label').attr('data-content', userTrigger.triggerName);
     $('.js-charity-label').attr('data-content', userTrigger.charityName);
     $('.js-charity-label').popup();

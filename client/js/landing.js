@@ -146,7 +146,6 @@ function landingDonate() {
     }
   });
   var userTrigger = getLandingInputs();
-  console.log(userTrigger)
   userTrigger.charityName = charityName;
   userTrigger.triggerName = triggerName;
   if (user) { // User signed in, store in db
