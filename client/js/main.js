@@ -2,11 +2,8 @@ $(document).ready(function () {
   var rawTrigger = localStorage.getItem('trigger');
   if(rawTrigger) {
     var userTrigger = JSON.parse(rawTrigger);
-    console.log(userTrigger);
-    $('.js-trigger-label').attr('data-content', userTrigger.triggerName);
-    $('.js-charity-label').attr('data-content', userTrigger.charityName);
-    $('.js-charity-label').popup();
-    $('.js-trigger-label').popup();
+    $('.js-charity-label span').text(userTrigger.charityName);
+    $('.js-trigger-label span').text(userTrigger.triggerName);
   }
   var redirectUrl = "/auth/twitter/callback";
   if(user && user.twitter) {
