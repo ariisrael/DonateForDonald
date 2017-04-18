@@ -2,7 +2,7 @@ const request = require('request');
 
 const PANDAPAY = require('../config/pandapay');
 var replyTweet = require('./tweetAtTrump')
-const donatedEmail = require('../utils/emails').donatedEmail
+const donatedEmail = require('../utils/email').donatedEmail
 
 const models = require('../models')
 const Donation = models.Donation
