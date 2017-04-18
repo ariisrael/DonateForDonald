@@ -5,8 +5,8 @@ $(document).ready(function() {
   var charity = getUrlParameter('charity');
 
   if(trigger) {
-    $('.js-trigger-text').text(trigger).removeClass('default');
-    $('input[name="trigger"]').val(trigger.toLowerCase());
+    $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
+    $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
     $('.left-button button').removeClass('disabled');
   }
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
       var ein = false;
       var cIdx = 0;
       while (!ein) {
-        if(charities[cIdx].name.toLowerCase() === charity.toLowerCase()) {
+        if(charities[cIdx].name.toLowerCase() === charity.toLowerCase().replace('+', ' ')) {
           ein = charities[cIdx].ein;
           console.log('EIN:', ein);
         }
