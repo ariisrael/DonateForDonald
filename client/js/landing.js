@@ -55,7 +55,6 @@ $(document).ready(function() {
 
         loadTweets(trigger);
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
-        $('main').css('overflow-y', 'hidden');
         $('body').css('overflow-y', 'hidden');
         $('html').css('overflow-y', 'hidden');
 
