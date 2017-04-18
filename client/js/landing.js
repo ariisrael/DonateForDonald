@@ -2,11 +2,17 @@ $(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
 
   var trigger = getUrlParameter('trigger');
+  var charity = getUrlParameter('charity');
 
   if(trigger) {
     $('.js-trigger-text').text(trigger).removeClass('default');
     $('input[name="trigger"]').val(trigger.toLowerCase());
     $('.left-button button').removeClass('disabled');
+  }
+
+  if(charity) {
+    $('input[name="charity"]').val(charity).trigger('change');
+    console.log('ein');
   }
 
   $(".toggle")
