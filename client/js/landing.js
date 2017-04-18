@@ -11,8 +11,16 @@ $(document).ready(function() {
   }
 
   if(charity) {
-    $('input[name="charity"]').val(charity).trigger('change');
-    console.log('ein');
+      var ein = false;
+      var cIdx = 0;
+      while (!ein) {
+        if(charities[cIdx].name.toLowerCase() === charity.toLowerCase()) {
+          ein = charities[cIdx].ein;
+          console.log('EIN:', ein);
+        }
+        cIdx++;
+      }
+    $('input[name="charity"]').val(ein).trigger('change');
   }
 
   $(".toggle")
