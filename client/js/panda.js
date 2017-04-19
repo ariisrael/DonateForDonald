@@ -18,7 +18,11 @@ $(document).ready(function() {
         url: '/api/users/' + user.id,
         data: data,
         success: function() {
-          window.location.replace("/social");
+          if ($('.payment-page').length) {
+            window.location.replace("/social");
+          } else {
+            console.log('success')
+          }
         },
         dataType: 'json'
       })
