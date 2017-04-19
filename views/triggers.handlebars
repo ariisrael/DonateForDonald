@@ -1,11 +1,12 @@
-{{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag email-nag">
-  <div class="ui text container">
-    <p>
-      Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-    </p>
+{{> header}}
+{{#if_not user.emailConfirmed }}
+  <div class="ui inline js-email-nag email-nag">
+    <div class="ui text container">
+      <p>
+        Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </p>
+    </div>
   </div>
-</div>
 {{/if_not}}
 <div class="ui text container web-form triggers-page">
   <div class="ui divided items">
@@ -18,9 +19,12 @@
             <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%" />
       </div>
     </div>
-    {{/if_not}} {{#each triggers}}
+    {{/if_not}}
+
+    {{#each triggers}}
 
     <div class="item js-trigger-item js-trigger-id-{{this.id}}">
+      <meta class="trigger-data" data-amount="{{this.amount}}" data-charity={{this.charityId.id}} data-term="{{this.name}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
         <img src="{{this.charityId.image}}">
       </div>
@@ -30,7 +34,9 @@
         <div class=" ui right floated horizontal small statistic">
 
           <div class="value">
-            <i class="usd green small icon"></i>{{this.amount}}</div>
+            <i class="usd green small icon"></i>
+            <span class="trigger-amount">{{this.amount}}<span>
+          </div>
           <div class="label">
             / tweet
           </div><br>
@@ -39,7 +45,7 @@
         <div class="header trigger-title">{{this.name}} </div>
         <div class="meta">
 
-          <span class="stay"> {{this.charityId.name}}</span>
+          <span class="stay charity-name"> {{this.charityId.name}}</span>
         </div>
 
         <div class="extra">
@@ -66,7 +72,7 @@
             <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             <span class="text"> Turn On</span>
           </button>
-          <button class="ui button small js-edit-button icon"><i class="icon write"></i> Edit</button>
+          <button class="ui button small js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
           <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
             data-position="right center"><i class="icon share"></i> Share</button>
         </div>
@@ -76,6 +82,7 @@
   </div>
 
   <div class="ui small modal">
+    <meta class="js-editing-trigger-id" data-id="">
     <i class="close icon"></i>
     <div class="header">
       Update Your Trigger
@@ -84,13 +91,13 @@
       <form class="ui form">
           <div class="field">
             <label>Term</label>
-            <p>Fake News</p>
+            <p class="js-term">Fake News</p>
           </div>
           <div class="field">
             <label>Amount</label>
           <div class="ui right labeled input">
   <div class="ui basic label">$</div>
-          <input type="number" name="amount" placeholder="Amount">
+          <input class="amount" type="number" name="amount" placeholder="Amount">
         </div>
       </div>
         <div class="field" style="margin-bottom: 20px">
@@ -107,17 +114,27 @@
         </div>
       </form>
     </div>
-    <div class="actions">
+    <div class="actions js-actions-primary">
       <div class="ui deny basic button">
         Cancel
       </div>
-      <div class="ui negative right labeled icon button">
+      <div class="ui red right labeled icon button js-delete-trigger">
         Delete
         <i class="trash icon"></i>
       </div>
-      <div class="ui positive right labeled icon button">
+      <div class="ui green right labeled icon button js-update-trigger">
         Save Changes
         <i class="checkmark icon"></i>
+      </div>
+    </div>
+    <div class="actions js-actions-confirm hide">
+      Are you sure you wish to delete this trigger?
+      <div class="ui basic button js-delete-trigger-cancel">
+        Cancel
+      </div>
+      <div class="ui red right labeled icon button js-delete-trigger-confirm">
+        Delete
+        <i class="trash icon"></i>
       </div>
     </div>
   </div>

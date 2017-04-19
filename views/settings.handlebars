@@ -1,42 +1,35 @@
+{{> header}}
+<main class="ui text container settings-page">
+  <div>
+    <h1>
+      {{title}}
+    </h1>
+    <div>
+      <h3>Social</h3>
+      <div class="ui buttons" style="position: relative; left: -10px">
 
-<body class="site">
-  {{> header}}
-  <main>
-    <div class="ui text container settings-page">
-      <h1>{{title}}
-      </h1>
-      <div>
-        <h3>Social</h3>
-        <div class="ui buttons" style="position: relative; left: -10px">
-
-          {{#if_not user.facebook}}
-          <a href="/auth/facebook">
-            <button class="ui large button facebook icon">
+        {{#if_not user.facebook}}
+        <a href="/auth/facebook">
+          <button class="ui large button facebook icon">
               <i class="facebook icon"></i>
                 Link Facebook
             </button>
-          </a>
-          {{/if_not}}
-
-
-        {{#if user.facebook}}
-          <a href="/unlink/facebook" class="js-unlink-facebook">
-            <button class="ui button large red icon" style="margin-left: 10px">
+        </a>
+        {{/if_not}} {{#if user.facebook}}
+        <a href="/unlink/facebook" class="js-unlink-facebook">
+          <button class="ui button large red icon" style="margin-left: 10px">
               <i class="facebook icon"></i>
               Unlink Facebook
             </button>
-          </a>
-        {{/if}}
-
-        {{#if_not user.twitter}}
+        </a>
+        {{/if}} {{#if_not user.twitter}}
         <a href="/auth/twitter">
           <button class="ui button large twitter icon" style="margin-left: 10px">
             <i class="twitter icon"></i>
               Link Twitter
           </button>
         </a>
-        {{/if_not}}
-        {{#if user.twitter}}
+        {{/if_not}} {{#if user.twitter}}
         <a href="/unlink/twitter" class="js-unlink-twitter {{#if_not user.twitter}}hide{{/if_not}}">
           <button class="ui button large red icon" style="margin-left: 10px">
             <i class="twitter icon"></i>
@@ -46,15 +39,15 @@
         {{/if}}
 
       </div>
-
-      <form id="" class="ui large form" method="post" action="/account">
-        <h3>Email</h3>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="field">
-          <label>Current Email</label>
-          <div>{{user.email}}</div>
-        </div>
-        <div class="two fields">
+    </div>
+    <form id="" class="ui large form" method="post" action="/account">
+      <h3>Email</h3>
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="field">
+        <label>Current Email</label>
+        <div>{{user.email}}</div>
+      </div>
+      <div class="two fields">
         <div class="field">
           <label>New Email</label>
           <div class="ui input fluid">
@@ -67,16 +60,16 @@
             <input type="email" name="confirm_email" placeholder="Confirm Email">
           </div>
         </div>
-        </div>
-        <div class="field">
-          <button class="ui button primary icon"><i class="icon envelope"></i> Update Email
-          </button>
-        </div>
-      </form>
-      <form id="" class="ui large form" method="post" action="/account">
-        <h3>Password</h3>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="two fields">
+      </div>
+      <div class="field">
+        <button class="ui button primary icon"><i class="icon envelope"></i> Update Email
+        </button>
+      </div>
+    </form>
+    <form id="" class="ui large form" method="post" action="/account">
+      <h3>Password</h3>
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="two fields">
         <div class="field">
           <label>New Password</label>
           <div class="ui input fluid">
@@ -89,52 +82,67 @@
             <input type="password" name="confirm" placeholder="Confirm Password">
           </div>
         </div>
+      </div>
+      <div class="field">
+        <button class="ui button primary icon"><i class="icon key"></i> Change Password
+        </button>
+      </div>
+    </form>
+    <form id="" method="post" action="/account" class="ui large form">
+      <h3>Payment</h3>
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="ui two fields">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" name="first_name" placeholder="First Name">
         </div>
         <div class="field">
-          <button class="ui button primary icon"><i class="icon key"></i> Change Password
-          </button>
+          <label>Last Name</label>
+          <input type="text" name="last_name" placeholder="Last Name">
         </div>
-      </form>
-      <form id="" method="post" action="/account" class="ui large form">
-        <h3>Payment</h3>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="ui two fields">
-          <div class="field">
-              <label>First Name</label>
-              <input type="text" name="first_name" placeholder="First Name">
-          </div>
-          <div class="field">
-              <label>Last Name</label>
-              <input type="text" name="last_name" placeholder="Last Name">
-          </div>
+      </div>
+      <div class="field">
+        <label>Credit Card Number</label>
+        <div class="ui input fluid">
+          <input type="" name="credit_card" placeholder="Credit Card Number">
+        </div>
+      </div>
+      <div class="ui two fields">
+        <div class="field">
+          <label>CVV</label>
+          <input type="text" name="cvv" placeholder="CVV" maxlength="4">
         </div>
         <div class="field">
-            <label>Credit Card Number</label>
-            <div class="ui input fluid">
-            <input type="" name="credit_card" placeholder="Credit Card Number">
-            </div>
+          <label>Expiration Date</label>
+          <input type="text" name="expiration" placeholder="MM/YYYY">
         </div>
-        <div class="ui two fields">
-          <div class="field">
-              <label>CVV</label>
-              <input type="text" name="cvv" placeholder="CVV" maxlength="4">
-          </div>
-          <div class="field">
-              <label>Expiration Date</label>
-              <input type="text" name="expiration" placeholder="MM/YYYY">
-          </div>
+      </div>
+      <div class="field">
+        <button class="ui button primary icon"><i class="icon credit card"></i> Save Payment
+        </button>
+      </div>
+    </form>
+    <form id="delete-account" method="post" action="/delete-account" class="ui large form">
+      <h3>Account</h3>
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="field">
+        <button class="ui red button icon delete-account-btn" type="submit"><i class="icon trash"></i>Delete Account</button>
+      </div>
+    </form>
+
+
+
+    <div class="ui small modal delete-account">
+      <div class="header">
+        Are you sure you want to delete your account? This cannot be undone.
+      </div>
+      <div class='actions'>
+        <div class="ui deny basic button">
+          Cancel
         </div>
-        <div class="field">
-          <button class="ui button primary icon"><i class="icon credit card"></i> Save Payment
-          </button>
+        <div class="ui red right labeled icon button js-confirm-delete">
+          <i class="trash icon"></i> Delete My Account
         </div>
-      </form>
-      <form id="" method="post" action="/account" class="ui large form">
-        <h3>Account</h3>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="field">
-          <button class="ui red button icon delete-account-btn" type="submit"><i class="icon trash"></i>Delete Account</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </main>
+</main>

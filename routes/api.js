@@ -38,6 +38,6 @@ api.post('/tweets', ADMIN_ONLY, TweetController.create);
 api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
 api.put('/users/:id', USER_ONLY, UserController.update);
 
-api.delete('/triggers/:id', USER_ONLY, TriggerController.update);
+api.delete('/triggers/:id', LOGIN_ONLY, TriggerController.destroy);
 
 module.exports =  api;
