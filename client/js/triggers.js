@@ -42,13 +42,14 @@ $(document).ready(function () {
     updateTrigger(id, data, function(error, data) {
       if (error) {
         // TODO: deal with this
+      } else {
+        var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
+        metadata.data('amount', data.trigger.amount)
+        $('.js-trigger-id-' + id + ' .trigger-amount').text(data.trigger.amount)
+        metadata.data('charity', data.charity._id)
+        $('.js-trigger-id-' + id + ' .charity-name').text(data.charity.name)
+        $('.js-trigger-id-' + id + ' .charity-image img').attr('src', data.charity.image)
       }
-      var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
-      metadata.data('amount', data.trigger.amount)
-      $('.js-trigger-id-' + id + ' .trigger-amount').text(data.trigger.amount)
-      metadata.data('charity', data.charity._id)
-      $('.js-trigger-id-' + id + ' .charity-name').text(data.charity.name)
-      $('.js-trigger-id-' + id + ' .charity-image img').attr('src', data.charity.image)
     })
   })
 
