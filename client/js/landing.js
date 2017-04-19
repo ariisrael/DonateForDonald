@@ -23,6 +23,10 @@ $(document).ready(function() {
     $('input[name="charity"]').val(ein).trigger('change');
   }
 
+  $('.js-action-btn').on('click', function() {
+        $('.js-action-btn').addClass('loading');
+
+  }); 
   $(".toggle")
     .on('click', function () {
       $(this).toggleClass('selected-amount');
