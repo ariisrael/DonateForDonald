@@ -5,21 +5,17 @@ $(document).ready(function() {
 
   var trigger = getUrlParameter('trigger');
   var charity = getUrlParameter('charity');
-
   if(trigger) {
     $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
     $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
     $('.left-button button').removeClass('disabled');
   }
-
   if(charity) {
       var ein = false;
       var cIdx = 0;
-      for (var cIdx = 0; cIdx < charities.length; cIdx++) {
-        if(charities[cIdx].name.toLowerCase() === charity.toLowerCase().replace('+', ' ')) {
+      while (!ein && cIdx <= charities.length) {
+        if(charities[cIdx].ein.replace('-', '') === charity.replace('-', '')) {
           ein = charities[cIdx].ein;
-          console.log('EIN:', ein);
-          break;
         }
       }
     $('input[name="charity"]').val(ein).trigger('change');
