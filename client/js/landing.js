@@ -184,7 +184,7 @@ function landingDonate() {
   var userTrigger = getLandingInputs();
   userTrigger.charityName = charityName;
   userTrigger.triggerName = triggerName;
-  if (user) { // User signed in, store in db
+  if (user && Object.keys(user).length > 0) { // User signed in, store in db
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
     jQuery.ajax({
       type: 'post',

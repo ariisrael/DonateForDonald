@@ -4,7 +4,7 @@
     <div class="ui text container web-form">
       <h1>{{title}}
       </h1>
-      <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org" class="forgot-pass">team@donatefordonald.org</a>.</span>
+      <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org">team@donatefordonald.org</a>.</span>
       </div>
       <form class="ui large form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -12,13 +12,13 @@
         <div class="field">
           <label>Email</label>
           <div class="ui input fluid">
-            <input type="text" placeholder="Email" name="email">
+            <input type="email" placeholder="Email" name="email">
           </div>
         </div>
         <div class="field">
           <label>Subject</label>
           <div class="ui input fluid">
-            <input type="text" placeholder="Subject" name="subject">
+            <input type="text" maxlength="60" placeholder="Subject" name="subject">
           </div>
         </div>
       </div>
