@@ -35,9 +35,13 @@ $(document).ready(function () {
     })
     .done(function(data, textStatus, jqXHR) {
       $('.js-trigger-id-' + id).remove()
+      $('.ui.modal .actions.js-actions-primary').removeClass('hide')
+      $('.ui.modal .actions.js-actions-confirm').addClass('hide')
       $('.ui.modal').modal('hide');
     })
     .fail(function(data, textStatus, errorThrown) {
+      $('.ui.modal .actions.js-actions-primary').removeClass('hide')
+      $('.ui.modal .actions.js-actions-confirm').addClass('hide')
       $('.ui.modal').modal('hide');
       // TODO: put a popup message on failure
     })
