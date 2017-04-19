@@ -8,14 +8,14 @@
 <body class="site">
   {{> header}}
   <main>
-    <div class="ui text container web-form">
+    <div class="ui text container web-form" >
       <h1>Reply to Donald's Tweet
       </h1>
       <div class="ui subheader">
         When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given
         more to charity than he ever has - and tag the charity too.
       </div>
-      <div class="social-tweet" style="font-family: Helvetica; font-size: 16px; padding-top: 10px; line-height: 160%"><span>
+      <div class="social-tweet" style="font-family: Helvetica; font-size: 16px; padding-top: 10px; line-height: 160%" ><span>
         I donated to
           <span class="js-charity-handles" style="color: #00aced; font-weight: 700"></span>
            because <span style="color: #00aced; font-weight: 700">@realDonaldTrump</span> tweeted "<span class="js-trigger-name" style="font-weight: 700"></span>" again<a href="https://twitter.com/search?q=%23DonateForDonald" style="color: #00aced; font-weight: 700"> #DonateForDonald</a><a href="#" class="js-landing-link" style="color: #00aced; text-overflow: ellipsis; overflow: hidden; word-break: break-all">www.donatefordonald.org</a>
@@ -23,18 +23,29 @@
       </div>
       <div class="connect-twitter-btn">
         {{#if user.twitter}}
-        <a class="ui primary icon massive fluid button connect-twitter"><i class="icon twitter"></i> Continue</a>
+        <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Continue</a>
         {{else}}
-        <a class="ui primary icon massive fluid button connect-twitter"><i class="icon twitter"></i> Connect Twitter</a>
+        <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Connect Twitter</a>
         {{/if}}
       </div>
-      <a class="skip-link">Skip <i class="ui icon right chevron"></i></a>
+      <a class="skip-link js-action-btn">Skip <i class="ui icon right chevron"></i></a>
       <div class="js-no-never" style="margin-top: 20px;">
         <div class="ui checkbox">
   <input type="checkbox" name="example">
   <label style="font-size: 90%; color: #777">Do not ask again, I'm antisocial</label>
 </div>
         </div>
-      </form>
+      </form>   
+
+
+    </div>
+ <div class="js-loader" style="display: none">
+    <img src="images/loading.gif" style="position: absolute; left: 46%; top: 30%; height: 80px">
     </div>
   </main>
+  <script>
+  $('.js-action-btn').on('click', function() {
+    $('.web-form').css('display', 'none');
+    $('.js-loader').css('display', '');
+  }); 
+  </script>
