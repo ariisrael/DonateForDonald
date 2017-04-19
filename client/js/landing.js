@@ -187,25 +187,26 @@ function landingDonate() {
   userTrigger.triggerName = triggerName;
   if (user) { // User signed in, store in db
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    if (user.twitter && user.paymentToken) {
-      jQuery.ajax({
-        type: 'post',
-        url: '/api/triggers',
-        data: userTrigger,
-        success: function () {
-          console.log('Trigger', userTrigger, 'stored');
-          localStorage.clear();
+    jQuery.ajax({
+      type: 'post',
+      url: '/api/triggers',
+      data: userTrigger,
+      success: function () {
+        console.log('Trigger', userTrigger, 'stored');
+        // redirect based on where they are in the signin flow
+        // allow them to make triggers
+        // if they have no payment token or twitter response
+        if (user.twitter && user.paymentToken) {
           window.location.replace('/triggers');
-        },
-        dataType: 'json'
-      });
-    } else if (user.paymentToken) {
-      window.location.replace('/social');
-    } else {
-      window.location.replace('/payment');
-    }
-  }
-  else { // The user is not signed in
+        } else if (user.paymentToken) {
+          window.location.replace('/social');
+        } else {
+          window.location.replace('/payment');
+        }
+      },
+      dataType: 'json'
+    });
+  } else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
     window.location.replace("/login");
   }
