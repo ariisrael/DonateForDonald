@@ -1,11 +1,12 @@
-{{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag email-nag">
-  <div class="ui text container">
-    <p>
-      Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-    </p>
+{{> header}}
+{{#if_not user.emailConfirmed }}
+  <div class="ui inline js-email-nag email-nag">
+    <div class="ui text container">
+      <p>
+        Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </p>
+    </div>
   </div>
-</div>
 {{/if_not}}
 <div class="ui text container web-form triggers-page">
   <div class="ui divided items">
@@ -113,17 +114,27 @@
         </div>
       </form>
     </div>
-    <div class="actions">
+    <div class="actions js-actions-primary">
       <div class="ui deny basic button">
         Cancel
       </div>
-      <div class="ui negative right labeled icon button js-delete-trigger">
+      <div class="ui red right labeled icon button js-delete-trigger">
         Delete
         <i class="trash icon"></i>
       </div>
-      <div class="ui positive right labeled icon button js-update-trigger">
+      <div class="ui green right labeled icon button js-update-trigger">
         Save Changes
         <i class="checkmark icon"></i>
+      </div>
+    </div>
+    <div class="actions js-actions-confirm hide">
+      Are you sure you wish to delete this trigger?
+      <div class="ui basic button js-delete-trigger-cancel">
+        Cancel
+      </div>
+      <div class="ui red right labeled icon button js-delete-trigger-confirm">
+        Delete
+        <i class="trash icon"></i>
       </div>
     </div>
   </div>

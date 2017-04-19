@@ -17,6 +17,16 @@ $(document).ready(function () {
   });
 
   $('.ui.modal .js-delete-trigger').on('click', function() {
+    $('.ui.modal .actions.js-actions-primary').addClass('hide')
+    $('.ui.modal .actions.js-actions-confirm').removeClass('hide')
+  })
+
+  $('.ui.modal .js-delete-trigger-cancel').on('click', function() {
+    $('.ui.modal .actions.js-actions-primary').removeClass('hide')
+    $('.ui.modal .actions.js-actions-confirm').addClass('hide')
+  })
+
+  $('.ui.modal .js-delete-trigger-confirm').on('click', function() {
     var id = $('.ui.modal .js-editing-trigger-id').data('id');
     var url = '/api/triggers/' + id
     jQuery.ajax({
@@ -25,8 +35,10 @@ $(document).ready(function () {
     })
     .done(function(data, textStatus, jqXHR) {
       $('.js-trigger-id-' + id).remove()
+      $('.ui.modal').modal('hide');
     })
     .fail(function(data, textStatus, errorThrown) {
+      $('.ui.modal').modal('hide');
       // TODO: put a popup message on failure
     })
   })
@@ -43,13 +55,14 @@ $(document).ready(function () {
       if (error) {
         // TODO: deal with this
       } else {
+        $('.js-trigger-id-' + id + ' .charity-image img').attr('src', data.charity.image)
         var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
         metadata.data('amount', data.trigger.amount)
         $('.js-trigger-id-' + id + ' .trigger-amount').text(data.trigger.amount)
         metadata.data('charity', data.charity._id)
         $('.js-trigger-id-' + id + ' .charity-name').text(data.charity.name)
-        $('.js-trigger-id-' + id + ' .charity-image img').attr('src', data.charity.image)
       }
+      $('.ui.modal').modal('hide');
     })
   })
 
