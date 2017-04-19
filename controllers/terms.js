@@ -3,7 +3,7 @@ const Term = models.Term;
 
 module.exports = {
   index: (req, res) => {
-    Term.find((err, terms) => {
+    Term.find().select('term weight').exec((err, terms) => {
       if (err) {
         console.error(err)
         return res.json([])

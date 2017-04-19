@@ -15,10 +15,10 @@ $(document).ready(function() {
   if(charity) {
       var ein = false;
       var cIdx = 0;
-      while (!ein && cIdx <= charities.length) {
+      for (var cIdx = 0; cIdx < charities.length; cIdx++) {
         if(charities[cIdx].ein.replace('-', '') === charity.replace('-', '')) {
           ein = charities[cIdx].ein;
-        }
+        }  
       }
     $('input[name="charity"]').val(ein).trigger('change');
   }

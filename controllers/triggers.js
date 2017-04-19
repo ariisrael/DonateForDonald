@@ -55,22 +55,33 @@ module.exports = {
             trigger.userId = req.user.id
             trigger.save((err) => {
                 var response = {
-                    trigger: trigger
+                    trigger: {
+                      _id: trigger._id,
+                      name: trigger.name,
+                      charityId: trigger.charityId,
+                      userId: trigger.userId,
+                      amount: trigger.amount,
+                      social: trigger.social,
+                      active: trigger.active,
+                    }
                 }
                 if (err) {
                     response.error = err
                     console.error(err);
                     res.json(response)
                 }
-                Charity.findById(trigger.charityId, (err, charity) => {
-                  if (err) {
-                      response.error = err
-                      console.error(err);
-                      res.json(response)
-                  }
-                  response.charity = charity
-                  res.json(response)
-                })
+                Charity
+                  .findById(trigger.charityId)
+                  .select('_id name twitter image')
+                  .exec((err, charity) => {
+                    if (err) {
+                        response.error = err
+                        console.error(err);
+                        res.json(response)
+                    }
+                    response.charity = charity
+                    res.json(response)
+                  })
             });
         });
     },
