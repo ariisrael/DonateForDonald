@@ -10,6 +10,10 @@ $(document).ready(function () {
     var term = metadata.data('term')
     var amount = metadata.data('amount')
     var charity = metadata.data('charity')
+    $('.js-editing-trigger-data').data('trigger', {
+      charityId: charity,
+      amount: amount
+    })
     $('.ui.modal input[name="charity"]').val(charity).trigger('change');
     $('.ui.modal input[name="amount"]').val(amount)
     $('.modal .js-term').text(term)
@@ -53,6 +57,10 @@ $(document).ready(function () {
     var data = {
       charityId: $('.ui.modal input[name="charity"]').val(),
       amount: $('.ui.modal input[name="amount"]').val()
+    }
+    var trigger = $('.ui.modal .js-editing-trigger-data').data('trigger');
+    if (trigger.charityId == data.charityId && trigger.amount == data.amount) {
+      return $('.ui.modal').modal('hide');
     }
 
     updateTrigger(id, data, function(error, data) {
