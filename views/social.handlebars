@@ -40,12 +40,11 @@
 
     </div>
  <div class="js-loader" style="display: none">
-    <img src="images/loading.gif" style="margin: 0 auto">
+    <img src="images/loading.gif" style="margin: 0 auto; display: inline-block" />
     </div>
   </main>
   <script>
   $('.js-action-btn').on('click', function() {
-    $('.web-form').css('display', 'none');
-    $('.js-loader').css('display', '');
+    $('.js-action-btn').addClass('disabled');
   }); 
   </script>
