@@ -655,3 +655,10 @@ body {
 .no-triggers {
   text-align: center;
 }
+
+.settings-page .ui.buttons a {
+	margin-left: 10px;
+}
+.settings-page .ui.buttons a:first-child {
+	margin-left: 0;
+}

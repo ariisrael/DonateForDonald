@@ -17,21 +17,21 @@
         </a>
         {{/if_not}} {{#if user.facebook}}
         <a href="/unlink/facebook" class="js-unlink-facebook">
-          <button class="ui button large red icon" style="margin-left: 10px">
+          <button class="ui button large red icon">
               <i class="facebook icon"></i>
               Unlink Facebook
             </button>
         </a>
         {{/if}} {{#if_not user.twitter}}
         <a href="/auth/twitter">
-          <button class="ui button large twitter icon" style="margin-left: 10px">
+          <button class="ui button large twitter icon">
             <i class="twitter icon"></i>
               Link Twitter
           </button>
         </a>
         {{/if_not}} {{#if user.twitter}}
         <a href="/unlink/twitter" class="js-unlink-twitter {{#if_not user.twitter}}hide{{/if_not}}">
-          <button class="ui button large red icon" style="margin-left: 10px">
+          <button class="ui button large red icon">
             <i class="twitter icon"></i>
             Unlink Twitter
           </button>
@@ -146,3 +146,4 @@
       </div>
     </div>
 </main>
+<script src="//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js"></script>
