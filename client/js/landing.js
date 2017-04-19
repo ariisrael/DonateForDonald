@@ -18,7 +18,7 @@ $(document).ready(function() {
       for (var cIdx = 0; cIdx < charities.length; cIdx++) {
         if(charities[cIdx].ein.replace('-', '') === charity.replace('-', '')) {
           ein = charities[cIdx].ein;
-        }  
+        }
       }
     $('input[name="charity"]').val(ein).trigger('change');
   }
@@ -195,9 +195,7 @@ function landingDonate() {
   userTrigger.twitter = twitter;
   localStorage.setItem('trigger', JSON.stringify(userTrigger));
   if (user && Object.keys(user).length > 0) {
-    if (user.twitter && user.paymentToken) {
-      window.location.replace('/triggers');
-    } else if (user.paymentToken) {
+    if (user.paymentToken) {
       window.location.replace('/social');
     } else {
       window.location.replace('/payment');
