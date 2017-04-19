@@ -1,5 +1,6 @@
 const models = require('../models');
 const Trigger = models.Trigger;
+const Charity = models.Charity;
 
 module.exports = {
     index: (req, res) => {
@@ -41,7 +42,10 @@ module.exports = {
             if (trigger) {
                 for (key in req.body) {
                     if (key === 'id' || key === '_id') {
-                      continue
+                      continue;
+                    }
+                    if (key === 'name' || key === 'userId') {
+                      continue;
                     }
                     trigger[key] = req.body[key]
                 }
@@ -56,8 +60,17 @@ module.exports = {
                 if (err) {
                     response.error = err
                     console.error(err);
+                    res.json(response)
                 }
-                res.json(response)
+                Charity.findById(trigger.charityId, (err, charity) => {
+                  if (err) {
+                      response.error = err
+                      console.error(err);
+                      res.json(response)
+                  }
+                  response.charity = charity
+                  res.json(response)
+                })
             });
         });
     },
