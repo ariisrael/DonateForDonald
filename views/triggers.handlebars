@@ -1,12 +1,12 @@
-{{> header}}
-{{#if_not user.emailConfirmed }}
-  <div class="ui inline js-email-nag email-nag">
-    <div class="ui text container">
-      <p>
-        Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a>      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-      </p>
-    </div>
+{{> header}} {{#if_not user.emailConfirmed }}
+<div class="ui inline js-email-nag email-nag">
+  <div class="ui text container">
+    <p>
+      Please confirm your email to start donating or <a href="#" class="new-link">request a new reset link</a> <a href="#"
+        class="close-nag"><i class="close icon js-close-nag"></i></a>
+    </p>
   </div>
+</div>
 {{/if_not}}
 <div class="ui text container web-form triggers-page">
   <div class="ui divided items">
@@ -16,12 +16,11 @@
         <h3 class="ui header no-triggers">
           No triggers. Sad! <a href="/">Make some.</a>
         </h3>
-            <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%" />
+        <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
+        />
       </div>
     </div>
-    {{/if_not}}
-
-    {{#each triggers}}
+    {{/if_not}} {{#each triggers}}
 
     <div class="item js-trigger-item js-trigger-id-{{this.id}}">
       <meta class="trigger-data" data-amount="{{this.amount}}" data-charity={{this.charityId.id}} data-term="{{this.name}}">
@@ -46,91 +45,88 @@
         <div class="meta">
 
           <span class="stay charity-name"> {{this.charityId.name}}</span>
-        </div>
-
-        <div class="extra">
-          <div>
-            <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
-          </div>
-          <div>
-            <i class="green money icon"></i> ${{this.donations}} donated
           </div>
 
-        </div>
-        <div class="left floated trigger-actions">
-          <button class="ui button small icon red js-active-button
-            js-disable {{#if_not this.active}}hide{{/if_not}}"
-            data-id="{{this.id}}">
+          <div class="extra">
+            <div>
+              <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
+            </div>
+            <div>
+              <i class="green money icon"></i> ${{this.donations}} donated
+            </div>
+
+          </div>
+          <div class="left floated trigger-actions">
+            <button class="ui button small icon red js-active-button
+            js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
             <i class="icon power"></i>
             <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             Turn Off
           </button>
-          <button class="ui button small icon green js-active-button
-            js-enable {{#if this.active}}hide{{/if}}"
-            data-id="{{this.id}}">
+            <button class="ui button small icon green js-active-button
+            js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
             <i class="icon power"></i>
             <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             <span class="text"> Turn On</span>
           </button>
-          <button class="ui button small js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
-          <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
-            data-position="right center"><i class="icon share"></i> Share</button>
+            <button class="ui button small js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
+            <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
+              data-position="right center"><i class="icon share"></i> Share</button>
+          </div>
         </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
 
-  <div class="ui small modal">
-    <meta class="js-editing-trigger-id" data-id="">
-    <i class="close icon"></i>
-    <div class="header js-term" style="font-family: Bangers; letter-spacing: 1px; font-size: 26px">
-    </div>
-    <div class="content">
-      <form class="ui form">
+    <div class="ui small modal">
+      <meta class="js-editing-trigger-id" data-id="">
+      <i class="close icon"></i>
+      <div class="header js-term" style="font-family: Bangers; letter-spacing: 1px; font-size: 26px">
+      </div>
+      <div class="content">
+        <form class="ui form">
           <div class="field">
             <label>Amount</label>
-          <div class="ui right fluid inline labeled input">
-  <div class="ui label basic" style="">$</div>
-          <input class="amount" type="number" name="amount" placeholder="Amount">
-        </div>
-      </div>
-        <div class="field" style="margin-bottom: 20px">
-          <label>Charity</label>
-          <div class="js-select-charity">
-            <div class="ui dropdown labeled fluid inline basic search icon button">
-              <input type="hidden" name="charity">
-              <i class="heart icon"></i>
-              <div class="default text">Charity</div>
-              <div class="menu" id="charities">
+            <div class="ui right fluid inline labeled input">
+              <div class="ui label basic" style="">$</div>
+              <input class="amount" type="number" name="amount" placeholder="Amount">
+            </div>
+          </div>
+          <div class="field" style="margin-bottom: 20px">
+            <label>Charity</label>
+            <div class="js-select-charity">
+              <div class="ui dropdown labeled fluid inline basic search icon button">
+                <input type="hidden" name="charity">
+                <i class="heart icon"></i>
+                <div class="default text">Charity</div>
+                <div class="menu" id="charities">
+                </div>
               </div>
             </div>
           </div>
+        </form>
+      </div>
+      <div class="actions js-actions-primary">
+         <div class="ui deny basic icon button">
+          <i class="cancel icon"></i> Cancel
         </div>
-      </form>
-    </div>
-    <div class="actions js-actions-primary">
-      <div class="ui deny basic button">
-        Cancel
+
+        <div class="ui red icon button js-delete-trigger">
+          <i class="trash icon"></i> Delete
+        </div>
+               
+        <div class="ui green icon button js-update-trigger">
+          <i class="checkmark icon"></i> Save
+        </div>
       </div>
-      <div class="ui red right labeled icon button js-delete-trigger">
-        Delete
-        <i class="trash icon"></i>
-      </div>
-      <div class="ui green right labeled icon button js-update-trigger">
-        Save
-        <i class="checkmark icon"></i>
-      </div>
-    </div>
-    <div class="actions js-actions-confirm hide">
-      Are you sure you wish to delete this trigger?
-      <div class="ui basic button js-delete-trigger-cancel">
-        Cancel
-      </div>
-      <div class="ui red right labeled icon button js-delete-trigger-confirm">
-        Delete
-        <i class="trash icon"></i>
+      <div class="actions js-actions-confirm hide">
+        Are you sure you wish to delete this trigger?
+        <div class="ui basic button icon js-delete-trigger-cancel">
+          <i class="cancel icon"></i> Cancel
+        </div>
+        <div class="ui red icon button js-delete-trigger-confirm">
+          <i class="trash icon"></i> Delete
+        </div>
       </div>
     </div>
   </div>
-</div>
