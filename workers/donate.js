@@ -37,7 +37,9 @@ function donationRequest(user, trigger, tweet, donation) {
       if (err) {
         return console.error(err)
       }
-      tweetAtTrump(user, tweet, trigger.charityId, trigger)
+      if (trigger.social) {
+        tweetAtTrump(user, tweet, trigger.charityId, trigger)
+      }
       var userName = user.name || user.email
       var userEmail = user.email
       donatedEmail(userName, user.email, tweet.text, tweet._id)
