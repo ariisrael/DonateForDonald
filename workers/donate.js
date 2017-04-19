@@ -1,7 +1,7 @@
 const request = require('request');
 
 const PANDAPAY = require('../config/pandapay');
-var replyTweet = require('./tweetAtTrump')
+const tweetAtTrump = require('./tweetAtTrump')
 const donatedEmail = require('../utils/email').donatedEmail
 
 const models = require('../models')
@@ -37,7 +37,7 @@ function donationRequest(user, trigger, tweet, donation) {
       if (err) {
         return console.error(err)
       }
-      replyTweet(user, tweet, trigger.charityId)
+      tweetAtTrump(user, tweet, trigger.charityId, trigger)
       var userName = user.name || user.email
       var userEmail = user.email
       donatedEmail(userName, user.email, tweet.text, tweet._id)
