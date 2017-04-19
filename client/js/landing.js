@@ -1,6 +1,8 @@
 $(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
 
+  if (!$('.main-landing').length) return;
+
   var trigger = getUrlParameter('trigger');
   var charity = getUrlParameter('charity');
 
@@ -13,12 +15,12 @@ $(document).ready(function() {
   if(charity) {
       var ein = false;
       var cIdx = 0;
-      while (!ein) {
+      for (var cIdx = 0; cIdx < charities.length; cIdx++) {
         if(charities[cIdx].name.toLowerCase() === charity.toLowerCase().replace('+', ' ')) {
           ein = charities[cIdx].ein;
           console.log('EIN:', ein);
+          break;
         }
-        cIdx++;
       }
     $('input[name="charity"]').val(ein).trigger('change');
   }
@@ -187,7 +189,19 @@ function landingDonate() {
   userTrigger.triggerName = triggerName;
   if (user) { // User signed in, store in db
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    if (user.paymentToken) {
+    if (user.twitter && user.paymentToken) {
+      jQuery.ajax({
+        type: 'post',
+        url: '/api/triggers',
+        data: userTrigger,
+        success: function () {
+          console.log('Trigger', userTrigger, 'stored');
+          localStorage.clear();
+          window.location.replace('/triggers');
+        },
+        dataType: 'json'
+      });
+    } else if (user.paymentToken) {
       window.location.replace('/social');
     } else {
       window.location.replace('/payment');
