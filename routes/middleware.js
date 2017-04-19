@@ -44,6 +44,9 @@ app.use(function(req, res, next) {
     res.locals.user = null
   }
   res.locals.env = process.env.NODE_ENV
+  if (process.env.NODE_ENV !== 'production') {
+    res.locals.development = true;
+  }
   next()
 })
 
