@@ -176,39 +176,34 @@ function landingDonate() {
   if(trigger) {
     triggerName = $('.js-trigger-text').text();
   }
+  var charityRecord;
   charities.forEach(function(c) {
     if(c.ein === charity) {
       charityName = c.name;
+      charityRecord = c;
     }
   });
   var userTrigger = getLandingInputs();
   userTrigger.charityName = charityName;
+  var twitter = charityName;
+  if(typeof charityRecord.twitter === 'string') {
+    twitter = charityRecord.twitter;
+  } else {
+    twitter = charityRecord.twitter.join(' ');
+  }
   userTrigger.triggerName = triggerName;
-  if (user && Object.keys(user).length > 0) { // User signed in, store in db
-    localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    jQuery.ajax({
-      type: 'post',
-      url: '/api/triggers',
-      data: userTrigger,
-      success: function () {
-        console.log('Trigger', userTrigger, 'stored');
-        // redirect based on where they are in the signin flow
-        // allow them to make triggers
-        // if they have no payment token or twitter response
-        if (user.twitter && user.paymentToken) {
-          window.location.replace('/triggers');
-        } else if (user.paymentToken) {
-          window.location.replace('/social');
-        } else {
-          window.location.replace('/payment');
-        }
-      },
-      dataType: 'json'
-    });
+  userTrigger.twitter = twitter;
+  localStorage.setItem('trigger', JSON.stringify(userTrigger));
+  if (user && Object.keys(user).length > 0) {
+    if (user.twitter && user.paymentToken) {
+      window.location.replace('/triggers');
+    } else if (user.paymentToken) {
+      window.location.replace('/social');
+    } else {
+      window.location.replace('/payment');
+    }
   } else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    console.log('Not signed in:', userTrigger);
-    window.location = '/login';
     window.location.replace("/login");
   }
 }

@@ -1,30 +1,32 @@
 $(document).ready(function () {
   var rawTrigger = localStorage.getItem('trigger');
-  if(rawTrigger) {
+  if (rawTrigger) {
     var userTrigger = JSON.parse(rawTrigger);
-    $('.js-charity-label span').text(userTrigger.charityName);
-    $('.js-trigger-label span').text(userTrigger.triggerName);
+    $('.js-charity-handles').text(userTrigger.twitter);
+    $('.js-trigger-name').text(userTrigger.triggerName);
+    var urlTrigger = userTrigger.triggerName.replace(' ', '+');
+    var urlCharity = userTrigger.charityId.replace('-', '');
+    var linkTrigger =  'http://www.donatefordonald.org/trigger=' + urlTrigger + '&charity=' + urlCharity;
+    $('.js-landing-link').prop('href', linkTrigger).text(linkTrigger);
+    delete userTrigger.charityName;
+    delete userTrigger.triggerName;
+    delete userTrigger.twitter;
   }
   var redirectUrl = "/auth/twitter/callback";
-  if(user && user.twitter) {
+  if (user && user.twitter) {
     redirectUrl = "/triggers";
   }
 
+  console.log(userTrigger);
   $('.connect-twitter').on('click', function (event) {
     event.preventDefault();
-    var rawTrigger = localStorage.getItem('trigger');
-    if(rawTrigger) {
-      var userTrigger = JSON.parse(rawTrigger);
-      delete userTrigger.charityName;
-      delete userTrigger.triggerName;
-
+    if (userTrigger) {
       userTrigger.social = true;
       jQuery.ajax({
         type: 'post',
         url: '/api/triggers',
         data: userTrigger,
         success: function () {
-          console.log('Trigger', userTrigger, 'stored');
           localStorage.clear();
           window.location = redirectUrl;
         },
@@ -37,18 +39,12 @@ $(document).ready(function () {
 
   $('.skip-link').on('click', function (event) {
     event.preventDefault();
-    var rawTrigger = localStorage.getItem('trigger');
-    if (rawTrigger) {
-      var userTrigger = JSON.parse(rawTrigger);
-      delete userTrigger.charityName;
-      delete userTrigger.triggerName;
-
+    if (userTrigger) {
       jQuery.ajax({
         type: 'post',
         url: '/api/triggers',
         data: userTrigger,
         success: function () {
-          console.log('Trigger', userTrigger, 'stored');
           localStorage.clear();
           window.location = "/triggers";
         },
