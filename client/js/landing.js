@@ -175,7 +175,6 @@ function landingDonate() {
   var triggerName;
   if(trigger) {
     triggerName = $('.js-trigger-text').text();
-    console.log('Capitalized', triggerName);
   }
   charities.forEach(function(c) {
     if(c.ein === charity) {
@@ -208,6 +207,8 @@ function landingDonate() {
     });
   } else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
+    console.log('Not signed in:', userTrigger);
+    window.location = '/login';
     window.location.replace("/login");
   }
 }
