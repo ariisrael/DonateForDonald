@@ -46,9 +46,15 @@
         <input type="text" placeholder="100" maxlength="4">
       </div>
     </div>
-      <button class="ui primary massive button fluid save-payment-btn js-save-payment" type="submit">Save</button>
+      <button class="ui primary massive button fluid js-action-btn save-payment-btn js-save-payment" type="submit">Save</button>
 
     </form>
     </div>
   </main>
+  <script>
+    $('.js-action-btn').on('click', function() {
+        $(this).addClass('loading');
+
+  }); 
+    </script>
 {{>pandascripts}}
