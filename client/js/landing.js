@@ -194,8 +194,8 @@ function landingDonate() {
   userTrigger.twitter = twitter;
   localStorage.setItem('trigger', JSON.stringify(userTrigger));
   if (user && Object.keys(user).length > 0) {
-    if (user.paymentToken && user.social) {
-      userTrigger.social = true;
+    if (user.paymentToken && user.skipSocial) {
+      userTrigger.social = user.social;
       jQuery.ajax({
         type: 'post',
         url: '/api/triggers',

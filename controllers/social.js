@@ -44,6 +44,7 @@ exports.enableUser = function(req, res) {
       return res.json({error: err})
     }
     user.social = true
+    user.skipSocial = true
     user.save((err) => {
       if (err) {
         return res.json({error: err})
@@ -64,6 +65,7 @@ exports.disableUser = function(req, res) {
       return res.json({error: err})
     }
     user.social = false
+    user.skipSocial = true
     user.save((err) => {
       if (err) {
         return res.json({error: err})
