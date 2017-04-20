@@ -206,7 +206,6 @@ function landingDonate() {
         },
         dataType: 'json'
       });
-
     } if (user.paymentToken) {
       window.location.replace('/social');
     } else {

@@ -1,6 +1,7 @@
 var app = require('../app')
 const url = require("url")
 const User = require('../models/user')
+const pandapay = require('../config/pandapay')
 
 require('./session')
 
@@ -48,6 +49,17 @@ app.use(function(req, res, next) {
   res.locals.env = process.env.NODE_ENV
   if (process.env.NODE_ENV !== 'production') {
     res.locals.development = true;
+  }
+
+  res.locals.pandapay = {
+    src: pandapay.src
+  }
+
+  if (process.env.NODE_ENV !== 'production') {
+    res.locals.pandapay.public = pandapay.test.public
+  } else {
+    // TODO: change this in production
+    res.locals.pandapay.public = pandapay.test.public
   }
   next()
 })
