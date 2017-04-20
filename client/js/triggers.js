@@ -21,13 +21,11 @@ $(document).ready(function () {
   });
 
   $('.ui.modal.edit-trigger .js-delete-trigger').on('click', function() {
-    $('.ui.modal.edit-trigger .actions.js-actions-primary').addClass('hide')
-    $('.ui.modal.edit-trigger .actions.js-actions-confirm').removeClass('hide')
+    $('.ui.modal.edit-trigger .actions').toggleClass('hide')
   })
 
   $('.ui.modal.edit-trigger .js-delete-trigger-cancel').on('click', function() {
-    $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
-    $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
+    $('.ui.modal.edit-trigger .actions').toggleClass('hide')
   })
 
   $('.ui.modal.edit-trigger .js-delete-trigger-confirm').on('click', function() {
@@ -39,13 +37,11 @@ $(document).ready(function () {
     })
     .done(function(data, textStatus, jqXHR) {
       $('.js-trigger-id-' + id).remove()
-      $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
-      $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
+      $('.ui.modal.edit-trigger .actions').toggleClass('hide')
       $('.ui.modal.edit-trigger').modal('hide');
     })
     .fail(function(data, textStatus, errorThrown) {
-      $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
-      $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
+      $('.ui.modal.edit-trigger .actions').toggleClass('hide')
       $('.ui.modal.edit-trigger').modal('hide');
       // TODO: put a popup message on failure
     })
@@ -81,8 +77,7 @@ $(document).ready(function () {
   $('.js-trigger-item .js-active-button').on('click', function(evt) {
     var self = this;
     var id = $(this).data('id')
-    $(this).find('.icon').toggleClass('hide')
-    $(this).toggleClass('disabled')
+    $(self).toggleClass('disabled loading')
     var data = {}
     if ($(this).hasClass('js-disable')) {
       data.active = false
@@ -95,16 +90,14 @@ $(document).ready(function () {
       if (!error) {
         $(classList).toggleClass('hide')
       }
-      $(self).find('.icon').toggleClass('hide')
-      $(self).toggleClass('disabled')
+      $(self).toggleClass('disabled loading')
     })
   });
 
   $('.js-trigger-item .js-social-active-button').on('click', function(evt) {
     var self = this;
     var id = $(this).data('id')
-    $(this).find('.icon').toggleClass('hide')
-    $(this).toggleClass('disabled')
+    $(self).toggleClass('disabled loading')
     var data = {}
     if ($(this).hasClass('js-disable')) {
       data.social = false
@@ -117,8 +110,7 @@ $(document).ready(function () {
       if (!error) {
         $(classList).toggleClass('hide')
       }
-      $(self).find('.icon').toggleClass('hide')
-      $(self).toggleClass('disabled')
+      $(self).toggleClass('disabled loading')
     })
   });
 
