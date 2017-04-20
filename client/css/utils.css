@@ -1,17 +1,17 @@
 .hide {
-  visibility: hidden;
-  display: none;
+  visibility: hidden !important;
+  display: none !important;
 }
 
 .hidden {
-  visibility: hidden;
-  display: none;
+  visibility: hidden !important;
+  display: none !important;
 }
 
 .invisible {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 
 .display-none {
-  display: none;
+  display: none !important;
 }
