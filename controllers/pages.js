@@ -109,8 +109,10 @@ exports.triggers = function(req, res) {
         }
       ], (err, results) => {
         results.forEach((result) => {
-          response.triggers[result._id].donations = result.amount
-          response.triggers[result._id].tweetsCount = result.count
+          if (response.triggers[result._id]) {
+            response.triggers[result._id].donations = result.amount
+            response.triggers[result._id].tweetsCount = result.count
+          }
         })
         res.render('triggers', response);
       })
