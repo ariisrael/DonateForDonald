@@ -57,18 +57,22 @@
 
           </div>
           <div class="left floated trigger-actions">
+            {{#if this.active}}
             <button class="ui button small icon red js-active-button
             js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
             <i class="icon power"></i>
             <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             Turn Off
           </button>
+          {{/if}}
+          {{#if_not this.active}}
             <button class="ui button small icon green js-active-button
             js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
             <i class="icon power"></i>
             <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             <span class="text"> Turn On</span>
           </button>
+          {{/if_not}}
             <button class="ui button small js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
             <button class="ui button small primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
               data-position="right center"><i class="icon share"></i> Share</button>
