@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     accessTokenSecret: String
   },
   google: String,
+  social: { type: Boolean, default: false },
   admin: { type: Boolean, default: false },
   monthlyLimit: { type: Number, min: 0 },
   paymentToken: String,
