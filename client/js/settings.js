@@ -16,15 +16,7 @@ $(document).ready(function() {
     var originalMaximum = $('#monthly-maximum .monthly-maximum-data').data('maximum')
     var newLimit = $('#monthly-maximum input').val()
     if (originalMaximum && originalMaximum == newLimit) {
-      $('#monthly-maximum .js-money').fadeOut(function() {
-        $('#monthly-maximum .js-approved').fadeIn(function() {
-          setTimeout(function() {
-            $('#monthly-maximum .js-approved').fadeOut(function() {
-              $('#monthly-maximum .js-money').fadeIn()
-            })
-          }, 2000)
-        })
-      })
+      fadeMaximumSuccess()
     }
     var data = {
       monthlyLimit: $('#monthly-maximum input').val()
@@ -35,18 +27,22 @@ $(document).ready(function() {
       url: '/api/users/' + user.id,
       data: data,
       success: function() {
-        $('#monthly-maximum .js-money').fadeOut(function() {
-          $('#monthly-maximum .js-approved').fadeIn(function() {
-            setTimeout(function() {
-              $('#monthly-maximum .js-approved').fadeOut(function() {
-                $('#monthly-maximum .js-money').fadeIn()
-              })
-            }, 2000)
-          })
-        })
+        fadeMaximumSuccess()
       },
       dataType: 'json'
     })
   })
 
 })
+
+function fadeMaximumSuccess() {
+  $('#monthly-maximum .js-money').fadeOut(function() {
+    $('#monthly-maximum .js-approved').fadeIn(function() {
+      setTimeout(function() {
+        $('#monthly-maximum .js-approved').fadeOut(function() {
+          $('#monthly-maximum .js-money').fadeIn()
+        })
+      }, 2000)
+    })
+  })
+}
