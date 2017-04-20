@@ -8,7 +8,7 @@ const TriggerSchema = new Schema({
   charityId: { type: String, ref: 'Charity' }, // Charity IDs are eins
   userId: ObjectId,
   amount: { type: Number, min: 1 },
-  social: Boolean,
+  social: { type: Boolean, default: false },
   active: { type: Boolean, default: true }
 });
 

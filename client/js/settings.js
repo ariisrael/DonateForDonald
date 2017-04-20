@@ -13,10 +13,12 @@ $(document).ready(function() {
 
   $('#monthly-maximum button').click(function(e) {
     e.preventDefault()
+    maximumLoading()
+
     var originalMaximum = $('#monthly-maximum .monthly-maximum-data').data('maximum')
     var newLimit = $('#monthly-maximum input').val()
     if (originalMaximum && originalMaximum == newLimit) {
-      fadeMaximumSuccess()
+      return maximumSuccess()
     }
     var data = {
       monthlyLimit: $('#monthly-maximum input').val()
@@ -27,22 +29,39 @@ $(document).ready(function() {
       url: '/api/users/' + user.id,
       data: data,
       success: function() {
-        fadeMaximumSuccess()
+        $('#monthly-maximum .monthly-maximum-data').data('maximum', newLimit)
+        maximumSuccess()
       },
       dataType: 'json'
     })
   })
 
-})
-
-function fadeMaximumSuccess() {
-  $('#monthly-maximum .js-money').fadeOut(function() {
-    $('#monthly-maximum .js-approved').fadeIn(function() {
-      setTimeout(function() {
-        $('#monthly-maximum .js-approved').fadeOut(function() {
-          $('#monthly-maximum .js-money').fadeIn()
-        })
-      }, 2000)
+  $('#social-toggle .js-social-active-button').click(function(e) {
+    e.preventDefault()
+    var self = this;
+    var url = '/api/social/'
+    $(self).addClass('loading disabled')
+    if ($(self).hasClass('js-enable')) {
+      url += 'enable'
+    } else {
+      url += 'disable'
+    }
+    jQuery.ajax({
+      type: 'post',
+      url: url
+    })
+    .done(function() {
+      $(self).removeClass('loading disabled')
+      $('.js-social-active-button').toggleClass('hide')
     })
   })
+
+})
+
+function maximumSuccess() {
+  $('#monthly-maximum button').removeClass('loading disabled')
+}
+
+function maximumLoading() {
+  $('#monthly-maximum button').addClass('loading disabled')
 }

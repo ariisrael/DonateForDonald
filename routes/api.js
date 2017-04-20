@@ -10,6 +10,7 @@ const TweetController = controllers.tweets;
 const CharityController = controllers.charities;
 const PaymentController = controllers.payments;
 const TermsController = controllers.terms;
+const SocialController = controllers.social;
 
 const ADMIN_ONLY = UserController.ensureAdmin;
 const USER_ONLY = UserController.ensureAuthorized;
@@ -34,6 +35,11 @@ api.get('/tweets/:id', TweetController.read);
 
 api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);
 api.post('/tweets', ADMIN_ONLY, TweetController.create);
+
+api.post('/social/enable', LOGIN_ONLY, SocialController.enableUser)
+api.post('/social/disable', LOGIN_ONLY, SocialController.disableUser)
+api.post('/social/enable/:id', LOGIN_ONLY, SocialController.enableTrigger)
+api.post('/social/disable/:id', LOGIN_ONLY, SocialController.disableTrigger)
 
 api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
 api.put('/users/:id', USER_ONLY, UserController.update);

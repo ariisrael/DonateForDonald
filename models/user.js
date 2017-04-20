@@ -24,6 +24,7 @@ const UserSchema = new Schema({
   },
   google: String,
   social: { type: Boolean, default: false },
+  skipSocial: { type: Boolean, default: false },
   admin: { type: Boolean, default: false },
   monthlyLimit: { type: Number, min: 0 },
   paymentToken: String,

@@ -194,7 +194,19 @@ function landingDonate() {
   userTrigger.twitter = twitter;
   localStorage.setItem('trigger', JSON.stringify(userTrigger));
   if (user && Object.keys(user).length > 0) {
-    if (user.paymentToken) {
+    if (user.paymentToken && user.skipSocial) {
+      userTrigger.social = user.social;
+      jQuery.ajax({
+        type: 'post',
+        url: '/api/triggers',
+        data: userTrigger,
+        success: function (data) {
+          localStorage.clear();
+          window.location = "/triggers";
+        },
+        dataType: 'json'
+      });
+    } if (user.paymentToken) {
       window.location.replace('/social');
     } else {
       window.location.replace('/payment');

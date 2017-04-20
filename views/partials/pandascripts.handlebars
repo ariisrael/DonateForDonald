@@ -1,6 +1,6 @@
-<script src="//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js"></script>
+<script src="{{pandapay.src}}"></script>
 <script>
-  Panda.init('pk_test_DGoDgSY4_9eNPYwXWQyNKg', 'payment-form');
+  Panda.init('{{pandapay.public}}', 'payment-form');
 
   Panda.on('success', function (cardToken) {
     // You now have a token you can use to refer to that credit card later.

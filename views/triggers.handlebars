@@ -23,7 +23,12 @@
     {{/if_not}} {{#each triggers}}
 
     <div class="item js-trigger-item js-trigger-id-{{this.id}}">
-      <meta class="trigger-data" data-amount="{{this.amount}}" data-charity={{this.charityId.id}} data-term="{{this.name}}">
+      <meta class="trigger-data"
+        data-charityname="{{this.charityId.name}}"
+        data-charitytwitter="{{this.charityId.twitter}}"
+        data-amount="{{this.amount}}"
+        data-charity="{{this.charityId.id}}"
+        data-term="{{this.name}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
         <img src="{{this.charityId.image}}">
       </div>
@@ -58,18 +63,30 @@
           </div>
           <div class="left floated trigger-actions">
             <button class="ui button icon red js-active-button
-            js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
-            <i class="icon power"></i>
-            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
-            Turn Off
-          </button>
+              js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
+              <i class="icon power"></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+              Turn Off
+            </button>
             <button class="ui button icon green js-active-button
-            js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
-            <i class="icon power"></i>
-            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
-            <span class="text"> Turn On</span>
-          </button>
+              js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
+              <i class="icon power"></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+              <span class="text"> Turn On</span>
+            </button>
             <button class="ui button js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
+            <button class="ui button icon red js-social-active-button
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}">
+              <i class="icon power"></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+              Disable Social
+            </button>
+            <button class="ui button icon green js-social-active-button
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}">
+              <i class="icon power"></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+              <span class="text">Enable Social</span>
+            </button>
             <button class="ui button primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
               data-position="right center"><i class="icon share"></i> Share</button>
           </div>
@@ -78,7 +95,7 @@
       {{/each}}
     </div>
 
-    <div class="ui small modal">
+    <div class="ui small modal edit-trigger">
       <meta class="js-editing-trigger-id" data-id="">
       <meta class="js-editing-trigger-data" data-trigger="">
       <i class="close icon"></i>

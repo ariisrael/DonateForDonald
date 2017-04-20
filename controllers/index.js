@@ -8,6 +8,7 @@ exports.donations = require('./donations');
 exports.tweets = require('./tweets');
 exports.payments = require('./payments');
 exports.terms = require('./terms');
+exports.social = require('./social');
 
 // Pages
 exports.pages = require('./pages');
