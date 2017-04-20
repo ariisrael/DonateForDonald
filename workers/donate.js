@@ -25,14 +25,16 @@ function donationRequest(user, trigger, tweet, donation) {
   }
 
   request.post({url: url, body: body}, function(error, response, body) {
+    donation.paid = true
     // Handle response error
     if(error) {
       console.error(error);
+      donation.paid = false
     }
     // Log callback parameters
     console.log('response:', response);
     console.log('body:', body);
-    donation.paid = true
+
     donation.save((err, d) => {
       if (err) {
         return console.error(err)
@@ -55,12 +57,7 @@ function makeDonation(user, trigger, tweet) {
     charityId: trigger.charityId._id,
     tweetId: tweet.id
   })
-  donation.save((err, donation) => {
-    if (err) {
-      return console.error(err)
-    }
-    donationRequest(user, trigger, tweet, donation)
-  })
+  donationRequest(user, trigger, tweet, donation)
   return donation
 }
 
