@@ -54,4 +54,10 @@ $(document).ready(function () {
       window.location = "/triggers";
     }
   });
+
+  // User toggles maximum monthly donation
+  $(".js-maximum-toggle")
+    .on('click', function () {
+      $('.js-maximum-amount').toggleClass('disabled');
+    });
 });

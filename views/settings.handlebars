@@ -88,6 +88,26 @@
         </button>
       </div>
     </form>
+    <form id="monthly-maximum" class="ui large form" method="post" action="/account">
+      <h3>Monthly Donation Maximum</h3>
+      <div class="three fields">
+        <div class="field">
+          <div class="ui labeled input">
+            <div class="ui basic label">
+              <i class="dollar icon js-money"></i>
+              <i class="checkmark icon green js-approved display-none" style="display: none;"></i>
+            </div>
+            <meta class="monthly-maximum-data" data-maximum="{{#if user.monthlyLimit}}{{user.monthlyLimit}}{{/if}}">
+            <input type="text" placeholder="100" maxlength="4" {{#if user.monthlyLimit}}value={{user.monthlyLimit}}{{/if}}>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <button class="ui button primary icon">
+          <i class="fa fa-money" aria-hidden="true"></i> Set Monthly Limit
+        </button>
+      </div>
+    </form>
     <form id="payment-form" method="post" class="ui large form">
       <h3>Payment</h3>
       <input type="hidden" name="_csrf" value="{{csrfToken}}">

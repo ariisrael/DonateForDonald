@@ -26,7 +26,7 @@ $(document).ready(function() {
   $('.js-action-btn').on('click', function() {
         $('.js-action-btn').addClass('loading');
 
-  }); 
+  });
   $(".toggle")
     .on('click', function () {
       $(this).toggleClass('selected-amount');
@@ -42,11 +42,6 @@ $(document).ready(function() {
       // Enable text field
       validateLanding();
       $(".dollar-sign").removeClass("greyed-out");
-    });
-  // User toggles maximum monthly donation
-  $(".js-maximum-toggle")
-    .on('click', function () {
-      $('.js-maximum-amount').toggleClass('disabled');
     });
 
   // User typing other amount (validate)
