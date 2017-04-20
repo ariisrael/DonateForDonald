@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   $('.js-edit-button').on('click', function () {
     var id = $(this).data('id');
-    $('.ui.modal .js-editing-trigger-id').data('id', id);
+    $('.ui.modal.edit-trigger .js-editing-trigger-id').data('id', id);
     var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
     var term = metadata.data('term')
     var amount = metadata.data('amount')
@@ -14,24 +14,24 @@ $(document).ready(function () {
       charityId: charity,
       amount: amount
     })
-    $('.ui.modal input[name="charity"]').val(charity).trigger('change');
-    $('.ui.modal input[name="amount"]').val(amount)
+    $('.ui.modal.edit-trigger input[name="charity"]').val(charity).trigger('change');
+    $('.ui.modal.edit-trigger input[name="amount"]').val(amount)
     $('.modal .js-term').text(term)
-    $('.ui.modal').modal('show');
+    $('.ui.modal.edit-trigger').modal('show');
   });
 
-  $('.ui.modal .js-delete-trigger').on('click', function() {
-    $('.ui.modal .actions.js-actions-primary').addClass('hide')
-    $('.ui.modal .actions.js-actions-confirm').removeClass('hide')
+  $('.ui.modal.edit-trigger .js-delete-trigger').on('click', function() {
+    $('.ui.modal.edit-trigger .actions.js-actions-primary').addClass('hide')
+    $('.ui.modal.edit-trigger .actions.js-actions-confirm').removeClass('hide')
   })
 
-  $('.ui.modal .js-delete-trigger-cancel').on('click', function() {
-    $('.ui.modal .actions.js-actions-primary').removeClass('hide')
-    $('.ui.modal .actions.js-actions-confirm').addClass('hide')
+  $('.ui.modal.edit-trigger .js-delete-trigger-cancel').on('click', function() {
+    $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
+    $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
   })
 
-  $('.ui.modal .js-delete-trigger-confirm').on('click', function() {
-    var id = $('.ui.modal .js-editing-trigger-id').data('id');
+  $('.ui.modal.edit-trigger .js-delete-trigger-confirm').on('click', function() {
+    var id = $('.ui.modal.edit-trigger .js-editing-trigger-id').data('id');
     var url = '/api/triggers/' + id
     jQuery.ajax({
       type: 'delete',
@@ -39,28 +39,28 @@ $(document).ready(function () {
     })
     .done(function(data, textStatus, jqXHR) {
       $('.js-trigger-id-' + id).remove()
-      $('.ui.modal .actions.js-actions-primary').removeClass('hide')
-      $('.ui.modal .actions.js-actions-confirm').addClass('hide')
-      $('.ui.modal').modal('hide');
+      $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
+      $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
+      $('.ui.modal.edit-trigger').modal('hide');
     })
     .fail(function(data, textStatus, errorThrown) {
-      $('.ui.modal .actions.js-actions-primary').removeClass('hide')
-      $('.ui.modal .actions.js-actions-confirm').addClass('hide')
-      $('.ui.modal').modal('hide');
+      $('.ui.modal.edit-trigger .actions.js-actions-primary').removeClass('hide')
+      $('.ui.modal.edit-trigger .actions.js-actions-confirm').addClass('hide')
+      $('.ui.modal.edit-trigger').modal('hide');
       // TODO: put a popup message on failure
     })
   })
 
-  $('.ui.modal .js-update-trigger').on('click', function() {
-    var id = $('.ui.modal .js-editing-trigger-id').data('id');
+  $('.ui.modal.edit-trigger .js-update-trigger').on('click', function() {
+    var id = $('.ui.modal.edit-trigger .js-editing-trigger-id').data('id');
 
     var data = {
-      charityId: $('.ui.modal input[name="charity"]').val(),
-      amount: $('.ui.modal input[name="amount"]').val()
+      charityId: $('.ui.modal.edit-trigger input[name="charity"]').val(),
+      amount: $('.ui.modal.edit-trigger input[name="amount"]').val()
     }
-    var trigger = $('.ui.modal .js-editing-trigger-data').data('trigger');
+    var trigger = $('.ui.modal.edit-trigger .js-editing-trigger-data').data('trigger');
     if (trigger.charityId == data.charityId && trigger.amount == data.amount) {
-      return $('.ui.modal').modal('hide');
+      return $('.ui.modal.edit-trigger').modal('hide');
     }
 
     updateTrigger(id, data, function(error, data) {
@@ -74,7 +74,7 @@ $(document).ready(function () {
         metadata.data('charity', data.charity._id)
         $('.js-trigger-id-' + id + ' .charity-name').text(data.charity.name)
       }
-      $('.ui.modal').modal('hide');
+      $('.ui.modal.edit-trigger').modal('hide');
     })
   })
 
@@ -92,6 +92,28 @@ $(document).ready(function () {
 
     updateTrigger(id, data, function(error, data) {
       var classList = '.js-trigger-id-' + id + ' .js-active-button'
+      if (!error) {
+        $(classList).toggleClass('hide')
+      }
+      $(self).find('.icon').toggleClass('hide')
+      $(self).toggleClass('disabled')
+    })
+  });
+
+  $('.js-trigger-item .js-social-active-button').on('click', function(evt) {
+    var self = this;
+    var id = $(this).data('id')
+    $(this).find('.icon').toggleClass('hide')
+    $(this).toggleClass('disabled')
+    var data = {}
+    if ($(this).hasClass('js-disable')) {
+      data.social = false
+    } else {
+      data.social = true
+    }
+
+    updateTrigger(id, data, function(error, data) {
+      var classList = '.js-trigger-id-' + id + ' .js-social-active-button'
       if (!error) {
         $(classList).toggleClass('hide')
       }

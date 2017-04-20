@@ -25,9 +25,19 @@ $(document).ready(function() {
         type: 'post',
         url: '/api/triggers',
         data: userTrigger,
-        success: function () {
+        success: function (data) {
           localStorage.clear();
-          window.location = redirectUrl;
+          if ($('.js-no-never input[name="donotask"]')[0].checked) {
+            jQuery.ajax({
+              type: 'post',
+              url: '/api/social/enable'
+            })
+            .done(function() {
+              window.location = redirectUrl;
+            })
+          } else {
+            window.location = redirectUrl;
+          }
         },
         dataType: 'json'
       });
@@ -43,9 +53,19 @@ $(document).ready(function() {
         type: 'post',
         url: '/api/triggers',
         data: userTrigger,
-        success: function () {
+        success: function (data) {
           localStorage.clear();
-          window.location = "/triggers";
+          if ($('.js-no-never input[name="donotask"]')[0].checked) {
+            jQuery.ajax({
+              type: 'post',
+              url: '/api/social/disable'
+            })
+            .done(function() {
+              window.location = "/triggers";
+            })
+          } else {
+            window.location = "/triggers";
+          }
         },
         dataType: 'json'
       });

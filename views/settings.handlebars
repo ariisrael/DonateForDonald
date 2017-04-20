@@ -88,6 +88,32 @@
         </button>
       </div>
     </form>
+    <form id="social-toggle" class="ui large form" method="post" action="">
+      <h3>Social</h3>
+      <p>
+        This will turn on or off tweeting of a donation by default.
+        <br>
+        <i>Warning:</i>
+        It will disable or enable social on all triggers you currently have.
+        You will have to individually enable or disable them.
+      </p>
+      <div class="field">
+        <div class="ui input">
+          <button class="ui button icon red js-social-active-button
+            js-disable {{#if_not user.social}}hide{{/if_not}}" data-id="{{this.id}}">
+            <i class="icon twitter"></i>
+            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+            Disable
+          </button>
+          <button class="ui button icon green js-social-active-button
+            js-enable {{#if user.social}}hide{{/if}}" data-id="{{this.id}}">
+            <i class="icon twitter"></i>
+            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
+            <span class="text">Enable</span>
+          </button>
+        </div>
+      </div>
+    </form>
     <form id="monthly-maximum" class="ui large form" method="post" action="/account">
       <h3>Monthly Donation Maximum</h3>
       <div class="three fields">

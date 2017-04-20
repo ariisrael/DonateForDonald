@@ -33,6 +33,28 @@ $(document).ready(function() {
     })
   })
 
+  $('#social-toggle .js-social-active-button').click(function(e) {
+    e.preventDefault()
+    var self = this;
+    var url = '/api/social/'
+    $(self).find('i').toggleClass('hide')
+    $(self).attr('disabled', true)
+    if ($(self).hasClass('js-enable')) {
+      url += 'enable'
+    } else {
+      url += 'disable'
+    }
+    jQuery.ajax({
+      type: 'post',
+      url: url
+    })
+    .done(function() {
+      $(self).find('i').toggleClass('hide')
+      $(self).attr('disabled', false)
+      $('.js-social-active-button').toggleClass('hide')
+    })
+  })
+
 })
 
 function fadeMaximumSuccess() {
