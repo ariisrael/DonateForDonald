@@ -2,8 +2,8 @@
 <div class="ui inline js-email-nag email-nag">
   <div class="ui text container">
     <p>
-      Please confirm your email to start donating or <a href="#" class="new-link">request a new confirmation link</a> <a href="#"
-        class="close-nag"><i class="close icon js-close-nag"></i></a>
+      Please confirm your email to start donating or <a href="#" class="new-link">request a new confirmation link</a>
+      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
     </p>
   </div>
 </div>
@@ -23,12 +23,8 @@
     {{/if_not}} {{#each triggers}}
 
     <div class="item js-trigger-item js-trigger-id-{{this.id}}">
-      <meta class="trigger-data"
-        data-charityname="{{this.charityId.name}}"
-        data-charitytwitter="{{this.charityId.twitter}}"
-        data-amount="{{this.amount}}"
-        data-charity="{{this.charityId.id}}"
-        data-term="{{this.name}}">
+      <meta class="trigger-data" data-charityname="{{this.charityId.name}}" data-charitytwitter="{{this.charityId.twitter}}" data-amount="{{this.amount}}"
+        data-charity="{{this.charityId.id}}" data-term="{{this.name}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
         <img src="{{this.charityId.image}}">
       </div>
@@ -47,9 +43,10 @@
         </div>
 
         <div class="header trigger-title">{{this.name}} </div>
-        <div class="meta">
+        <div class="meta" style="width: 100%">
 
           <span class="stay charity-name"> {{this.charityId.name}}</span>
+                    
           </div>
 
           <div class="extra">
@@ -59,7 +56,8 @@
             <div>
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
-
+            
+            
           </div>
           <div class="left floated trigger-actions">
             <button class="ui button icon red js-active-button
@@ -87,8 +85,12 @@
               <i class="hide icon fa-spinner fa-spin fa-fw"></i>
               <span class="text">Enable</span>
             </button>
-            <button class="ui button primary js-share-button icon" data-html='<button class="ui circular facebook icon button"><i class="facebook icon"></i></button><button class="ui circular twitter icon button"><i class="twitter icon"></i></button><button class="ui circular google plus icon button"><i class="google plus icon"></i></button>'
-              data-position="right center"><i class="icon share"></i> Share</button>
+
+          </div>
+<div class="ui floated right" style="display: inline-block; float: right; position: relative; top: -60px">
+            <button class="ui facebook circular icon button"><i class="facebook icon"></i></button>
+                        <button class="ui twitter circular button icon"><i class="twitter icon"></i></button>
+
           </div>
         </div>
       </div>
@@ -125,7 +127,7 @@
         </form>
       </div>
       <div class="actions js-actions-primary">
-         <div class="ui deny basic icon button">
+        <div class="ui deny basic icon button">
           <i class="cancel icon"></i> Cancel
         </div>
 
