@@ -4,7 +4,7 @@ const async = require('async');
 
 module.exports = {
     index: (req, res) => {
-        Tweet.find({ testTweet: false }, (err, tweets) => {
+        Tweet.find({ testTweet: { $ne: true } }, (err, tweets) => {
             if(err) return console.error(err);
             res.json(tweets);
         });
@@ -22,7 +22,7 @@ module.exports = {
         it might make the database unhappy if we don't
       */
       var query = res.locals.query.q
-      var params = { $text : { $search : '"' + query + '""' }, testTweet: false }
+      var params = { $text : { $search : '"' + query + '""' }, testTweet: { $ne: true } }
       if (!query) {
         return res.json([])
       }
