@@ -9,6 +9,7 @@ const Tweet = models.Tweet
 const Trigger = models.Trigger
 const Donation = models.Donation
 const User = models.User
+const async = require('async')
 
 var makeDonation = require('./donate')
 var popularTerms = require('./popularTerms')
@@ -76,7 +77,7 @@ function analyzeTweet(tweet) {
       }
     })
     .exec((err, users) => {
-      users.forEach((user) => {
+      async.eachSeries(users, (user, next) => {
         if (user.monthlyLimit) {
           Donation.aggregate([{
               $match: {
@@ -90,27 +91,32 @@ function analyzeTweet(tweet) {
               }
             }], (err, result) => {
             if (result[0].amount < user.monthlyLimit) {
-              checkUserTriggers(user, tweet)
+              checkUserTriggers(user, tweet, function() {
+                next()
+              })
             }
           })
         } else {
-          checkUserTriggers(user, tweet)
+          checkUserTriggers(user, tweet, function() {
+            next()
+          })
         }
       })
   })
-
   popularTerms()
 }
 
-function checkUserTriggers(user, tweet) {
+function checkUserTriggers(user, tweet, cb) {
   Trigger.find({
     userId: user.id,
     active: true
   }).populate('charityId').exec((err, triggers) => {
     if (err || !triggers || !triggers.length) {
       if (err) {
+        cb()
         return console.log('error grabbing triggers', err)
       } else {
+        cb()
         return console.log('there are no triggers')
       }
     }
@@ -125,7 +131,7 @@ function checkUserTriggers(user, tweet) {
         // a potential optimization is to create only
         // a single regex for all keywords
         if (re.exec(tweet.text)) {
-          donation = makeDonation(user, trigger, tweet)
+          donation = makeDonation(user, trigger, tweet, cb)
           // on a single tweet, we only want to donate once per user,
           // so we break out of the loop
           break

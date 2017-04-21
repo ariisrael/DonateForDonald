@@ -92,7 +92,6 @@ function getPopularTerms(options, callback) {
         Object.keys(tweets).forEach(function(id) {
           tweetsArray.push(tweets[id])
         })
-        fs.writeFileSync('tweets.json', JSON.stringify(tweetsArray, null, '  '))
         analyzePopularTerms(tweetsArray, callback)
       }
     });
