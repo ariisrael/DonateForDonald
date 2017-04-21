@@ -76,10 +76,13 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', '
 app.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err || !user) {
+      console.error('auth error: ', err)
+      console.log('user: ', user)
       return res.redirect('/login')
     }
     req.logIn(user, function(err) {
       if (err) {
+        console.error('auth error: ', err)
         return res.redirect('/login')
       }
       if(!(user.paymentToken)) {

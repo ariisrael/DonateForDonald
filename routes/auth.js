@@ -67,6 +67,7 @@ passport.use(new FacebookStrategy({
       User.findOne({ email: profile._json.email }, function(err, user) {
         if (user) {
           req.flash('error', { msg: user.email + ' is already associated with another account.' });
+          console.error('fb auth error: ', user.email, ' is already associated with another account.')
           done(err);
         } else {
           var newUser = new User({
