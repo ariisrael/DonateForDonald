@@ -2,7 +2,7 @@ const config = require('../config/worker')
 const Twitter = require('twit')
 
 
-function tweetAtTrump(user, tweet, charity, trigger) {
+function tweetAtTrump(user, tweet, charity, trigger, callback) {
   if (user.twitter && user.twitterCreds) {
     if (user.twitterCreds.accessToken && user.twitterCreds.accessTokenSecret) {
       var userTwitterCreds = {
@@ -27,8 +27,13 @@ function tweetAtTrump(user, tweet, charity, trigger) {
             ' with data, ', JSON.stringify(data)
           )
         }
+        callback()
       })
+    } else {
+      callback()
     }
+  } else {
+    callback()
   }
 }
 
@@ -40,9 +45,9 @@ function mkStatus(charity, trigger) {
     status += charity.name
   }
 
-  status += ' because @realDonaldTrump tweeted "' trigger.name '" again #DonateForDonald '
+  status += ' because @realDonaldTrump tweeted "' + trigger.name + '" again #DonateForDonald '
 
-  var url = "http://www.donatefordonald.org/trigger=" + trigger.name + "&charity=" charity.name
+  var url = "http://www.donatefordonald.org/trigger=" + trigger.name + "&charity=" + charity.name
 
   status += url
   return status

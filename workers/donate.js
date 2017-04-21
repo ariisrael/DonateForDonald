@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/donations';
 
-function donationRequest(user, trigger, tweet, donation) {
+function donationRequest(user, trigger, tweet, donation, cb) {
   var body = {
     source: user.paymenttoken,
     platform_fee: PANDAPAY.fee,
@@ -25,29 +25,35 @@ function donationRequest(user, trigger, tweet, donation) {
   }
 
   request.post({url: url, body: body}, function(error, response, body) {
+    donation.paid = true
     // Handle response error
     if(error) {
       console.error(error);
+      donation.paid = false
+      cb()
     }
     // Log callback parameters
     console.log('response:', response);
     console.log('body:', body);
-    donation.paid = true
+
     donation.save((err, d) => {
       if (err) {
+        cb()
         return console.error(err)
       }
       if (trigger.social) {
-        tweetAtTrump(user, tweet, trigger.charityId, trigger)
+
       }
       var userName = user.name || user.email
       var userEmail = user.email
-      donatedEmail(userName, user.email, tweet.text, tweet._id)
+      donatedEmail(userName, user.email, tweet.text, tweet._id, function(err, body) {
+        tweetAtTrump(user, tweet, trigger.charityId, trigger, cb)
+      })
     })
   });
 }
 
-function makeDonation(user, trigger, tweet) {
+function makeDonation(user, trigger, tweet, cb) {
   donation = new Donation({
     userId: user._id,
     triggerId: trigger._id,
@@ -55,12 +61,7 @@ function makeDonation(user, trigger, tweet) {
     charityId: trigger.charityId._id,
     tweetId: tweet.id
   })
-  donation.save((err, donation) => {
-    if (err) {
-      return console.error(err)
-    }
-    donationRequest(user, trigger, tweet, donation)
-  })
+  donationRequest(user, trigger, tweet, donation, cb)
   return donation
 }
 
