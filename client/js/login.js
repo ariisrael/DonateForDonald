@@ -14,6 +14,6 @@ $(document).ready(function() {
     event.preventDefault()
     var path = window.location.pathname
     var query = '?redirect=' + encodeURIComponent(path)
-    window.location = '/login' + query
+    window.location.replace('/login' + query)
   })
 })

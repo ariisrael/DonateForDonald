@@ -2,7 +2,7 @@
 <script>
   var rawTrigger = localStorage.getItem('trigger');
   if (!rawTrigger) {
-    window.location = "/";
+    window.location.replace("/");
   }
 </script>
 {{> header}}

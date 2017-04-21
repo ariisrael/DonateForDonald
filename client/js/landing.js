@@ -202,11 +202,12 @@ function landingDonate() {
         data: userTrigger,
         success: function (data) {
           localStorage.clear();
-          window.location = "/triggers";
+          console.log('here')
+          window.location.replace("/triggers");
         },
         dataType: 'json'
       });
-    } if (user.paymentToken) {
+    } else if (user.paymentToken) {
       window.location.replace('/social');
     } else {
       window.location.replace('/payment');

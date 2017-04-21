@@ -45,6 +45,7 @@ passport.use(new FacebookStrategy({
     User.findOne({ facebook: profile.id }, function(err, user) {
       if (user) {
         req.flash('error', { msg: 'There is already an existing account linked with Facebook that belongs to you.' });
+        console.error('fb auth error: ', profile.id, ' is already associated with another account.')
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {

@@ -33,16 +33,16 @@ $(document).ready(function() {
               url: '/api/social/enable'
             })
             .done(function() {
-              window.location = redirectUrl;
+              window.location.replace(redirectUrl);
             })
           } else {
-            window.location = redirectUrl;
+            window.location.replace(redirectUrl);
           }
         },
         dataType: 'json'
       });
     } else {
-      window.location = '/triggers'
+      window.location.replace('/triggers')
     }
   });
 
@@ -61,16 +61,16 @@ $(document).ready(function() {
               url: '/api/social/disable'
             })
             .done(function() {
-              window.location = "/triggers";
+              window.location.replace("/triggers");
             })
           } else {
-            window.location = "/triggers";
+            window.location.replace("/triggers");
           }
         },
         dataType: 'json'
       });
     } else {
-      window.location = "/triggers";
+      window.location.replace("/triggers");
     }
   });
 })

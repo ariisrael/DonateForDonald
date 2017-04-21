@@ -10,8 +10,7 @@
 {{/if_not}}
 <div class="ui text container web-form triggers-page">
   <div class="ui divided items">
-    {{#if_not triggers}}
-    <div class="ui center aligned">
+    <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
       <div class="ui text container">
         <h3 class="ui header no-triggers">
           No triggers. Sad! <a href="/">Make some.</a>
@@ -20,7 +19,9 @@
         />
       </div>
     </div>
-    {{/if_not}} {{#each triggers}}
+  </div>
+  <div class="ui divided items">
+    {{#each triggers}}
 
     <div class="item js-trigger-item js-trigger-id-{{this.id}}">
       <meta class="trigger-data" data-charityname="{{this.charityId.name}}" data-charitytwitter="{{this.charityId.twitter}}" data-amount="{{this.amount}}"
@@ -46,7 +47,7 @@
         <div class="meta" style="width: 100%">
 
           <span class="stay charity-name"> {{this.charityId.name}}</span>
-                    
+
           </div>
 
           <div class="extra">
@@ -56,8 +57,8 @@
             <div>
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
-            
-            
+
+
           </div>
           <div class="left floated trigger-actions">
             <button class="ui button icon red js-active-button

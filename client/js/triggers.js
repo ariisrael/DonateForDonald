@@ -37,6 +37,9 @@ $(document).ready(function () {
     })
     .done(function(data, textStatus, jqXHR) {
       $('.js-trigger-id-' + id).remove()
+      if (!$('.js-trigger-item').length) {
+        $('.js-no-triggers').toggleClass('hide')
+      }
       $('.ui.modal.edit-trigger .actions').toggleClass('hide')
       $('.ui.modal.edit-trigger').modal('hide');
     })
