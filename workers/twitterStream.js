@@ -3,6 +3,7 @@ const config = require('../config/worker'); // Credentials
 const Twitter = require('twit'); // Twitter API
 const T = new Twitter(config.twitterCreds);
 const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
+const GOP_CLUSTER_FUCK_ID = '3388526333'; // User ID for @GOPClusterFuck
 
 const models = require('../models')
 const Tweet = models.Tweet
@@ -15,7 +16,7 @@ var makeDonation = require('./donate')
 var popularTerms = require('./popularTerms')
 
 // Create new stream filtering statuses by user (including retweets, replies)
-var stream = T.stream('statuses/filter', { follow: TRUMP_USER_ID});
+var stream = T.stream('statuses/filter', { follow: [TRUMP_USER_ID, GOP_CLUSTER_FUCK_ID] });
 
 // Connect to Twitter API and start streaming
 stream.on('tweet', function (tweet) {
@@ -23,12 +24,11 @@ stream.on('tweet', function (tweet) {
   if (tweet.user.id == TRUMP_USER_ID) {
     console.log("new tweet: ", getFullText(tweet))
     console.log("matches trump!")
-    var text = getFullText(tweet);
-    var id = tweet.id_str;
-    var date = tweet.created_at;
-    var t = {text: text, id: id, _id: id, date: date}
-    console.log("about to save tweet: ", t)
-    saveTweet(t)
+    prepareTweet(tweet)
+  } else if (tweet.user.id == GOP_CLUSTER_FUCK_ID) {
+    console.log("new tweet: ", getFullText(tweet))
+    console.log("matches GOPClusterFuck!")
+    prepareTweet(tweet, true)
   }
 });
 
@@ -54,7 +54,19 @@ function getFullText(tweet) {
   return tweet.text;
 }
 
-function saveTweet(tweet) {
+function prepareTweet(tweet, testing) {
+  var text = getFullText(tweet);
+  var id = tweet.id_str;
+  var date = tweet.created_at;
+  var t = {text: text, id: id, _id: id, date: date}
+  console.log("about to save tweet: ", t)
+  if (testing) {
+    t.testTweet = true
+  }
+  saveTweet(t, testing)
+}
+
+function saveTweet(tweet, testing) {
   var t = new Tweet(tweet)
   console.log("saving tweet: ", JSON.stringify(t))
   t.save((err) => {
@@ -62,22 +74,33 @@ function saveTweet(tweet) {
     if (err) {
       return console.log(err)
     }
-    analyzeTweet(t)
+    analyzeTweet(t, testing)
   })
 }
 
-function analyzeTweet(tweet) {
+function analyzeTweet(tweet, testing) {
+  console.log('analyzing tweet')
+  console.log(tweet)
   var date = new Date();
   var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  var userQuery = {
+    admin: {
+      $ne: true
+    }
+  }
+  if (testing) {
+    // if it's a test tweet, only analyze the test users
+    userQuery.testUser = true
+  }
 
   User
-    .find({
-      admin: {
-        $ne: true
-      }
-    })
+    .find(userQuery)
     .exec((err, users) => {
-      async.eachSeries(users, (user, next) => {
+      console.log('grabbed users')
+      async.eachSeries(users, (user, nextUser) => {
+        if (!user.paymenttoken && !user.testUser) {
+          return nextUser()
+        }
         if (user.monthlyLimit) {
           Donation.aggregate([{
               $match: {
@@ -91,22 +114,28 @@ function analyzeTweet(tweet) {
               }
             }], (err, result) => {
             if (result[0].amount < user.monthlyLimit) {
-              checkUserTriggers(user, tweet, function() {
-                next()
+              checkUserTriggers(user, tweet, testing, function() {
+                console.log('user has under the monthly limit')
+                nextUser()
               })
             }
           })
         } else {
-          checkUserTriggers(user, tweet, function() {
-            next()
+          checkUserTriggers(user, tweet, testing, function() {
+            console.log('user has no monthly limit')
+            nextUser()
           })
         }
       })
   })
-  popularTerms()
+  if (!testing) {
+    popularTerms()
+  }
 }
 
-function checkUserTriggers(user, tweet, cb) {
+function checkUserTriggers(user, tweet, testing, cb) {
+  console.log('checking user triggers')
+  console.log(tweet)
   Trigger.find({
     userId: user.id,
     active: true
@@ -120,25 +149,24 @@ function checkUserTriggers(user, tweet, cb) {
         return console.log('there are no triggers')
       }
     }
+    console.log('grabbed triggers')
 
     var donation;
-    for (trigger in triggers) {
+    for (triggerIdx in triggers) {
+      var trigger = triggers[triggerIdx]
       // loop through the keywords
-      for (keyword in trigger.keywords) {
-        keyword = escapeRegExp(keyword)
-        var re = new RegExp(keyword)
-        // check if there's a match
-        // a potential optimization is to create only
-        // a single regex for all keywords
-        if (re.exec(tweet.text)) {
-          donation = makeDonation(user, trigger, tweet, cb)
-          // on a single tweet, we only want to donate once per user,
-          // so we break out of the loop
-          break
-        }
-      }
-      // similarly, we break out of this loop if we have a donation already
-      if (donation) {
+      var keyword = trigger.name
+      keyword = escapeRegExp(keyword)
+      var re = new RegExp(keyword)
+      // check if there's a match
+      // a potential optimization is to create only
+      // a single regex for all keywords
+      if (re.exec(tweet.text)) {
+        console.log('found a match!')
+        console.log(tweet)
+        donation = makeDonation(user, trigger, tweet, testing, cb)
+        // on a single tweet, we only want to donate once per user,
+        // so we break out of the loop
         break
       }
     }

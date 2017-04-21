@@ -30,6 +30,10 @@ const UserSchema = new Schema({
   paymentToken: String,
   billDate: Date,
   notification: Boolean,
+  // test users are the ones who are going to be used for our testing purposes
+  // since we're using a different twitter to test them from, one that we can trigger whenever,
+  // we don't ever want them to be confused with real users
+  testUser: { type: Boolean, default: false }
 }, { toJSON: { virtuals: true } });
 
 UserSchema.pre('save', function(next) {
@@ -46,7 +50,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.pre('save', function(next) {
   var user = this
-  if (user.emailConfirmed || user.confirmationToken) {
+  if (user.emailConfirmed || user.confirmationToken || user.testUser) {
     return next();
   }
   crypto.randomBytes(16, function(err, buf) {
