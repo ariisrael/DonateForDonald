@@ -25,7 +25,7 @@
     <div class="js-no-never" style="margin-top: 20px;">
       <div class="ui checkbox">
         <input type="checkbox" name="donotask">
-        <label style="font-size: 90%; color: #777; position: relative; top: -5px">Do not ask again</label>
+        <label class="js-ask-label" style="cursor: pointer; font-size: 90%; color: #777; position: relative; top: -5px">Do not ask again</label>
       </div>
     </div>
   </div>
@@ -33,5 +33,16 @@
 <script>
   $('.js-action-btn').on('click', function() {
     $('.js-action-btn').addClass('loading');
+  });
+
+  $('.js-ask-label').on('click', function() {
+    var isChecked = $('input[name="donotask"]').prop('checked');
+    if(isChecked) {
+    $('input[name="donotask"]').prop('checked', false);
+
+    } else {
+    $('input[name="donotask"]').prop('checked', true);
+
+    }
   });
 </script>
