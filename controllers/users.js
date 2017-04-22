@@ -106,8 +106,12 @@ exports.loginPost = function(req, res, next) {
 
   passport.authenticate('local', function(err, user, info) {
     if (!user) {
-      req.flash('error', info);
-      return res.redirect('/login')
+      var errors = 'Email/password combination incorrect'; 
+      return res.render('login', {
+        title: 'Login',
+        error: errors,
+        csrfToken: req.csrfToken(),
+      });      
     }
 
     req.logIn(user, function(err) {
@@ -155,8 +159,12 @@ exports.signupPost = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, user) {
     if (user) {
-      req.flash('error', { msg: 'The email address you have entered is already associated with another account.' });
-      return res.redirect('/signup');
+      var errors = 'Email already exists'; 
+      return res.render('login', {
+        title: 'Login',
+        error: errors,
+        csrfToken: req.csrfToken(),
+      });
     }
     user = new User({
       name: req.body.name,
@@ -483,3 +491,5 @@ exports.resetPost = function(req, res, next) {
     }
   ]);
 };
+
+

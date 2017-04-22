@@ -4,14 +4,12 @@
       <a href="/">
         <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
       </a>
-      <div class="ui error message js-login-errors" style="position: relative; top: -10px; margin: 0px; display: none">
+      {{#if error}}
+      <div class="ui error message js-login-errors" style="position: relative; top: -10px; margin: 0px;">
         <i class="close icon"></i>
         <div class="header">
-          There were some errors with your submission
+          {{error}}
         </div>
-        <ul class="list js-login-errors">
-          <li>You entered an incorrect email or password combination.</li>
-        </ul>
       </div>
       <script>
         $('.js-login-errors .close').on('click', function () {
@@ -19,7 +17,9 @@
           $('.js-login-errors').css('display', 'none')
         });
       </script>
+
       <br>
+      {{/if}}
       <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
 
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
