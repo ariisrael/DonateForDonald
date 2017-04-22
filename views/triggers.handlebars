@@ -8,22 +8,18 @@
   </div>
 </div>
 {{/if_not}}
-<div class="ui text container web-form triggers-page">
-  <div class="ui divided items">
-    <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
-      <div class="ui text container">
-        <h3 class="ui header no-triggers">
-          No triggers. Sad! <a href="/">Make some.</a>
-        </h3>
-        <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
-        />
-      </div>
-    </div>
+<div class="ui text container triggers-page" style="margin-top: 0px; padding-top: 0px">
+  <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
+    <h3 class="ui header no-triggers">
+      No triggers. Sad! <a href="/">Make some.</a>
+    </h3>
+    <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
+    />
   </div>
-  <div class="ui divided items">
+  <div class="ui items">
     {{#each triggers}}
 
-    <div class="item js-trigger-item js-trigger-id-{{this.id}}">
+    <div class="item js-trigger-item js-trigger-id-{{this.id}}" style="border-bottom: 2px solid #eee; padding-bottom: 20px">
       <meta class="trigger-data" data-charityname="{{this.charityId.name}}" data-charitytwitter="{{this.charityId.twitter}}" data-amount="{{this.amount}}"
         data-charity="{{this.charityId.id}}" data-term="{{this.name}}">
       <div class="ui small fluid image charity-image" style="border-radius: 3px">
@@ -88,9 +84,9 @@
             </button>
 
           </div>
-<div class="ui floated right" style="display: inline-block; float: right; position: relative; top: -60px">
+          <div class="ui floated right" style="display: inline-block; float: right; position: relative; top: -60px">
             <button class="ui facebook circular icon button"><i class="facebook icon"></i></button>
-                        <button class="ui twitter circular button icon"><i class="twitter icon"></i></button>
+            <button class="ui twitter circular button icon"><i class="twitter icon"></i></button>
 
           </div>
         </div>

@@ -46,7 +46,7 @@
         <input type="text" placeholder="100" maxlength="4">
       </div>
     </div>
-      <button class="ui primary massive button fluid js-action-btn save-payment-btn js-save-payment" type="submit">Save</button>
+      <button class="ui disabled massive button fluid js-action-btn save-payment-btn js-save-payment" type="submit">Save</button>
 
     </form>
     </div>
@@ -56,5 +56,30 @@
         $(this).addClass('loading');
 
   }); 
+  $('input').on('keyup', function() {
+    validatePayment();
+  });
+
+  function validatePayment() {
+    var inputs = getPaymentInputs();
+    if(inputs.first_name.length > 0 && inputs.last_name.length > 0 && (inputs.credit_card.length === 15 || inputs.credit_card.length === 16) && (inputs.cvv.length === 3 || inputs.cvv.length === 4) && (inputs.expiration.length === 7 && inputs.expiration.indexOf('/') > 0)) {
+      console.log('inputs', inputs);
+      $('.js-save-payment').addClass('primary').removeClass('disabled');
+    } else {
+      console.log('invalid');
+      $('.js-save-payment').addClass('disabled').removeClass('primary');
+    }
+  }
+
+  function getPaymentInputs() {
+    return {
+      first_name: $('input[name="first_name"]').val(),
+      last_name: $('input[name="last_name"]').val(),
+      credit_card: $('input[name="credit_card"]').val(),
+      cvv: $('input[name="cvv"]').val(),
+      expiration: $('input[name="expiration"]').val()
+    }
+  }
+  
     </script>
 {{>pandascripts}}
