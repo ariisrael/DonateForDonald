@@ -2,48 +2,128 @@
   <main style="width: 100%">
     <div class="ui text container" style="width: 100%; max-width: 400px; width: 500px; margin: 5% auto">
       <a href="/">
-      <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
+        <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
       </a>
-<div class="ui error message js-login-errors" style="display:none; position: relative; top: -10px; margin: 0px;">
-  <i class="close icon"></i>
-  <div class="header">
-    There were some errors with your submission
-  </div>
-  <ul class="list js-login-errors">
-    <li>You entered an incorrect email or password combination.</li>
-  </ul>
-</div>
-<br>
-<form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
-
-  <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  <div class="field">
-    <input type="email" class="ui input massive" name="email" placeholder="Email">
-  </div>
-  <div class="field">
-    <input type="password" name="password" placeholder="Password">
-  </div>
-
-<div class="ui two-buttons" style="margin-top: 0px; padding: 0px">
-  <button type='submit' class="ui massive primary button signup-button js-action-btn" type="submit">
-    Sign Up
-  </button>
-<button type='submit' class="ui basic massive button login-button js-action-btn" type="submit">
-    Log In
-  </button>
-</div>
-  </form>
-  <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
-    <a class="fluid ui button facebook massive icon js-action-btn" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
-  </div>
-  <a class="forgot-pass" href="/reset" style="float: right; margin-top: 20px; ">Forgot Password</a>
-
-
+      <div class="ui error message js-login-errors" style="position: relative; top: -10px; margin: 0px; display: none">
+        <i class="close icon"></i>
+        <div class="header">
+          There were some errors with your submission
+        </div>
+        <ul class="list js-login-errors">
+          <li>You entered an incorrect email or password combination.</li>
+        </ul>
       </div>
-  </main>
-<script>
-$('.js-action-btn').on('click', function() {
-        $(this).addClass('loading');
+      <script>
+        $('.js-login-errors .close').on('click', function () {
+          console.log('Closing errors');
+          $('.js-login-errors').css('display', 'none')
+        });
+      </script>
+      <br>
+      <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
 
-  });
-  </script> 
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="ui field js-email-field">
+          <input type="email" class="ui input massive" name="email" placeholder="Email">
+        </div>
+        <div class="field js-password-field">
+          <input type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="two-buttons" style="padding-top: 10px">
+
+
+          <!-- CTA: Donate -->
+
+          <!-- End CTA: Donate -->
+          <!-- CTA: View Tweets -->
+          <div class="left-button">
+
+            <button class="ui massive icon button fluid signup-button disabled js-action-btn" type="submit" style="height: 64px">
+                Sign Up
+              </button>
+          </div>
+          <div class="right-button">
+            <button class="ui icon massive button basic disabled login-button fluid js-action-btn" style="border: 1px solid #ddd; height:"
+              type="submit">
+                Log In
+              </button>
+          </div>
+          <!-- End CTA: View Tweets -->
+
+        </div>
+        <!-- End landing CTAs -->
+      </form>
+      <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
+        <a class="fluid ui button facebook massive icon js-action-btn" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
+      </div>
+      <a class="forgot-pass" href="/reset" style="float: right; margin-top: 20px; ">Forgot Password</a>
+
+
+    </div>
+  </main>
+  <script>
+    $('.js-action-btn').on('click', function () {
+      $(this).addClass('loading');
+    });
+
+    $('input[name="email"]').on('keyup', function () {
+      console.log('Typing email');
+      validateLogin();
+    });
+
+
+    $('input[name="password"]').on('keyup', function () {
+      console.log('Typing password');
+      validateLogin();
+    });
+
+    function validateLogin() {
+      var email = $('input[name="email"]').val();
+      var password = $('input[name="password"]').val();
+      if (email && password && email.length > 0 && email.indexOf('@') > 0 && email.indexOf('.') > 0 && password.length > 4) {
+        enableButton('login');
+        enableButton('signup');
+      } else {
+        disableButton('login');
+        disableButton('signup');
+      }
+    }
+
+    function enableButton(type) {
+      var elem = "";
+      switch (type) {
+        case 'login':
+          elem = $('.login-button');
+          break;
+        case 'signup':
+          elem = $('.signup-button');
+          elem.addClass('primary');
+          break;
+        default:
+          return console.log('No button to enable');
+      }
+      console.log('Enabling button...');
+      elem.removeClass('disabled');
+      return true;
+    }
+    function disableButton(type) {
+      $('button').removeClass('primary');
+      var elem = "";
+      switch (type) {
+        case 'login':
+          elem = $('.login-button');
+          break;
+        case 'signup':
+          elem = $('.signup-button');
+          console.log('removing');
+          elem.removeClass('primary');
+          break;
+        default:
+          return console.log('No button to disable');
+      }
+      console.log('Disabling button...');
+      elem.addClass('disabled');
+      return true;
+    }
+  </script>
