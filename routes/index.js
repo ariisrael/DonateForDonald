@@ -72,7 +72,15 @@ app.post('/reset/:token', UserController.resetPost);
 
 app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.unlink);
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+app.get('/auth/facebook', function(req, res, next) {
+
+  if (req.query.redirect) {
+    
+  }
+
+
+  passport.authenticate('facebook', { scope: ['email', 'user_location'] })(req, res, next)
+});
 app.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err || !user) {

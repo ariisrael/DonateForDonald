@@ -1,67 +1,66 @@
-<body class="site">
-  <main style="width: 100%">
-    <div class="ui text container" style="width: 100%; max-width: 400px; width: 500px; margin: 5% auto">
-      <a href="/">
-        <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
-      </a>
-      {{#if error}}
-      <div class="ui error message js-login-errors" style="position: relative; top: -10px; margin: 0px;">
-        <i class="close icon"></i>
-        <div class="header">
-          {{error}}
-        </div>
+<main class="login-page" style="width: 100%">
+  <div class="ui text container" style="width: 100%; max-width: 400px; width: 500px; margin: 5% auto">
+    <a href="/">
+      <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 40px" />
+    </a>
+    {{#if error}}
+    <div class="ui error message js-login-errors" style="position: relative; top: -10px; margin: 0px;">
+      <i class="close icon"></i>
+      <div class="header">
+        {{error}}
       </div>
-      <script>
-        $('.js-login-errors .close').on('click', function () {
-          console.log('Closing errors');
-          $('.js-login-errors').css('display', 'none')
-        });
-      </script>
-
-      <br>
-      {{/if}}
-      <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
-
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="ui field js-email-field">
-          <input type="email" class="ui input massive" name="email" placeholder="Email">
-        </div>
-        <div class="field js-password-field">
-          <input type="password" name="password" placeholder="Password">
-        </div>
-
-        <div class="two-buttons" style="padding-top: 10px">
-
-
-          <!-- CTA: Donate -->
-
-          <!-- End CTA: Donate -->
-          <!-- CTA: View Tweets -->
-          <div class="left-button">
-
-            <button class="ui massive icon button fluid signup-button disabled js-action-btn" type="submit" style="height: 64px">
-                Sign Up
-              </button>
-          </div>
-          <div class="right-button">
-            <button class="ui icon massive button basic disabled login-button fluid js-action-btn" style="border: 1px solid #ddd; height:"
-              type="submit">
-                Log In
-              </button>
-          </div>
-          <!-- End CTA: View Tweets -->
-
-        </div>
-        <!-- End landing CTAs -->
-      </form>
-      <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
-        <a class="fluid ui button facebook massive icon js-action-btn" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
-      </div>
-      <a class="forgot-pass" href="/reset" style="float: right; margin-top: 20px; ">Forgot Password</a>
-
-
     </div>
-  </main>
+    <script>
+      $('.js-login-errors .close').on('click', function () {
+        console.log('Closing errors');
+        $('.js-login-errors').css('display', 'none')
+      });
+    </script>
+
+    <br>
+    {{/if}}
+    <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
+
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="ui field js-email-field">
+        <input type="email" class="ui input massive" name="email" placeholder="Email">
+      </div>
+      <div class="field js-password-field">
+        <input type="password" name="password" placeholder="Password">
+      </div>
+
+      <div class="two-buttons" style="padding-top: 10px">
+
+
+        <!-- CTA: Donate -->
+
+        <!-- End CTA: Donate -->
+        <!-- CTA: View Tweets -->
+        <div class="left-button">
+
+          <button class="ui massive icon button fluid signup-button disabled js-action-btn js-signup-button" type="submit" style="height: 64px">
+              Sign Up
+            </button>
+        </div>
+        <div class="right-button">
+          <button class="ui icon massive button basic disabled login-button fluid js-action-btn js-login-button" style="border: 1px solid #ddd; height:"
+            type="submit">
+              Log In
+            </button>
+        </div>
+        <!-- End CTA: View Tweets -->
+
+      </div>
+      <!-- End landing CTAs -->
+    </form>
+    <div class="" style="padding: 30px 0px 0px 0px; border-top: 2px solid #eee ; margin-top: 20px;">
+      <a class="fluid ui button facebook massive icon js-action-btn js-fb-login-button" href="/auth/facebook"><i class="ui icon facebook"></i> Use Facebook</a>
+    </div>
+    <a class="forgot-pass" href="/reset" style="float: right; margin-top: 20px; ">Forgot Password</a>
+
+
+  </div>
+</main>
   <script>
     $('.js-action-btn').on('click', function () {
       $(this).addClass('loading');
