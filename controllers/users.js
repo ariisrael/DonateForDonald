@@ -106,17 +106,19 @@ exports.loginPost = function(req, res, next) {
 
   passport.authenticate('local', function(err, user, info) {
     if (!user) {
-      var errors = 'Email/password combination incorrect'; 
+      var errors = 'Email/password combination incorrect';
       return res.render('login', {
         title: 'Login',
         error: errors,
         csrfToken: req.csrfToken(),
-      });      
+      });
     }
 
     req.logIn(user, function(err) {
       console.log(user);
-      if(!(user.paymentToken)) {
+      if (req.query && req.query.redirect) {
+        res.redirect(decodeURIComponent(req.query.redirect))
+      } else if (!(user.paymentToken)) {
         res.redirect('/payment');
       } else {
         res.redirect('/triggers');
@@ -159,7 +161,7 @@ exports.signupPost = function(req, res, next) {
 
   User.findOne({ email: req.body.email }, function(err, user) {
     if (user) {
-      var errors = 'Email already exists'; 
+      var errors = 'Email already exists';
       return res.render('login', {
         title: 'Login',
         error: errors,
@@ -491,5 +493,3 @@ exports.resetPost = function(req, res, next) {
     }
   ]);
 };
-
-

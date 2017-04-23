@@ -74,13 +74,13 @@ app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.
 
 app.get('/auth/facebook', function(req, res, next) {
 
-  if (req.query.redirect) {
-    
+  if (req.query && req.query.redirect) {
+    req.session.redirectURI = decodeURIComponent(req.query.redirect)
   }
-
 
   passport.authenticate('facebook', { scope: ['email', 'user_location'] })(req, res, next)
 });
+
 app.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err || !user) {
@@ -93,7 +93,11 @@ app.get('/auth/facebook/callback', function(req, res, next) {
         console.error('auth error: ', err)
         return res.redirect('/login')
       }
-      if(!(user.paymentToken)) {
+      if (req.session.redirectURI) {
+        redirectURI = req.session.redirectURI
+        req.session.redirectURI = undefined
+        return res.redirect(redirectURI)
+      } else if (!(user.paymentToken)) {
         return res.redirect('/payment');
       }
       if (!(user.twitter)) {
