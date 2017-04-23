@@ -9,7 +9,8 @@ $(document).ready(function () {
     var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
     var term = metadata.data('term')
     var amount = metadata.data('amount')
-    var charity = metadata.data('charity')
+    var charity = metadata.data('charity'); 
+
     $('.js-editing-trigger-data').data('trigger', {
       charityId: charity,
       amount: amount
