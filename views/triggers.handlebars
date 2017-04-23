@@ -75,7 +75,7 @@
           
 
           <div class="left floated trigger-actions" style="clear: both; margin-top: 0px; padding-top: 5px; margin-bottom: 10px">
-
+<div style="display: none">
  <button class="ui button left labeled red icon js-social-active-button
               js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}">
                             
@@ -93,10 +93,10 @@
               <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
               Connect
             </button>
+</div>
 
-
-            <button class="ui button js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> </button>
-            <div class="ui primary icon button"><i class="share icon"></i>
+            <button class="ui button left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
+            <div class="ui primary left labeled icon button"><i class="share icon"></i> Share
             </div>
 
           </div>
