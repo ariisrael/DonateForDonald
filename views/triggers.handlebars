@@ -68,11 +68,10 @@
             </div>
           </div>
 
-                      <span style="float: right; text-transform: uppercase; color: #999; font-size: 80%; position: relative; top: -7px">
+          <span style="float: right; text-transform: uppercase; color: #999; font-size: 80%; position: relative; top: -7px">
               <i class="ui icon share"></i> Share this
-            </span>
-            {{#if user.twitter}}
-            
+            </span> {{#if user.twitter}}
+
           <div style="position: relative; top: -20px">
 
             <div class="js-social-active-button social-active-button
@@ -81,9 +80,9 @@
               <i class="icon check circle green"></i> Autoreply on Twitter
             </div>
             <div class="js-social-active-button social-active-button
-              js-enable {{#if this.social}}hide{{/Sif}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
               <i class="icon radio" style="color: #555"></i> Autoreply on Twitter
-            </div>         
+            </div>
           </div>
           {{else}}
           <div style="position: relative; top: -20px">
@@ -91,15 +90,15 @@
             <div style="color: #fff;">
 
               <i class="icon check circle"></i> Connect to Twitter
-            </div>     
+            </div>
           </div>
-            {{/if}}
+          {{/if}}
 
           <div style="position: relative; top: -5px">
             <button class="ui button large js-edit-button icon fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
-                                             <button class="ui large circular button basic icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui attach icon"></i></button>
+            <button class="ui large circular button basic icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui attach icon"></i></button>
 
-                        <button class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui twitter icon"></i></button>
+            <button class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui twitter icon"></i></button>
 
             <button class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui facebook icon"></i></button>
 
