@@ -1,4 +1,4 @@
-function settingsPage() {
+$(document).ready(function() {
   if (!$('.settings-page').length) return;
 
   $('form#delete-account button').on('click', function(e) {
@@ -56,7 +56,7 @@ function settingsPage() {
     })
   })
 
-}
+})
 
 function maximumSuccess() {
   $('#monthly-maximum button').removeClass('loading disabled')

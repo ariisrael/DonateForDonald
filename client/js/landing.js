@@ -1,4 +1,4 @@
-function landingPage() {
+$(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
 
   if (!$('.main-landing').length) return;
@@ -115,13 +115,8 @@ function landingPage() {
     validateLanding();
   });
 
-  $('.js-donate button.js-action-btn').click(function(e) {
-    e.preventDefault()
-    landingDonate()
-  })
 
-
-}
+})
 
 
 function loadTweets(term) {

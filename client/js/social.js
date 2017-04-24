@@ -1,4 +1,4 @@
-function socialPage() {
+$(document).ready(function() {
   if (!$('.social-page').length) {
     return;
   }
@@ -73,4 +73,4 @@ function socialPage() {
       window.location.replace("/triggers");
     }
   });
-}
+})
