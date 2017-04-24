@@ -28,7 +28,7 @@
     <div class="item js-trigger-item js-trigger-id-{{this.id}}" style="border-bottom: 1px solid #eee; padding-bottom: 10px">
       <meta class="trigger-data" data-charityname="{{this.charityId.name}}" data-charitytwitter="{{this.charityId.twitter}}" data-amount="{{this.amount}}"
         data-charity="{{this.charityId.id}}" data-term="{{this.name}}">
-      <div class="ui small fluid image charity-image" style="border-radius: 6px">
+      <div class="ui fluid image charity-image" style="border-radius: 10px; width: 170px">
         <img src="{{this.charityId.image}}">
       </div>
 
@@ -61,11 +61,11 @@
           </div>
 
           <div class="meta" style="width: 100%">
-            <span class="stay charity-name" style="color: #555; font-size: 20px; font-weight: 300; position: relative; top: 3px"> {{this.charityId.name}}</span>
+            <span class="stay charity-name" style="color: #555; font-weight: 300; position: relative; top: 3px"> {{this.charityId.name}}</span>
 
           </div>
 
-          <div class="extra " style="position: relative; top: -13px; display: inline-block; font-size: 20px">
+          <div class="extra " style="position: relative; top: -13px; display: inline-block;">
             <div>
               <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
             </div>
@@ -73,18 +73,18 @@
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
           </div>
-          <div style="position: relative; top: -22px">
+          <div style="position: relative; top: -20px">
             <a class="js-social-active-button
-              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999; font-size: 20px">
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999;">
 
               <i class="icon check circle green"></i> Autoreply to @realDonaldTrump
             </a> <a class="js-social-active-button
-              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999; font-size: 20px">
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999;">
 
               <i class="icon check circle outline" style="color: #555"></i> Autoreply to @realDonaldTrump
             </a>
  </div>
-          <div style="position: relative; top: 0px">
+          <div style="position: relative; top: -5px">
             <button class="ui button large left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
             <div class="ui primary large left labeled icon button"><i class="share icon"></i> Share
             </div>
