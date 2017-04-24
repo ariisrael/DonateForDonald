@@ -1,76 +1,85 @@
-  <header style="z-index: 888">
-    <!-- Navigation -->
-    <nav class="ui squared menu js-nav">
-      <!-- Logo -->
-      <div class="item drawer-hide">
-        <a href="/" style="z-index: 999">
-          <img src="/images/profile.jpg" class="logo" />
-        </a>
-      </div>
-      <!-- Share buttons -->
-      <div class="share-buttons drawer-hide" style="z-index: 999; margin: 20px">
-        <!-- Facebook -->
-        <a class="ui button facebook icon" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//www.donatefordonald.org">
-          <i class="facebook icon"></i>
-          <span class="share-text">Share</span>
-        </a>
-        <!-- Twitter -->
-        <a class="ui button twitter icon" href="https://twitter.com/home?status=http%3A//www.donatefordonald.org" >
-          <i class="twitter icon"></i>
-          <span class="share-text">Tweet</span>
-        </a>
-      </div>
-      <!-- User dropdown/login -->
-      <div class="right menu">
-        <!-- Logged in view -->
-        {{#if user}}
-        <div class="ui pointing dropdown link item" style="border-color: transparent; z-index: 999;">
-          <!-- Profile picture -->
-          {{#if user.picture}}
-          <img src="{{user.picture}}" class="user-picture" style="border-radius: 100%;"/>
-          {{/if}}
-          <!-- Name -->
-          <i class="dropdown icon"></i>
-          <div class="menu js-user-menu user-menu" style="z-index: 999">
-            <a href="/">
-              <div class="item">
-                <i class="icon home"></i> Home
-              </div>
-            </a>
-            <a href="/triggers">
-              <div class="item">
-                <i class="icon lightning"></i> Triggers
-              </div>
-            </a>
-            {{#if user.admin}}
-            <a href="/admin" >
-              <div class="item">
-                <i class="icon lab"></i> Admin
-              </div>
-            </a>
-            {{/if}}
-            <a href="/contact">
-              <div class="item">
-                <i class="icon envelope alternative"></i> Contact
-              </div>
-            </a>
-            <a href="/settings">
-              <div class="item">
-                <i class="icon settings"></i> Settings
-              </div>
-            </a>
-            <!-- Logout button -->
-            <div class="js-logout logout">
-              <a href="/logout" class="ui button fluid large primary">Logout</a>
+<header style="z-index: 888">
+  <!-- Navigation -->
+  <nav class="ui squared menu js-nav">
+    <!-- Logo -->
+    <div class="item drawer-hide">
+      <a href="/" style="z-index: 999">
+        <img src="/images/profile.jpg" class="logo" />
+      </a>
+    </div>
+    <!-- Share buttons -->
+    <div class="share-buttons drawer-hide" style="z-index: 999; margin: 20px">
+      <!-- Facebook -->
+      <a class="ui button facebook icon" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//www.donatefordonald.org">
+        <i class="facebook icon"></i>
+        <span class="share-text">Share</span>
+      </a>
+      <!-- Twitter -->
+      <a class="ui button twitter icon" href="https://twitter.com/home?status=http%3A//www.donatefordonald.org" >
+        <i class="twitter icon"></i>
+        <span class="share-text">Tweet</span>
+      </a>
+    </div>
+    <!-- User dropdown/login -->
+    <div class="right menu">
+      <!-- Logged in view -->
+      {{#if user}}
+      <div class="ui pointing dropdown link item" style="border-color: transparent; z-index: 999;">
+        <!-- Profile picture -->
+        {{#if user.picture}}
+        <img src="{{user.picture}}" class="user-picture" style="border-radius: 100%;"/>
+        {{/if}}
+        <!-- Name -->
+        <i class="dropdown icon"></i>
+        <div class="menu js-user-menu user-menu" style="z-index: 999">
+          <a href="/">
+            <div class="item">
+              <i class="icon home"></i> Home
             </div>
+          </a>
+          <a href="/triggers">
+            <div class="item">
+              <i class="icon lightning"></i> Triggers
+            </div>
+          </a>
+          {{#if user.admin}}
+          <a href="/admin" >
+            <div class="item">
+              <i class="icon lab"></i> Admin
+            </div>
+          </a>
+          {{/if}}
+          <a href="/contact">
+            <div class="item">
+              <i class="icon envelope alternative"></i> Contact
+            </div>
+          </a>
+          <a href="/settings">
+            <div class="item">
+              <i class="icon settings"></i> Settings
+            </div>
+          </a>
+          <!-- Logout button -->
+          <div class="js-logout logout">
+            <a href="/logout" class="ui button fluid large primary">Logout</a>
           </div>
         </div>
-        {{else}}
-        <!-- Login button -->
-        <div class="login js-login item">
-          <a class="ui button primary text login" href="/login">Login</a>
-        </div>
-        {{/if}}
       </div>
-    </nav>
-  </header>
+      {{else}}
+      <!-- Login button -->
+      <div class="login js-login item">
+        <a class="ui button primary text login" href="/login">Login</a>
+      </div>
+      {{/if}}
+    </div>
+  </nav>
+</header>
+
+<div class="ui inline js-unsaved-nag unsaved-nag d4d-nag" style="display: none;">
+  <div class="ui text container">
+    <p>
+      You have an unfinished trigger. <a class="finish-link" href="/social">Click here to complete it</a>. Or click <a href="#" class='disgard-trigger disgard-link'>here</a> to disgard it.
+      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
+    </p>
+  </div>
+</div>

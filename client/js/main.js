@@ -5,7 +5,18 @@ $(document).ready(function () {
       $('.js-maximum-amount').toggleClass('disabled');
     });
 
-  createTrigger()
+  unsavedNag()
+
+  $('.js-close-nag').on('click', function () {
+    $(this).parents('.d4d-nag').css('display', 'none');
+  });
+
+  $('.disgard-trigger').on('click', function () {
+    localStorage.removeItem('trigger');
+    $(this).parents('.d4d-nag').css('display', 'none');
+  });
+
+
 });
 
 function setupSocial(charityTwitter, charityId, triggerName) {
@@ -17,30 +28,12 @@ function setupSocial(charityTwitter, charityId, triggerName) {
   $('.js-landing-link').prop('href', linkTrigger).text(linkTrigger);
 }
 
-
-function createTrigger() {
+function unsavedNag() {
   if ($('.social-page').length || $('.login-page').length || $('.payment-page').length) {
     return;
   }
 
-  var rawTrigger = localStorage.getItem('trigger');
-  if (rawTrigger) {
-    var userTrigger = JSON.parse(rawTrigger);
-    delete userTrigger.charityName;
-    delete userTrigger.triggerName;
-    delete userTrigger.twitter;
-
-    jQuery.ajax({
-      type: 'post',
-      url: '/api/triggers',
-      data: userTrigger,
-      success: function (data) {
-        localStorage.clear();
-        if ($('.triggers-page').length) {
-          location.reload()
-        }
-      },
-      dataType: 'json'
-    });
+  if (localStorage.getItem('trigger')) {
+    $('.unsaved-nag').css('display', 'block');
   }
 }

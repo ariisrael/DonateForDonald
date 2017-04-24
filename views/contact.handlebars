@@ -1,51 +1,36 @@
-<body class="site">
-  {{> header}}
-  <main>
-    <div class="ui text container web-form">
-      <h1>{{title}}
-      </h1>
-      <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org">team@donatefordonald.org</a>.</span>
-      </div>
-      <form class="ui large form">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="two fields">
-        <div class="field">
-          <label>Email</label>
-          <div class="ui input fluid">
-            <input type="email" placeholder="Email" name="email">
-          </div>
-        </div>
-        <div class="field">
-          <label>Subject</label>
-          <div class="ui input fluid">
-            <input type="text" maxlength="60" placeholder="Subject" name="subject">
-          </div>
+{{> header}}
+<main>
+  <div class="ui text container web-form">
+    <h1>{{title}}
+    </h1>
+    <div class="ui subheader"><span>Send a message or email <a href="mailto:team@donatefordonald.org">team@donatefordonald.org</a>.</span>
+    </div>
+    <form class="ui large form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="two fields">
+      <div class="field">
+        <label>Email</label>
+        <div class="ui input fluid">
+          <input type="email" placeholder="Email" name="email">
         </div>
       </div>
-        <div class="field">
-          <label>Message</label>
-          <div class="ui input fluid">
-            <textarea placeholder="Message" name="message" rows="5"></textarea>
-          </div>
+      <div class="field">
+        <label>Subject</label>
+        <div class="ui input fluid">
+          <input type="text" maxlength="60" placeholder="Subject" name="subject">
         </div>
-        <div class="send-message js-send-message">
-          <button class="ui primary massive button fluid" type="submit">Send</button>
+      </div>
+    </div>
+      <div class="field">
+        <label>Message</label>
+        <div class="ui input fluid">
+          <textarea placeholder="Message" name="message" rows="5"></textarea>
         </div>
+      </div>
+      <div class="send-message js-send-message">
+        <button class="ui primary massive button fluid" type="submit">Send</button>
+      </div>
 
-      </form>
-    </div>
-  </main>
-  <!--
-  <footer>
-    <span style="float: left">                      <a href="#" class="item"><i class="ui icon github"></i>View Source</a>
-</span>
-    <div style="display: inline-block; float: right">
-
-      <a href="#" class="item"><i class="ui icon twitter"></i> Twitter</a>
-      <a href="#" class="item"><i class="ui icon facebook"></i> Facebook</a>
-
-      <a href="mailto:team@donatefordonald.org" class="item"><i class="ui icon envelope"></i> Contact</a>
-
-    </div>
-  </footer>
-  -->
+    </form>
+  </div>
+</main>
