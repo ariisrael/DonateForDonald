@@ -8,6 +8,7 @@ const passport = require('passport');
 const emailUtils = require('../utils/email')
 const forgotEmail = emailUtils.forgotEmail
 const changedEmail = emailUtils.changedEmail
+const confirmEmail = require('../utils/email').confirmEmail
 
 const User = models.User;
 
@@ -117,7 +118,19 @@ exports.loginPost = function(req, res, next) {
     req.logIn(user, function(err) {
       console.log(user);
       if (req.query && req.query.redirect) {
-        res.redirect(decodeURIComponent(req.query.redirect))
+        if (req.query.redirect = 'create') {
+          var redirectPath = ''
+          if (user.paymentToken && user.skipSocial) {
+            redirectPath = '/triggers'
+          } else if (user.paymentToken) {
+            redirectPath = '/social'
+          } else {
+            redirectPath = '/payment'
+          }
+          return res.redirect(redirectPath)
+        } else {
+          return res.redirect(decodeURIComponent(req.query.redirect))
+        }
       } else if (!(user.paymentToken)) {
         res.redirect('/payment');
       } else {
@@ -493,3 +506,32 @@ exports.resetPost = function(req, res, next) {
     }
   ]);
 };
+
+/**
+ * POST /api/resend-confirmation-email
+ */
+exports.sendConfirmationEmail = function(req, res) {
+  var resp = {}
+  User.findById(req.user.id, function(err, user) {
+    if (err) {
+      resp.error = err
+      return res.json(resp)
+    }
+    crypto.randomBytes(16, function(err, buf) {
+      var token = buf.toString('hex');
+      user.confirmationToken = token;
+      user.confirmationTokenExpires = Date.now() + 86400000; // expire in 1 day
+      var name = user.name
+      if (!name) name = user.email
+      user.save(function(err) {
+        if (err) {
+          resp.error = err
+          return res.json(resp)
+        }
+        confirmEmail(name, user.email, token, (err, body) => {
+          return res.json(resp)
+        })
+      })
+    });
+  })
+}

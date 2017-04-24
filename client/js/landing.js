@@ -214,7 +214,7 @@ function landingDonate() {
     }
   } else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    window.location.replace("/login");
+    window.location.replace("/login?create=true");
   }
 }
 

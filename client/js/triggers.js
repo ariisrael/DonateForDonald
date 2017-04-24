@@ -1,4 +1,4 @@
-$(document).ready(function () {
+function triggerPage() {
   if (!$('.triggers-page').length) return;
 
   $('.js-share-button').popup();
@@ -9,7 +9,7 @@ $(document).ready(function () {
     var metadata = $('.js-trigger-id-' + id + ' .trigger-data')
     var term = metadata.data('term')
     var amount = metadata.data('amount')
-    var charity = metadata.data('charity'); 
+    var charity = metadata.data('charity');
 
     $('.js-editing-trigger-data').data('trigger', {
       charityId: charity,
@@ -118,10 +118,15 @@ $(document).ready(function () {
     })
   });
 
-  $('.js-close-nag').on('click', function () {
-    $('.js-email-nag').css('display', 'none');
-  });
-})
+    $('.email-nag .new-link').click(function(evt) {
+      evt.preventDefault()
+      var self = this;
+      sendConfirmationEmail(function(err, data) {
+        $(this).parents('.d4d-nag').css('display', 'none');
+      })
+    })
+
+}
 
 function updateTrigger(id, data, callback) {
   var url = '/api/triggers/' + id
@@ -129,6 +134,19 @@ function updateTrigger(id, data, callback) {
     type: 'put',
     url: url,
     data: data,
+  })
+  .done(function(data, textStatus, jqXHR) {
+    callback(null, data)
+  })
+  .fail(function(data, textStatus, errorThrown) {
+    callback(errorThrown, data)
+  })
+}
+
+function sendConfirmationEmail(callback) {
+  jQuery.ajax({
+    type: 'post',
+    url: '/api/resend-confirmation-email'
   })
   .done(function(data, textStatus, jqXHR) {
     callback(null, data)

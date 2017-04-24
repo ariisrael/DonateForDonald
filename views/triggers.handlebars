@@ -1,5 +1,5 @@
 {{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag email-nag">
+<div class="ui inline js-email-nag email-nag d4d-nag" {{#if_not user.emailConfirmed }}style="display: block;"{{/if_not}}>
   <div class="ui text container">
     <p>
       Please confirm your email to start donating or <a href="#" class="new-link">request a new confirmation link</a>
@@ -56,12 +56,12 @@
               <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             </button></span> {{this.name}}
 
-            
+
             </div>
 
           <div class="meta" style="width: 100%">
             <span class="stay charity-name"> {{this.charityId.name}}</span>
-           
+
           </div>
 
           <div class="extra " style="position: relative; top: -23px; display: inline-block">
@@ -72,6 +72,7 @@
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
           </div>
+<<<<<<< HEAD
           
 <div style="position: relative; top: -32px">
  <a class="js-social-active-button
@@ -88,6 +89,29 @@
               <i class="icon toggle off blue"></i>
               Autoreply to @realDonaldTrump
             </a>
+=======
+
+
+          <div class="left floated trigger-actions" style="clear: both; margin-top: 0px; padding-top: 5px; margin-bottom: 10px">
+<div style="display: none">
+ <button class="ui button left labeled red icon js-social-active-button
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}">
+
+
+              <i class="icon twitter"></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
+            Disconnect
+            </button>
+              <button class="ui button left labeled green icon js-social-active-button
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}">
+
+
+              <i class="icon twitter"></i>
+
+              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
+              Connect
+            </button>
+>>>>>>> 4000e9335948558fefe6f85637f235a169bc409e
 </div>
 <script>
 
