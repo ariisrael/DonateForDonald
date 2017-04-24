@@ -19,7 +19,7 @@ function setupSocial(charityTwitter, charityId, triggerName) {
 
 
 function createTrigger() {
-  if ($('.social-page').length || $('.login-page').length) {
+  if ($('.social-page').length || $('.login-page').length || $('.payment-page').length) {
     return;
   }
 
