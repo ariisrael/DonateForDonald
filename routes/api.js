@@ -44,6 +44,8 @@ api.post('/social/disable/:id', LOGIN_ONLY, SocialController.disableTrigger)
 api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
 api.put('/users/:id', USER_ONLY, UserController.update);
 
+api.post('/resend-confirmation-email', LOGIN_ONLY, UserController.sendConfirmationEmail)
+
 api.delete('/triggers/:id', LOGIN_ONLY, TriggerController.destroy);
 
 module.exports =  api;

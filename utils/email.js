@@ -29,6 +29,34 @@ exports.welcomeEmail = function (name, email, token, callback) {
   })
 }
 
+exports.confirmEmail = function (name, email, token, callback) {
+  var params = {
+    layout: 'email',
+    name: name,
+    token: token,
+    email: email,
+    baseUrl: app.get('baseUrl')
+  }
+  app.render('email/confirm', params, (err, html) => {
+    if (err) {
+      console.log(err)
+      return callback(err, null)
+    }
+    var data = {
+      from: 'Donate for Donald <' + app.get('email') + '>',
+      to: email, // you need to register the email on mailgun since this is a test account
+      subject: 'Confirm your email on Donate for Donald',
+      html: html
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(error)
+      console.log(body);
+      callback(error, body)
+    });
+  })
+}
+
 exports.forgotEmail = function (name, email, token, callback) {
   var params = {
     layout: 'email',
