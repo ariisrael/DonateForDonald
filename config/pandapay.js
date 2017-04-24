@@ -24,7 +24,7 @@ else {
 }
 
 // Src url to include PandaPay script (generating customer token)
-PANDAPAY.src = '//d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js';
+PANDAPAY.src = 'https://d2t45z63lq9zlh.cloudfront.net/panda-v0.0.5.min.js';
 PANDAPAY.fee = '47'; // Platform fee in credentials
 PANDAPAY.currency = 'usd';
 
