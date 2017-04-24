@@ -118,7 +118,7 @@ exports.loginPost = function(req, res, next) {
     req.logIn(user, function(err) {
       console.log(user);
       if (req.query && req.query.redirect) {
-        if (req.query.redirect = 'create') {
+        if (req.query.redirect === 'create') {
           var redirectPath = ''
           if (user.paymentToken && user.skipSocial) {
             redirectPath = '/triggers'
