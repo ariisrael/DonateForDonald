@@ -73,35 +73,33 @@
             </div>
           </div>
           
-
-          <div class="left floated trigger-actions" style="clear: both; margin-top: 0px; padding-top: 5px; margin-bottom: 10px">
-<div style="display: none">
- <button class="ui button left labeled red icon js-social-active-button
-              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}">
+<div style="position: relative; top: -32px">
+ <a class="js-social-active-button
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999">
                             
 
-              <i class="icon twitter"></i>
-              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
-            Disconnect
-            </button>
-              <button class="ui button left labeled green icon js-social-active-button
-              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}">
+              <i class="icon toggle on blue"></i>
+              Autoreply to @realDonaldTrump
+            </a>
+              <a class="js-social-active-button
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999">
               
 
-              <i class="icon twitter"></i>
-              
-              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
-              Connect
-            </button>
+              <i class="icon toggle off blue"></i>
+              Autoreply to @realDonaldTrump
+            </a>
 </div>
+<script>
 
+  </script>
+<div style="position: relative; top: -20px">
             <button class="ui button left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
             <div class="ui primary left labeled icon button"><i class="share icon"></i> Share
             </div>
 
           </div>
+          </div>
 
-        </div>
       </div>
       {{/each}}
     </div>
@@ -111,9 +109,6 @@
       <i class="close icon"></i>
       <div class="header">
         <div class="js-term" style="font-family: Bangers; letter-spacing: 1px; font-size: 26px">
-        </div>
-        <div class="ui basic icon button js-delete-trigger" style="position: relative; float: right; display: inline-block; top: -30px">
-          <i class="trash icon"></i>
         </div>
       </div>
 
@@ -144,16 +139,19 @@
       <div class="actions js-actions-primary">
 
 
-        <div class="ui deny basic left labeled icon button">
 
 
+        <div class="ui icon red left labeled button js-delete-trigger">
+          <i class="trash icon"></i> Delete
+        </div>
+                <div class="ui deny basic left labeled icon button">
 
           <i class="cancel icon"></i> Cancel
         </div>
 
 
         <div class="ui green icon left labeled button js-update-trigger">
-          <i class="checkmark icon"></i> Save Changes
+          <i class="checkmark icon"></i> Save
         </div>
       </div>
       <div class="actions js-actions-confirm hide">
