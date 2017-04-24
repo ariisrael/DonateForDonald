@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function loginPage() {
   $('#login-form .login-button').on('click', function(event) {
     event.preventDefault()
     $('#login-form').attr('action', '/login')
@@ -18,7 +18,7 @@ $(document).ready(function() {
   })
 
   setupLoginRedirect()
-})
+}
 
 function setupLoginRedirect() {
   if (!$('.login-page').length) return

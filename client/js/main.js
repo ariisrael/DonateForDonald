@@ -5,9 +5,6 @@ $(document).ready(function () {
       $('.js-maximum-amount').toggleClass('disabled');
     });
 
-  unsavedNag()
-  triggerPage()
-
   $('.js-close-nag').on('click', function () {
     $(this).parents('.d4d-nag').css('display', 'none');
   });
