@@ -69,15 +69,15 @@
           </div>
 
           <div style="position: relative; top: -20px">
-            <a class="js-social-active-button social-active-button
-              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999;">
+            <div class="js-social-active-button social-active-button
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
 
-              <i class="icon check circle green"></i> Autoreply to @realDonaldTrump
-            </a>
-            <a class="js-social-active-button social-active-button
-              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999;">
-              <i class="icon radio" style="color: #555"></i> Autoreply to @realDonaldTrump
-            </a>
+              <i class="icon check circle green"></i> Autoreply to <a href="">@realDonaldTrump</a>
+            </div>
+            <div class="js-social-active-button social-active-button
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
+              <i class="icon radio" style="color: #555"></i> Autoreply to <a href="">@realDonaldTrump</a>
+            </div>
           </div>
           <div style="position: relative; top: -5px">
             <button class="ui button large js-edit-button icon fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
