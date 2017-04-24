@@ -666,3 +666,8 @@ body {
 .settings-page .ui.buttons a:first-child {
 	margin-left: 0;
 }
+
+.social-active-button::selection, .social-active-button i::selection {
+	background-color: transparent;
+	color: inherit;
+}

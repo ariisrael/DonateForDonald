@@ -1,4 +1,5 @@
-{{> header}} {{#if_not user.emailConfirmed }}
+{{> header}}
+{{#if_not user.emailConfirmed }}
 <div class="ui inline js-email-nag email-nag d4d-nag" {{#if_not user.emailConfirmed }}style="display: block;" {{/if_not}}>
   <div class="ui text container">
     <p>
@@ -74,13 +75,13 @@
           </div>
 
           <div style="position: relative; top: -32px">
-            <a class="js-social-active-button
+            <a class="js-social-active-button social-active-button
               js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999">
 
 
               <i class="icon toggle on blue"></i> Autoreply to @realDonaldTrump
             </a>
-            <a class="js-social-active-button
+            <a class="js-social-active-button social-active-button
               js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999">
 
 
