@@ -44,27 +44,27 @@
         </div>
 
         <div class="header trigger-title">
-          <span style="position: relative; top: -4px">
-          <button class="ui button mini compact circular icon red js-active-button
+          <span style="position: relative; top: 0px; color: #555">
+          <a class="ui icon js-active-button
               js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
-              <i class="icon power"></i>
+              <i class="icon large toggle on green" ></i>
               <i class="hide icon fa-spinner fa-spin fa-fw"></i>
-            </button>
-            <button class="ui button mini compact circular icon green js-active-button
+            </a>
+            <a class="ui icon js-active-button
               js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
-              <i class="icon power"></i>
+              <i class="icon large toggle off" style="color: #555" ></i>
               <i class="hide icon fa-spinner fa-spin fa-fw"></i>
-            </button></span> {{this.name}}
+            </a></span> {{this.name}}
 
 
           </div>
 
           <div class="meta" style="width: 100%">
-            <span class="stay charity-name"> {{this.charityId.name}}</span>
+            <span class="stay charity-name" style="color: #555; font-size: 20px; font-weight: 300; position: relative; top: 3px"> {{this.charityId.name}}</span>
 
           </div>
 
-          <div class="extra " style="position: relative; top: -23px; display: inline-block">
+          <div class="extra " style="position: relative; top: -13px; display: inline-block; font-size: 20px">
             <div>
               <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
             </div>
@@ -73,26 +73,26 @@
             </div>
           </div>
 
-          <div style="position: relative; top: -32px">
+          <div style="position: relative; top: -22px">
             <a class="js-social-active-button
-              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999">
+              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999; font-size: 20px">
 
 
-              <i class="icon toggle on blue"></i> Autoreply to @realDonaldTrump
+              <i class="icon check circle green"></i> Autoreply to @realDonaldTrump
             </a>
             <a class="js-social-active-button
-              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999">
+              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999; font-size: 20px">
 
 
-              <i class="icon toggle off blue"></i> Autoreply to @realDonaldTrump
+              <i class="icon check circle outline" style="color: #555"></i> Autoreply to @realDonaldTrump
             </a>
           </div>
           <script>
 
           </script>
-          <div style="position: relative; top: -20px">
-            <button class="ui button left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
-            <div class="ui primary left labeled icon button"><i class="share icon"></i> Share
+          <div style="position: relative; top: 0px">
+            <button class="ui button large left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
+            <div class="ui primary large left labeled icon button"><i class="share icon"></i> Share
             </div>
 
           </div>
