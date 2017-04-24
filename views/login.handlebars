@@ -17,8 +17,7 @@
       });
     </script>
 
-    <br>
-    {{/if}}
+    <br> {{/if}}
     <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
 
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -28,28 +27,24 @@
       <div class="field js-password-field">
         <input type="password" name="password" placeholder="Password">
       </div>
-
-      <div class="two-buttons">
+<div style="width: 100%">
+      <div class="ui two buttons" style="width: 97%; margin: 0 auto">
 
 
         <!-- CTA: Donate -->
 
         <!-- End CTA: Donate -->
         <!-- CTA: View Tweets -->
-        <div class="left-button">
 
-          <button class="ui massive icon button fluid signup-button disabled js-action-btn js-signup-button" type="submit" style="height: 64px">
+        <button class="ui massive icon button signup-button disabled js-action-btn js-signup-button" type="submit" style="border-radius: 4px; position: relative; left: 0px">
               Sign Up
             </button>
-        </div>
-        <div class="right-button">
-          <button class="ui icon massive button basic disabled login-button fluid js-action-btn js-login-button" style="border: 1px solid #ddd;"
-            type="submit">
+        <button class="ui icon massive button basic disabled login-button fluid js-action-btn js-login-button" type="submit" style="border-radius: 4px; position: relative; left: 10px; border: 1px solid #bbb">
               Log In
             </button>
-        </div>
         <!-- End CTA: View Tweets -->
 
+      </div>
       </div>
       <!-- End landing CTAs -->
     </form>
@@ -61,68 +56,69 @@
 
   </div>
 </main>
-  <script>
-    $('.js-action-btn').on('click', function () {
-      $(this).addClass('loading');
-    });
+<script>
+  $('.js-action-btn').on('click', function () {
+    $(this).addClass('loading');
+  });
 
-    $('input[name="email"]').on('keyup', function () {
-      console.log('Typing email');
-      validateLogin();
-    });
+  $('input[name="email"]').on('keyup', function () {
+    console.log('Typing email');
+    validateLogin();
+  });
 
 
-    $('input[name="password"]').on('keyup', function () {
-      console.log('Typing password');
-      validateLogin();
-    });
+  $('input[name="password"]').on('keyup', function () {
+    console.log('Typing password');
+    validateLogin();
+  });
 
-    function validateLogin() {
-      var email = $('input[name="email"]').val();
-      var password = $('input[name="password"]').val();
-      if (email && password && email.length > 0 && email.indexOf('@') > 0 && email.indexOf('.') > 0 && password.length > 4) {
-        enableButton('login');
-        enableButton('signup');
-      } else {
-        disableButton('login');
-        disableButton('signup');
-      }
+  function validateLogin() {
+    var email = $('input[name="email"]').val();
+    var password = $('input[name="password"]').val();
+    if (email && password && email.length > 0 && email.indexOf('@') > 0 && email.indexOf('.') > 0 && password.length > 4) {
+      enableButton('login');
+      enableButton('signup');
+    } else {
+      disableButton('login');
+      disableButton('signup');
     }
+  }
 
-    function enableButton(type) {
-      var elem = "";
-      switch (type) {
-        case 'login':
-          elem = $('.login-button');
-          break;
-        case 'signup':
-          elem = $('.signup-button');
-          elem.addClass('primary');
-          break;
-        default:
-          return console.log('No button to enable');
-      }
-      console.log('Enabling button...');
-      elem.removeClass('disabled');
-      return true;
+  function enableButton(type) {
+    var elem = "";
+    switch (type) {
+      case 'login':
+        elem = $('.login-button');
+        break;
+      case 'signup':
+        elem = $('.signup-button');
+        elem.addClass('primary');
+        break;
+      default:
+        return console.log('No button to enable');
     }
-    function disableButton(type) {
-      $('button').removeClass('primary');
-      var elem = "";
-      switch (type) {
-        case 'login':
-          elem = $('.login-button');
-          break;
-        case 'signup':
-          elem = $('.signup-button');
-          console.log('removing');
-          elem.removeClass('primary');
-          break;
-        default:
-          return console.log('No button to disable');
-      }
-      console.log('Disabling button...');
-      elem.addClass('disabled');
-      return true;
+    console.log('Enabling button...');
+    elem.removeClass('disabled');
+    return true;
+  }
+  function disableButton(type) {
+    $('button').removeClass('primary');
+    var elem = "";
+    switch (type) {
+      case 'login':
+        elem = $('.login-button');
+        break;
+      case 'signup':
+        elem = $('.signup-button');
+        console.log('removing');
+        elem.removeClass('primary');
+        break;
+      default:
+        return console.log('No button to disable');
     }
-  </script>
+    console.log('Disabling button...');
+    elem.addClass('disabled');
+    return true;
+  }
+
+</script>
