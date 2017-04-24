@@ -1,5 +1,5 @@
 {{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag email-nag d4d-nag" {{#if_not user.emailConfirmed }}style="display: block;"{{/if_not}}>
+<div class="ui inline js-email-nag email-nag d4d-nag" {{#if_not user.emailConfirmed }}style="display: block;" {{/if_not}}>
   <div class="ui text container">
     <p>
       Please confirm your email to start donating or <a href="#" class="new-link">request a new confirmation link</a>
@@ -57,7 +57,7 @@
             </button></span> {{this.name}}
 
 
-            </div>
+          </div>
 
           <div class="meta" style="width: 100%">
             <span class="stay charity-name"> {{this.charityId.name}}</span>
@@ -72,57 +72,31 @@
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
           </div>
-<<<<<<< HEAD
-          
-<div style="position: relative; top: -32px">
- <a class="js-social-active-button
+
+          <div style="position: relative; top: -32px">
+            <a class="js-social-active-button
               js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999">
-                            
 
-              <i class="icon toggle on blue"></i>
-              Autoreply to @realDonaldTrump
+
+              <i class="icon toggle on blue"></i> Autoreply to @realDonaldTrump
             </a>
-              <a class="js-social-active-button
+            <a class="js-social-active-button
               js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999">
-              
 
-              <i class="icon toggle off blue"></i>
-              Autoreply to @realDonaldTrump
+
+              <i class="icon toggle off blue"></i> Autoreply to @realDonaldTrump
             </a>
-=======
+          </div>
+          <script>
 
-
-          <div class="left floated trigger-actions" style="clear: both; margin-top: 0px; padding-top: 5px; margin-bottom: 10px">
-<div style="display: none">
- <button class="ui button left labeled red icon js-social-active-button
-              js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}">
-
-
-              <i class="icon twitter"></i>
-              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
-            Disconnect
-            </button>
-              <button class="ui button left labeled green icon js-social-active-button
-              js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}">
-
-
-              <i class="icon twitter"></i>
-
-              <i class="hide icon fa-spinner fa-spin fa-fw" style="padding-right: 10px"></i>
-              Connect
-            </button>
->>>>>>> 4000e9335948558fefe6f85637f235a169bc409e
-</div>
-<script>
-
-  </script>
-<div style="position: relative; top: -20px">
+          </script>
+          <div style="position: relative; top: -20px">
             <button class="ui button left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
             <div class="ui primary left labeled icon button"><i class="share icon"></i> Share
             </div>
 
           </div>
-          </div>
+        </div>
 
       </div>
       {{/each}}
@@ -168,7 +142,7 @@
         <div class="ui icon red left labeled button js-delete-trigger">
           <i class="trash icon"></i> Delete
         </div>
-                <div class="ui deny basic left labeled icon button">
+        <div class="ui deny basic left labeled icon button">
 
           <i class="cancel icon"></i> Cancel
         </div>
