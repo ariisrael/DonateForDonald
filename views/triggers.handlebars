@@ -58,9 +58,7 @@
 
           <div class="meta" style="width: 100%">
             <span class="stay charity-name" style="color: #555; font-weight: 300; position: relative; top: 3px"> {{this.charityId.name}}</span>
-
           </div>
-
           <div class="extra " style="position: relative; top: -13px; display: inline-block;">
             <div>
               <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
@@ -82,16 +80,17 @@
             </a>
           </div>
           <div style="position: relative; top: -5px">
-            <button class="ui button large left labeled js-edit-button icon" data-id="{{this.id}}"><i class="icon write"></i> Edit</button>
-            <div class="ui primary large left labeled icon button"><i class="share icon"></i> Share
-            </div>
+            <button class="ui button large js-edit-button icon compact fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
+                        <button class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -5px; right: -10px"><i class="ui twitter icon"></i></button>
 
+            <button class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -5px; right: -10px"><i class="ui facebook icon"></i></button>
           </div>
-        </div>
 
+        </div>
       </div>
       {{/each}}
     </div>
+
     <div class="ui small modal edit-trigger">
       <meta class="js-editing-trigger-id" data-id="">
       <meta class="js-editing-trigger-data" data-trigger="">
