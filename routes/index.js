@@ -108,12 +108,10 @@ app.get('/auth/facebook/callback', function(req, res, next) {
           return res.redirect(decodeURIComponent(req.session.redirectURI))
         }
       } else if (!(user.paymentToken)) {
-        return res.redirect('/payment');
+        res.redirect('/payment');
+      } else {
+        res.redirect('/triggers');
       }
-      if (!(user.twitter)) {
-        return res.redirect('/social');
-      }
-      return res.redirect('/')
     })
   })(req, res, next);
 });
