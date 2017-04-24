@@ -19,12 +19,13 @@ function setupSocial(charityTwitter, charityId, triggerName) {
 
 
 function createTrigger() {
-  if ($('.social-page').length) {
+  if ($('.social-page').length || $('.login-page').length) {
     return;
   }
 
   var rawTrigger = localStorage.getItem('trigger');
   if (rawTrigger) {
+    var userTrigger = JSON.parse(rawTrigger);
     delete userTrigger.charityName;
     delete userTrigger.triggerName;
     delete userTrigger.twitter;

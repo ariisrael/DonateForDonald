@@ -22,19 +22,26 @@ $(document).ready(function() {
 
 function setupLoginRedirect() {
   if (!$('.login-page').length) return
-  var redirectPath = ''
-  if (user.paymentToken && user.skipSocial) {
-    redirectPath = '/triggers'
-  } else if (user.paymentToken) {
-    redirectPath = '/social'
-  } else {
-    redirectPath = '/payment'
+  var redirect = ''
+  if (getQueryVariable('create')) {
+    redirect = 'create'
   }
-  redirectPath = encodeURIComponent(redirectPath)
   var loginUrl = $('#login-form').attr('action')
-  loginUrl += '?redirect=' + redirectPath
+  loginUrl += '?redirect=' + redirect
   $('#login-form').attr('action', loginUrl)
   var fbUrl = $('.js-fb-login-button').attr('href')
-  fbUrl += '?redirect=' + redirectPath
+  fbUrl += '?redirect=' + redirect
   $('.js-fb-login-button').attr('href', fbUrl)
+}
+
+function getQueryVariable(variable){
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return false;
 }

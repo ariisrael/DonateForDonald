@@ -117,7 +117,19 @@ exports.loginPost = function(req, res, next) {
     req.logIn(user, function(err) {
       console.log(user);
       if (req.query && req.query.redirect) {
-        res.redirect(decodeURIComponent(req.query.redirect))
+        if (req.query.redirect = 'create') {
+          var redirectPath = ''
+          if (user.paymentToken && user.skipSocial) {
+            redirectPath = '/triggers'
+          } else if (user.paymentToken) {
+            redirectPath = '/social'
+          } else {
+            redirectPath = '/payment'
+          }
+          return res.redirect(redirectPath)
+        } else {
+          return res.redirect(decodeURIComponent(req.query.redirect))
+        }
       } else if (!(user.paymentToken)) {
         res.redirect('/payment');
       } else {

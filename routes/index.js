@@ -94,9 +94,19 @@ app.get('/auth/facebook/callback', function(req, res, next) {
         return res.redirect('/login')
       }
       if (req.session.redirectURI) {
-        redirectURI = req.session.redirectURI
-        req.session.redirectURI = undefined
-        return res.redirect(redirectURI)
+        if (req.query.redirect = 'create') {
+          var redirectPath = ''
+          if (user.paymentToken && user.skipSocial) {
+            redirectPath = '/triggers'
+          } else if (user.paymentToken) {
+            redirectPath = '/social'
+          } else {
+            redirectPath = '/payment'
+          }
+          return res.redirect(redirectPath)
+        } else {
+          return res.redirect(decodeURIComponent(req.session.redirectURI))
+        }
       } else if (!(user.paymentToken)) {
         return res.redirect('/payment');
       }
