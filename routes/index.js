@@ -94,7 +94,7 @@ app.get('/auth/facebook/callback', function(req, res, next) {
         return res.redirect('/login')
       }
       if (req.session.redirectURI) {
-        if (req.query.redirect = 'create') {
+        if (req.session.redirectURI === 'create') {
           var redirectPath = ''
           if (user.paymentToken && user.skipSocial) {
             redirectPath = '/triggers'
