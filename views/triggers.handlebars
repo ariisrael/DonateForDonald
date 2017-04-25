@@ -36,7 +36,8 @@
 
           <div class="value">
             <i class="usd green icon" style="position: relative; left: 10px"></i>
-            <span class="trigger-amount">{{this.amount}}<span>
+            <span class="trigger-amou
+            nt">{{this.amount}}<span>
           </div>
         </div>
 
@@ -45,10 +46,12 @@
           <a class="ui icon js-active-button
               js-disable {{#if_not this.active}}hide{{/if_not}}" data-id="{{this.id}}">
               <i class="icon large toggle on green" ></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             </a>
             <a class="ui icon js-active-button
               js-enable {{#if this.active}}hide{{/if}}" data-id="{{this.id}}">
               <i class="icon large toggle off" style="color: #777" ></i>
+              <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             </a></span> {{this.name}}
 
 
@@ -88,9 +91,9 @@
             <button class="ui button large js-edit-button icon fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
             <button class="ui large circular button basic icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui attach icon"></i></button>
 
-            <button class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui twitter icon"></i></button>
+            <a class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui twitter icon"></i></a>
 
-            <button class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui facebook icon"></i></button>
+            <a class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px" href="https://www.facebook.com/sharer/sharer.php?u=www.donatefordonald.org?trigger={{this.name}}&charity={{this.charityId._id}}"><i class="ui facebook icon"></i></a>
 
           </div>
 
