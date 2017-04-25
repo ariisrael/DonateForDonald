@@ -34,7 +34,9 @@ function unsavedNag() {
     return;
   }
 
-  if (localStorage.getItem('trigger')) {
+  if ($('.triggers-page').length && getQueryVariable('login') && getQueryVariable('created')) {
+    localStorage.clear()
+  } else if (localStorage.getItem('trigger')) {
     $('.unsaved-nag').css('display', 'block');
   }
 }
