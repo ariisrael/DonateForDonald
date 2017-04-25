@@ -34,6 +34,7 @@ api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);
 api.get('/tweets/:id', TweetController.read);
 
 api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);
+api.post('/triggers/session', TriggerController.storeInSession);
 api.post('/tweets', ADMIN_ONLY, TweetController.create);
 
 api.post('/social/enable', LOGIN_ONLY, SocialController.enableUser)

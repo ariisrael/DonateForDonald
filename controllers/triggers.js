@@ -95,5 +95,11 @@ module.exports = {
         }
         res.json(trigger);
       })
+    },
+    storeInSession: (req, res) => {
+      if (!req.user) {
+        req.session.sessionTrigger = req.body
+      }
+      res.json({})
     }
 }

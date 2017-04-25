@@ -7,6 +7,9 @@ const passport = require('passport');
 const csurf = require('csurf')
 const bodyParser = require('body-parser');
 
+const models = require('../models');
+const Trigger = models.Trigger;
+
 // Require middleware before routes
 require('./middleware');
 require('./auth');
@@ -97,6 +100,21 @@ app.get('/auth/facebook/callback', function(req, res, next) {
         if (req.session.redirectURI === 'create') {
           var redirectPath = ''
           if (user.paymentToken && user.skipSocial) {
+            if (req.session.sessionTrigger) {
+              var trigger = new Trigger(req.session.sessionTrigger);
+              trigger.userId = req.user.id
+              return trigger.save((err) => {
+                  var response = {
+                      trigger: trigger
+                  }
+                  if (err) {
+                      response.error = err
+                      console.error(err);
+                  }
+                  req.session.sessionTrigger = undefined
+                  return res.redirect('/triggers?login=true&created=true')
+              });
+            }
             redirectPath = '/triggers'
           } else if (user.paymentToken) {
             redirectPath = '/social'

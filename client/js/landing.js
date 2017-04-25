@@ -115,6 +115,10 @@ $(document).ready(function() {
     validateLanding();
   });
 
+  $('.js-donate .js-action-btn').on('click', function() {
+    landingDonate()
+  })
+
 
 })
 
@@ -202,7 +206,6 @@ function landingDonate() {
         data: userTrigger,
         success: function (data) {
           localStorage.clear();
-          console.log('here')
           window.location.replace("/triggers");
         },
         dataType: 'json'
@@ -214,7 +217,15 @@ function landingDonate() {
     }
   } else { // The user is not signed in
     localStorage.setItem('trigger', JSON.stringify(userTrigger));
-    window.location.replace("/login?create=true");
+    jQuery.ajax({
+      type: 'post',
+      url: '/api/triggers/session',
+      data: userTrigger,
+      success: function (data) {
+        window.location.replace("/login?create=true");
+      },
+      dataType: 'json'
+    });
   }
 }
 
