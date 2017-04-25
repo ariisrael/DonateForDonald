@@ -74,7 +74,7 @@
             </span>
 
           <div style="position: relative; top: -20px" class="js-autoreply">
-            <span style="display: none">
+            <span style="display: none" class="george">
             <div  class="js-social-active-button social-active-button
               js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
 
@@ -85,12 +85,12 @@
               <i class="icon radio" style="color: #555"></i> Autoreply on Twitter
             </div>
             </span>
-            <span style="color: #fff">JEB!</span>
+            <span style="color: #fff" class="jeb">JEB!</span>
             <script>
               console.log(user.twitter);
               if(user.twitter) {
-                $('.js-autoreply p').css('display', 'none');
-                $('.js-autoreply span').css('display', '');
+                $('.jeb').css('display', 'none');
+                $('.george').css('display', '');
               }
             </script>
           </div>
