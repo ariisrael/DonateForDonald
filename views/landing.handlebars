@@ -22,6 +22,18 @@
           <i class="quote left icon"></i>
           <div class="default text js-trigger-text">Select a trigger</div>
           <div class="menu js-fill">
+            {{#each terms}}
+              {{#ifeq this.term 'washinon'}}
+              {{else}}
+              {{#ifeq this.term 'jobs jobs jobs'}}
+              {{else}}
+              <div class="js-trigger-item item" data-term="{{this.term}}">{{this.term}}</div>
+              {{/ifeq}}
+              {{/ifeq}}
+            {{/each}}
+            {{#each whitelist}}
+              <div class="js-trigger-item item" data-term="{{this}}">{{this}}</div>
+            {{/each}}
           </div>
         </div>
       </div>
@@ -71,31 +83,8 @@
               <div class="ui basic label" style="color: #bbb; padding-left: 10px; padding-right: 5px; font-weight: 400; border-right: none; position: relative; padding-top: 14px">$</div>
               <input class="mobile-amount" type="number" name="amount" min="1" max="9999" style='padding-left: 0px; padding-right: 10px; outline: none; position: relative'>
             </div>
-            <script>
-              $('.js-toggle-other').on('click', function () {
-                $('js-mobile-input').css('display', '')
-                $(this).css('display', 'none');
-                $('.js-mobile-input').css('display', '');
-                $('.mobile-amount').focus();
-                $('.mobile-amount').attr('value', '');
-              });
-
-
-              $('.mobile-amt').css('padding', '15px 25px');
-              $('.mobile-amt').not($('.js-toggle-other')).on('click', function () {
-                $('.js-mobile-input').css('display', 'none');
-                $('.js-toggle-other').css('display', '');
-                $('a.js-toggle-other').focusout().blur();
-              });
-            </script>
           </div>
         </div>
-        <script>
-              $('.js-amount-other').on('click', function () {
-                $('a', this).addClass('selected-amount');
-                $(".selected-amount").not($('a', this)).removeClass('selected-amount');
-              });
-        </script>
         <!-- End choose amount -->
 
         <style>
@@ -169,3 +158,28 @@
   </div>
 </main>
 {{> footer}}
+
+{{>scripts}}
+
+<script>
+  $('.js-toggle-other').on('click', function () {
+    $('js-mobile-input').css('display', '')
+    $(this).css('display', 'none');
+    $('.js-mobile-input').css('display', '');
+    $('.mobile-amount').focus();
+    $('.mobile-amount').attr('value', '');
+  });
+
+  $('.mobile-amt').css('padding', '15px 25px');
+  $('.mobile-amt').not($('.js-toggle-other')).on('click', function () {
+    $('.js-mobile-input').css('display', 'none');
+    $('.js-toggle-other').css('display', '');
+    $('a.js-toggle-other').focusout().blur();
+  });
+</script>
+<script>
+  $('.js-amount-other').on('click', function () {
+    $('a', this).addClass('selected-amount');
+    $(".selected-amount").not($('a', this)).removeClass('selected-amount');
+  });
+</script>
