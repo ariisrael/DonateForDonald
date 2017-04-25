@@ -102,13 +102,11 @@
           <button class="ui button icon red js-social-active-button
             js-disable {{#if_not user.social}}hide{{/if_not}}" data-id="{{this.id}}">
             <i class="icon twitter"></i>
-            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             Disable
           </button>
           <button class="ui button icon green js-social-active-button
             js-enable {{#if user.social}}hide{{/if}}" data-id="{{this.id}}">
             <i class="icon twitter"></i>
-            <i class="hide icon fa-spinner fa-spin fa-fw"></i>
             <span class="text">Enable</span>
           </button>
         </div>
@@ -130,7 +128,7 @@
       </div>
       <div class="field">
         <button class="ui button primary icon">
-          <i class="fa fa-money" aria-hidden="true"></i> Set Monthly Limit
+          <i class="icon money" aria-hidden="true"></i> Set Monthly Limit
         </button>
       </div>
     </form>
