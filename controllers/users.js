@@ -121,7 +121,22 @@ exports.loginPost = function(req, res, next) {
         if (req.query.redirect === 'create') {
           var redirectPath = ''
           if (user.paymentToken && user.skipSocial) {
-            redirectPath = '/triggers'
+            if (req.session.sessionTrigger) {
+              var trigger = new Trigger(req.session.sessionTrigger);
+              trigger.userId = req.user.id
+              if (req.user.social) trigger.social = true
+              return trigger.save((err) => {
+                  var response = {
+                      trigger: trigger
+                  }
+                  if (err) {
+                      response.error = err
+                      console.error(err);
+                  }
+                  req.session.sessionTrigger = undefined
+                  return res.redirect('/triggers?login=true&created=true')
+              });
+            }
           } else if (user.paymentToken) {
             redirectPath = '/social'
           } else {
