@@ -18,6 +18,11 @@ function triggerPage() {
     $('.ui.modal.edit-trigger input[name="charity"]').val(charity).trigger('change');
     $('.ui.modal.edit-trigger input[name="amount"]').val(amount)
     $('.modal .js-term').text(term)
+
+    if ($('.ui.modal.edit-trigger .actions.js-actions-primary').hasClass('hide')) {
+      $('.ui.modal.edit-trigger .actions').toggleClass('hide')
+    }
+
     $('.ui.modal.edit-trigger').modal('show');
   });
 
