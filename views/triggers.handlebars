@@ -73,9 +73,9 @@
               <i class="ui icon share"></i> Share this
             </span>
 
-          <div style="position: relative; top: -20px">
-
-            <div class="js-social-active-button social-active-button
+          <div style="position: relative; top: -20px" class="js-autoreply">
+            <span style="display: none">
+            <div  class="js-social-active-button social-active-button
               js-disable {{#if_not this.social}}hide{{/if_not}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
 
               <i class="icon check circle green"></i> Autoreply on Twitter
@@ -84,12 +84,20 @@
               js-enable {{#if this.social}}hide{{/if}}" data-id="{{this.id}}" style="color: #999; cursor: pointer">
               <i class="icon radio" style="color: #555"></i> Autoreply on Twitter
             </div>
+            </span>
+            <p style="color: #fff">JEB!</p>
+            <script>
+              console.log(user.twitter);
+              if(user.twitter) {
+                $('.js-autoreply p').css('display', 'none');
+                $('.js-autoreply span').css('display', '');
+              }
+            </script>
           </div>
 
 
           <div style="position: relative; top: -5px">
             <button class="ui button large js-edit-button icon fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
-            <button class="ui large circular button basic icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui attach icon"></i></button>
 
             <a class="ui large circular button twitter icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"><i class="ui twitter icon"></i></a>
 
