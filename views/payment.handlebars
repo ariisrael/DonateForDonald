@@ -51,13 +51,11 @@
     </form>
     </div>
   </main>
-  
-  {{>scripts}}
   <script>
     $('.js-action-btn').on('click', function() {
         $(this).addClass('loading');
 
-  });
+  }); 
   $('input').on('keyup', function() {
     validatePayment();
   });
@@ -82,6 +80,6 @@
       expiration: $('input[name="expiration"]').val()
     }
   }
-
-</script>
+  
+    </script>
 {{>pandascripts}}

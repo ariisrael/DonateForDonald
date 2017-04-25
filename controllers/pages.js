@@ -7,34 +7,11 @@ const mongoose = require('mongoose');
 const Trigger = models.Trigger;
 const Charity = models.Charity;
 const Donation = models.Donation;
-const Term = models.Term;
-const whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice', 'unmasking']
 
-const temMinutes = 600000;
-
-var terms = []
-var lastGrabbed;
 
 exports.landing = function(req, res) {
-  if (lastGrabbed && lastGrabbed < lastGrabbed + 600000) {
-    res.render('landing', {
-      terms: terms,
-      whitelist: whitelist
-    });
-  } else {
-    Term.find().select('term weight').exec((err, ts) => {
-      if (err) {
-        console.error('error grabbing terms: ', err)
-      } else {
-        terms = ts
-        lastGrabbed = Date.now()
-      }
-      res.render('landing', {
-        terms: ts,
-        whitelist: whitelist
-      });
-    })
-  }
+  res.render('landing', {
+  });
 };
 
 exports.payment = function(req, res) {

@@ -285,32 +285,24 @@ function setupLandingTerms() {
   var whitelist = ['Ocare', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice', 'unmasking'];
   var blacklist = ['washinon', 'jobs jobs jobs'];
 
-  // if (terms) {
-  //   processTerms(terms)
-  // } else {
-  //   jQuery.getJSON('/api/terms', function (data) {
-  //     processTerms(data)
-  //   })
-  // }
-}
-
-function processTerms(data) {
-  $('.message').css('display', 'none');
-  var postedTerms = [];
-  for (var i = 0; i < data.length; i++) {
-    var html = '<div class="js-trigger-item item" data-term="' + data[i].term + '">' + data[i].term + '</div>';
-    if (blacklist.indexOf(data[i].term.toLowerCase()) < 0 && postedTerms.indexOf(data[i].term.toLowerCase()) < 0) {
-      $('.js-select-trigger .js-fill').append(html);
-      postedTerms.push(data[i].term.toLowerCase());
+  jQuery.getJSON('/api/terms', function (data) {
+    $('.message').css('display', 'none');
+    var postedTerms = [];
+    for (var i = 0; i < data.length; i++) {
+      var html = '<div class="js-trigger-item item" data-term="' + data[i].term + '">' + data[i].term + '</div>';
+      if (blacklist.indexOf(data[i].term.toLowerCase()) < 0 && postedTerms.indexOf(data[i].term.toLowerCase()) < 0) {
+        $('.js-select-trigger .js-fill').append(html);
+        postedTerms.push(data[i].term.toLowerCase());
+      }
     }
-  }
-  var wlHtml = '';
-  whitelist.forEach(function (term) {
-    if (postedTerms.indexOf(term.toLowerCase()) < 0) {
-      wlHtml = '<div class="item js-trigger-item" data-term="' + term + '">' + term + '</div>';
-      $('.js-select-trigger .js-fill').append(wlHtml);
-    }
-  });
+    var wlHtml = '';
+    whitelist.forEach(function (term) {
+      if (postedTerms.indexOf(term.toLowerCase()) < 0) {
+        wlHtml = '<div class="item js-trigger-item" data-term="' + term + '">' + term + '</div>';
+        $('.js-select-trigger .js-fill').append(wlHtml);
+      }
+    });
+  })
 }
 
 function getClickedLabel(text) {

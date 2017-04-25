@@ -10,6 +10,12 @@
         {{error}}
       </div>
     </div>
+    <script>
+      $('.js-login-errors .close').on('click', function () {
+        console.log('Closing errors');
+        $('.js-login-errors').css('display', 'none')
+      });
+    </script>
 
     <br> {{/if}}
     <form id="login-form" method="POST" action="/login" class="ui massive form" style="padding-bottom: 10px;">
@@ -50,15 +56,6 @@
 
   </div>
 </main>
-
-{{>scripts}}
-
-<script>
-  $('.js-login-errors .close').on('click', function () {
-    console.log('Closing errors');
-    $('.js-login-errors').css('display', 'none')
-  });
-</script>
 <script>
   $('.js-action-btn').on('click', function () {
     $(this).addClass('loading');
