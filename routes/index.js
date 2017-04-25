@@ -103,6 +103,7 @@ app.get('/auth/facebook/callback', function(req, res, next) {
             if (req.session.sessionTrigger) {
               var trigger = new Trigger(req.session.sessionTrigger);
               trigger.userId = req.user.id
+              if (req.user.social) trigger.social = true
               return trigger.save((err) => {
                   var response = {
                       trigger: trigger
