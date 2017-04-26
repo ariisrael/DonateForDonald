@@ -5,6 +5,14 @@ const pandapay = require('../config/pandapay')
 
 require('./session')
 
+app.use(function(req, res, next) {
+  var hostUrl = req.protocol + '://' + req.get('host')
+  if (hostUrl != app.get('baseUrl')) {
+    res.redirect(hostUrl + req.originalUrl)
+  }
+  next()
+})
+
 // this is our generic middleware that's applied to everything
 app.use(function (req, res, next) {
   // res.locals is always passed to the template,
