@@ -89,6 +89,16 @@ exports.triggers = function(req, res) {
       triggers.forEach((trigger) => {
         trigger.donations = 0
         trigger.tweetsCount = 0
+
+        var shareUrl = 'www.donatefordonald.org?trigger='
+        shareUrl += trigger.name + '&charity='
+        shareUrl += trigger.charityId._id
+        var encodedShareUrl = encodeURIComponent(shareUrl)
+        trigger.shareUrl = encodedShareUrl
+
+        var twitterShareText = "Donate to " + trigger.charityId.twitter[0] + " anytime @realDonaldTrump tweets '" + trigger.name + "'! " + shareUrl
+        trigger.twitterShareText = encodeURIComponent(twitterShareText)
+
         response.triggers[trigger._id] = trigger
       })
       Donation.aggregate([

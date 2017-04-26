@@ -84,6 +84,7 @@ $(document).ready(function() {
     });
   // User selected dropdown option
   $('.selection').dropdown({
+    preserveHTML: true,
     onChange: function (value) {
       $('.demo.icon').popup({ transition: value }).popup('toggle');
     }
@@ -171,7 +172,7 @@ function getUrlParameter(sParam) {
 
 function landingDonate() {
   var charity = $('input[name=charity]').val().trim();
-  var trigger = $('input[name=trigger]').val().trim();
+  var trigger = $('.js-trigger-text').text().trim();
   var amount = ($('.amount-other a').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   var charityName;
@@ -189,6 +190,7 @@ function landingDonate() {
   var userTrigger = getLandingInputs();
   userTrigger.charityName = charityName;
   var twitter = charityName;
+  console.log(charityRecord)
   if(typeof charityRecord.twitter === 'string') {
     twitter = charityRecord.twitter;
   } else {
@@ -323,7 +325,7 @@ function tweetHtml(id, text) {
 
 function getLandingInputs() {
   var charity = $('input[name=charity]').val().trim();
-  var trigger = $('input[name=trigger]').val().trim();
+  var trigger = $('.js-trigger-text').text().trim();
   var amount = ($('.js-toggle-other').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   return {

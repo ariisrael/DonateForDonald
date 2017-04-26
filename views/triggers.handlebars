@@ -97,12 +97,13 @@
 
           <div style="position: relative; top: -5px">
             <button class="ui button large js-edit-button icon fluid" data-id="{{this.id}}" style="width: 50%; display: inline-block"><i class="icon write"></i> Edit</button>
+            <meta data-test="{{{this}}}">
 
             <a class="ui large circular button twitter icon"
               style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"
-              href="http://twitter.com/share?url=www.donatefordonald.org?trigger={{this.name}}&charity={{this.charityId._id}}"><i class="ui twitter icon"></i></a>
+              href="https://twitter.com/intent/tweet?text={{this.twitterShareText}}"><i class="ui twitter icon"></i></a>
 
-            <a class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px" href="https://www.facebook.com/sharer/sharer.php?u=www.donatefordonald.org?trigger={{this.name}}&charity={{this.charityId._id}}"><i class="ui facebook icon"></i></a>
+            <a class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px" href="https://www.facebook.com/sharer/sharer.php?u={{this.shareUrl}}"><i class="ui facebook icon"></i></a>
 
           </div>
 
