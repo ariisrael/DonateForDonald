@@ -6,12 +6,15 @@ const pandapay = require('../config/pandapay')
 require('./session')
 
 app.use(function(req, res, next) {
+  if (!app.get('forcehttps')) return next()
+
   var hostUrl = req.protocol + '://' + req.get('host')
-  if (hostUrl != app.get('baseUrl')) {
-    console.log(app.get('baseUrl'))
-    console.log(hostUrl)
-    console.log(req.originalUrl)
-    console.log(app.get('baseUrl') + req.originalUrl)
+
+  if (req.protocol != 'https') {
+    console.log('baseurl ', app.get('baseUrl'))
+    console.log('hostUrl ', hostUrl)
+    console.log('req.originalUrl ', req.originalUrl)
+    console.log("app.get('baseUrl') + req.originalUrl ", app.get('baseUrl') + req.originalUrl)
     res.redirect(app.get('baseUrl') + req.originalUrl)
   } else {
     next()
