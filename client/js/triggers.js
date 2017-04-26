@@ -123,11 +123,10 @@ function triggerPage() {
     })
   });
 
-    $('.email-nag .new-link').click(function(evt) {
+    $('.new-link').click(function(evt) {
       evt.preventDefault()
       var self = this;
       sendConfirmationEmail(function(err, data) {
-        $(self).parents('.d4d-nag').css('display', 'none');
       })
     })
 
