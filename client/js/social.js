@@ -16,7 +16,6 @@ $(document).ready(function() {
     redirectUrl = "/triggers";
   }
 
-  console.log(userTrigger);
   $('.connect-twitter').on('click', function (event) {
     event.preventDefault();
     if (userTrigger) {
