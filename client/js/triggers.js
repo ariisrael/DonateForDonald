@@ -127,7 +127,7 @@ function triggerPage() {
       evt.preventDefault()
       var self = this;
       sendConfirmationEmail(function(err, data) {
-        $(this).parents('.d4d-nag').css('display', 'none');
+        $(self).parents('.d4d-nag').css('display', 'none');
       })
     })
 

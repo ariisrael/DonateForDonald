@@ -11,9 +11,15 @@ if (process.env.NODE_ENV !== 'production') {
   app.set('baseUrl', 'https://hackthecyber.herokuapp.com/')
 }
 
+if (process.env.NODE_ENV !== 'production') {
+  app.set('forcehttps', false)
+} else {
+  app.set('forcehttps', true)
+}
+
 // This is the testing email I've been using
 // in production we need a different one
-var email = 'noreply@donatefordonald.com'
+var email = 'noreply@donatefordonald.org'
 if (process.env.EMAIL) {
   email = process.env.EMAIL
 }

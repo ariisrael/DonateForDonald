@@ -5,6 +5,13 @@ const pandapay = require('../config/pandapay')
 
 require('./session')
 
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https' && app.get('forcehttps')) {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  next()
+})
+
 // this is our generic middleware that's applied to everything
 app.use(function (req, res, next) {
   // res.locals is always passed to the template,
@@ -59,7 +66,7 @@ app.use(function(req, res, next) {
     res.locals.pandapay.public = pandapay.test.public
   } else {
     // TODO: change this in production
-    res.locals.pandapay.public = pandapay.test.public
+    res.locals.pandapay.public = pandapay.live.public
   }
   next()
 })

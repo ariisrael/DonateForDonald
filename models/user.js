@@ -2,12 +2,17 @@ const mongoose = require('../config/mongo');
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const welcomeEmail = require('../utils/email').welcomeEmail
+const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: { type: String, trim: true },
-  email: { type: String, required: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
   picture: String,
   phone: String,
   password: String,
@@ -77,6 +82,8 @@ UserSchema.options.toJSON = {
     delete ret.passwordResetExpires; // eslint-disable-line no-param-reassign
   },
 };
+
+UserSchema.plugin(uniqueValidator);
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
