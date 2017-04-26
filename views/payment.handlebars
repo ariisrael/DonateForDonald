@@ -1,9 +1,15 @@
   {{> header}}
+  <div class="js-error-payment hide" style="height: 40px; position: absolute; text-align: center; top: 75px; left: 0px; background-color:  #f39c12; color: #fff; width: 100%; padding: 10px;">
+    <div class="ui text container">
+      <p style="display: inline-block">Could not validate payment! Please check information and try again. <a style="text-decoration: underline; color: #fff" href="mailto:team@donatefordonald.org">Need help?</a></p>
+      <a class="ui icon js-close-error-nag" style="cursor: pointer; float: right; display: inline-block; position: relative; top: -2px; color: #fff"><i class="ui medium icon close"></i></a>
+      </div>
+    </div>
   <main class="payment-page">
     <div class="ui text container web-form">
       <h1>{{title}}
       </h1>
-      <div class="ui subheader"><span>Donations are processed when a tweet containing your trigger is posted. Payment processing fees are <a style="display: inline-block" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 30 cents per donation</a> and tax-deductible donation receipts are emailed monthly.</span>
+      <div class="ui subheader"><span>Donations are processed when a tweet containing your trigger is posted. Payment processing fees are <a style="display: inline-block" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 10 cents per donation</a> and tax-deductible donation receipts are emailed monthly.</span>
       </div>
       <form class="ui large form" id="payment-form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -70,6 +76,10 @@
       $('.js-save-payment').addClass('disabled').removeClass('primary');
     }
   }
+
+  $('.js-close-error-nag').on('click', function(){
+    $('.js-error-payment').addClass('hide');
+  });
 
   function getPaymentInputs() {
     return {

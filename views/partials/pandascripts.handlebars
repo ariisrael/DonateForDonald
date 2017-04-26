@@ -29,7 +29,11 @@
 
   Panda.on('error', function (errors) {
     // errors is a human-readable list of things that went wrong
-    //  (invalid card number, missing last name, etc.)
+    //  (invalid card number, missing last namhe, etc.)
+    $('.js-error-payment').removeClass('hide');
+    $('.js-save-payment').removeClass('loading');
+    $('.js-save-payment').removeClass('primary');
+    $('.js-save-payment').addClass('disabled');
     console.log(errors);
   });
 </script>
