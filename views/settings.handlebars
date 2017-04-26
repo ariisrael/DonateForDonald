@@ -1,4 +1,28 @@
 {{> header}}
+<div class="js-error-nag js-nag hide" style="height: 40px; text-align: center; background-color:  #f39c12; color: #fff; width: 100%; padding: 9px;">
+    <div class="ui text container" style="padding-left: 3%">
+ <p style="display: inline-block">
+      Error saving changes
+    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </div>
+      <script> 
+        $('.close-nag').on('click', function() {
+          $('.js-email-nag').addClass('hide');
+        });
+      </script>
+    </div>
+    <div class="js-success-nag js-nag hide" style="height: 40px; text-align: center; background-color:  limegreen; color: #fff; width: 100%; padding: 9px;">
+    <div class="ui text container" style="padding-left: 3%">
+ <p style="display: inline-block">
+<i class="ui icon check"></i> Success! Changes saved 
+    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </div>
+      <script> 
+        $('.close-nag').on('click', function() {
+          $('.js-nag').addClass('hide');
+        });
+      </script>
+    </div>
 <main class="ui text container settings-page">
   <div>
     <h1>

@@ -53,15 +53,34 @@ $(document).ready(function() {
     .done(function() {
       $(self).removeClass('loading disabled')
       $('.js-social-active-button').toggleClass('hide')
+        confirmNag(true);
+
     })
   })
 
 })
 
 function maximumSuccess() {
-  $('#monthly-maximum button').removeClass('loading disabled')
+  $('#monthly-maximum button').removeClass('loading disabled');
+  confirmNag(true);
 }
 
 function maximumLoading() {
   $('#monthly-maximum button').addClass('loading disabled')
+}
+
+
+function confirmNag(success, message) {
+  if(success) {
+    var elem = $('.js-success-nag');
+  } else {
+    var elem = $('.js-error-nag');
+  }
+  console.log('confirming action')
+  elem.removeClass('hide');
+  setTimeout(function() {
+    elem.addClass('hide');
+    console.log('Hide element');
+  }, 3000);
+  return true;
 }
