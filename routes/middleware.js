@@ -8,6 +8,10 @@ require('./session')
 app.use(function(req, res, next) {
   var hostUrl = req.protocol + '://' + req.get('host')
   if (hostUrl != app.get('baseUrl')) {
+    console.log(app.get('baseUrl'))
+    console.log(hostUrl)
+    console.log(req.originalUrl)
+    console.log(app.get('baseUrl') + req.originalUrl)
     res.redirect(app.get('baseUrl') + req.originalUrl)
   } else {
     next()
