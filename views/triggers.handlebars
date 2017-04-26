@@ -1,17 +1,17 @@
 {{> header}} {{#if_not user.emailConfirmed }}
-<div class="ui inline js-email-nag email-nag d4d-nag" {{#if_not user.emailConfirmed }}style="display: block;" {{/if_not}}>
-  <div class="ui text container">
-    <p>
-      Please confirm your email to start donating or <a href="#" class="new-link">request a new confirmation link</a>
-      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-    </p>
-  </div>
-</div>
-<style>
-  .inactive {
-    color: #888 !important;
-  }
-</style>
+<div class="js-email-nag" style="height: 40px; text-align: center; background-color:  #f39c12; color: #fff; width: 100%; padding: 9px;">
+    <div class="ui text container" style="padding-left: 3%">
+ <p style="display: inline-block">
+      Confirm your email to start donating. <a href="#" style="cursor: pointer; text-decoration: underline; color: #fff; font-weight: 700" class="new-link">Didn't receive a link?</a>
+      
+    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </div>
+      <script> 
+        $('.close-nag').on('click', function() {
+          $('.js-email-nag').addClass('hide');
+        });
+      </script>
+    </div>
 {{/if_not}}
 <div class="ui text container triggers-page" style="margin-top: 0px; padding-top: 0px">
   <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
