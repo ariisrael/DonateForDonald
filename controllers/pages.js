@@ -27,9 +27,9 @@ exports.notifications = function(req, res) {
   });
 }
 
-exports.contact = function(req, res) {
-  res.render('contact', {
-    title: 'Contact',
+exports.home = function(req, res) {
+  res.render('home', {
+    title: 'Home',
     csrfToken: req.csrfToken()
   });
 }

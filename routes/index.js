@@ -40,7 +40,7 @@ app.get('/settings', csrfProtection, UserController.ensureAuthenticated, PageCon
 app.get('/notifications', UserController.ensureAuthenticated,PageController.notifications);
 app.get('/terms', PageController.terms);
 app.get('/social', UserController.ensureAuthenticated, PageController.social);
-app.get('/contact', csrfProtection, PageController.contact);
+app.get('/home', csrfProtection, PageController.home);
 app.get('/donations', UserController.ensureAuthenticated,PageController.donations);
 app.get('/triggers', UserController.ensureAuthenticated, PageController.triggers);
 app.get('/leaderboard', PageController.leaderboard);
