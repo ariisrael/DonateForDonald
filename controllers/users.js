@@ -277,11 +277,11 @@ exports.accountPut = function(req, res, next) {
     if ('password' in req.body) {
       user.password = req.body.password;
     }
-    if (req.body.email) {
-      user.email = req.body.email
-    }
     if (req.body.name) {
       user.name = req.body.name
+    }
+    if (req.body.email) {
+      user.email = req.body.email
     }
     user.save(function(err) {
       if ('password' in req.body) {
@@ -291,6 +291,7 @@ exports.accountPut = function(req, res, next) {
       } else {
         req.flash('success', { msg: 'Your profile information has been updated.' });
       }
+      console.error('error updating user: ', err)
       res.redirect('/settings');
     });
   });
