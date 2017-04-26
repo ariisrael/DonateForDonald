@@ -66,7 +66,7 @@ app.use(function(req, res, next) {
     res.locals.pandapay.public = pandapay.test.public
   } else {
     // TODO: change this in production
-    res.locals.pandapay.public = pandapay.test.public
+    res.locals.pandapay.public = pandapay.live.public
   }
   next()
 })
