@@ -8,9 +8,10 @@ require('./session')
 app.use(function(req, res, next) {
   var hostUrl = req.protocol + '://' + req.get('host')
   if (hostUrl != app.get('baseUrl')) {
-    res.redirect(hostUrl + req.originalUrl)
+    res.redirect(app.get('baseUrl') + req.originalUrl)
+  } else {
+    next()
   }
-  next()
 })
 
 // this is our generic middleware that's applied to everything
