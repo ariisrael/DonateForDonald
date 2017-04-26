@@ -58,6 +58,10 @@ UserSchema.pre('save', function(next) {
   if (user.emailConfirmed || user.confirmationToken || user.testUser) {
     return next();
   }
+  if (user.facebook) {
+    user.emailConfirmed = true
+    return true
+  }
   crypto.randomBytes(16, function(err, buf) {
     var token = buf.toString('hex');
     user.confirmationToken = token;
