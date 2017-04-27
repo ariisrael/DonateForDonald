@@ -1,35 +1,36 @@
 {{> header}}
 <div class="js-error-nag js-nag hide" style="height: 40px; text-align: center; background-color:  #f39c12; color: #fff; width: 100%; padding: 9px;">
-    <div class="ui text container" style="padding-left: 3%">
- <p style="display: inline-block">
+  <div class="ui text container" style="padding-left: 3%">
+    <p style="display: inline-block">
       Error saving changes
-    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
-      </div>
-      <script> 
-        $('.close-nag').on('click', function() {
-          $('.js-email-nag').addClass('hide');
-        });
-      </script>
-    </div>
-    <div class="js-success-nag js-nag hide" style="height: 40px; text-align: center; background-color:  limegreen; color: #fff; width: 100%; padding: 9px;">
-    <div class="ui text container" style="padding-left: 3%">
- <p style="display: inline-block">
-<i class="ui icon check"></i> Success! Changes saved 
-    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
-      </div>
-      <script> 
-        $('.close-nag').on('click', function() {
-          $('.js-nag').addClass('hide');
-        });
-      </script>
-    </div>
+    </p> <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+  </div>
+  <script>
+    $('.close-nag').on('click', function () {
+      $('.js-email-nag').addClass('hide');
+    });
+  </script>
+</div>
+<div class="js-success-nag js-nag hide" style="height: 40px; text-align: center; background-color:  limegreen; color: #fff; width: 100%; padding: 9px;">
+  <div class="ui text container" style="padding-left: 3%">
+    <p style="display: inline-block">
+      <i class="ui icon check"></i> Success! Changes saved
+    </p> <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+  </div>
+  <script>
+    $('.close-nag').on('click', function () {
+      $('.js-nag').addClass('hide');
+    });
+  </script>
+</div>
 <main class="ui text container settings-page">
-  <div>
+  <div style="max-width: 450px; margin: 0 auto">
     <h1>
       {{title}}
     </h1>
+
     <div>
-      <div class="ui buttons" >
+      <div class="ui buttons">
 
         {{#if_not user.facebook}}
         <a href="/auth/facebook">
@@ -40,7 +41,7 @@
         </a>
         {{/if_not}} {{#if user.facebook}}
         <a href="/unlink/facebook" class="js-unlink-facebook">
-          <button class="ui button large red icon">
+          <button class="ui button large facebook icon">
               <i class="facebook icon"></i>
               Unlink Facebook
             </button>
@@ -54,7 +55,7 @@
         </a>
         {{/if_not}} {{#if user.twitter}}
         <a href="/unlink/twitter" class="js-unlink-twitter {{#if_not user.twitter}}hide{{/if_not}}">
-          <button class="ui button large red icon">
+          <button class="ui button large twitter icon">
             <i class="twitter icon"></i>
             Unlink Twitter
           </button>
@@ -63,13 +64,13 @@
 
       </div>
     </div>
+    <div class="ui divider"></div>
+
     <form id="" class="ui large form" method="post" action="/account">
-      <h3>Email</h3>
+      <h3 style="display: inline-block">Email</h3> <span class="js-no-match-email hide" style="float: right;"><i class="ui yellow icon warning"></i> Emails do not match</span>
+      <span class="js-match-email hide" style="float: right;"><i class="ui green icon check"></i> Emails match</span>
+
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
-      <div class="field">
-        <label>Current Email</label>
-        <div>{{user.email}}</div>
-      </div>
       <div class="two fields">
         <div class="field">
           <label>New Email</label>
@@ -85,12 +86,33 @@
         </div>
       </div>
       <div class="field">
-        <button class="ui button primary icon"><i class="icon envelope"></i> Update Email
+
+        <button class="ui fluid large disabled button icon js-update-email"><i class="icon envelope"></i> Update Email
         </button>
       </div>
+      <script>
+        $('input[name="confirm_email"]').on('keyup', function () {
+          var email = $('input[name="email"]').val();
+          if (email === $(this).val() && email.length > 0) {
+            $('.js-no-match-email').addClass('hide');
+            $('.js-match-email').removeClass('hide');
+            $('.js-update-email').addClass('primary');
+            $('.js-update-email').removeClass('disabled');
+          } else {
+            $('.js-no-match-email').removeClass('hide');
+            $('.js-match-email').addClass('hide');
+            $('.js-update-email').addClass('disabled');
+            $('.js-update-email').removeClass('primary');
+          }
+        });
+      </script>
     </form>
+    <div class="ui divider"></div>
+
     <form id="" class="ui large form" method="post" action="/account">
-      <h3>Password</h3>
+      <h3 style="display: inline-block">Password</h3> <span class="js-no-match-password hide" style="float: right;"><i class="ui yellow icon warning"></i> Passwords do not match</span>
+      <span class="js-match-password hide" style="float: right;"><i class="ui green icon check"></i> Passwords match</span>
+
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="two fields">
         <div class="field">
@@ -107,42 +129,33 @@
         </div>
       </div>
       <div class="field">
-        <button class="ui button primary icon"><i class="icon key"></i> Change Password
+        <button class="ui button fluid disabled large icon js-update-password"><i class="icon key"></i> Change Password
         </button>
       </div>
+      <script>
+        $('input[name="confirm"]').on('keyup', function () {
+          var pass = $('input[name="password"]').val();
+          if (pass === $(this).val()) {
+            $('.js-no-match-password').addClass('hide');
+            $('.js-match-password').removeClass('hide');
+            $('.js-update-password').addClass('primary');
+            $('.js-update-password').removeClass('disabled');
+          } else {
+            $('.js-no-match-password').removeClass('hide');
+            $('.js-match-password').addClass('hide');
+            $('.js-update-password').addClass('disabled');
+            $('.js-update-password').removeClass('primary');
+          }
+        });
+      </script>
     </form>
-    {{#if user.twitter}}
-    <form id="social-toggle" class="ui large form" method="post" action="">
-      <h3>Social</h3>
-      <p>
-        {{#if user.social}}Disable{{else}}Enable{{/if}} autoreplying to @realDonaldTrump's tweets with your donation by default
-        <br>
-        <span style="font-size: 80%; color: #888; display: block; margin-top: 2px">
-          <i class="ui icon warning"></i>
-        This will {{#if user.social}}disable{{else}}enable{{/if}} autoreplying for <b>all</b> your current triggers and requires a linked Twitter account.
-        </span>
-      </p>
-      <div class="field">
-        <div class="ui input">
-          <button class="ui button icon red js-social-active-button
-            js-disable {{#if_not user.social}}hide{{/if_not}}" data-id="{{this.id}}">
-            <i class="icon twitter"></i>
-            Disable
-          </button>
-          <button class="ui button icon green js-social-active-button
-            js-enable {{#if user.social}}hide{{/if}}" data-id="{{this.id}}">
-            <i class="icon twitter"></i>
-            <span class="text">Enable</span>
-          </button>
-        </div>
-      </div>
-    </form>
-    {{/if}}
+    <div class="ui divider"></div>
+
     <form id="monthly-maximum" class="ui large form" method="post" action="/account">
-      <h3>Monthly Donation Maximum</h3>
+      <h3>Monthly Limit</h3>
       <div class="three fields">
         <div class="field">
-          <div class="ui left icon input">
+          <div class="ui left icon fluid input">
             <i class="dollar left icon js-money"></i>
             <meta class="monthly-maximum-data" data-maximum="{{#if user.monthlyLimit}}{{user.monthlyLimit}}{{/if}}">
             <input type="text" placeholder="100" maxlength="4" {{#if user.monthlyLimit}}value={{user.monthlyLimit}}{{/if}}>
@@ -153,13 +166,28 @@
         </div>
       </div>
       <div class="field">
-        <button class="ui button primary icon">
+        <button class="ui button disabled js-set-limit large fluid icon">
           <i class="icon money" aria-hidden="true"></i> Set Monthly Limit
         </button>
       </div>
+      <script>
+        $('#monthly-maximum input').on('keyup', function () {
+          if ($(this).val().length > 0 && $(this).val() !== user.monthlyLimit) {
+            $('.js-set-limit').addClass('primary');
+            $('.js-set-limit').removeClass('disabled');
+          } else {
+            $('.js-set-limit').removeClass('primary');
+            $('.js-set-limit').addClass('disabled');
+          }
+        });
+      </script>
     </form>
+    <div class="ui divider"></div>
+
     <form id="payment-form" method="post" class="ui large form">
-      <h3>Payment</h3>
+      <h3 style="display: inline-block">Payment</h3> {{#if user.paymentToken}}
+      <span class="js-payment-status" style="float: right; color: #888; font-size: 80%; margin-bottom: 0px"><i class="ui icon gray check"></i> Valid payment method already saved</span>{{/if}}
+
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="ui two fields">
         <div class="field">
@@ -174,7 +202,7 @@
       <div class="field">
         <label>Credit Card Number</label>
         <div class="ui input fluid">
-          <input type="" name="credit_card" placeholder="Credit Card Number" data-panda="credit_card">
+          <input type="" name="credit_card" placeholder="Credit Card Number" maxlength="16" data-panda="credit_card">
         </div>
       </div>
       <div class="ui two fields">
@@ -184,19 +212,75 @@
         </div>
         <div class="field">
           <label>Expiration Date</label>
-          <input type="text" name="expiration" placeholder="MM/YYYY" data-panda="expiration">
+          <input type="text" name="expiration" placeholder="MM/YYYY" maxlength="7" data-panda="expiration">
         </div>
       </div>
       <div class="field">
-        <button class="ui button primary icon"><i class="icon credit card"></i> Save Payment
+        <button class="ui button disabled fluid large js-update-payment icon"><i class="icon credit card"></i> Update Payment
         </button>
       </div>
+      <script>
+        $('#payment-form input').on('keyup', function () {
+          var expiration = $('input[name="expiration"]').val();
+          var credit_card = $('input[name="credit_card"]').val();
+          var cvv = $('input[name="cvv"]').val();
+          var first_name = $('input[name="first_name"]').val();
+          var last_name = $('input[name="last_name"]').val();
+          if(first_name.length > 0 && last_name.length > 0 && (cvv.length === 3 || cvv.length === 4) && credit_card.length >= 15 && expiration.indexOf('/') > 0 && expiration.length === 7){
+            $('.js-update-payment').addClass('primary');
+            $('.js-update-payment').removeClass('disabled');
+          } else {
+            $('.js-update-payment').removeClass('primary');
+            $('.js-update-payment').addClass('disabled');
+          }
+        });
+
+        $('.js-update-payment').on('click', function() {
+          $(this).addClass('loading');
+          setTimeout(function() {
+            $('.js-update-payment').removeClass('loading');
+            $('.js-payment-status').html('<i class="ui icon green check"></i> Successfully updated payment information');
+            $('.js-update-payment').removeClass('primary');
+            $('.js-update-payment').addClass('disabled');
+          }, 1000)
+        });
+      </script>
     </form>
+    {{#if user.twitter}}
+    <div class="ui divider"></div>
+
+    <form id="social-toggle" class="ui large form" method="post" action="">
+      <h3>Social</h3>
+      <p>
+        {{#if user.social}}Disable{{else}}Enable{{/if}} default autoreplying to tweets with your donation
+        <br>
+        <span style="font-size: 80%; color: #888; display: block; margin-top: 2px">
+          <i class="ui icon warning"></i>
+        This will {{#if user.social}}disable{{else}}enable{{/if}} autoreplying for <b>all</b> your current triggers.
+        </span>
+      </p>
+      <div class="field">
+        <div class="ui input">
+          <button class="ui fluid large button icon red js-social-active-button
+            js-disable {{#if_not user.social}}hide{{/if_not}}" data-id="{{this.id}}">
+            <i class="icon twitter"></i> Disable Autoreply
+          </button>
+          <button class="ui fluid large button icon green js-social-active-button
+            js-enable {{#if user.social}}hide{{/if}}" data-id="{{this.id}}">
+            <i class="icon twitter"></i> <span class="text">Enable Autoreply</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    {{/if}}
+
+    <div class="ui divider"></div>
+
     <form id="delete-account" method="post" action="/delete-account" class="ui large form">
       <h3>Account</h3>
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div class="field">
-        <button class="ui red button icon delete-account-btn" type="submit"><i class="icon trash"></i>Delete Account</button>
+        <button class="ui red large button fluid icon delete-account-btn" type="submit"><i class="icon trash"></i> Delete Account Permanently</button>
       </div>
     </form>
 
