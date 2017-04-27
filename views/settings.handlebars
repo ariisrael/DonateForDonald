@@ -111,14 +111,16 @@
         </button>
       </div>
     </form>
+    {{#if user.twitter}}
     <form id="social-toggle" class="ui large form" method="post" action="">
       <h3>Social</h3>
       <p>
-        This will turn on or off tweeting of a donation by default.
+        {{#if user.social}}Disable{{else}}Enable{{/if}} autoreplying to @realDonaldTrump's tweets with your donation by default
         <br>
-        <i>Warning:</i>
-        It will disable or enable social on all triggers you currently have.
-        You will have to individually enable or disable them.
+        <span style="font-size: 80%; color: #888; display: block; margin-top: 2px">
+          <i class="ui icon warning"></i>
+        This will {{#if user.social}}disable{{else}}enable{{/if}} autoreplying for <b>all</b> your current triggers and requires a linked Twitter account.
+        </span>
       </p>
       <div class="field">
         <div class="ui input">
@@ -135,6 +137,7 @@
         </div>
       </div>
     </form>
+    {{/if}}
     <form id="monthly-maximum" class="ui large form" method="post" action="/account">
       <h3>Monthly Donation Maximum</h3>
       <div class="three fields">
