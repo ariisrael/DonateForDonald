@@ -17,7 +17,7 @@ exports.welcomeEmail = function (name, email, token, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Welcome!!!',
+      subject: 'Confirm Your Donate For Donald Account',
       html: html
     };
 
@@ -45,7 +45,7 @@ exports.confirmEmail = function (name, email, token, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Confirm your email on Donate for Donald',
+      subject: 'Confirm Your Donate For Donald Account',
       html: html
     };
 
@@ -73,7 +73,7 @@ exports.forgotEmail = function (name, email, token, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'You forgot your password! Sad!',
+      subject: 'Reset Your Donate For Donald Password',
       html: html
     };
 
@@ -100,7 +100,7 @@ exports.changedEmail = function (name, email, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Your password has been changed',
+      subject: "Your Password Recently Changed - Was It Lyin' Ted?",
       html: html
     };
 
@@ -131,7 +131,7 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: "You just donated! You're a winner, not a loser.",
+      subject: "You Just Donated For Donald- Read The Tweet!",
       html: html
     };
 
