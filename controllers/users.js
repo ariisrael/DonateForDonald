@@ -230,7 +230,7 @@ exports.confirmEmail = function(req, res) {
             res.redirect('/');
           });
         } else {
-          res.redirect('/');
+          res.redirect('/?confirmed=true');
         }
       })
     });
