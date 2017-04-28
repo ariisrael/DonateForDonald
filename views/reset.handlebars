@@ -3,14 +3,48 @@
     <a href="/">
       <img src="/images/profile.jpg" style="width: 100px; height: auto; margin-bottom: 10px" /></a>
     <h1 class="header">Reset Your Password</h1>
-    <p style="color: #888; margin-bottom: 30px; line-height: 160%">Type in your email to request a reset link. If an account exists, you should receive an email with a link to set a new password. </p>
-    <form class="ui massive form" style="padding-bottom: 20px;">
-      <div class="field">
-        <input type="text" class="ui input massive" name="email" placeholder="Email">
-      </div>
-      <a class="forgot-pass" href="/login" style="float: right; font-size: 75%; position: relative; top: -5px">Back to Login</a>
-      <button class="ui primary massive left labeled button login-button" type="submit"><i class="ui icon rocket"></i> Submit</button>
+    <div class="js-reset-prompt">
+      <p style="color: #888; margin-bottom: 30px; line-height: 160%">Type in your email to request a reset link. If an account exists, you should receive an email with a link to set a
+        new password. </p>
+      <form class="ui massive form" style="padding-bottom: 20px;">
+        <div class="field">
+          <input type="text" class="ui input massive" name="email" placeholder="Email">
+        </div>
+        <a class="forgot-pass" href="/login" style="float: right; font-size: 75%; position: relative; top: -5px">Back to Login</a>
+        <button class="ui massive disabled button js-reset-button" type="submit">Submit</button>
 
-    </form>
+      </form>
+
+    </div>
+    <div class="js-reset-confirm hide">
+
+      <p><i class="ui icon green check"></i> Sent! Check your email for a reset link.</p>
+    </div>
   </div>
 </main>
+<script>
+  $('.js-reset-button').on('click', function () {
+    $('.js-reset-button').addClass('loading');
+    setTimeout(function () {
+      $('.js-reset-button').addClass('disabled');
+      $('.js-reset-button').removeClass('loading');
+      $('.js-reset-button').removeClass('primary');
+      $('.js-reset-confirm').removeClass('hide');
+    }, 1000);
+  });
+
+  $('input').on('keyup', function () {
+    var email = $('input[name="email"]').val();
+    if (email.length > 0 && email.indexOf('@') > 0 && email.indexOf('.') > 0) {
+      $('.js-reset-button').addClass('primary');
+      $('.js-reset-button').removeClass('disabled');
+    } else {
+      $('.js-reset-button').addClass('disabled');
+      $('.js-reset-button').removeClass('primary');
+    }
+  });
+
+  if(location.search.indexOf('email')) {
+    $('.js-reset-confirm').removeClass('hide');
+  }
+</script>
