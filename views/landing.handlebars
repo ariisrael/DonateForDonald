@@ -5,6 +5,27 @@
   }
 
 </style>
+<div class="js-confirmed-nag hide" style="height: 40px; position: absolute; top: 70px; left: 0px; z-index: 999; text-align: center; background-color:  #00aced; color: #fff; width: 100%; padding: 9px;">
+    <div class="ui text container" style="padding-left: 3%">
+ <p style="display: inline-block">
+     <i class="ui icon circle check"></i> Account confirmed! Donating is now enabled.
+      
+    </p>      <a href="#" style="color: #fff; cursor: pointer; float: right; display: inline-block" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </div>
+      <script> 
+        $('.close-nag').on('click', function() {
+          $('.js-confirmed-nag').addClass('hide');
+        });
+
+        setTimeout(function() {
+          $('.js-confirmed-nag').addClass('hide');
+        }, 2000);
+        
+        if(location.search.indexOf('confirmed') > 0) {
+          $('.js-confirmed-nag').removeClass('hide');
+        }
+      </script>
+    </div>
 <main class="main-landing">
   <section class="landing-left" style="overflow-y: hidden">
     <div data-tagul-src="//cdn.wordart.com/json/m8k9mxvep085" class="js-word-cloud"></div>
