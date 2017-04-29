@@ -244,6 +244,14 @@ body {
     letter-spacing: 2px;
     font-size: 26px !important;
 }
+.donated-value {
+	font-size: 26px !important;
+}
+
+.donations-page .charity {
+	margin-left: 20px;
+}
+
 .site {
     /* Flexbox */
 

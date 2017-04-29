@@ -1,3 +1,27 @@
 <div class="donations-page">
   {{> header}}
+  <div class="ui container top-margin-10">
+  <div class="ui items">
+  {{#each donations}}
+  <div class="item donation" style="border-bottom: 1px solid #eee; padding-bottom: 10px">
+    <div class="ui fluid image charity-image" style="border-radius: 10px; width: 170px">
+      <img src="{{this.charity.image}}">
+    </div>
+    <div class=" ui charity horizontal statistic">
+      <div class="header trigger-title">
+        {{this.charity.name}}
+        </div>
+    </div>
+
+    <div class=" ui horizontal statistic">
+      <div class="donated-value">
+        <i class="usd green icon" style="position: relative; left: 10px"></i>
+        <span class="trigger-amount">{{this.donations.amount}}<span>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+  </div>
+</div>
 </div>
