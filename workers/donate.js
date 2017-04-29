@@ -39,7 +39,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     donation.paid = true
     // Handle response error
     if(error) {
-      console.error(error);
+      console.error('error making donation: ', error);
       donation.paid = false
     }
     // Log callback parameters
@@ -74,7 +74,6 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 
 function makeDonation(user, trigger, tweet, testing, cb) {
   console.log('making donation')
-  console.log(tweet)
   donation = new Donation({
     userId: user._id,
     triggerId: trigger._id,

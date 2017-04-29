@@ -20,7 +20,7 @@ function findPopularTerms(options, cb) {
         }
         PopularTerm.findOne(query, function(err, term) {
           if (err) {
-            console.error(err)
+            console.error('error finding terms: ', err)
           }
           if (!term) {
             if (t.constructor === String) {
@@ -37,7 +37,7 @@ function findPopularTerms(options, cb) {
           }
           term.save((err, term) => {
             if (err) {
-              console.error(err)
+              console.error('error saving term: ', err)
             }
           })
         })

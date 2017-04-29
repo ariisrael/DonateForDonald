@@ -72,15 +72,14 @@ function saveTweet(tweet, testing) {
   t.save((err) => {
     console.log("saved tweet: ", JSON.stringify(t))
     if (err) {
-      return console.log(err)
+      return console.log('error saving tweet: ', err)
     }
     analyzeTweet(t, testing)
   })
 }
 
 function analyzeTweet(tweet, testing) {
-  console.log('analyzing tweet')
-  console.log(tweet)
+  console.log('analyzing tweet: ', JSON.stringify(tweet))
   var date = new Date();
   var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   var userQuery = {
@@ -133,7 +132,6 @@ function analyzeTweet(tweet, testing) {
 
 function checkUserTriggers(user, tweet, testing, cb) {
   console.log('checking user triggers')
-  console.log(tweet)
   Trigger.find({
     userId: user.id,
     active: true
@@ -161,7 +159,7 @@ function checkUserTriggers(user, tweet, testing, cb) {
       // a single regex for all keywords
       if (re.exec(tweet.text)) {
         console.log('found a match!')
-        console.log(tweet)
+        console.log('trigger: ', JSON.stringify(trigger))
         donation = makeDonation(user, trigger, tweet, testing, cb)
         // on a single tweet, we only want to donate once per user,
         // so we break out of the loop
