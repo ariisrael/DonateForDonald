@@ -37,6 +37,6 @@ function unsavedNag() {
   if ($('.triggers-page').length && getQueryVariable('login') && getQueryVariable('created')) {
     localStorage.clear()
   } else if (localStorage.getItem('trigger')) {
-    $('.unsaved-nag').css('display', 'block');
+    $('.js-unsaved-nag').css('display', 'block');
   }
 }

@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', PageController.landing);
 app.get('/login', csrfProtection, UserController.loginGet);
 app.get('/payment', csrfProtection, UserController.ensureAuthenticated, PageController.payment);
-app.get('/reset', PageController.reset);
+app.get('/forgot', PageController.reset);
 app.get('/settings', csrfProtection, UserController.ensureAuthenticated, PageController.settings);
 app.get('/notifications', UserController.ensureAuthenticated,PageController.notifications);
 app.get('/terms', PageController.terms);
@@ -65,13 +65,12 @@ app.post('/login', csrfProtection, UserController.loginPost);
 
 app.get('/logout', UserController.logout);
 
-app.get('/forgot', UserController.forgotGet);
 app.post('/forgot', UserController.forgotPost);
 
 app.get('/payment', PaymentController.view)
 
-app.get('/reset/:token', UserController.resetGet);
-app.post('/reset/:token', UserController.resetPost);
+app.get('/reset', UserController.resetGet);
+app.post('/reset', UserController.resetPost);
 
 app.get('/unlink/:provider', UserController.ensureAuthenticated, UserController.unlink);
 

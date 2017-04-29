@@ -49,7 +49,7 @@
             </div>
           </a>
           {{/if}}
-          
+
           <a href="/settings">
             <div class="item">
               <i class="icon settings"></i> Settings
@@ -84,3 +84,14 @@
     </p>
   </div>
 </div>
+
+{{#each flash}}
+  <div class="ui inline d4d-nag" style="display: block">
+    <div class="ui text container">
+      <p>
+        {{this.message}}
+        <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
+      </p>
+    </div>
+  </div>
+{{/each}}

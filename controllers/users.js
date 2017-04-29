@@ -455,7 +455,7 @@ exports.forgotPost = function(req, res, next) {
     function(token, user, done) {
       forgotEmail(user.name || user.email, user.email, user.passwordResetToken, function(err, data) {
         if (err) console.error(err)
-        res.redirect('/forgot')
+        res.redirect('/forgot?email=' + user.email)
       })
     }
   ]);
@@ -468,14 +468,19 @@ exports.resetGet = function(req, res) {
   if (req.isAuthenticated()) {
     return res.redirect('/');
   }
+  if (!req.query || !req.query.token) {
+    req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
+    return res.render('reset', {
+      title: 'Password Reset'
+    });
+  }
   User.findOne({ passwordResetToken: req.query.token })
     .where('passwordResetExpires').gt(Date.now())
     .exec(function(err, user) {
       if (!user) {
         req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-        return res.redirect('/reset');
       }
-      res.render('account/reset', {
+      res.render('reset', {
         title: 'Password Reset'
       });
     });
@@ -492,7 +497,7 @@ exports.resetPost = function(req, res, next) {
 
   if (errors) {
     req.flash('error', errors);
-    return res.redirect('back');
+    return res.render('reset');
   }
 
   async.waterfall([
@@ -502,7 +507,7 @@ exports.resetPost = function(req, res, next) {
         .exec(function(err, user) {
           if (!user) {
             req.flash('error', { msg: 'Password reset token is invalid or has expired.' });
-            return res.redirect('back');
+            return res.render('reset');
           }
           user.password = req.body.password;
           user.passwordResetToken = undefined;
