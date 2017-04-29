@@ -1,6 +1,13 @@
 <div class="donations-page">
   {{> header}}
   <div class="ui container top-margin-10">
+    <div class="ui center aligned js-no-triggers {{#if_not donations}}{{else}}hide{{/if_not}}">
+      <h3 class="ui header no-triggers">
+        No donations. Sad! <a href="/">Make some triggers!</a>
+      </h3>
+      <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
+      />
+    </div>
   <div class="ui items">
   {{#each donations}}
   <div class="item donation" style="border-bottom: 1px solid #eee; padding-bottom: 10px">

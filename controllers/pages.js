@@ -66,6 +66,15 @@ exports.donations = function(req, res) {
       }
     }])
     .exec((err, result) => {
+      if (err) {
+        console.error('donations query error: ', err)
+      }
+      if (!result || !result.length) {
+        return res.render('donations', {
+          title: 'donations',
+          donations: undefined
+        });
+      }
       var charitiesQuery = [];
       var charitiesResult = {}
       result.forEach((charity) => {
