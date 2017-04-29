@@ -26,10 +26,10 @@ if (process.env.EMAIL) {
 
 app.set('email', email)
 
-if (process.env.SEND_DONATION_EMAIL) {
-  app.set('sendDonationEmail', true)
+if (process.env.SEND_OPTIONAL_EMAIL) {
+  app.set('sendOptionalEmail', true)
 } else {
-  app.set('sendDonationEmail', false)
+  app.set('sendOptionalEmail', false)
 }
 
 module.exports = app

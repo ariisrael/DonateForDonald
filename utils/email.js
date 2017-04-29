@@ -114,7 +114,7 @@ exports.changedEmail = function (name, email, callback) {
 
 exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
   // allow this to be configurable
-  if (!app.get('sendDonationEmail')) return;
+  if (!app.get('sendOptionalEmail')) return;
   var params = {
     layout: 'email',
     name: name,
@@ -132,6 +132,36 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
       subject: "You Just Donated For Donald- Read The Tweet!",
+      html: html
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      console.log(error)
+      console.log(body);
+      callback(error, body)
+    });
+  })
+}
+
+exports.paymentFailedEmail = function (name, email, charity, callback) {
+  // allow this to be configurable
+  if (!app.get('sendOptionalEmail')) return;
+  var params = {
+    layout: 'email',
+    name: name,
+    email: email,
+    charity: charity.name,
+    baseUrl: app.get('baseUrl')
+  }
+  app.render('email/payment-failed', params, (err, html) => {
+    if (err) {
+      console.log(err)
+      return callback(err, null)
+    }
+    var data = {
+      from: 'Donate for Donald <' + app.get('email') + '>',
+      to: email, // you need to register the email on mailgun since this is a test account
+      subject: "Your Payment information did not work!",
       html: html
     };
 

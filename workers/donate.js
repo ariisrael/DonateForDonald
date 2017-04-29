@@ -3,6 +3,7 @@ const request = require('request');
 const PANDAPAY = require('../config/pandapay');
 const tweetAtTrump = require('./tweetAtTrump')
 const donatedEmail = require('../utils/email').donatedEmail
+const paymentFailedEmail = require('../utils/email').paymentFailedEmail
 
 const models = require('../models')
 const Donation = models.Donation
@@ -13,6 +14,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 function donationRequest(user, trigger, tweet, donation, testing, cb) {
+  // If the user does not have a payment token and it's not a test user,
+  // do not go through this dance
+  if (!user.paymenttoken && !user.testUser) {
+    return
+  }
   var body = {
     source: user.paymenttoken,
     platform_fee: PANDAPAY.fee,
@@ -43,8 +49,10 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 
     donation.save((err, d) => {
       if (err) {
-        cb()
-        return console.error(err)
+        paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
+          cb()
+        })
+        return console.error('A payment failed: ', err)
       }
       if (trigger.social) {
         var userName = user.name || user.email
@@ -53,7 +61,9 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
           tweetAtTrump(user, tweet, trigger.charityId, trigger, cb)
         })
       } else {
-        cb()
+        donatedEmail(userName, user.email, tweet.text, tweet.id, function(err, body) {
+          cb()
+        })
       }
     })
   });
