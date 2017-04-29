@@ -75,23 +75,3 @@
     </div>
   </nav>
 </header>
-
-<div class="ui inline js-unsaved-nag unsaved-nag d4d-nag" style="display: none;">
-  <div class="ui text container">
-    <p>
-      You have an unfinished trigger. <a class="finish-link" href="/social">Click here to complete it</a>. Or click <a href="#" class='disgard-trigger disgard-link'>here</a> to disgard it.
-      <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-    </p>
-  </div>
-</div>
-
-{{#each flash}}
-  <div class="ui inline d4d-nag" style="display: block">
-    <div class="ui text container">
-      <p>
-        {{this.message}}
-        <a href="#" class="close-nag"><i class="close icon js-close-nag"></i></a>
-      </p>
-    </div>
-  </div>
-{{/each}}
