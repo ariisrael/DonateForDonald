@@ -79,7 +79,7 @@ exports.donations = function(req, res) {
       Charity.find({
         "$or": charitiesQuery
       }).exec((err, charities) => {
-        if (charities.length) {
+        if (charities && charities.length) {
           charities.forEach((charity) => {
             charitiesResult[charity._id].charity = charity
           })
