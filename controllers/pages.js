@@ -54,19 +54,41 @@ exports.terms = function(req, res) {
 }
 
 exports.donations = function(req, res) {
-  Donation.find({
-    userId: req.user.id
-  })
-  .populate('triggerId charityId tweetId')
-  .exec((err, donations) => {
-    if (err) {
-      console.error(err);
-    }
-    res.render('donations', {
-      title: 'donations',
-      donations: donations
-    });
-  })
+  console.log(req.user.id)
+  Donation.aggregate([{
+      $match: {
+        userId: req.user._id
+      }
+    }, {
+      $group: {
+        _id: "$charityId",
+        amount: { $sum: "$amount" }
+      }
+    }])
+    .exec((err, result) => {
+      var charitiesQuery = [];
+      var charitiesResult = {}
+      result.forEach((charity) => {
+        charitiesResult[charity._id] = {
+          donations: charity
+        }
+        charitiesQuery.push({
+          _id: charity._id
+        })
+      })
+      Charity.find({
+        "$or": charitiesQuery
+      }).exec((err, charities) => {
+        charities.forEach((charity) => {
+          charitiesResult[charity._id].charity = charity
+        })
+        res.render('donations', {
+          title: 'donations',
+          donations: charitiesResult
+        });
+      })
+
+    })
 }
 
 exports.faq = function(req, res) {
