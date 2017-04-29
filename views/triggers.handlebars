@@ -1,4 +1,4 @@
-{{> header}} {{#if_not user.emailConfirmed }}
+{{> header}} {{#if_not user.emailConfirmed }} {{#if_not user.facebook}}
 <div class="js-email-nag" style="height: 40px; text-align: center; background-color:  #00aced; color: #fff; width: 100%; padding: 9px;">
     <div class="ui text container" style="padding-left: 3%">
  <p style="display: inline-block">
@@ -15,6 +15,7 @@
         })
       </script>
     </div>
+    {{/if_not}}
 {{/if_not}}
 <div class="ui text container triggers-page" style="margin-top: 0px; padding-top: 0px">
   <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
