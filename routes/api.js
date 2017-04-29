@@ -43,6 +43,7 @@ api.post('/social/enable/:id', LOGIN_ONLY, SocialController.enableTrigger)
 api.post('/social/disable/:id', LOGIN_ONLY, SocialController.disableTrigger)
 
 api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
+api.put('/users/card/:id', USER_ONLY, UserController.updatePayment);
 api.put('/users/:id', USER_ONLY, UserController.update);
 
 api.post('/resend-confirmation-email', LOGIN_ONLY, UserController.sendConfirmationEmail)

@@ -21,6 +21,8 @@ const UserSchema = new Schema({
   confirmationToken: String,
   confirmationTokenExpires: Date,
   emailConfirmed: { type: Boolean, default: false },
+  pandaUserId: String,
+  pandaUser: Object,
   facebook: String,
   twitter: String,
   twitterCreds: {

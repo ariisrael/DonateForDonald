@@ -10,6 +10,11 @@ const forgotEmail = emailUtils.forgotEmail
 const changedEmail = emailUtils.changedEmail
 const confirmEmail = require('../utils/email').confirmEmail
 
+var mode = 'test'
+if (process.env.NODE_ENV === 'production') {
+  mode = 'live' // If in production set mode to live
+}
+
 const User = models.User;
 
 exports.index = (req, res) => {
@@ -33,6 +38,27 @@ exports.update = (req, res) => {
     if(err) return console.error(err);
     res.json(num);
   });
+}
+
+exports.updatePayment = (req, res) => {
+  var pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/customers';
+  var body = {
+    source: req.body.paymentToken,
+    email: req.user.email,
+  }
+  request.post({url: pandapayURL, json: body}, function(error, response, body) {
+    var id = req.params.id;
+    var query = { _id: id };
+    User.update(query, {
+      pandaUserId: body.id,
+      pandaUser: body,
+      paymentToken: req.body.paymentToken
+    }, {}, (err, num) => {
+      if(err) return console.error(err);
+      res.json(num);
+    })
+
+  })
 }
 
 /**

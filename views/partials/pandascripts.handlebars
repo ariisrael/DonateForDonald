@@ -14,7 +14,7 @@
     }
     jQuery.ajax({
       type: 'put',
-      url: '/api/users/' + user.id,
+      url: '/api/users/card/' + user.id,
       data: data,
       success: function() {
         if ($('.payment-page').length) {

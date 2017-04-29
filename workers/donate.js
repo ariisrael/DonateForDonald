@@ -20,7 +20,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     return
   }
   var body = {
-    source: user.paymenttoken,
+    source: user.pandaUserId,
     platform_fee: PANDAPAY.fee,
     amount: (trigger.amount * 100).toString(),
     currency: PANDAPAY.currency,
