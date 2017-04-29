@@ -47,6 +47,10 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     console.log('body:', body);
 
     donation.save((err, d) => {
+      if (user.testUser) {
+        // if it's a test user, do not send an email
+        return;
+      }
       if (err) {
         paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
           cb()
