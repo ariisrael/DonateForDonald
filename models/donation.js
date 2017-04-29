@@ -6,8 +6,8 @@ const ObjectId = Schema.ObjectId;
 
 const DonationSchema = new Schema({
   userId: ObjectId,
-  triggerId: ObjectId,
-  charityId: String,
+  triggerId: { type: ObjectId, ref: 'Trigger'},
+  charityId: { type: String, ref: 'Charity'},
   uniqueness: {
     type: String,
     unique: true

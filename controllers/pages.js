@@ -54,9 +54,19 @@ exports.terms = function(req, res) {
 }
 
 exports.donations = function(req, res) {
-  res.render('donations', {
-    title: 'donations'
-  });
+  Donation.find({
+    userId: req.user.id
+  })
+  .populate('triggerId charityId tweetId')
+  .exec((err, donations) => {
+    if (err) {
+      console.error(err);
+    }
+    res.render('donations', {
+      title: 'donations',
+      donations: donations
+    });
+  })
 }
 
 exports.faq = function(req, res) {
