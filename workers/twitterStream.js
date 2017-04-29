@@ -84,9 +84,7 @@ function analyzeTweet(tweet, testing) {
   var date = new Date();
   var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   var userQuery = {
-    admin: {
-      $ne: true
-    }
+    emailConfirmed: true
   }
   if (testing) {
     // if it's a test tweet, only analyze the test users

@@ -35,8 +35,8 @@ exports.home = function(req, res) {
 }
 
 exports.reset = function(req, res) {
-  res.render('reset', {
-    title: 'Reset'
+  res.render('forgot', {
+    title: 'Forgot Password'
   });
 }
 
