@@ -79,9 +79,11 @@ exports.donations = function(req, res) {
       Charity.find({
         "$or": charitiesQuery
       }).exec((err, charities) => {
-        charities.forEach((charity) => {
-          charitiesResult[charity._id].charity = charity
-        })
+        if (charities.length) {
+          charities.forEach((charity) => {
+            charitiesResult[charity._id].charity = charity
+          })
+        }
         res.render('donations', {
           title: 'donations',
           donations: charitiesResult
