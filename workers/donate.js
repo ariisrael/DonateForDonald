@@ -27,7 +27,6 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     destination: trigger.ein,
     receipt_email: user.email
   }
-  body = JSON.stringify(body)
   console.log('body: ', body)
 
   if (testing) {
@@ -36,7 +35,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 
   var pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/donations';
 
-  request.post({url: pandapayURL, body: body}, function(error, response, body) {
+  request.post({url: pandapayURL, json: body}, function(error, response, body) {
     donation.paid = true
     // Handle response error
     if(error) {
