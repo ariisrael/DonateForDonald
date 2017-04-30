@@ -1,5 +1,8 @@
 const app = require('./app')
 
+const createLogger = require('logging').default;
+const log = createLogger('app/settings');
+
 const express = require('express');
 const morgan = require('morgan');
 const favicon = require('serve-favicon');

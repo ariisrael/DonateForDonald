@@ -1,5 +1,8 @@
 const express = require('express');
 
+const createLogger = require('logging').default;
+const log = createLogger('app/app');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));

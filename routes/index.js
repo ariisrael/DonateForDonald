@@ -26,6 +26,9 @@ const LOGIN_ONLY = UserController.ensureAuthenticated;
 
 const csrfProtection = csurf({ cookie: true })
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/payments');
+
 app.use('/api', require('./api'));
 
 // Don't enable this until after api, all api posts should be json decoded,
@@ -86,13 +89,13 @@ app.get('/auth/facebook', function(req, res, next) {
 app.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
     if (err || !user) {
-      console.error('auth error: ', err)
-      console.log('user: ', user)
+      log.error('auth error: ', err)
+      log.debug('user: ', user)
       return res.redirect('/login')
     }
     req.logIn(user, function(err) {
       if (err) {
-        console.error('auth error: ', err)
+        log.error('auth error: ', err)
         return res.redirect('/login')
       }
       if (req.session.redirectURI) {
@@ -109,7 +112,7 @@ app.get('/auth/facebook/callback', function(req, res, next) {
                   }
                   if (err) {
                       response.error = err
-                      console.error(err);
+                      log.error(err);
                   }
                   req.session.sessionTrigger = undefined
                   return res.redirect('/triggers?login=true&created=true')

@@ -2,6 +2,9 @@ var config = require('../config/worker')
 
 var popularTerms = require('./popularTerms')
 
+const createLogger = require('logging').default;
+const log = createLogger('worker');
+
 var db = config.db
 
 db.once('open', function() {

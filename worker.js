@@ -14,5 +14,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+const createLogger = require('logging').default;
+const log = createLogger('worker');
+
 
 require('./workers')

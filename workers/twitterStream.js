@@ -1,19 +1,21 @@
 const config = require('../config/worker'); // Credentials
-
+const async = require('async')
 const Twitter = require('twit'); // Twitter API
+var makeDonation = require('./donate')
+var popularTerms = require('./popularTerms')
+
 const T = new Twitter(config.twitterCreds);
 const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 const GOP_CLUSTER_FUCK_ID = '3388526333'; // User ID for @GOPClusterFuck
-
 const models = require('../models')
 const Tweet = models.Tweet
 const Trigger = models.Trigger
 const Donation = models.Donation
 const User = models.User
-const async = require('async')
 
-var makeDonation = require('./donate')
-var popularTerms = require('./popularTerms')
+const createLogger = require('logging').default;
+const log = createLogger('twitterStream');
+
 
 // Create new stream filtering statuses by user (including retweets, replies)
 var stream = T.stream('statuses/filter', { follow: [TRUMP_USER_ID, GOP_CLUSTER_FUCK_ID] });
@@ -22,23 +24,23 @@ var stream = T.stream('statuses/filter', { follow: [TRUMP_USER_ID, GOP_CLUSTER_F
 stream.on('tweet', function (tweet) {
   // Only parse tweets from @realDonaldTrump
   if (tweet.user.id == TRUMP_USER_ID) {
-    console.log("new tweet: ", getFullText(tweet))
-    console.log("matches trump!")
+    log.info("new tweet: ", getFullText(tweet))
+    log.info("matches trump!")
     prepareTweet(tweet)
   } else if (tweet.user.id == GOP_CLUSTER_FUCK_ID) {
-    console.log("new tweet: ", getFullText(tweet))
-    console.log("matches GOPClusterFuck!")
+    log.info("new tweet: ", getFullText(tweet))
+    log.info("matches GOPClusterFuck!")
     prepareTweet(tweet, true)
   }
 });
 
 stream.on('disconnect', function (disconnectMessage) {
-  console.log('disconnected: ', disconnectMessage)
+  log.warn('disconnected: ', disconnectMessage)
   stream.stop().start()
 })
 
 stream.on('error', function (error) {
-  console.log('errored: ', JSON.stringify(error))
+  log.error('errored: ', JSON.stringify(error))
   // this is synchronous, no need to have a callback,
   // but it returns this so the functions can be chained.
   stream.stop().start()
@@ -59,7 +61,7 @@ function prepareTweet(tweet, testing) {
   var id = tweet.id_str;
   var date = tweet.created_at;
   var t = {text: text, id: id, _id: id, date: date}
-  console.log("about to save tweet: ", t)
+  log.info("about to save tweet: ", t)
   if (testing) {
     t.testTweet = true
   }
@@ -68,18 +70,18 @@ function prepareTweet(tweet, testing) {
 
 function saveTweet(tweet, testing) {
   var t = new Tweet(tweet)
-  console.log("saving tweet: ", JSON.stringify(t))
+  log.debug("saving tweet: ", JSON.stringify(t))
   t.save((err) => {
-    console.log("saved tweet: ", JSON.stringify(t))
+    log.debug("saved tweet: ", JSON.stringify(t))
     if (err) {
-      return console.log('error saving tweet: ', err)
+      return log.warn('error saving tweet: ', err)
     }
     analyzeTweet(t, testing)
   })
 }
 
 function analyzeTweet(tweet, testing) {
-  console.log('analyzing tweet: ', JSON.stringify(tweet))
+  log.info('analyzing tweet: ', JSON.stringify(tweet))
   var date = new Date();
   var firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   var userQuery = {
@@ -93,7 +95,8 @@ function analyzeTweet(tweet, testing) {
   User
     .find(userQuery)
     .exec((err, users) => {
-      console.log('grabbed users')
+      log.info('grabbed users')
+      log.debug('grabbed ' + users.length + ' users')
       async.eachSeries(users, (user, nextUser) => {
         if (!user.paymenttoken && !user.testUser) {
           return nextUser()
@@ -112,17 +115,20 @@ function analyzeTweet(tweet, testing) {
             }], (err, result) => {
             if (result[0].amount < user.monthlyLimit) {
               checkUserTriggers(user, tweet, testing, function() {
-                console.log('user has under the monthly limit')
+                log.debug('user has under the monthly limit')
                 nextUser()
               })
             }
           })
         } else {
           checkUserTriggers(user, tweet, testing, function() {
-            console.log('user has no monthly limit')
+            log.debug('user has no monthly limit')
             nextUser()
           })
         }
+      }, (err) => {
+        log.info('finished with all users')
+        log.info('===================================')
       })
   })
   if (!testing) {
@@ -130,8 +136,8 @@ function analyzeTweet(tweet, testing) {
   }
 }
 
-function checkUserTriggers(user, tweet, testing, cb) {
-  console.log('checking user triggers')
+function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
+  log.info('checking user triggers')
   Trigger.find({
     userId: user.id,
     active: true
@@ -139,33 +145,36 @@ function checkUserTriggers(user, tweet, testing, cb) {
     if (err || !triggers || !triggers.length) {
       if (err) {
         cb()
-        return console.log('error grabbing triggers', err)
+        return log.error('error grabbing triggers', err)
       } else {
         cb()
-        return console.log('there are no triggers')
+        return log.info('there are no triggers')
       }
     }
-    console.log('grabbed triggers')
+    log.info('grabbed triggers')
 
-    var donation;
-    for (triggerIdx in triggers) {
-      var trigger = triggers[triggerIdx]
-      // loop through the keywords
-      var keyword = trigger.name
-      keyword = escapeRegExp(keyword)
+    async.each(triggers, (trigger, triggerFinishedCallback) => {
+      var keyword = escapeRegExp(trigger.name)
       var re = new RegExp(keyword)
       // check if there's a match
       // a potential optimization is to create only
       // a single regex for all keywords
       if (re.exec(tweet.text)) {
-        console.log('found a match!')
-        console.log('trigger: ', JSON.stringify(trigger))
-        donation = makeDonation(user, trigger, tweet, testing, cb)
-        // on a single tweet, we only want to donate once per user,
-        // so we break out of the loop
-        break
+        log.info('found a match!')
+        log.info('trigger: ', JSON.stringify(trigger))
+        makeDonation(user, trigger, tweet, testing, (err) => {
+          triggerFinishedCallback(err)
+        })
+      } else {
+        triggerFinishedCallback()
       }
-    }
+
+    }, (err) => {
+      if (err) {
+        log.error('errored out in the donation flow', err)
+      }
+      userFinishedCallback()
+    })
   })
 }
 

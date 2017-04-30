@@ -8,6 +8,9 @@ const paymentFailedEmail = require('../utils/email').paymentFailedEmail
 const models = require('../models')
 const Donation = models.Donation
 
+const createLogger = require('logging').default;
+const log = createLogger('donate');
+
 var mode = 'test'
 if (process.env.NODE_ENV === 'production') {
   mode = 'live' // If in production set mode to live
@@ -17,6 +20,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
   // If the user does not have a payment token and it's not a test user,
   // do not go through this dance
   if (!user.paymenttoken && !user.testUser) {
+    cb()
     return
   }
   var body = {
@@ -27,7 +31,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     destination: trigger.ein,
     receipt_email: user.email
   }
-  console.log('body: ', body)
+  log.info('body: ', body)
 
   if (testing) {
     mode = 'test'
@@ -39,23 +43,25 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     donation.paid = true
     // Handle response error
     if(error) {
-      console.error('error making donation: ', error);
+      log.error('error making donation: ', error);
       donation.paid = false
     }
     // Log callback parameters
     // console.log('response:', response);
-    console.log('body:', body);
+    log.info('body:', body);
 
     donation.save((err, d) => {
+      log.info('done making donation')
       if (user.testUser) {
         // if it's a test user, do not send an email
+        cb()
         return;
       }
       if (err) {
         paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
           cb()
         })
-        return console.error('A payment failed: ', err)
+        return log.error('A payment failed: ', err)
       }
       if (trigger.social) {
         var userName = user.name || user.email
@@ -73,7 +79,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 }
 
 function makeDonation(user, trigger, tweet, testing, cb) {
-  console.log('making donation')
+  log.info('making donation')
   donation = new Donation({
     userId: user._id,
     triggerId: trigger._id,
@@ -82,7 +88,6 @@ function makeDonation(user, trigger, tweet, testing, cb) {
     tweetId: tweet.id
   })
   donationRequest(user, trigger, tweet, donation, testing, cb)
-  return donation
 }
 
 module.exports = exports = makeDonation

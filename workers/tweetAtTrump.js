@@ -1,6 +1,9 @@
 const config = require('../config/worker')
 const Twitter = require('twit')
 
+const createLogger = require('logging').default;
+const log = createLogger('worker');
+
 
 function tweetAtTrump(user, tweet, charity, trigger, callback) {
   if (user.twitter && user.twitterCreds) {
@@ -21,7 +24,7 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
       }
       T.post('statuses/update', replyTweet, function(err, data) {
         if (err) {
-          console.error(
+          log.error(
             'twitter posting failed for user, ', JSON.stringify(user),
             ' with error, ', JSON.stringify(err),
             ' with data, ', JSON.stringify(data)

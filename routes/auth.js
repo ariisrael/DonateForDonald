@@ -5,6 +5,9 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
 
+const createLogger = require('logging').default;
+const log = createLogger('routes/auth');
+
 const User = require('../models').User;
 
 passport.serializeUser(function(user, done) {
@@ -45,7 +48,7 @@ passport.use(new FacebookStrategy({
     User.findOne({ facebook: profile.id }, function(err, user) {
       if (user) {
         req.flash('error', { msg: 'There is already an existing account linked with Facebook that belongs to you.' });
-        console.error('fb auth error: ', profile.id, ' is already associated with another account.')
+        log.error('fb auth error: ', profile.id, ' is already associated with another account.')
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
@@ -68,7 +71,7 @@ passport.use(new FacebookStrategy({
       User.findOne({ email: profile._json.email }, function(err, user) {
         if (user) {
           req.flash('error', { msg: user.email + ' is already associated with another account.' });
-          console.error('fb auth error: ', user.email, ' is already associated with another account.')
+          log.error('fb auth error: ', user.email, ' is already associated with another account.')
           done(err);
         } else {
           var newUser = new User({

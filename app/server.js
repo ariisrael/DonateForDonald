@@ -3,6 +3,9 @@
 * utilities can be imported by the worker without starting the server
 **/
 
+const createLogger = require('logging').default;
+const log = createLogger('app/server');
+
 var app = require('./app')
 
 // import the config

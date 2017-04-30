@@ -2,6 +2,9 @@ const models = require('../models');
 const Trigger = models.Trigger;
 const Charity = models.Charity;
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/triggers');
+
 module.exports = {
     index: (req, res) => {
         var query = req.locals.query

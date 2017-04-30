@@ -8,6 +8,9 @@ const Trigger = models.Trigger;
 const Charity = models.Charity;
 const Donation = models.Donation;
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/pages');
+
 
 exports.landing = function(req, res) {
   res.render('landing', {
@@ -54,7 +57,6 @@ exports.terms = function(req, res) {
 }
 
 exports.donations = function(req, res) {
-  console.log(req.user.id)
   Donation.aggregate([{
       $match: {
         userId: req.user._id
@@ -67,7 +69,7 @@ exports.donations = function(req, res) {
     }])
     .exec((err, result) => {
       if (err) {
-        console.error('donations query error: ', err)
+        log.error('donations query error: ', err)
       }
       if (!result || !result.length) {
         return res.render('donations', {
@@ -141,7 +143,7 @@ exports.triggers = function(req, res) {
     userId: req.user.id
   }).populate('charityId').exec((err, triggers) => {
       if (err) {
-        console.error(err);
+        log.error(err);
       }
       if (triggers && triggers.length) {
         triggers = triggers.reverse();

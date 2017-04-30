@@ -10,6 +10,9 @@ const forgotEmail = emailUtils.forgotEmail
 const changedEmail = emailUtils.changedEmail
 const confirmEmail = require('../utils/email').confirmEmail
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/users');
+
 var mode = 'test'
 if (process.env.NODE_ENV === 'production') {
   mode = 'live' // If in production set mode to live
@@ -19,14 +22,14 @@ const User = models.User;
 
 exports.index = (req, res) => {
   User.find({}, (err, users) => {
-    if(err) return console.error(err);
+    if(err) return log.error(err);
     res.json(users);
   });
 }
 
 exports.read = (req, res) => {
   User.findById(req.params.id, (err, user) => {
-    if(err) return console.error(err);
+    if(err) return log.error(err);
     res.json(user);
   });
 }
@@ -35,7 +38,7 @@ exports.update = (req, res) => {
   var id = req.params.id;
   var query = { _id: id };
   User.update(query, req.body, {}, (err, num) => {
-    if(err) return console.error(err);
+    if(err) return log.error(err);
     res.json(num);
   });
 }
@@ -54,7 +57,7 @@ exports.updatePayment = (req, res) => {
       pandaUser: body,
       paymentToken: req.body.paymentToken
     }, {}, (err, num) => {
-      if(err) return console.error(err);
+      if(err) return log.error(err);
       res.json(num);
     })
 
@@ -127,7 +130,7 @@ exports.loginPost = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    console.log(errors);
+    log.info(errors);
     return res.redirect('/login');
   }
 
@@ -142,7 +145,7 @@ exports.loginPost = function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
-      console.log(user);
+      log.info(user);
       if (req.query && req.query.redirect) {
         if (req.query.redirect === 'create') {
           var redirectPath = ''
@@ -157,7 +160,7 @@ exports.loginPost = function(req, res, next) {
                   }
                   if (err) {
                       response.error = err
-                      console.error(err);
+                      log.error(err);
                   }
                   req.session.sessionTrigger = undefined
                   return res.redirect('/triggers?login=true&created=true')
@@ -206,7 +209,7 @@ exports.signupPost = function(req, res, next) {
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
-  console.log(errors);
+  log.info(errors);
 
   if (errors) {
     req.flash('error', errors);
@@ -290,7 +293,7 @@ exports.accountPut = function(req, res, next) {
   var errors = req.validationErrors();
 
   if (errors) {
-    console.error(errors)
+    log.error(errors)
     req.flash('error', errors);
     return res.redirect('/settings');
   }
@@ -317,7 +320,7 @@ exports.accountPut = function(req, res, next) {
       } else {
         req.flash('success', { msg: 'Your profile information has been updated.' });
       }
-      console.error('error updating user: ', err)
+      log.error('error updating user: ', err)
       res.redirect('/settings');
     });
   });
@@ -345,16 +348,16 @@ exports.destroy = function(req, res, next) {
 exports.triggers = {
   index: (req, res) => {
     User.findOne({ _id: req.params.id }, 'triggers', (err, user) => {
-      if(err) return console.error(err);
+      if(err) return log.error(err);
       res.json(user.triggers);
     });
   },
   create: (req, res) => {
     User.findById({ _id: req.params.id }, (err, user) => {
-      if(err) return console.error(err);
+      if(err) return log.error(err);
       user.triggers.push(req.body);
       user.save((err) => {
-        if(err) return console.error(err);
+        if(err) return log.error(err);
       });
     });
   },
@@ -376,20 +379,20 @@ exports.triggers = {
       }
       user.triggers.push(newObj);
       user.save((err) => {
-        if(err) return console.error(err);
+        if(err) return log.error(err);
       });
     });
   },
   destroy: (req, res) => {
     User.findById(req.params.userId, (err, user) => {
-      if(err) return console.error(err);
+      if(err) return log.error(err);
       user.triggers.filter((t) => {
         if(t.triggerId === req.params.triggerId) {
           return false;
         }
       });
       user.save((err) => {
-        if(err) console.error(err);
+        if(err) log.error(err);
       })
     });
   },
@@ -480,7 +483,7 @@ exports.forgotPost = function(req, res, next) {
     },
     function(token, user, done) {
       forgotEmail(user.name || user.email, user.email, user.passwordResetToken, function(err, data) {
-        if (err) console.error(err)
+        if (err) log.error(err)
         res.redirect('/forgot?email=' + user.email)
       })
     }
@@ -547,7 +550,7 @@ exports.resetPost = function(req, res, next) {
     },
     function(user, done) {
       changedEmail(user.name || user.email, user.email, function(err, data) {
-        if (err) console.log(err)
+        if (err) log.info(err)
         res.redirect('/settings')
       })
     }

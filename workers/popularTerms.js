@@ -2,6 +2,9 @@ var _ = require('lodash')
 var popularTerms = require('../utils/popular').getPopularTerms
 var PopularTerm = require('../models/term')
 
+const createLogger = require('logging').default;
+const log = createLogger('popularTerms');
+
 function findPopularTerms(options, cb) {
   if (!cb) cb = function(){}
   var opts = {count: 1000}
@@ -20,7 +23,7 @@ function findPopularTerms(options, cb) {
         }
         PopularTerm.findOne(query, function(err, term) {
           if (err) {
-            console.error('error finding terms: ', err)
+            log.error('error finding terms: ', err)
           }
           if (!term) {
             if (t.constructor === String) {
@@ -37,7 +40,7 @@ function findPopularTerms(options, cb) {
           }
           term.save((err, term) => {
             if (err) {
-              console.error('error saving term: ', err)
+              log.error('error saving term: ', err)
             }
           })
         })

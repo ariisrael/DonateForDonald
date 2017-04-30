@@ -2,6 +2,9 @@ const models = require('../models');
 const Trigger = models.Trigger;
 const User = models.User;
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/social');
+
 exports.enableTrigger = function(req, res) {
   Trigger.findOne({
     userId: req.user.id,
