@@ -10,7 +10,7 @@ module.exports = {
         var query = req.locals.query
         Trigger.find(params, (err, triggers) => {
             if (err)
-                return console.error(err);
+                return log.error(err);
             res.json(triggers);
         });
     },
@@ -19,7 +19,7 @@ module.exports = {
         query.id = req.params.id
         Trigger.findOne(params, (err, trigger) => {
             if (err)
-                return console.error(err);
+                return log.error(err);
             res.json(trigger);
         });
     },
@@ -32,7 +32,7 @@ module.exports = {
             }
             if (err) {
                 response.error = err
-                console.error(err);
+                log.error(err);
             }
             res.json(response)
         });
@@ -70,7 +70,7 @@ module.exports = {
                 }
                 if (err) {
                     response.error = err
-                    console.error(err);
+                    log.error(err);
                     res.json(response)
                 }
                 Charity
@@ -79,7 +79,7 @@ module.exports = {
                   .exec((err, charity) => {
                     if (err) {
                         response.error = err
-                        console.error(err);
+                        log.error(err);
                         res.json(response)
                     }
                     response.charity = charity
@@ -94,7 +94,7 @@ module.exports = {
       query.userId = req.user.id
       Trigger.find(query).remove().exec((err, trigger) => {
         if (err) {
-          return console.error(err);
+          return log.error(err);
         }
         res.json(trigger);
       })
