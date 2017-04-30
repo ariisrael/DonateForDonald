@@ -30,9 +30,9 @@ function seedUsers() {
   for (var i = 0; i < numberToCreate; i++) {
     array.push(i)
   }
-  var users = []
+  var users = {}
 
-  async.eachSeries(array, function(item, next) {
+  async.each(array, function(item, next) {
     var name = faker.name.findName();
     var email = faker.internet.email();
     var user = new User({
@@ -51,7 +51,7 @@ function seedUsers() {
       if (err) {
         console.log("error: ", err)
       } else {
-        users.push(user)
+        users[user._id] = user
       }
       next()
     })
@@ -65,13 +65,12 @@ function testTriggers(users) {
   Term
     .find()
     .limit(numberToCreate)
-    .sort({'createdAt': -1})
     .exec((err, terms) => {
       if (err) {
         return console.log(err)
       } else {
         async.eachSeries(users, function(user, nextUser) {
-          async.eachSeries(terms, function(term, nextTerm) {
+          async.each(terms, function(term, nextTerm) {
             var trigger = new Trigger({
               charityId: ACLU,
               userId: user.id,

@@ -19,25 +19,26 @@ db.once('open', function() {
   User.find({
     testUser: true
   }, (err, users) => {
-    users.forEach((user) => {
+    async.each(users, (user, next) => {
       Trigger.remove({
         userId: user.id || user._id
       }, (err) => {
         if (err) console.log(err)
+        next()
       })
-    })
-
-    console.log('removed all triggers')
-
-    User.remove({
-      testUser: true
     }, (err) => {
-      if (err) {
-        console.log("error: ", err)
-      } else {
-        console.log('removed!')
-      }
+      console.log('removed all triggers')
+      User.remove({
+        testUser: true
+      }, (err) => {
+        if (err) {
+          console.log("error: ", err)
+        } else {
+          console.log('removed!')
+        }
+        process.exit(0)
+      })
+
     })
   })
-
 })
