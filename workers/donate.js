@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 function donationRequest(user, trigger, tweet, donation, testing, cb) {
   // If the user does not have a payment token and it's not a test user,
   // do not go through this dance
-  if (!user.paymenttoken && !user.testUser) {
+  if (!user.paymentToken && !user.testUser) {
     cb()
     return
   }
