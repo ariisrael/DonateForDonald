@@ -15,6 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var mongoose = require('./mongo')
 var twitter = require('./twitter')
+var rabbit = require('./rabbit')
 var EventEmitter = require('events')
 var workerEmitter = new EventEmitter();
 
