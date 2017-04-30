@@ -49,7 +49,7 @@ function getUsers(tweet, testing) {
           user.aggregateDonations = aggregateDonations[user._id].amount
         }
         usersBucket.push(user)
-        if (usersBucket.length == 5) {
+        if (usersBucket.length == 10) {
           processUsers(tweet, testing, usersBucket, (err) => {
             usersBucket = []
             nextUser()
@@ -70,7 +70,7 @@ function getUsers(tweet, testing) {
 }
 
 function processUsers(tweet, testing, users, usersCallback) {
-  async.eachSeries(users, (user, nextUser) => {
+  async.each(users, (user, nextUser) => {
     processUser(tweet, testing, user, (err) => {
       nextUser()
     })
