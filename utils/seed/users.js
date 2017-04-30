@@ -64,7 +64,7 @@ function seedUsers() {
 function testTriggers(users) {
   Term
     .find()
-    .limit(numberToCreate)
+    .limit(100)
     .exec((err, terms) => {
       if (err) {
         return console.log(err)
