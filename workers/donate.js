@@ -35,6 +35,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 
   if (testing) {
     mode = 'test'
+    body.receipt_email = "gmeypop+pandapaytesting2@gmail.com"
   }
 
   var pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/donations';
