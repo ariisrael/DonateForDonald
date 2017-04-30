@@ -16,6 +16,7 @@ const User = models.User
 const createLogger = require('logging').default;
 const log = createLogger('twitterStream');
 
+var Timer = require('timer-machine')
 
 // Create new stream filtering statuses by user (including retweets, replies)
 var stream = T.stream('statuses/filter', { follow: [TRUMP_USER_ID, GOP_CLUSTER_FUCK_ID] });
@@ -23,6 +24,7 @@ var stream = T.stream('statuses/filter', { follow: [TRUMP_USER_ID, GOP_CLUSTER_F
 // Connect to Twitter API and start streaming
 stream.on('tweet', function (tweet) {
   // Only parse tweets from @realDonaldTrump
+  Timer.get(tweet.id_str).start()
   if (tweet.user.id == TRUMP_USER_ID) {
     log.info("new tweet: ", getFullText(tweet))
     log.info("matches trump!")
@@ -31,6 +33,8 @@ stream.on('tweet', function (tweet) {
     log.info("new tweet: ", getFullText(tweet))
     log.info("matches GOPClusterFuck!")
     prepareTweet(tweet, true)
+  } else {
+    Timer.destroy(tweet.id_str)
   }
 });
 
@@ -97,43 +101,69 @@ function analyzeTweet(tweet, testing) {
     .exec((err, users) => {
       log.info('grabbed users')
       log.debug('grabbed ' + users.length + ' users')
+      var usersBucket = [];
+
       async.eachSeries(users, (user, nextUser) => {
-        if (!user.paymenttoken && !user.testUser) {
-          return nextUser()
-        }
-        if (user.monthlyLimit) {
-          Donation.aggregate([{
-              $match: {
-                createdAt: { $gte: firstDayOfMonth },
-                userId: user._id
-              }
-            }, {
-              $group: {
-                _id: "total",
-                amount: { $sum: "$amount" }
-              }
-            }], (err, result) => {
-            if (result[0].amount < user.monthlyLimit) {
-              checkUserTriggers(user, tweet, testing, function() {
-                log.debug('user has under the monthly limit')
-                nextUser()
-              })
-            }
-          })
-        } else {
-          checkUserTriggers(user, tweet, testing, function() {
-            log.debug('user has no monthly limit')
+
+        usersBucket.push(user)
+        if (usersBucket.length == 5) {
+          processUsers(tweet, testing, usersBucket, (err) => {
+            usersBucket = []
             nextUser()
           })
+        } else {
+          nextUser()
         }
+
       }, (err) => {
         log.info('finished with all users')
+        Timer.get(tweet.id).stop()
+        var seconds = (Timer.get(tweet.id).time()/1000)%60
+        Timer.destroy(tweet.id)
+        log.info('processing all users took: ', seconds, ' seconds')
         log.info('===================================')
       })
+
+
   })
   if (!testing) {
     popularTerms()
   }
+}
+
+function processUsers(tweet, testing, users, bucketCallback) {
+  async.each(users, (user, nextUser) => {
+    if (!user.paymenttoken && !user.testUser) {
+      return nextUser()
+    }
+    if (user.monthlyLimit) {
+      Donation.aggregate([{
+          $match: {
+            createdAt: { $gte: firstDayOfMonth },
+            userId: user._id
+          }
+        }, {
+          $group: {
+            _id: "total",
+            amount: { $sum: "$amount" }
+          }
+        }], (err, result) => {
+        if (result[0].amount < user.monthlyLimit) {
+          checkUserTriggers(user, tweet, testing, function() {
+            log.debug('user has under the monthly limit')
+            nextUser()
+          })
+        }
+      })
+    } else {
+      checkUserTriggers(user, tweet, testing, function() {
+        log.debug('user has no monthly limit')
+        nextUser()
+      })
+    }
+  }, (err) => {
+    bucketCallback()
+  })
 }
 
 function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
@@ -153,7 +183,7 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
     }
     log.info('grabbed triggers')
 
-    async.each(triggers, (trigger, triggerFinishedCallback) => {
+    async.eachSeries(triggers, (trigger, triggerFinishedCallback) => {
       var keyword = escapeRegExp(trigger.name)
       var re = new RegExp(keyword)
       // check if there's a match
