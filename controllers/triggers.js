@@ -1,6 +1,7 @@
 const models = require('../models');
 const Trigger = models.Trigger;
 const Charity = models.Charity;
+const Term = models.Term;
 
 const createLogger = require('logging').default;
 const log = createLogger('controllers/triggers');
@@ -34,7 +35,21 @@ module.exports = {
                 response.error = err
                 log.error(err);
             }
-            res.json(response)
+            Term.findOne({term: trigger.name}, (err, term) => {
+              if (!term) {
+                var newTerm = new Term({
+                  term: trigger.name
+                })
+                newTerm.save((err) => {
+                  if (err) {
+                    log.error('error saving new term: ', newTerm, 'on trigger create: ', err)
+                  }
+                  res.json(response)
+                })
+              } else {
+                res.json(response)
+              }
+            })
         });
     },
     update: (req, res) => {
