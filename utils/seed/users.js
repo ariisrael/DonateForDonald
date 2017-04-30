@@ -40,7 +40,8 @@ function seedUsers() {
       email: email,
       password: testPassword,
       emailConfirmed: true,
-      testUser: true
+      testUser: true,
+      pandaUserId: 'cus_bhyenD7ShQkNEWUyE69imw' // fake user account
     })
 
     if (item % 2 == 0) {
