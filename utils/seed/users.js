@@ -16,13 +16,18 @@ const Term = models.Term
 const config = require('../../config/worker')
 const db = config.db
 
+var numberToCreate = 100;
+if (process.env.NUMBER_TO_CREATE) {
+  numberToCreate = process.env.NUMBER_TO_CREATE
+}
+
 db.once('open', function() {
   seedUsers()
 })
 
 function seedUsers() {
   var array = []
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < numberToCreate; i++) {
     array.push(i)
   }
   var users = []
@@ -39,7 +44,7 @@ function seedUsers() {
     })
 
     if (item % 2 == 0) {
-      user.monthlyLimit = 100
+      user.monthlyLimit = numberToCreate
     }
 
     user.save((err) => {
@@ -59,7 +64,8 @@ function seedUsers() {
 function testTriggers(users) {
   Term
     .find()
-    .limit(100)
+    .limit(numberToCreate)
+    .sort({'createdAt': -1})
     .exec((err, terms) => {
       if (err) {
         return console.log(err)
