@@ -38,6 +38,10 @@ function seedUsers() {
       testUser: true
     })
 
+    if (item % 2 == 0) {
+      user.monthlyLimit = 100
+    }
+
     user.save((err) => {
       if (err) {
         console.log("error: ", err)

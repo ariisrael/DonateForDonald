@@ -37,21 +37,22 @@ const UserSchema = new Schema({
   paymentToken: String,
   billDate: Date,
   notification: Boolean,
+  aggregateDonations: Number,
   // test users are the ones who are going to be used for our testing purposes
   // since we're using a different twitter to test them from, one that we can trigger whenever,
   // we don't ever want them to be confused with real users
   testUser: { type: Boolean, default: false }
 }, { toJSON: { virtuals: true } });
 
+UserSchema.pre('update', function(next) {
+  this.aggregateDonations = undefined
+  this.hashPassword(next)
+  return true;
+});
+
 UserSchema.pre('save', function(next) {
-  var user = this;
-  if (!user.isModified('password')) { return next(); }
-  bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
-      user.password = hash;
-      next();
-    });
-  });
+  this.aggregateDonations = undefined
+  this.hashPassword(next)
   return true;
 });
 
@@ -76,6 +77,17 @@ UserSchema.pre('save', function(next) {
   });
   return true
 });
+
+UserSchema.methods.hashPassword = function(cb) {
+  var user = this;
+  if (!user.isModified('password')) { return cb(); }
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
+      user.password = hash;
+      cb();
+    });
+  });
+};
 
 UserSchema.methods.comparePassword = function(password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => cb(err, isMatch));
