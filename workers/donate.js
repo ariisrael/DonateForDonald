@@ -28,7 +28,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     platform_fee: PANDAPAY.fee,
     amount: (trigger.amount * 100).toString(),
     currency: PANDAPAY.currency,
-    destination: trigger.ein,
+    destination: trigger.charityId._id,
     receipt_email: user.email
   }
   log.info('body: ', body)
