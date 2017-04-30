@@ -37,6 +37,10 @@ function getUsers(tweet, testing) {
   if (testing) {
     // if it's a test tweet, only analyze the test users
     userQuery.testUser = true
+  } else {
+    userQuery.testUser = {
+      "$ne": true
+    }
   }
 
   User.find(userQuery).exec((err, users) => {
