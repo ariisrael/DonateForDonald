@@ -12,6 +12,7 @@ const confirmEmail = require('../utils/email').confirmEmail
 
 const createLogger = require('logging').default;
 const log = createLogger('controllers/users');
+const PANDAPAY = require('../config/pandapay');
 
 var mode = 'test'
 if (process.env.NODE_ENV === 'production') {
