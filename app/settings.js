@@ -33,6 +33,9 @@ const handlebars = exphbs.create({
     toJSON: function(object) {
       return JSON.stringify(object);
     },
+    toJSONPretty: function(object) {
+      return JSON.stringify(object, null, '  ');
+    },
     if_not: function(a, options) {
       if (!a) {
         return options.fn(this)

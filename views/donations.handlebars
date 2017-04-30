@@ -17,7 +17,7 @@
     <div class=" ui charity horizontal statistic">
       <div class="header trigger-title">
         {{this.charity.name}}
-        </div>
+      </div>
     </div>
 
     <div class=" ui horizontal statistic">
@@ -27,8 +27,13 @@
       </div>
     </div>
   </div>
-
   {{/each}}
+  {{#each tweets}}
+  <pre>
+    {{toJSONPretty this}}
+  </pre>
+  {{/each}}
+
   </div>
 </div>
 </div>

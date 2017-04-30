@@ -93,10 +93,28 @@ exports.donations = function(req, res) {
             charitiesResult[charity._id].charity = charity
           })
         }
-        res.render('donations', {
-          title: 'donations',
-          donations: charitiesResult
-        });
+        Donation.find({
+          userId: req.user._id
+        })
+        .populate('triggerId charityId tweetId')
+        .exec((err, donations) => {
+
+          var tweets = {}
+          donations.forEach((donation) => {
+            if (tweets[donation.tweetId._id]) {
+              tweets[donation.tweetId._id].triggers.push(donation.triggerId)
+            } else {
+              tweets[donation.tweetId._id] = donation.tweetId.toJSON()
+              tweets[donation.tweetId._id].triggers = [donation.triggerId]
+            }
+          })
+
+          res.render('donations', {
+            title: 'donations',
+            donations: charitiesResult,
+            tweets: tweets
+          });
+        })
       })
 
     })
