@@ -65,8 +65,8 @@ function getUsers(tweet, testing) {
         log.info('finished with all users')
         Timer.get(tweet.id).stop()
         var seconds = (Timer.get(tweet.id).time()/1000)%60
+        log.info('processing all users took: ', Timer.get(tweet.id).time(), ' ms', ' or ', seconds, ' seconds')
         Timer.destroy(tweet.id)
-        log.info('processing all users took: ', seconds, ' seconds')
         log.info('===================================')
       })
     })
