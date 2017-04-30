@@ -58,10 +58,12 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
         return;
       }
       if (err) {
-        paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
+        log.error('A donation failed to save: ', err)
+      }
+      if (!donation.paid) {
+        return paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
           cb()
         })
-        return log.error('A payment failed: ', err)
       }
       if (trigger.social) {
         var userName = user.name || user.email
