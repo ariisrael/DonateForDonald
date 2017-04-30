@@ -100,6 +100,7 @@ function testTriggers(users) {
           })
         }, (err, result) => {
           console.log('finished')
+          process.exit(0)
         })
       }
     })
