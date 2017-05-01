@@ -19,13 +19,22 @@ const db = config.db
 const terms = require('./data/popularTerms')
 
 db.once('open', function() {
-  terms.forEach((term) => {
-    Term.create({
-      term: term
-    }, (err) => {
-      if (err) console.log(err)
+  async.each(terms, (term, done) => {
+    Term.findOne({term: term}, (err, t) => {
+      if (!t) {
+        Term.create({
+          term: term
+        }, (err) => {
+          if (err) console.log(err)
+          done()
+        })
+      } else {
+        done()
+      }
     })
+  }, (err) => {
+    console.log('done')
+    process.exit(0)
   })
-  console.log('done')
 
 })

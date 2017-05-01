@@ -168,5 +168,8 @@ module.exports = [
   "healthcare",
   "#Economy",
   "false",
-  "allowed"
+  "allowed",
+  "jobs",
+  "jobs, jobs, jobs",
+  "test"
 ]
