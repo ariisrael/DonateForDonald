@@ -4,6 +4,9 @@ const crypto = require('crypto');
 const welcomeEmail = require('../utils/email').welcomeEmail
 const uniqueValidator = require('mongoose-unique-validator');
 
+const createLogger = require('logging').default;
+const log = createLogger('controllers/charities');
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -41,18 +44,20 @@ const UserSchema = new Schema({
   // test users are the ones who are going to be used for our testing purposes
   // since we're using a different twitter to test them from, one that we can trigger whenever,
   // we don't ever want them to be confused with real users
-  testUser: { type: Boolean, default: false }
+  testUser: { type: Boolean, default: false },
+  bucket: Number
 }, { toJSON: { virtuals: true } });
-
-UserSchema.pre('update', function(next) {
-  this.aggregateDonations = undefined
-  this.hashPassword(next)
-  return true;
-});
 
 UserSchema.pre('save', function(next) {
   this.aggregateDonations = undefined
-  this.hashPassword(next)
+  var user = this
+  if (!user.isModified('password')) { return next(); }
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
+      user.password = hash;
+      next();
+    });
+  });
   return true;
 });
 
@@ -78,15 +83,8 @@ UserSchema.pre('save', function(next) {
   return true
 });
 
-UserSchema.methods.hashPassword = function(cb) {
-  var user = this;
-  if (!user.isModified('password')) { return cb(); }
-  bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(user.password, salt, null, (err, hash) => { // eslint-disable-line no-shadow
-      user.password = hash;
-      cb();
-    });
-  });
+var hashPassword = function(user, cb) {
+
 };
 
 UserSchema.methods.comparePassword = function(password, cb) {

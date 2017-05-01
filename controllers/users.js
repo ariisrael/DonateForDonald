@@ -39,10 +39,30 @@ exports.read = (req, res) => {
 exports.update = (req, res) => {
   var id = req.params.id;
   var query = { _id: id };
-  User.update(query, req.body, {}, (err, num) => {
-    if(err) return log.error(err);
-    res.json(num);
-  });
+  if (req.body.password) {
+    User.findOne(query, (err, user) => {
+      if (user) {
+        for(key in req.body) {
+          user[key] = req.body[key];
+        }
+        user.save((err) => {
+          var response = {user: user}
+          if (err) {
+            response.error = err
+          }
+          res.json(response)
+        })
+      } else {
+        res.json({err: err})
+      }
+    })
+
+  } else {
+    User.update(query, req.body, {}, (err, num) => {
+      if(err) return log.error(err);
+      res.json(num);
+    });
+  }
 }
 
 exports.updatePayment = (req, res) => {
