@@ -147,7 +147,6 @@ exports.loginPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
@@ -228,7 +227,6 @@ exports.signupPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
   log.info(errors);
@@ -301,6 +299,7 @@ exports.accountGet = function(req, res) {
  * Update profile information OR change password.
  */
 exports.accountPut = function(req, res, next) {
+  log.info(req.body)
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
@@ -308,7 +307,6 @@ exports.accountPut = function(req, res, next) {
   if (req.body.email) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
     req.assert('email', 'Emails must match').equals(req.body.confirm_email);
   }
 
@@ -342,7 +340,9 @@ exports.accountPut = function(req, res, next) {
       } else {
         req.flash('success', { msg: 'Your profile information has been updated.' });
       }
-      log.error('error updating user: ', err)
+      if (err) {
+        log.error('error updating user: ', err)
+      }
       res.redirect('/settings');
     });
   });
@@ -474,7 +474,6 @@ exports.forgotGet = function(req, res) {
 exports.forgotPost = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
   var errors = req.validationErrors();
 
