@@ -36,35 +36,6 @@ exports.read = (req, res) => {
   });
 }
 
-exports.update = (req, res) => {
-  var id = req.params.id;
-  var query = { _id: id };
-  if (req.body.password) {
-    User.findOne(query, (err, user) => {
-      if (user) {
-        for(key in req.body) {
-          user[key] = req.body[key];
-        }
-        user.save((err) => {
-          var response = {user: user}
-          if (err) {
-            response.error = err
-          }
-          res.json(response)
-        })
-      } else {
-        res.json({err: err})
-      }
-    })
-
-  } else {
-    User.update(query, req.body, {}, (err, num) => {
-      if(err) return log.error(err);
-      res.json(num);
-    });
-  }
-}
-
 exports.updatePayment = (req, res) => {
   var pandapayURL = 'https://' + PANDAPAY[mode].private + '@api.pandapay.io/v1/customers';
   var body = {
@@ -299,7 +270,6 @@ exports.accountGet = function(req, res) {
  * Update profile information OR change password.
  */
 exports.accountPut = function(req, res, next) {
-  log.info(req.body)
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
@@ -315,13 +285,21 @@ exports.accountPut = function(req, res, next) {
   if (errors) {
     log.error(errors)
     req.flash('error', errors);
-    return res.redirect('/settings');
+    if (res.locals.returnJSON) {
+      return res.json({errors: errors})
+    } else {
+      return res.redirect('/settings');
+    }
   }
 
   User.findOne({ email: req.user.email }, function(err, user) {
     if (err) {
       req.flash('error', ['Something went wrong, please try again']);
-      res.redirect('/settings')
+      if (res.locals.returnJSON) {
+        return res.json({errors: err})
+      } else {
+        return res.redirect('/settings');
+      }
     }
     if ('password' in req.body) {
       user.password = req.body.password;
@@ -332,18 +310,31 @@ exports.accountPut = function(req, res, next) {
     if (req.body.email) {
       user.email = req.body.email
     }
+    for(key in req.body) {
+      if (key === 'email' || key === 'name' || key === 'password') {
+        continue;
+      }
+      user[key] = req.body[key];
+    }
     user.save(function(err) {
+      var response = {}
       if ('password' in req.body) {
         req.flash('success', { msg: 'Your password has been changed.' });
       } else if (err && err.code === 11000) {
+        response.error = 'The email address you have entered is already associated with another account.'
         req.flash('error', { msg: 'The email address you have entered is already associated with another account.' });
       } else {
+        response.user = user
         req.flash('success', { msg: 'Your profile information has been updated.' });
       }
       if (err) {
         log.error('error updating user: ', err)
       }
-      res.redirect('/settings');
+      if (res.locals.returnJSON) {
+        return res.json(response)
+      } else {
+        return res.redirect('/settings');
+      }
     });
   });
 };

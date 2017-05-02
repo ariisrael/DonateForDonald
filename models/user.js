@@ -96,6 +96,14 @@ UserSchema.options.toJSON = {
     delete ret.password; // eslint-disable-line no-param-reassign
     delete ret.passwordResetToken; // eslint-disable-line no-param-reassign
     delete ret.passwordResetExpires; // eslint-disable-line no-param-reassign
+    delete ret.pandaUser; // eslint-disable-line no-param-reassign
+    delete ret.twitterCreds; // eslint-disable-line no-param-reassign
+    if (!ret.admin) {
+      delete ret.admin; // eslint-disable-line no-param-reassign
+    }
+    if (!ret.testUser) {
+      delete ret.testUser; // eslint-disable-line no-param-reassign
+    }
   },
 };
 

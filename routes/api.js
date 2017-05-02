@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = require('../app');
 const controllers = require('../controllers');
+const middleware = require('./utilMiddleware')
 
 const TriggerController = controllers.triggers;
 const UserController = controllers.users;
@@ -16,6 +17,7 @@ const ADMIN_ONLY = UserController.ensureAdmin;
 const USER_ONLY = UserController.ensureAuthorized;
 const LOGIN_ONLY = UserController.ensureAuthenticated;
 const USER_QUERY = UserController.userQuery
+const returnJSON = middleware.returnJSON
 
 const bodyParser = require('body-parser');
 // all of these should be json decoded, so load json body parser here
@@ -44,7 +46,7 @@ api.post('/social/disable/:id', LOGIN_ONLY, SocialController.disableTrigger)
 
 api.put('/triggers/:id', LOGIN_ONLY, TriggerController.update);
 api.put('/users/card/:id', USER_ONLY, UserController.updatePayment);
-api.put('/users/:id', USER_ONLY, UserController.update);
+api.put('/users/:id', USER_ONLY, returnJSON, UserController.accountPut);
 
 api.post('/resend-confirmation-email', LOGIN_ONLY, UserController.sendConfirmationEmail)
 
