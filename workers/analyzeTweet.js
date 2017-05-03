@@ -48,12 +48,12 @@ function getUsers(tweet, testing) {
     log.info('grabbed ' + users.length + ' users')
     var usersBucket = [];
     getAggregateDonations((err, aggregateDonations) => {
-      async.eachSeries(users, (user, nextUser) => {
+      async.eachOfSeries(users, (user, idx, nextUser) => {
         if (aggregateDonations[user._id] && aggregateDonations[user._id].amount) {
           user.aggregateDonations = aggregateDonations[user._id].amount
         }
         usersBucket.push(user)
-        if (usersBucket.length == 10) {
+        if (usersBucket.length == 10 || idx == (users.length - 1)) {
           processUsers(tweet, testing, usersBucket, (err) => {
             usersBucket = []
             nextUser()
