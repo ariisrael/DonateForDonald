@@ -46,9 +46,9 @@ function prepareTweet(tweet, testing) {
 
 function saveTweet(tweet, testing) {
   var t = new Tweet(tweet)
-  log.debug("saving tweet: ", JSON.stringify(t))
+  log.info("saving tweet: ", JSON.stringify(t))
   t.save((err) => {
-    log.debug("saved tweet: ", JSON.stringify(t))
+    log.info("saved tweet: ", JSON.stringify(t))
     if (err) {
       log.warn('error saving tweet: ', err)
     }

@@ -45,7 +45,7 @@ function getUsers(tweet, testing) {
 
   User.find(userQuery).exec((err, users) => {
     log.info('grabbed users')
-    log.debug('grabbed ' + users.length + ' users')
+    log.info('grabbed ' + users.length + ' users')
     var usersBucket = [];
     getAggregateDonations((err, aggregateDonations) => {
       async.eachSeries(users, (user, nextUser) => {
@@ -90,7 +90,7 @@ function processUser(tweet, testing, user, nextUser) {
   if (user.monthlyLimit) {
     if (user.aggregateDonations < user.monthlyLimit) {
       checkUserTriggers(user, tweet, testing, function() {
-        log.debug('user has under the monthly limit')
+        log.info('user has under the monthly limit')
         nextUser()
       })
     } else {
@@ -98,7 +98,7 @@ function processUser(tweet, testing, user, nextUser) {
     }
   } else {
     checkUserTriggers(user, tweet, testing, function() {
-      log.debug('user has no monthly limit')
+      log.info('user has no monthly limit')
       nextUser()
     })
   }
