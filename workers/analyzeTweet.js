@@ -71,6 +71,7 @@ function getUsers(tweet, testing) {
         Timer.destroy(tweet.id)
         log.info('===================================')
         workerEmitter.emit('doneProcessing')
+        app.set('workerProcessing', false)
       })
     })
   })
