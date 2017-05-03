@@ -5,6 +5,7 @@ const TRUMP_USER_ID = '25073877'; // User ID for @realDonaldTrump
 const GOP_CLUSTER_FUCK_ID = '3388526333'; // User ID for @GOPClusterFuck
 const models = require('../models')
 const Tweet = models.Tweet
+const app = require('../app')
 
 const createLogger = require('logging').default;
 const log = createLogger('twitterStream');
@@ -20,10 +21,12 @@ stream.on('tweet', (tweet) => {
   // Only parse tweets from @realDonaldTrump
   Timer.get(tweet.id_str).start()
   if (tweet.user.id == TRUMP_USER_ID) {
+    app.set('workerProcessing', true)
     log.info("new tweet: ", getFullText(tweet))
     log.info("matches trump!")
     prepareTweet(tweet)
   } else if (tweet.user.id == GOP_CLUSTER_FUCK_ID) {
+    app.set('workerProcessing', true)
     log.info("new tweet: ", getFullText(tweet))
     log.info("matches GOPClusterFuck!")
     prepareTweet(tweet, true)

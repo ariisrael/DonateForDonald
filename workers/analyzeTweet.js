@@ -8,6 +8,7 @@ const Tweet = models.Tweet
 const Trigger = models.Trigger
 const Donation = models.Donation
 const User = models.User
+const workerEmitter = require('./workerEmitter')
 
 const createLogger = require('logging').default;
 const log = createLogger('processUsers');
@@ -69,6 +70,7 @@ function getUsers(tweet, testing) {
         log.info('processing all users took: ', Timer.get(tweet.id).time(), ' ms', ' or ', seconds, ' seconds')
         Timer.destroy(tweet.id)
         log.info('===================================')
+        workerEmitter.emit('doneProcessing')
       })
     })
   })
