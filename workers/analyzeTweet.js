@@ -54,6 +54,7 @@ function getUsers(tweet, testing) {
         }
         usersBucket.push(user)
         if (usersBucket.length == 10 || idx == (users.length - 1)) {
+          log.info('processing bucket with ', usersBucket.length, ' users at index ', idx)
           processUsers(tweet, testing, usersBucket, (err) => {
             usersBucket = []
             nextUser()
