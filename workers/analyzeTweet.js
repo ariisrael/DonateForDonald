@@ -82,6 +82,7 @@ function getUsers(tweet, testing) {
 function processUsers(tweet, testing, users, usersCallback) {
   async.each(users, (user, nextUser) => {
     processUser(tweet, testing, user, (err) => {
+      log.info('finished with user: ', user.name || user.email)
       nextUser()
     })
   }, (err) => {
@@ -90,7 +91,7 @@ function processUsers(tweet, testing, users, usersCallback) {
 }
 
 function processUser(tweet, testing, user, nextUser) {
-  if (!user.paymenttoken && !user.testUser) {
+  if (!user.pandaUserId && !user.testUser) {
     return nextUser()
   }
   if (user.monthlyLimit) {
