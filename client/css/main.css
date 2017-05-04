@@ -465,7 +465,10 @@ nav {
   margin-top: 5%;
 }
 
+
+
 @media only screen and (max-width: 500px) {
+
     .js-trigger-item {
         border: none !important;
     }
@@ -563,6 +566,10 @@ nav {
     }
 }
 @media only screen and (max-width: 800px) {
+
+		#clockdiv {
+			display: none !important;
+		}
     .tweet-drawer {
         z-index: 999 !important;
         width: 100% !important;
