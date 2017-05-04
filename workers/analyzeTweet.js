@@ -13,6 +13,8 @@ const workerEmitter = require('./workerEmitter')
 const createLogger = require('logging').default;
 const log = createLogger('processUsers');
 
+const app = require('../app')
+
 var Timer = require('timer-machine')
 
 var firstDayOfMonth = function() {
