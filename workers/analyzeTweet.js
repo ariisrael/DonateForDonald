@@ -92,12 +92,13 @@ function processUsers(tweet, testing, users, usersCallback) {
 
 function processUser(tweet, testing, user, nextUser) {
   if (!user.pandaUserId && !user.testUser) {
+    log.info('user ', user.name || user.email, ' does not have a panda user id')
     return nextUser()
   }
   if (user.monthlyLimit) {
     if (user.aggregateDonations < user.monthlyLimit) {
       checkUserTriggers(user, tweet, testing, function() {
-        log.info('user has under the monthly limit')
+        log.info('user', user.name || user.email,' has under the monthly limit')
         nextUser()
       })
     } else {
@@ -105,7 +106,7 @@ function processUser(tweet, testing, user, nextUser) {
     }
   } else {
     checkUserTriggers(user, tweet, testing, function() {
-      log.info('user has no monthly limit')
+      log.info('user', user.name || user.email,' has no monthly limit')
       nextUser()
     })
   }
@@ -142,15 +143,16 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
     if (err || !triggers || !triggers.length) {
       if (err) {
         cb()
-        return log.error('error grabbing triggers', err)
+        return log.error('error grabbing triggers for user ', user.name || user.email, 'error: ', err)
       } else {
         cb()
-        return log.info('there are no triggers')
+        return log.info('there are no triggers for user ', user.name || user.email)
       }
     }
-    log.info('grabbed triggers')
+    log.info('grabbed triggers for user', user.name || user.email)
 
     async.eachSeries(triggers, (trigger, triggerFinishedCallback) => {
+      log.info('analyzing trigger', trigger.name)
       var keyword = escapeRegExp(trigger.name)
       var re = new RegExp(keyword)
       // check if there's a match
