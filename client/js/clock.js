@@ -20,21 +20,15 @@ function initializeClock(id) {
   var lastTweet = $('#last-tweet-time')
   var starttime = new Date(lastTweet.data('last-time'))
 
-  var clock = document.getElementById(id);
+  var clock = $('#' + id)
   if (!lastTweet || !clock) {
     return
   }
-  var classList = []
-  clock.classList.forEach(function(className) {
-    if (className != 'hide') {
-      classList.push(className)
-    }
-  })
-  clock.classList = classList
-  var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
+  clock.removeClass('hide')
+  var daysSpan = clock.find('.days')[0];
+  var hoursSpan = clock.find('.hours')[0];
+  var minutesSpan = clock.find('.minutes')[0];
+  var secondsSpan = clock.find('.seconds')[0];
 
   function updateClock() {
     var t = getTimeSince(starttime);
