@@ -15,7 +15,7 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
         access_token_key: user.twitterCreds.accessToken,
         access_token_secret: user.twitterCreds.accessTokenSecret,
       }
-      var T = new Twitter(twitterCreds)
+      var T = new Twitter(userTwitterCreds)
       var status = mkStatus(charity, trigger)
       var status = '@realDonaldTrump @DonateForDonald helped me donate to ' + charity.twitter[0] || charity.name + ' because of this tweet!'
       var replyTweet = {
@@ -33,9 +33,11 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
         callback()
       })
     } else {
+      log.info('user does not have accessToken and accessTokenSecret')
       callback()
     }
   } else {
+    log.info('user does not have twitterCreds')
     callback()
   }
 }

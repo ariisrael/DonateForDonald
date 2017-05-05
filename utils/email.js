@@ -25,7 +25,7 @@ exports.welcomeEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });
@@ -53,7 +53,7 @@ exports.confirmEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });
@@ -81,7 +81,7 @@ exports.forgotEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });
@@ -108,7 +108,7 @@ exports.changedEmail = function (name, email, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });
@@ -141,7 +141,7 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });
@@ -173,7 +173,7 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      log.info('error sending email: ', error)
+      if (error) log.info('error sending email: ', error)
       log.info('response from mailgun: ', body);
       callback(error, body)
     });

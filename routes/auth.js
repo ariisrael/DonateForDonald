@@ -103,8 +103,10 @@ passport.use(new TwitterStrategy({
       user.location = user.location || profile._json.location;
       user.picture = user.picture || profile._json.profile_image_url_https;
       user.twitter = profile.id;
-      user.accessToken = accessToken || undefined;
-      user.accessTokenSecret = tokenSecret || undefined;
+      user.twitterCreds = {
+        accessToken: accessToken || undefined,
+        accessTokenSecret: tokenSecret || undefined
+      }
       user.save(function(err) {
         req.flash('success', { msg: 'Your Twitter account has been linked.' });
         done(err, user);

@@ -43,6 +43,8 @@ exports.updatePayment = (req, res) => {
     email: req.user.email,
   }
   request.post({url: pandapayURL, json: body}, function(error, response, body) {
+    log.info('update payment body: ', body)
+    log.info('update payment error: ', error)
     var id = req.params.id;
     var query = { _id: id };
     User.update(query, {

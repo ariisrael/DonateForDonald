@@ -2,7 +2,6 @@ const mongoose = require('../config/mongo');
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const welcomeEmail = require('../utils/email').welcomeEmail
-const uniqueValidator = require('mongoose-unique-validator');
 
 const createLogger = require('logging').default;
 const log = createLogger('controllers/charities');
@@ -14,7 +13,9 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    index: {
+      unique: true
+    }
   },
   picture: String,
   phone: String,
@@ -64,7 +65,8 @@ UserSchema.pre('save', function(next) {
 UserSchema.pre('save', function(next) {
   var user = this
   if (user.emailConfirmed || user.confirmationToken || user.testUser) {
-    return next();
+    next();
+    return true;
   }
   if (user.facebook) {
     user.emailConfirmed = true
@@ -106,8 +108,6 @@ UserSchema.options.toJSON = {
     }
   },
 };
-
-UserSchema.plugin(uniqueValidator);
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
