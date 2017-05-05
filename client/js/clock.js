@@ -21,6 +21,9 @@ function initializeClock(id) {
   var starttime = new Date(lastTweet.data('last-time'))
 
   var clock = document.getElementById(id);
+  if (!lastTweet || !clock) {
+    return
+  }
   var classList = []
   clock.classList.forEach(function(className) {
     if (className != 'hide') {
