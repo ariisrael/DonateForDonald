@@ -86,14 +86,27 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
 
 function makeDonation(user, trigger, tweet, testing, cb) {
   log.info('making donation')
-  donation = new Donation({
+  Donation.findOne({
     userId: user._id,
     triggerId: trigger._id,
-    amount: trigger.amount,
-    charityId: trigger.charityId._id,
-    tweetId: tweet.id
+    tweetId: tweet.id,
+  }).exec((err, donation) => {
+    if (donation && donation.paid) {
+      log.info('already donated')
+      return cb()
+    }
+
+    donation = new Donation({
+      userId: user._id,
+      triggerId: trigger._id,
+      amount: trigger.amount,
+      charityId: trigger.charityId._id,
+      tweetId: tweet.id,
+      paid: false
+    })
+    donationRequest(user, trigger, tweet, donation, testing, cb)
+
   })
-  donationRequest(user, trigger, tweet, donation, testing, cb)
 }
 
 module.exports = exports = makeDonation
