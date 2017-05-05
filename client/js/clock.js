@@ -39,8 +39,11 @@ function initializeClock(id) {
   function updateClock() {
     var t = getTimeSince(starttime);
     var daysInHours = (t.days * 24);
-    var hoursNew = '0' + (t.hours + daysInHours);
-    hoursSpan.innerHTML = (hoursNew).slice(-2);
+    var hoursNew = (t.hours + daysInHours).toString();
+    if (hoursNew.length < 2) {
+      hoursNew = '0' + hoursNew
+      hoursSpan.innerHTML = hoursNew;
+    }
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
