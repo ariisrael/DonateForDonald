@@ -52,9 +52,9 @@ function getUsers(tweet, testing) {
     var usersBucket = [];
     getAggregateDonations((err, aggregateDonations) => {
       async.eachOfSeries(users, (user, idx, nextUser) => {
-        if (aggregateDonations[user._id] && aggregateDonations[user._id].amount) {
-          log.info('user ', user.name || user.email, ' has ', aggregateDonations[user._id].amount, ' in donations')
-          user.aggregateDonations = aggregateDonations[user._id].amount || 0
+        if (aggregateDonations[user._id]) {
+          log.info('user ', user.name || user.email, ' has ', aggregateDonations[user._id], ' in donations')
+          user.aggregateDonations = aggregateDonations[user._id]
         } else {
           user.aggregateDonations = 0
         }
