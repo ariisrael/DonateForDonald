@@ -1,6 +1,9 @@
 var mailgun = require('../config/mailgun')
 var app = require('../app')
 
+const createLogger = require('logging').default;
+const log = createLogger('email');
+
 exports.welcomeEmail = function (name, email, token, callback) {
   var params = {
     layout: 'email',
@@ -11,7 +14,7 @@ exports.welcomeEmail = function (name, email, token, callback) {
   }
   app.render('email/welcome', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -22,8 +25,8 @@ exports.welcomeEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })
@@ -39,7 +42,7 @@ exports.confirmEmail = function (name, email, token, callback) {
   }
   app.render('email/confirm', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -50,8 +53,8 @@ exports.confirmEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })
@@ -67,7 +70,7 @@ exports.forgotEmail = function (name, email, token, callback) {
   }
   app.render('email/forgot', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -78,8 +81,8 @@ exports.forgotEmail = function (name, email, token, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })
@@ -94,7 +97,7 @@ exports.changedEmail = function (name, email, callback) {
   }
   app.render('email/passwordChanged', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -105,8 +108,8 @@ exports.changedEmail = function (name, email, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })
@@ -114,7 +117,9 @@ exports.changedEmail = function (name, email, callback) {
 
 exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
   // allow this to be configurable
-  if (!app.get('sendOptionalEmail')) return;
+  if (!app.get('sendOptionalEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
@@ -125,7 +130,7 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
   }
   app.render('email/donated', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -136,8 +141,8 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })
@@ -145,7 +150,9 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
 
 exports.paymentFailedEmail = function (name, email, charity, callback) {
   // allow this to be configurable
-  if (!app.get('sendOptionalEmail')) return;
+  if (!app.get('sendOptionalEmail')) {
+    return callback(null, null);
+  };
   var params = {
     layout: 'email',
     name: name,
@@ -155,7 +162,7 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
   }
   app.render('email/payment-failed', params, (err, html) => {
     if (err) {
-      console.log(err)
+      log.info('error rendering email: ', err)
       return callback(err, null)
     }
     var data = {
@@ -166,8 +173,8 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
     };
 
     mailgun.messages().send(data, function (error, body) {
-      console.log(error)
-      console.log(body);
+      log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
       callback(error, body)
     });
   })

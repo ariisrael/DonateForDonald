@@ -53,7 +53,10 @@ function getUsers(tweet, testing) {
     getAggregateDonations((err, aggregateDonations) => {
       async.eachOfSeries(users, (user, idx, nextUser) => {
         if (aggregateDonations[user._id] && aggregateDonations[user._id].amount) {
-          user.aggregateDonations = aggregateDonations[user._id].amount
+          log.info('user ', user.name || user.email, ' has ', aggregateDonations[user._id].amount, ' in donations')
+          user.aggregateDonations = aggregateDonations[user._id].amount || 0
+        } else {
+          user.aggregateDonations = 0
         }
         usersBucket.push(user)
         if (usersBucket.length == 10 || idx == (users.length - 1)) {
@@ -97,16 +100,20 @@ function processUser(tweet, testing, user, nextUser) {
   }
   if (user.monthlyLimit) {
     if (user.aggregateDonations < user.monthlyLimit) {
+      log.info('user', user.name || user.email,
+        ' has ' , user.aggregateDonations,
+        ' in donations, under their monthly limit', user.monthlyLimit)
       checkUserTriggers(user, tweet, testing, function() {
-        log.info('user', user.name || user.email,' has under the monthly limit')
         nextUser()
       })
     } else {
+      log.info('user', user.name || user.email,' has ', user.aggregateDonations,
+      ' in donations, above their monthly limit', user.monthlyLimit)
       nextUser()
     }
   } else {
+    log.info('user', user.name || user.email,' has no monthly limit')
     checkUserTriggers(user, tweet, testing, function() {
-      log.info('user', user.name || user.email,' has no monthly limit')
       nextUser()
     })
   }
@@ -154,7 +161,7 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
     async.eachSeries(triggers, (trigger, triggerFinishedCallback) => {
       log.info('analyzing trigger', trigger.name)
       var keyword = escapeRegExp(trigger.name)
-      var re = new RegExp(keyword)
+      var re = new RegExp(keyword, 'i')
       // check if there's a match
       // a potential optimization is to create only
       // a single regex for all keywords

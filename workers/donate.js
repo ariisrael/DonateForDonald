@@ -49,7 +49,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
     }
     // Log callback parameters
     // console.log('response:', response);
-    log.info('body:', body);
+    log.info('response body:', body);
 
     donation.save((err, d) => {
       log.info('done making donation')
@@ -62,17 +62,20 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
         log.error('A donation failed to save: ', err)
       }
       if (!donation.paid) {
+        log.error('the donation was not paid ')
         return paymentFailedEmail(userName, user.email, trigger.charityId, function(err, body) {
           cb()
         })
       }
       if (trigger.social) {
+        log.info('the user has social')
         var userName = user.name || user.email
         var userEmail = user.email
         donatedEmail(userName, user.email, tweet.text, tweet.id, function(err, body) {
           tweetAtTrump(user, tweet, trigger.charityId, trigger, cb)
         })
       } else {
+        log.info('the user does not have social')
         donatedEmail(userName, user.email, tweet.text, tweet.id, function(err, body) {
           cb()
         })
