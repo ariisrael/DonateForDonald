@@ -43,7 +43,7 @@ function donationRequest(user, trigger, tweet, donation, testing, cb) {
   request.post({url: pandapayURL, json: body}, function(error, response, body) {
     donation.paid = true
     // Handle response error
-    if(error) {
+    if(error || body.error) {
       log.error('error making donation: ', error);
       donation.paid = false
     }
