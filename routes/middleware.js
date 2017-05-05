@@ -3,6 +3,12 @@ const url = require("url")
 const User = require('../models/user')
 const pandapay = require('../config/pandapay')
 
+const models = require('../models');
+const Tweet = models.Tweet;
+
+const createLogger = require('logging').default;
+const log = createLogger('routes/middleware');
+
 require('./session')
 
 app.use((req, res, next) => {
@@ -69,6 +75,26 @@ app.use(function(req, res, next) {
     res.locals.pandapay.public = pandapay.live.public
   }
   next()
+})
+
+app.use((req, res, next) => {
+  Tweet.findOne({
+    testTweet: {
+      $ne: true
+    }
+  })
+    .sort({
+      posted: -1
+    })
+    .exec((err, tweet) => {
+      if (err) {
+        log.error('error getting most recent tweet', err)
+      }
+
+      res.locals.mostRecentTweet = tweet
+      next();
+
+    })
 })
 
 app.use(function(req, res, next) {

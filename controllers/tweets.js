@@ -65,7 +65,13 @@ module.exports = {
     },
     destroy: (req, res) => {
         Tweet.remove({ _id: req.params.id }, (err) => {
-            if(err) return log.error(err);
+            if(err) log.error(err);
+            res.json()
         });
+    },
+    mostRecent: (req, res) => {
+      res.json({
+        tweet: res.locals.mostRecentTweet
+      })
     }
 }

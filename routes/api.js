@@ -33,6 +33,7 @@ api.get('/terms', TermsController.index)
 api.get('/tweets/search', TweetController.find);
 api.get('/triggers/:id', TriggerController.read);
 api.get('/users/:id', USER_ONLY, USER_QUERY, UserController.read);
+api.get('/tweets/most-recent', TweetController.mostRecent);
 api.get('/tweets/:id', TweetController.read);
 
 api.post('/triggers', LOGIN_ONLY, USER_QUERY, TriggerController.create);

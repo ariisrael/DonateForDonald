@@ -39,7 +39,7 @@ function prepareTweet(tweet, testing) {
   var text = getFullText(tweet);
   var id = tweet.id_str;
   var date = tweet.created_at;
-  var t = {text: text, id: id, _id: id, date: date}
+  var t = {text: text, id: id, _id: id, date: date, posted: date}
   log.info("about to save tweet: ", t)
   if (testing) {
     t.testTweet = true

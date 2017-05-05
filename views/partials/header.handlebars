@@ -82,7 +82,8 @@
   </nav>
 </header>
 
-<div id="clockdiv" style="position: fixed; right: 110px; z-index: 999; color: #666; top: 22px">
+<div id="clockdiv" style="position: fixed; right: 110px; z-index: 999; color: #666; top: 22px" class="hide">
+  <meta id='last-tweet-time' data-last-time="{{{mostRecentTweet.posted}}}">
   <div style="color: #999; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 100; margin-left: 5px; font-size: 10px; margin-bottom: 5px;">
 Time Since Last Tweet  </div>
   <div  style="margin: 0 auto; font-size: 22px"><i class="ui icon clock"></i>
@@ -92,47 +93,3 @@ Time Since Last Tweet  </div>
   <span class="seconds"></span>
 </div>
 </div>
-<script>
-function getTimeSince(starttime) {
-var t = Date.parse(new Date()) - Date.parse(starttime);
-var seconds = Math.floor((t / 1000) % 60);
-var minutes = Math.floor((t / 1000 / 60) % 60);
-var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-var days = Math.floor(t / (1000 * 60 * 60 * 24));
-return {
-'total': t,
-'days': days,
-'hours': hours,
-'minutes': minutes,
-'seconds': seconds
-};
-}
-
-function initializeClock(id, starttime) {
-var clock = document.getElementById(id);
-var daysSpan = clock.querySelector('.days');
-var hoursSpan = clock.querySelector('.hours');
-var minutesSpan = clock.querySelector('.minutes');
-var secondsSpan = clock.querySelector('.seconds');
-
-function updateClock() {
-var t = getTimeSince(starttime);
-var daysInHours = (t.days * 24);
-var hoursNew = '0' + t.hours + t.days;
-hoursSpan.innerHTML = (hoursNew).slice(-2);
-minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-if (t.total <= 0) {
-clearInterval(timeinterval);
-}
-}
-
-updateClock();
-var timeinterval = setInterval(updateClock, 1000);
-}
-
-var starttime = new Date(2017, 4, 2, 20, 6, 31, 0);
-
-initializeClock('clockdiv', starttime);
-</script>

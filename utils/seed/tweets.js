@@ -2,6 +2,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+var async = require('async')
+
 const models = require('../../models')
 const Tweet = models.Tweet
 
@@ -33,38 +35,48 @@ function seedTweets(max_id) {
       return console.error("error grabbing tweets", err)
     }
     console.log(data.length)
-    data.forEach((t, index) => {
+    async.eachOf(data, (t, idx, nextTweet) => {
       var text = getFullText(t);
       var id = t.id_str;
       var date = t.created_at;
-      saveTweet({text: text, id: id, _id: id, date: date}, index)
-      if (index === 196) {
-        if (times < 16) {
-          times++
-          seedTweets(id)
-        }
+      var tw = {text: text, id: id, _id: id, date: date, posted: date}
+      saveTweet(tw, () => {
+        nextTweet()
+      })
+    }, (err) => {
+      if (times < 16) {
+        times++
+        var tw = data[data.length - 1]
+        var id = tw.id_str
+        seedTweets(id)
+      } else {
+        process.exit(0)
       }
     })
   })
 }
 
-function saveTweet(tweet, index) {
+function saveTweet(tweet, callback) {
   Tweet.findById(tweet.id, (err, t) => {
     if (err) {
-      return console.error("error grabbing tweet", err)
+      console.error("error grabbing tweet", err)
+      return callback()
     }
     if (t) {
       t.text = tweet.text
+      t.posted = tweet.posted
       t.save((err) => {
         if (err) {
-          return console.error("error creating tweet", err)
+          console.error("error creating tweet", err)
         }
+        return callback()
       })
     } else {
       Tweet.create(tweet, (err, t) => {
         if (err) {
-          return console.error("error creating tweet", err)
+          console.error("error creating tweet", err)
         }
+        return callback()
       })
     }
 
