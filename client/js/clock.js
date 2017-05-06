@@ -1,14 +1,8 @@
 function getTimeSince(starttime) {
-  // var t = Date.parse(new Date()) - Date.parse(starttime);
   var rightNow = moment()
   var then = moment(starttime)
   var diff = rightNow.diff(then)
   var duration = moment.duration(diff)
-
-  // var seconds = Math.floor((t / 1000) % 60);
-  // var minutes = Math.floor((t / 1000 / 60) % 60);
-  // var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  // var days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
     'total': diff,
     'days': duration.get('days'),
