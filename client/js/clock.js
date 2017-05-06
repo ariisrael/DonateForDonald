@@ -1,15 +1,20 @@
 function getTimeSince(starttime) {
-  var t = Date.parse(new Date()) - Date.parse(starttime);
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  // var t = Date.parse(new Date()) - Date.parse(starttime);
+  var rightNow = moment()
+  var then = moment(starttime)
+  var diff = rightNow.diff(then)
+  var duration = moment.duration(diff)
+
+  // var seconds = Math.floor((t / 1000) % 60);
+  // var minutes = Math.floor((t / 1000 / 60) % 60);
+  // var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  // var days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
+    'total': diff,
+    'days': duration.get('days'),
+    'hours': duration.get('hours'),
+    'minutes': duration.get('minutes'),
+    'seconds': duration.get('seconds')
   };
 }
 
@@ -25,7 +30,6 @@ function initializeClock(id) {
     return
   }
   clock.removeClass('hide')
-  var daysSpan = clock.find('.days')[0];
   var hoursSpan = clock.find('.hours')[0];
   var minutesSpan = clock.find('.minutes')[0];
   var secondsSpan = clock.find('.seconds')[0];
@@ -36,8 +40,8 @@ function initializeClock(id) {
     var hoursNew = (t.hours + daysInHours).toString();
     if (hoursNew.length < 2) {
       hoursNew = '0' + hoursNew
-      hoursSpan.innerHTML = hoursNew;
     }
+    hoursSpan.innerHTML = hoursNew;
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
