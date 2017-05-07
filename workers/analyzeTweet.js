@@ -168,13 +168,20 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
       if (re.exec(tweet.text)) {
         log.info('found a match!')
         log.info('trigger: ', JSON.stringify(trigger))
-        makeDonation(user, trigger, tweet, testing, (err) => {
-          triggerFinishedCallback(err)
-        })
+        if (checkTriggerBelowLimit(user, trigger)) {
+          user.aggregateDonations += trigger.amount
+          makeDonation(user, trigger, tweet, testing, (err) => {
+            triggerFinishedCallback(err)
+          })
+        } else {
+          log.info('trigger ', trigger.name,
+            ' with amount ', trigger.amount , ' will put user ',
+            user.name || user.email, ' over their limit')
+          triggerFinishedCallback()
+        }
       } else {
         triggerFinishedCallback()
       }
-
     }, (err) => {
       if (err) {
         log.error('errored out in the donation flow', err)
@@ -182,6 +189,18 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
       userFinishedCallback()
     })
   })
+}
+
+function checkTriggerBelowLimit(user, trigger) {
+  if (user.monthlyLimit) {
+    var donationsTotal = user.aggregateDonations + trigger.amount
+    if (donationsTotal < user.monthlyLimit) {
+      return true
+    }
+  } else {
+    return true
+  }
+  return false
 }
 
 function escapeRegExp(s) {
