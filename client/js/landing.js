@@ -90,6 +90,13 @@ $(document).ready(function() {
     }
   });
 
+  // triggers dropdown
+  $('.triggers .ui.dropdown').dropdown({
+    fullTextSearch: true,
+    sortSelect: true,
+    allowAdditions: true,
+  });
+
   // Update tweet count
   $('.js-tweet-count').text();
   noLinkReload();

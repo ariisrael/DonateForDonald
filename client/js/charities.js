@@ -268,5 +268,5 @@ $(document).ready(function() {
         charitiesOptions += html;
     });
     $(charitiesOptions).appendTo("#charities");
-    $('.ui.dropdown').dropdown({fullTextSearch: true, sortSelect: true});
+    $('.charities .ui.dropdown').dropdown({fullTextSearch: true, sortSelect: true});
 });
