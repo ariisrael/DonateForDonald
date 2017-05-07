@@ -46,9 +46,7 @@ function initializeClock(id) {
 
   function queryForMostRecent() {
     jQuery.get('/api/tweets/most-recent', function(data, textStatus, jqxhr) {
-
       starttime = new Date(data.tweet.posted)
-
     })
   }
 
