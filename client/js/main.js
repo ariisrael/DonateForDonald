@@ -5,6 +5,8 @@ $(document).ready(function () {
       $('.js-maximum-amount').toggleClass('disabled');
     });
 
+  $('header .menu .ui.dropdown').dropdown({});
+
   unsavedNag()
   triggerPage()
 
