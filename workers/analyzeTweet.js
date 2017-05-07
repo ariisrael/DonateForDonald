@@ -194,7 +194,7 @@ function checkUserTriggers(user, tweet, testing, userFinishedCallback) {
 function checkTriggerBelowLimit(user, trigger) {
   if (user.monthlyLimit) {
     var donationsTotal = user.aggregateDonations + trigger.amount
-    if (donationsTotal < user.monthlyLimit) {
+    if (donationsTotal <= user.monthlyLimit) {
       return true
     }
   } else {
