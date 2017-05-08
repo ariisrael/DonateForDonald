@@ -5,6 +5,9 @@ const createLogger = require('logging').default;
 const log = createLogger('email');
 
 exports.welcomeEmail = function (name, email, token, callback) {
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
@@ -33,6 +36,9 @@ exports.welcomeEmail = function (name, email, token, callback) {
 }
 
 exports.confirmEmail = function (name, email, token, callback) {
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
@@ -61,6 +67,9 @@ exports.confirmEmail = function (name, email, token, callback) {
 }
 
 exports.forgotEmail = function (name, email, token, callback) {
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
@@ -89,6 +98,9 @@ exports.forgotEmail = function (name, email, token, callback) {
 }
 
 exports.changedEmail = function (name, email, callback) {
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
@@ -118,6 +130,9 @@ exports.changedEmail = function (name, email, callback) {
 exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
   // allow this to be configurable
   if (!app.get('sendOptionalEmail')) {
+    return callback(null, null);
+  }
+  if (app.get('sendNoEmail')) {
     return callback(null, null);
   }
   var params = {
@@ -152,7 +167,10 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
   // allow this to be configurable
   if (!app.get('sendOptionalEmail')) {
     return callback(null, null);
-  };
+  }
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,

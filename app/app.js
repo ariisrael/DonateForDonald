@@ -35,4 +35,10 @@ if (process.env.SEND_OPTIONAL_EMAIL) {
   app.set('sendOptionalEmail', false)
 }
 
+if (process.env.SEND_NO_EMAIL) {
+  app.set('sendNoEmail', true)
+} else {
+  app.set('sendNoEmail', false)
+}
+
 module.exports = app
