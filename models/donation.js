@@ -11,6 +11,8 @@ const DonationSchema = new Schema({
   amount: { type: Number, min: 0, required: true },
   tweetId: { type: String, ref: 'Tweet' },
   paid: { type: Boolean, default: false },
+  emailed: { type: Boolean, default: false },
+  tweeted: { type: Boolean, default: false },
   uniqueness: {
     type: String,
     unique: true
