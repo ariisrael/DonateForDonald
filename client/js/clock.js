@@ -20,7 +20,7 @@ function initializeClock(id) {
   var starttime = new Date(lastTweet.data('last-time'))
 
   var clock = $('#' + id)
-  if (!lastTweet || !clock) {
+  if (!lastTweet.length || !clock.length) {
     return
   }
   clock.removeClass('hide')
