@@ -19,8 +19,8 @@ exports.welcomeEmail = function (name, email, token, callback) {
     }
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
-      to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Confirm Your Donate For Donald Account',
+      to: email,
+      subject: 'Confirm Your Account To Start Donating',
       html: html
     };
 
@@ -48,7 +48,7 @@ exports.confirmEmail = function (name, email, token, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Confirm Your Donate For Donald Account',
+      subject: 'Confirm Your Account To Start Donating',
       html: html
     };
 
