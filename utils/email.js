@@ -76,7 +76,7 @@ exports.forgotEmail = function (name, email, token, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: 'Reset Your Donate For Donald Password',
+      subject: 'Reset Your Password',
       html: html
     };
 
@@ -102,8 +102,8 @@ exports.changedEmail = function (name, email, callback) {
     }
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
-      to: email, // you need to register the email on mailgun since this is a test account
-      subject: "Your Password Recently Changed - Was It Lyin' Ted?",
+      to: email,
+      subject: "Did You Make Your Password Great Again?",
       html: html
     };
 
@@ -135,8 +135,8 @@ exports.donatedEmail = function (name, email, tweetBody, tweetID, callback) {
     }
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
-      to: email, // you need to register the email on mailgun since this is a test account
-      subject: "You Just Donated For Donald- Read The Tweet!",
+      to: email,
+      subject: "You Just Donated For Donald. CONGRATULATIONS!",
       html: html
     };
 
@@ -168,7 +168,7 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
     var data = {
       from: 'Donate for Donald <' + app.get('email') + '>',
       to: email, // you need to register the email on mailgun since this is a test account
-      subject: "Your Payment information did not work!",
+      subject: 'Your Donation Failed. SAD! Update Your Payment.',
       html: html
     };
 
