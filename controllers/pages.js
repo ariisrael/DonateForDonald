@@ -141,7 +141,10 @@ exports.triggers = function(req, res) {
   }
   Trigger.find({
     userId: req.user.id
-  }).populate('charityId').exec((err, triggers) => {
+  })
+  .populate('charityId')
+  .sort({updatedAt: 1})
+  .exec((err, triggers) => {
       if (err) {
         log.error(err);
       }
