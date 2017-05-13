@@ -27,7 +27,7 @@ function setupSocial(charityTwitter, charityId, triggerName) {
   $('.js-trigger-name').text(triggerName);
   var urlTrigger = triggerName.replace(' ', '+');
   var urlCharity = charityId.replace('-', '');
-  var linkTrigger =  'http://www.donatefordonald.org/trigger=' + urlTrigger + '&charity=' + urlCharity;
+  var linkTrigger =  'http://www.donatefordonald.org?trigger=' + urlTrigger + '&charity=' + urlCharity;
   $('.js-landing-link').prop('href', linkTrigger).text(linkTrigger);
 }
 
