@@ -5,6 +5,8 @@ var PopularTerm = require('../models/term')
 const createLogger = require('logging').default;
 const log = createLogger('popularTerms');
 
+const workerEmitter = require('./workerEmitter')
+
 function findPopularTerms(options, cb) {
   if (!cb) cb = function(){}
   var opts = {count: 1000}

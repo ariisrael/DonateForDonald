@@ -6,7 +6,7 @@ const ObjectId = Schema.ObjectId;
 const TriggerSchema = new Schema({
   name: { type: String, trim: true },
   charityId: { type: String, ref: 'Charity' }, // Charity IDs are eins
-  userId: ObjectId,
+  userId: { type: ObjectId, ref: 'User' },
   amount: { type: Number, min: 1 },
   social: { type: Boolean, default: false },
   active: { type: Boolean, default: true }

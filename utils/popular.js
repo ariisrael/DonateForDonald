@@ -2,6 +2,9 @@ const keyword = require('./gramophone');
 const Twit = require('twit');
 var fs = require('fs')
 
+const createLogger = require('logging').default;
+const log = createLogger('utils/popular');
+
 var T = new Twit({
   consumer_key:         'HSjDtq7x7IjkrcHzEbyMT8QvN',
   consumer_secret:      'V3ewc1zexgaY8A37pDZaLLT0zJ51VZpBsnUAmnfOWcf1zv694y',
@@ -78,8 +81,8 @@ function getPopularTerms(options, callback) {
     }
     T.get('statuses/user_timeline', query, function(err, data, response) {
       if (err) {
-        console.log(err)
-        callback(err, null)
+        log.error('error getting tweets: ', err)
+        return callback(err, null)
       }
       data.forEach((tweet) => {
         tweets[tweet.id_str] = tweet
