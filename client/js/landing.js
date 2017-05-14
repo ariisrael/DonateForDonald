@@ -1,6 +1,5 @@
 $(document).ready(function() {
   // Toggle amount selector buttons between active/inactive
-
   if (!$('.main-landing').length) return;
 
   setupLandingTerms()
@@ -11,6 +10,7 @@ $(document).ready(function() {
     $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
     $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
     $('.left-button button').removeClass('disabled');
+    loadTweets(trigger);
   }
   if(charity) {
       var ein = false;
