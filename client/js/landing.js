@@ -334,6 +334,9 @@ function tweetHtml(id, text) {
 function getLandingInputs() {
   var charity = $('input[name=charity]').val().trim();
   var trigger = $('.js-trigger-text').text().trim();
+  if(trigger.toLowerCase() === 'select a trigger') {
+    trigger = '';
+  }
   var amount = ($('.js-toggle-other').hasClass('selected-amount')) ? $('input[name=amount]').val() : $('.selected-amount').text();
   amount = amount.replace('$', '').trim();
   return {
