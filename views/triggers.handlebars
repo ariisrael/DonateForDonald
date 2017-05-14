@@ -20,7 +20,7 @@
 <div class="ui text container triggers-page" style="margin-top: 0px; padding-top: 0px">
   <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
     <h3 class="ui header no-triggers">
-      No triggers. Sad! <a href="/">Make some.</a>
+      No triggers. Sad!
     </h3>
     <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
     />
@@ -38,7 +38,7 @@
       <div class="content">
         <div class=" ui right floated small horizontal statistic">
 
-          <div class="value">
+          <div class="value js-amount-{{#if this.active}}{{else}}{{/if}}">
             <i class="usd green icon" style="position: relative; left: 10px"></i>
             <span class="trigger-amount">{{this.amount}}<span>
           </div>
@@ -115,9 +115,7 @@
         </div>
       </div>
       {{/each}}
-      {{#if triggers}}
       <a href="/" class="ui primary massive fluid button icon"><i class="ui icon plus"></i> Create New Trigger</a>
-      {{/if}}
     </div>
 
     <div class="ui small modal edit-trigger">
