@@ -17,6 +17,9 @@
           $('.js-confirmed-nag').addClass('hide');
         });
 
+        $('body').on('click', function() {
+          event.preventDefault();
+        });
         setTimeout(function() {
           $('.js-confirmed-nag').addClass('hide');
         }, 3000);
