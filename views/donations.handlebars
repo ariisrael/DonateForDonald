@@ -2,11 +2,14 @@
   {{> header}}
   <div class="ui container top-margin-10">
     <div class="ui center aligned js-no-triggers {{#if_not donations}}{{else}}hide{{/if_not}}">
-      <h3 class="ui header no-triggers">
-        No donations. Sad! <a href="/">Make some triggers!</a>
-      </h3>
-      <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; margin-top: 4%"
+      <h1 class="ui header no-triggers">
+        No donations. Sad!
+      </h1>
+      <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; position: relative; top: -20px"
       />
+      <div class="text container" style="max-width: 500px; margin: 0 auto">
+           <a href="/" class="ui primary massive fluid button icon"><i class="ui icon plus"></i> Create New Trigger</a>
+</div>
     </div>
   <div class="ui items">
   {{#each donations}}
