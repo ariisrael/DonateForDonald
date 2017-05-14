@@ -472,7 +472,7 @@ nav {
         border: none !important;
     }
     footer {
-        display: none;
+        display: none !important;
     }
     .headline {
         font-size: 22px !important;
