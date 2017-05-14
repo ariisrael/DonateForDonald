@@ -182,8 +182,6 @@
         });
       </script>
     </form>
-    <div class="ui divider"></div>
-
     {{!-- <form id="payment-form" method="post" class="ui large form">
       <h3 style="display: inline-block">Payment</h3> {{#if user.paymentToken}}
       <span class="js-payment-status" style="float: right; color: #888; font-size: 80%; margin-bottom: 0px"><i class="ui icon gray check"></i> Valid payment method already saved</span>{{/if}}
@@ -273,9 +271,11 @@
       </div>
     </form>
     {{/if}}
-
     <div class="ui divider"></div>
-
+    <h3 style="display: inline-block">Update Payment</h3> 
+    <p>Coming soon! <a href="mailto:team@donatefordonald.org">Contact us</a> for more information.</p>
+    <div class="ui divider"></div>
+    
     <form id="delete-account" method="post" action="/delete-account" class="ui large form">
       <h3>Account</h3>
       <input type="hidden" name="_csrf" value="{{csrfToken}}">
