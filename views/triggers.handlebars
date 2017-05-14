@@ -63,7 +63,8 @@
           <div class="meta" style="width: 100%">
             <span class="stay charity-name" style="color: #555; font-weight: 300; position: relative; top: 3px"> {{this.charityId.name}}</span>
           </div>
-          <div class="extra " style="position: relative; top: -13px; display: inline-block;">
+          <a href="/donations" target="_blank">
+          <div class="extra" style="position: relative; top: -13px; display: inline-block;">
             <div>
               <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
             </div>
@@ -71,6 +72,7 @@
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
           </div>
+          </a>
 
           <span style="float: right; text-transform: uppercase; color: #999; font-size: 80%; position: relative; top: -7px">
               <i class="ui icon share"></i> Share this
@@ -104,9 +106,9 @@
 
             <a class="ui large circular button twitter icon"
               style="display: inline-block; float: right; position: relative; top: -1px; right: -10px"
-              href="https://twitter.com/intent/tweet?text={{this.twitterShareText}}"><i class="ui twitter icon"></i></a>
+              href="https://twitter.com/intent/tweet?text={{this.twitterShareText}}" target="_blank"><i class="ui twitter icon"></i></a>
 
-            <a class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px" href="https://www.facebook.com/sharer/sharer.php?u={{this.shareUrl}}"><i class="ui facebook icon"></i></a>
+            <a class="ui large circular button facebook icon" style="display: inline-block; float: right; position: relative; top: -1px; right: -10px" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{this.shareUrl}}"><i class="ui facebook icon"></i></a>
 
           </div>
 
