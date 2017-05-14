@@ -112,6 +112,7 @@ $(document).ready(function() {
     if (e.which === 13 || e.which === 1) {
       var term = $('input[name=trigger]').val()
       $('.selected').removeClass('selected');
+      $('.active').addClass('selected');
       $('input[name="trigger"]').val(term);
       if ($('.js-tweet-drawer').hasClass('visible')) {
         loadTweets(term);
