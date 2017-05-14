@@ -38,9 +38,13 @@
       <div class="content">
         <div class=" ui right floated small horizontal statistic">
 
-          <div class="value js-amount-{{#if this.active}}{{else}}{{/if}}">
+          <div class="value js-value-on {{#if_not this.active}}hide{{/if_not}}">
             <i class="usd green icon" style="position: relative; left: 10px"></i>
             <span class="trigger-amount">{{this.amount}}<span>
+          </div>
+          <div class="value js-value-off {{#if this.active}}hide{{/if}}">
+            <i class="usd icon" style="position: relative; left: 10px; color: #999"></i>
+            <span class="trigger-amount" style="color: #aaa">––<span>
           </div>
         </div>
 
@@ -65,10 +69,16 @@
           </div>
           <a href="/donations" target="_blank">
           <div class="extra" style="position: relative; top: -13px; display: inline-block;">
-            <div>
+            <div class="js-value-off {{#if this.active}}hide{{/if}}">
+              <i class="gray twitter icon"></i> {{this.tweetsCount}} tweets
+            </div>
+            <div class="js-value-off {{#if this.active}}hide{{/if}}">
+              <i class="gray money icon"></i> ${{this.donations}} donated
+            </div>
+            <div class="js-value-on {{#if_not this.active}}hide{{/if_not}}">
               <i class="blue twitter icon"></i> {{this.tweetsCount}} tweets
             </div>
-            <div>
+            <div class="js-value-on {{#if_not this.active}}hide{{/if_not}}">
               <i class="green money icon"></i> ${{this.donations}} donated
             </div>
           </div>
