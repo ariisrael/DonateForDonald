@@ -59,8 +59,6 @@ $(document).ready(function() {
       } else {
         // Switch button to hide tweets
         var trigger = $('input[name=trigger]').val().trim();
-
-        loadTweets(trigger);
         $(this).html('<i class="cancel icon"></i> Hide Tweets');
         $('body').css('overflow-y', 'hidden');
         $('html').css('overflow-y', 'hidden');
@@ -114,9 +112,7 @@ $(document).ready(function() {
       $('.selected').removeClass('selected');
       $('.active').addClass('selected');
       $('input[name="trigger"]').val(term);
-      if ($('.js-tweet-drawer').hasClass('visible')) {
         loadTweets(term);
-      }
     }
     validateLanding();
   });
