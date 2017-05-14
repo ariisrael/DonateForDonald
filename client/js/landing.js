@@ -10,7 +10,7 @@ $(document).ready(function() {
     $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
     $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
     $('.left-button button').removeClass('disabled');
-    loadTweets(trigger);
+    loadTweets(trigger.replace('+', ' '));
   }
   if(charity) {
       var ein = false;
