@@ -1,42 +1,45 @@
 <div class="donations-page">
   {{> header}}
-  <div class="ui container top-margin-10">
-    <div class="ui center aligned js-no-triggers {{#if_not donations}}{{else}}hide{{/if_not}}">
-      <h1 class="ui header no-triggers">
-        No donations. Sad!
-      </h1>
-      <img src="images/maxs.png" style="width: 40%; min-width: 300px; display: block; margin: 0 auto; height: auto; position: relative; top: -20px"
-      />
-      <div class="text container" style="max-width: 500px; margin: 0 auto">
-        <a href="/" class="ui primary massive fluid button icon"><i class="ui icon plus"></i> Create New Trigger</a>
-      </div>
-    </div>
-    <div class="ui items">
-      {{#each donations}}
-      <div class="item donation" style="border-bottom: 1px solid #eee; padding-bottom: 10px">
-        <div class="ui fluid image charity-image" style="border-radius: 10px; width: 170px">
-          <img src="{{this.charity.image}}">
-        </div>
-        <div class=" ui charity horizontal statistic">
-          <div class="header trigger-title">
-            {{this.charity.name}}
-          </div>
-        </div>
+  <div class="ui container top-margin-10" style="margin-top:5%">
+    <h1>My Donations</h1>
+    {{#if donations}}
 
-        <div class=" ui horizontal statistic">
-          <div class="donated-value">
-            <i class="usd green icon" style="position: relative; left: 10px"></i>
-            <span class="trigger-amount">{{this.donations.amount}}<span>
-      </div>
-    </div>
-  </div>
-  {{/each}}
-  <!--
+    <table class="ui unstackable single line table">
+
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Charity</th>
+          <th>Tweet</th>
+          <th>Paid</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each donations}}
+
+        <tr>
+          <td><i class="ui icon green plus"></i> ${{this.donations.amount}}</td>
+          <td>{{this.charity.name}}</td>
+          <td><a href="https://twitter.com/realDonaldTrump/status/{{this.donations.tweetId}}">Link</a></td>
+          <td class="center aligned">
+            {{#if this.donations.paid}}
+            <i class="large green checkmark icon"></i> {{else}}
+            <i class="large red cancel icon"></i> {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <p>No donations. <a href="/">Make some triggers!</a></p>
+    {{/if}}
+
+
+    <!--
   {{#each tweets}}
   <pre>{{toJSONPretty this}}</pre>
   {{/each}}
   -->
 
   </div>
-</div>
 </div>

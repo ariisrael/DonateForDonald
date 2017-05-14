@@ -52,7 +52,7 @@ exports.settings = function(req, res) {
 
 exports.terms = function(req, res) {
   res.render('terms', {
-    title: 'terms'
+    title: 'Terms'
   });
 }
 
@@ -73,7 +73,7 @@ exports.donations = function(req, res) {
       }
       if (!result || !result.length) {
         return res.render('donations', {
-          title: 'donations',
+          title: 'Donations',
           donations: undefined
         });
       }
@@ -112,7 +112,7 @@ exports.donations = function(req, res) {
           })
 
           res.render('donations', {
-            title: 'donations',
+            title: 'Donations',
             donations: charitiesResult,
             tweets: tweets
           });
