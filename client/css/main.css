@@ -471,6 +471,9 @@ nav {
     .js-trigger-item {
         border: none !important;
     }
+    footer {
+        display: none;
+    }
     .headline {
         font-size: 22px !important;
         font-weight: 700;
