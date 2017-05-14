@@ -197,3 +197,31 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
     });
   })
 }
+
+exports.monthlyLimitEmail = function (name, email, callback) {
+
+  var params = {
+    layout: 'email',
+    name: name,
+    email: email,
+    baseUrl: app.get('baseUrl')
+  }
+  app.render('email/mothlyLimit', params, (err, html) => {
+    if (err) {
+      log.info('error rendering email: ', err)
+      return callback(err, null)
+    }
+    var data = {
+      from: 'Donate for Donald <' + app.get('email') + '>',
+      to: email, // you need to register the email on mailgun since this is a test account
+      subject: 'You Reached Your Monthly Limit',
+      html: html
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      if (error) log.info('error sending email: ', error)
+      log.info('response from mailgun: ', body);
+      callback(error, body)
+    });
+  })
+}

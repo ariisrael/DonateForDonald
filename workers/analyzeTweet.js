@@ -2,6 +2,8 @@ const config = require('../config/worker'); // Credentials
 const async = require('async')
 var makeDonation = require('./donate')
 var popularTerms = require('./popularTerms')
+const donatedEmail = require('../utils/email').monthlyLimitEmail;
+
 
 const models = require('../models')
 const Tweet = models.Tweet
@@ -141,6 +143,9 @@ function checkUserLimit(user, aggregateDonations, trigger) {
   log.info('user', user.name || user.email,' has ', aggregateDonation,
   ' in donations, above their monthly limit',
   user.monthlyLimit, ' with the new donation of ', newAggregateDonation || aggregateDonation)
+          monthlyLimitEmail(userName, user.email, function(err, body) {
+          cb()
+        })
   return false;
 }
 
