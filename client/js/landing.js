@@ -9,7 +9,8 @@ $(document).ready(function() {
   if(trigger) {
     $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
     $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
-    $('.left-button button').removeClass('disabled');
+    $('.left-button button').css('border', 'inherit').removeClass('disabled');
+
     loadTweets(trigger.replace('+', ' '));
   }
   if(charity) {
