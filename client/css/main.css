@@ -434,7 +434,7 @@ nav {
 
 @media (max-width: 700px) {
   .desktop-only {
-      display: none;
+      display: none !important;
   }
   .no-mobile {
       display: block !important;
@@ -468,7 +468,6 @@ nav {
 
 
 @media only screen and (max-width: 500px) {
-
     .js-trigger-item {
         border: none !important;
     }

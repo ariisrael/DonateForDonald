@@ -1,25 +1,50 @@
 <!-- Redirect users not in process of creating a trigger -->
 <script>
-  var rawTrigger = localStorage.getItem('trigger');
-  if (!rawTrigger) {
-    window.location.replace("/");
-  }
+  $(document).ready(function () {
+    var rawTrigger = localStorage.getItem('trigger');
+    if (!rawTrigger) {
+      window.location.replace("/");
+    }
+    $('.js-user-menu').css('display', 'none');
+    $('#clockdiv').css('right', '0px');
+
+  })
 </script>
 {{> header}}
+
 <main class="social-page">
-  <div class="ui text container web-form">
+  <div class="ui fluid ordered steps desktop-guide" style="height: 60px">
+    <div class="completed step">
+      <div class="content">
+        <div class="title">Choose Trigger</div>
+        <div class="description">Set up donation</div>
+      </div>
+    </div>
+    <div class="completed step">
+      <div class="content">
+        <div class="title">Add Payment</div>
+        <div class="description">Enter credit card</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">Share Donation</div>
+        <div class="description">Autoreply to Donald</div>
+      </div>
+    </div>
+  </div>
+  <div class="ui text container" style="margin-top: 5%">
     <h1>Reply to Donald's Tweet
-      </h1>
+    </h1>
     <div class="ui subheader">
-      When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given more to charity than he ever has - and tag the charity too.
+      When Trump's twitter tirades trigger your donation, you can reply to his tweet automatically to tell him that you've given
+      more to charity than he ever has - and tag the charity too.
     </div>
     {{>tweetpreview}}
     <div class="connect-twitter-btn">
       {{#if user.twitter}}
-        <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Continue</a>
-      {{else}}
-        <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Connect Twitter</a>
-      {{/if}}
+      <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Continue</a>      {{else}}
+      <a class="ui primary icon massive fluid button connect-twitter js-action-btn"><i class="icon twitter"></i> Connect Twitter</a>      {{/if}}
     </div>
     <a class="skip-link js-action-btn">Skip <i class="ui icon right chevron"></i></a>
     <div class="js-no-never" style="margin-top: 20px;">
@@ -31,18 +56,19 @@
   </div>
 </main>
 <script>
-  $('.js-action-btn').on('click', function() {
+  $('.js-action-btn').on('click', function () {
     $('.js-action-btn').addClass('loading');
   });
 
-  $('.js-ask-label').on('click', function() {
+  $('.js-ask-label').on('click', function () {
     var isChecked = $('input[name="donotask"]').prop('checked');
-    if(isChecked) {
-    $('input[name="donotask"]').prop('checked', false);
+    if (isChecked) {
+      $('input[name="donotask"]').prop('checked', false);
 
     } else {
-    $('input[name="donotask"]').prop('checked', true);
+      $('input[name="donotask"]').prop('checked', true);
 
     }
   });
+
 </script>

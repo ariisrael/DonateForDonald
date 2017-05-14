@@ -1,74 +1,114 @@
-  {{> header}}
+<script>
+  $(document).ready(function () {
+    var rawTrigger = localStorage.getItem('trigger');
+    if (!rawTrigger) {
+      window.location.replace("/");
+    }
+    $('.js-user-menu').css('display', 'none');
+    $('#clockdiv').css('right', '0px');
+
+  })
+
+</script>
+{{> header}}
+<style>
+  @media(max-width: 768px) {
+    .desktop-guide {
+      display: none !important;
+    }
+  }
+</style>
+<main class="payment-page">
+
+  <div class="ui fluid ordered steps desktop-guide" style="height: 60px">
+    <div class="completed step">
+      <div class="content">
+        <div class="title">Choose Trigger</div>
+        <div class="description">Set up donation</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">Add Payment</div>
+        <div class="description">Enter credit card</div>
+      </div>
+    </div>
+    <div class="disabled step">
+      <div class="content">
+        <div class="title">Share Donation</div>
+        <div class="description">Autoreply to Donald</div>
+      </div>
+    </div>
+  </div>
   <div class="js-error-payment hide" style="height: 40px; text-align: center; background-color:  #f39c12; color: #fff; width: 100%; padding: 10px;">
     <div class="ui text container">
       <p style="display: inline-block">Invalid payment! <a style="text-decoration: underline; color: #fff" href="mailto:team@donatefordonald.org">Need help?</a></p>
       <a class="ui icon js-close-error-nag" style="cursor: pointer; float: right; display: inline-block; position: relative; top: -2px; color: #fff"><i class="ui medium icon close"></i></a>
-      </div>
     </div>
-  <main class="payment-page">
-    <div class="ui text container web-form">
-      <h1>{{title}}
-      </h1>
-      <div class="ui subheader"><span>Donations are processed when a tweet containing your trigger is posted. Payment processing fees are <a style="display: inline-block; margin-bottom: 0px; padding-bottom: 0px" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 10 cents per donation</a> and tax-deductible donation receipts are emailed monthly.</span>
-      </div>
-      <form class="ui large form" id="payment-form">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <div class="two fields">
-          <div class="field">
-
-            <label>First Name</label>
-
-            <input placeholder="First Name" type="text" name="first_name" data-panda="first_name">
-
-          </div>
-          <div class="field">
-            <label>Last Name</label>
-
-            <input placeholder="Last Name" name="last_name" type="text" data-panda="last_name">
-          </div>
-        </div>
-        <div class="fields">
-          <div class="seven wide field mobile-field">
-            <label>Card Number</label>
-            <input type="text" name="credit_card" maxlength="16" placeholder="Card Number" data-panda="credit_card">
-          </div>
-          <div class="three wide field mobile-field">
-            <label class="mobile-label">CVV</label>
-            <input type="text" name="cvv" maxlength="4" placeholder="CVV" data-panda="cvv">
-          </div>
-          <br>
-          <div class="six wide field mobile-field">
-            <label class="mobile-label">Expiration</label>
-            <input type="text" name="expiration" maxlength="7" placeholder="MM/YYYY" data-panda="expiration">
-          </div>
-        </div>
-    <div class="maximum field">
-      <div class="ui toggle inline checkbox js-maximum-toggle">
-        <input type="checkbox" name="public">
-        <label>Set monthly limit of </label>
-      </div>
-      <div class="ui labeled input disabled js-maximum-amount">
-        <div class="ui basic label">$</div>
-        <input type="text" placeholder="100" maxlength="4">
-      </div>
+  </div>
+  <div class="ui text container" style="margin-top: 5%">
+    <h1>{{title}}
+    </h1>
+    <div class="ui subheader"><span>Donations are processed when a tweet containing your trigger is posted. Payment processing fees are <a style="display: inline-block; margin-bottom: 0px; padding-bottom: 0px" href="https://www.pandapay.io/pricing/" class="forgot-pass">3.9% + 10 cents per donation</a> and tax-deductible donation receipts are emailed monthly.</span>
     </div>
+    <form class="ui large form" id="payment-form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="two fields">
+        <div class="field">
+
+          <label>First Name</label>
+
+          <input placeholder="First Name" type="text" name="first_name" data-panda="first_name">
+
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+
+          <input placeholder="Last Name" name="last_name" type="text" data-panda="last_name">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="seven wide field mobile-field">
+          <label>Card Number</label>
+          <input type="text" name="credit_card" maxlength="16" placeholder="Card Number" data-panda="credit_card">
+        </div>
+        <div class="three wide field mobile-field">
+          <label class="mobile-label">CVV</label>
+          <input type="text" name="cvv" maxlength="4" placeholder="CVV" data-panda="cvv">
+        </div>
+        <br>
+        <div class="six wide field mobile-field">
+          <label class="mobile-label">Expiration</label>
+          <input type="text" name="expiration" maxlength="7" placeholder="MM/YYYY" data-panda="expiration">
+        </div>
+      </div>
+      <div class="maximum field">
+        <div class="ui toggle inline checkbox js-maximum-toggle">
+          <input type="checkbox" name="public">
+          <label>Set monthly limit of </label>
+        </div>
+        <div class="ui labeled input disabled js-maximum-amount">
+          <div class="ui basic label">$</div>
+          <input type="text" placeholder="100" maxlength="4">
+        </div>
+      </div>
       <button class="ui disabled massive button fluid js-action-btn save-payment-btn js-save-payment" type="submit">Save</button>
 
     </form>
-    </div>
-  </main>
-  <script>
-    $('.js-action-btn').on('click', function() {
-        $(this).addClass('loading');
+  </div>
+</main>
+<script>
+  $('.js-action-btn').on('click', function () {
+    $(this).addClass('loading');
 
-  }); 
-  $('input').on('keyup', function() {
+  });
+  $('input').on('keyup', function () {
     validatePayment();
   });
 
   function validatePayment() {
     var inputs = getPaymentInputs();
-    if(inputs.first_name.length > 0 && inputs.last_name.length > 0 && (inputs.credit_card.length === 15 || inputs.credit_card.length === 16) && (inputs.cvv.length === 3 || inputs.cvv.length === 4) && (inputs.expiration.length === 7 && inputs.expiration.indexOf('/') > 0)) {
+    if (inputs.first_name.length > 0 && inputs.last_name.length > 0 && (inputs.credit_card.length === 15 || inputs.credit_card.length === 16) && (inputs.cvv.length === 3 || inputs.cvv.length === 4) && (inputs.expiration.length === 7 && inputs.expiration.indexOf('/') > 0)) {
       console.log('inputs', inputs);
       $('.js-save-payment').addClass('primary').removeClass('disabled');
     } else {
@@ -77,7 +117,7 @@
     }
   }
 
-  $('.js-close-error-nag').on('click', function(){
+  $('.js-close-error-nag').on('click', function () {
     $('.js-error-payment').addClass('hide');
   });
 
@@ -90,6 +130,6 @@
       expiration: $('input[name="expiration"]').val()
     }
   }
-  
-    </script>
+
+</script>
 {{>pandascripts}}
