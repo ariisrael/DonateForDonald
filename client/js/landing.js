@@ -122,6 +122,8 @@ $(document).ready(function() {
   });
   // User selected a charity from dropdown
   $('.js-select-charity').on('click', function () {
+          $('.selected').removeClass('selected');
+      $('.active').addClass('selected');
     validateLanding();
   });
 
