@@ -172,7 +172,7 @@ exports.loginPost = function(req, res, next) {
       } else if (!(user.paymentToken)) {
         res.redirect('/payment');
       } else {
-        res.redirect('/triggers');
+        res.redirect('/');
       }
     });
   })(req, res, next);
