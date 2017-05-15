@@ -83,7 +83,7 @@ gulp.task('clean-images', () => {
 });
 
 gulp.task('images', ['clean-images'], () => {
-  return gulp.src(['client/images/*'])
+  return gulp.src(['client/images/*', 'client/images/**/*'])
   .pipe(gulp.dest('./public/images'))
 })
 
