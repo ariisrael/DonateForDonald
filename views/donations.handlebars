@@ -19,7 +19,7 @@
         <tr>
           <td><i class="ui icon green usd"></i>{{this.donations.amount}}</td>
           <td>{{this.charity.name}}</td>
-          <td><a href="https://twitter.com/realDonaldTrump/status/{{this.donations.tweetId}}">Link</a></td>
+          <td><a href="https://twitter.com/realDonaldTrump/status/{{this.donations.tweetId._id}}">Link</a></td>
         </tr>
         {{/each}}
       </tbody>
@@ -28,12 +28,6 @@
     <p>No donations. <a href="/">Make some triggers!</a></p>
     {{/if}}
 
-
-    <!--
-  {{#each tweets}}
-  <pre>{{toJSONPretty this}}</pre>
-  {{/each}}
-  -->
 
   </div>
 </div>
