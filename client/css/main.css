@@ -703,3 +703,7 @@ body {
 	background-color: transparent;
 	color: inherit;
 }
+
+.donations-page tr:hover {
+	background-color: rgba(85, 172, 238, .2);
+}
