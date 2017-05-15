@@ -11,21 +11,15 @@
           <th>Amount</th>
           <th>Charity</th>
           <th>Tweet</th>
-          <th>Paid</th>
         </tr>
       </thead>
       <tbody>
         {{#each donations}}
 
         <tr>
-          <td><i class="ui icon green plus"></i> ${{this.donations.amount}}</td>
+          <td><i class="ui icon green usd"></i>{{this.donations.amount}}</td>
           <td>{{this.charity.name}}</td>
           <td><a href="https://twitter.com/realDonaldTrump/status/{{this.donations.tweetId}}">Link</a></td>
-          <td class="center aligned">
-            {{#if this.donations.paid}}
-            <i class="large green checkmark icon"></i> {{else}}
-            <i class="large red cancel icon"></i> {{/if}}
-          </td>
         </tr>
         {{/each}}
       </tbody>
