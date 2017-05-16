@@ -49,7 +49,7 @@ $(document).ready(function() {
   $(".mobile-amount")
     .on('keyup', function () {
       validateLanding();
-    });
+    }); 
 
   // User clicked 'View Tweets'
   $('.js-tweets')
@@ -91,10 +91,11 @@ $(document).ready(function() {
 
   // triggers dropdown
   $('.triggers .ui.dropdown').dropdown({
-    fullTextSearch: true,
     sortSelect: true,
     allowAdditions: true,
   });
+
+
 
   // Update tweet count
   $('.js-tweet-count').text();
