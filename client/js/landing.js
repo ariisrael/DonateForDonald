@@ -7,11 +7,11 @@ $(document).ready(function() {
   var trigger = getUrlParameter('trigger');
   var charity = getUrlParameter('charity');
   if(trigger) {
-    $('.js-trigger-text').text(trigger.replace('+', ' ')).removeClass('default');
-    $('input[name="trigger"]').val(trigger.toLowerCase().replace('+', ' '));
+    trigger = trigger.replace(/\+/g, ' ');
+    $('.js-trigger-text').text(trigger).removeClass('default');
+    $('input[name="trigger"]').val(trigger.toLowerCase());
     $('.left-button button').css('border', 'inherit').removeClass('disabled');
-
-    loadTweets(trigger.replace('+', ' '));
+    loadTweets(trigger);
   }
   if(charity) {
       var ein = false;
