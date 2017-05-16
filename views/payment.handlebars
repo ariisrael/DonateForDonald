@@ -1,7 +1,7 @@
 <script>
   $(document).ready(function () {
     var rawTrigger = localStorage.getItem('trigger');
-    if (!rawTrigger) {
+    if (!rawTrigger && (!user || !user.pandaUserId )) {
       window.location.replace("/");
     }
     $('.js-user-menu').css('display', 'none');
