@@ -284,9 +284,7 @@ function noLinkReload() {
       $('.js-trigger-text').removeClass('default')
       $('.js-trigger-item').removeClass('active')
       $('*[data-term="' + trigger + '"]').addClass('active')
-      if ($('.js-tweet-drawer').hasClass('visible')) {
-        loadTweets(trigger);
-      }
+      loadTweets(trigger);
     }
   });
 }
