@@ -2,7 +2,7 @@ const config = require('../config/worker'); // Credentials
 const async = require('async')
 var makeDonation = require('./donate')
 var popularTerms = require('./popularTerms')
-const donatedEmail = require('../utils/email').monthlyLimitEmail;
+const monthlyLimitEmail = require('../utils/email').monthlyLimitEmail;
 
 
 const models = require('../models')
