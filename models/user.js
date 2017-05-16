@@ -70,6 +70,7 @@ UserSchema.pre('save', function(next) {
   }
   if (user.facebook) {
     user.emailConfirmed = true
+    next();
     return true
   }
   crypto.randomBytes(16, function(err, buf) {

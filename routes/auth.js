@@ -44,7 +44,7 @@ passport.use(new FacebookStrategy({
   profileFields: ['name', 'email', 'gender', 'location'],
   passReqToCallback: true
 }, function(req, accessToken, refreshToken, profile, done) {
-  if (req.user) {
+  if (req.user && req.user.id) {
     User.findOne({ facebook: profile.id }, function(err, user) {
       if (user) {
         req.flash('error', { msg: 'There is already an existing account linked with Facebook that belongs to you.' });
@@ -83,6 +83,10 @@ passport.use(new FacebookStrategy({
             facebook: profile.id
           });
           newUser.save(function(err) {
+            log.info('saved user: ', newUser)
+            if (err) {
+              log.error('error saving user ', err)
+            }
             done(err, newUser, {newUser: true});
           });
         }
