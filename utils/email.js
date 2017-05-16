@@ -199,7 +199,12 @@ exports.paymentFailedEmail = function (name, email, charity, callback) {
 }
 
 exports.monthlyLimitEmail = function (name, email, callback) {
-
+  if (!app.get('sendOptionalEmail')) {
+    return callback(null, null);
+  }
+  if (app.get('sendNoEmail')) {
+    return callback(null, null);
+  }
   var params = {
     layout: 'email',
     name: name,
