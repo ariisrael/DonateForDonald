@@ -23,6 +23,11 @@ var charities = [{
         twitter: ['@PPFA', '@PPact'],
         site: 'www.plannedparenthood.org'
     }, {
+        ein: '47-2485464',
+        name: 'Hacker Fund',
+        twitter: ['@TheHackerFund'],
+        site: 'www.hacker.fund'
+    }, {
         ein: '13-1818723',
         name: 'Anti-Defamation League',
         alias: 'ADL',
