@@ -30,10 +30,9 @@ module.exports = {
         return res.json([])
       }
       Tweet.find(
-        params,
-        { score : { $meta: "textScore" } }
+        params
       )
-      .sort({ score : { $meta : 'textScore' } })
+      .sort({ posted: -1 })
       .limit(50)
       .exec((err, tweets) => {
         if (err) {
