@@ -93,10 +93,12 @@ exports.userQuery = function(req, res, next) {
 }
 
 exports.ensureAdmin = function(req, res, next) {
-  if(req.user.admin) {
+  if(req.user && req.user.admin) {
     next();
-  } else {
-    res.redirect('/login');
+  } else if (req.user) {
+    // all admin links should always render to a 404
+    res.status(404)
+    res.render('errors/404')
   }
 }
 

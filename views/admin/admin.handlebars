@@ -1,0 +1,14 @@
+{{> header}}
+
+<div class="ui container text top-margin-10" style="margin-top:5%">
+  <div class="ui center aligned js-no-triggers {{#if_not triggers}}{{else}}hide{{/if_not}}">
+    <h2 class="ui header no-triggers">
+      Minimal Admin Page
+    </h1>
+  </div>
+  <div class="ui center aligned js-no-triggers top-margin-10 {{#if_not triggers}}{{else}}hide{{/if_not}}">
+    <a class="ui link" href="/users">Users</a>
+  </div>
+</div>
+
+{{>footer}}

@@ -53,4 +53,9 @@ api.post('/resend-confirmation-email', LOGIN_ONLY, UserController.sendConfirmati
 
 api.delete('/triggers/:id', LOGIN_ONLY, TriggerController.destroy);
 
+api.use((req, res, next) => {
+  res.status(404)
+  res.json({error: "Not Found"})
+})
+
 module.exports =  api;

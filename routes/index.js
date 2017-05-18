@@ -23,6 +23,7 @@ const CharityController = controllers.charities;
 const PaymentController = controllers.payments;
 
 const LOGIN_ONLY = UserController.ensureAuthenticated;
+const ADMIN_ONLY = UserController.ensureAdmin;
 
 const csrfProtection = csurf({ cookie: true })
 
@@ -51,6 +52,8 @@ app.get('/charities', PageController.charities);
 app.get('/faq', PageController.faq);
 app.get('/tweets', PageController.tweets);
 app.get('/confirm_email', UserController.confirmEmail)
+app.get('/admin', ADMIN_ONLY, PageController.admin)
+app.get('/users', ADMIN_ONLY, PageController.users)
 
 app.get('/account', LOGIN_ONLY, (req, res) => {
   res.redirect('/settings')
@@ -146,3 +149,8 @@ app.get('/auth/twitter/callback', function(req, res, next) {
     return res.redirect('/triggers')
   })(req, res, next);
 });
+
+app.use((req, res, next) => {
+  res.status(404)
+  res.render('errors/404')
+})

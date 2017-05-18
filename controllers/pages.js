@@ -7,10 +7,26 @@ const mongoose = require('mongoose');
 const Trigger = models.Trigger;
 const Charity = models.Charity;
 const Donation = models.Donation;
+const User = models.User;
+
 
 const createLogger = require('logging').default;
 const log = createLogger('controllers/pages');
 
+exports.users = function(req, res) {
+  User
+    .find()
+    .sort({createdAt: -1})
+    .exec((err, users) => {
+    res.render('admin/users', {
+      users: users
+    });
+  })
+};
+
+exports.admin = function(req, res) {
+  res.render('admin/admin', {})
+}
 
 exports.landing = function(req, res) {
   res.render('landing', {
