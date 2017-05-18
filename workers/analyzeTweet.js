@@ -143,9 +143,9 @@ function checkUserLimit(user, aggregateDonations, trigger) {
   log.info('user', user.name || user.email,' has ', aggregateDonation,
   ' in donations, above their monthly limit',
   user.monthlyLimit, ' with the new donation of ', newAggregateDonation || aggregateDonation)
-          monthlyLimitEmail(userName, user.email, function(err, body) {
-          cb()
-        })
+          monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
+            cb()
+          })
   return false;
 }
 
