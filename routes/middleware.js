@@ -26,9 +26,11 @@ app.use(function (req, res, next) {
   // Setup a query
   res.locals.query = {}
 
-  var parsedUrl = url.parse(req.url, true)
+  var parsedUrl = url.parse(req.originalUrl, true)
   var query = parsedUrl.query;
   if (query) res.locals.query = query
+
+  res.locals.url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
   next()
 })
@@ -63,6 +65,8 @@ app.use(function(req, res, next) {
   if (process.env.NODE_ENV !== 'production') {
     res.locals.development = true;
   }
+
+  res
 
   res.locals.pandapay = {
     src: pandapay.src
