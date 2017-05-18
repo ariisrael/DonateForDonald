@@ -251,10 +251,10 @@ exports.confirmEmail = function(req, res) {
         }
         if (!req.isAuthenticated()) {
           req.logIn(user, function(err) {
-            res.redirect('/');
+            res.redirect('/confirmed');
           });
         } else {
-          res.redirect('/?confirmed=true');
+          res.redirect('/confirmed');
         }
       })
     });

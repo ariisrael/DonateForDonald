@@ -46,6 +46,8 @@ exports.notifications = function(req, res) {
   });
 }
 
+
+
 exports.home = function(req, res) {
   res.render('home', {
     title: 'Home',
@@ -226,5 +228,11 @@ exports.tweets = function(req, res) {
 exports.leaderboard = function(req, res) {
   res.render('leaderboard', {
     title: 'Leaderboard'
+  })
+}
+
+exports.confirmed = function(req, res) {
+  res.render('confirmed', {
+    title: 'Confirmed'
   })
 }
