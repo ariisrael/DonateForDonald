@@ -105,7 +105,7 @@ function processTriggers(tweet, aggregateDonations, triggers, testing, callback)
       return nextTrigger()
     }
     if (!checkUserLimit(user, aggregateDonations, trigger)) {
-      monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
+      return monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
         nextTrigger()
       })
     }
