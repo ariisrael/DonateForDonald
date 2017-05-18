@@ -30,7 +30,12 @@ app.use(function (req, res, next) {
   var query = parsedUrl.query;
   if (query) res.locals.query = query
 
-  res.locals.url = req.protocol + '://' + req.get('host') + req.originalUrl;
+  var protocol = req.protocol
+  if (process.env.NODE_ENV === 'production') {
+    protocol = "https"
+  }
+
+  res.locals.url = protocol + '://' + req.get('host') + req.originalUrl;
 
   next()
 })
