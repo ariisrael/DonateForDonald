@@ -211,7 +211,7 @@ exports.monthlyLimitEmail = function (name, email, callback) {
     email: email,
     baseUrl: app.get('baseUrl')
   }
-  app.render('email/mothlyLimit', params, (err, html) => {
+  app.render('email/monthlyLimit', params, (err, html) => {
     if (err) {
       log.info('error rendering email: ', err)
       return callback(err, null)

@@ -105,7 +105,9 @@ function processTriggers(tweet, aggregateDonations, triggers, testing, callback)
       return nextTrigger()
     }
     if (!checkUserLimit(user, aggregateDonations, trigger)) {
-      return nextTrigger()
+      monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
+        nextTrigger()
+      })
     }
     log.info('making donation')
     makeDonation(trigger.userId, trigger, tweet, testing, (err) => {
@@ -143,9 +145,6 @@ function checkUserLimit(user, aggregateDonations, trigger) {
   log.info('user', user.name || user.email,' has ', aggregateDonation,
   ' in donations, above their monthly limit',
   user.monthlyLimit, ' with the new donation of ', newAggregateDonation || aggregateDonation)
-          monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
-            cb()
-          })
   return false;
 }
 
