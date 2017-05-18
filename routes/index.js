@@ -37,6 +37,8 @@ app.use('/api', require('./api'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', PageController.landing);
+app.get('/confirmed', PageController.confirmed);
+
 app.get('/login', csrfProtection, UserController.loginGet);
 app.get('/payment', csrfProtection, UserController.ensureAuthenticated, PageController.payment);
 app.get('/forgot', PageController.reset);
