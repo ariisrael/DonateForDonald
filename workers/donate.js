@@ -94,6 +94,8 @@ function makeDonation(user, trigger, tweet, testing, cb) {
     if (donation && donation.paid) {
       log.info('already donated')
       return cb()
+    } else if (donation) {
+      return donationRequest(user, trigger, tweet, donation, testing, cb)
     }
 
     donation = new Donation({
