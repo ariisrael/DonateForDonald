@@ -4,7 +4,6 @@ const Twitter = require('twit')
 const createLogger = require('logging').default;
 const log = createLogger('worker');
 
-
 function tweetAtTrump(user, tweet, charity, trigger, callback) {
   if (user.twitter && user.twitterCreds) {
     if (user.twitterCreds.accessToken && user.twitterCreds.accessTokenSecret) {
@@ -16,8 +15,7 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
         access_token_secret: user.twitterCreds.accessTokenSecret,
       }
       var T = new Twitter(userTwitterCreds)
-      var status = mkStatus(charity, trigger)
-      var status = '@realDonaldTrump @DonateForDonald helped me donate to ' + charity.twitter[0] || charity.name + ' because of this tweet!'
+      var status = mkStatus(charity, trigger);
       var replyTweet = {
         in_reply_to_status_id: tweet._id,
         status: status
@@ -43,19 +41,12 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
 }
 
 function mkStatus(charity, trigger) {
-  var status = 'I donated to '
-  if (charity.twitter && charity.twitter[0]) {
-    status += charity.twitter[0]
-  } else {
-    status += charity.name
-  }
-
-  status += ' because @realDonaldTrump tweeted "' + trigger.name + '" again #DonateForDonald '
-
-  var url = "http://www.donatefordonald.org/trigger=" + trigger.name + "&charity=" + charity.name
-
-  status += url
-  return status
+  var charityTwitterHandle = charity.twitter[0] ? charity.twitter[0] : charity.name;
+  var queryString = `?trigger=${trigger.name}&charity=${charity._id}`;
+  var shareUrl = `https://www.donatefordonald.org/${encodeURIComponent(queryString)}`;
+  var status = `#DonateForDonald turned this @realDonaldTrump tweet into $${trigger.amount} for @${charityTwitterHandle}! ${shareUrl}`
+  log.info(`created tweet: ${status}`);
+  return status;
 }
 
 module.exports = tweetAtTrump
