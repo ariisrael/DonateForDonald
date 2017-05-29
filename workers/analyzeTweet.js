@@ -27,12 +27,12 @@ var firstDayOfMonth = function() {
 
 module.exports = function analyzeTweet(tweet, testing) {
   log.info('analyzing tweet: ', JSON.stringify(tweet))
-  allTimes = []
-  getTerms(tweet, testing)
+  var sentLimitEmails = {}
+  getTerms(tweet, sentLimitEmails, testing)
 }
 
 
-function getTerms(tweet, testing) {
+function getTerms(tweet, sentLimitEmails, testing) {
   var matchedTerms = []
   var triggerQuery = { $or: [] }
 
@@ -49,13 +49,13 @@ function getTerms(tweet, testing) {
       nextTerm()
     }, (err) => {
       log.info('finished analyzing terms for tweet: ', tweet)
-      analyzeTriggers(tweet, triggerQuery, testing)
+      analyzeTriggers(tweet, triggerQuery, sentLimitEmails, testing)
     })
 
   })
 }
 
-function analyzeTriggers(tweet, triggerQuery, testing) {
+function analyzeTriggers(tweet, triggerQuery, sentLimitEmails, testing) {
   getAggregateDonations((err, aggregateDonations) => {
     if (err) {
       log.info('error getting aggregate donations: ', err)
@@ -74,7 +74,7 @@ function analyzeTriggers(tweet, triggerQuery, testing) {
             triggersBucket.push(trigger)
           }
           if (triggersBucket.length == 10 || idx == (triggers.length - 1)) {
-            processTriggers(tweet, aggregateDonations, triggersBucket, testing, (err) => {
+            processTriggers(tweet, aggregateDonations, triggersBucket, sentLimitEmails, testing, (err) => {
               triggersBucket = []
               nextTrigger()
             })
@@ -96,7 +96,7 @@ function analyzeTriggers(tweet, triggerQuery, testing) {
   })
 }
 
-function processTriggers(tweet, aggregateDonations, triggers, testing, callback) {
+function processTriggers(tweet, aggregateDonations, triggers, sentLimitEmails, testing, callback) {
   async.eachSeries(triggers, (trigger, nextTrigger) => {
     log.info('trigger: ', trigger)
     var user = trigger.userId;
@@ -105,9 +105,14 @@ function processTriggers(tweet, aggregateDonations, triggers, testing, callback)
       return nextTrigger()
     }
     if (!checkUserLimit(user, aggregateDonations, trigger)) {
-      return monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
-        nextTrigger()
-      })
+      if (sentLimitEmails[user.id]) {
+        return nextTrigger()
+      } else {
+        return monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
+          sentLimitEmails[user.id] = true
+          nextTrigger()
+        })
+      }
     }
     log.info('making donation')
     makeDonation(trigger.userId, trigger, tweet, testing, (err) => {
