@@ -42,9 +42,9 @@ function tweetAtTrump(user, tweet, charity, trigger, callback) {
 
 function mkStatus(charity, trigger) {
   var charityTwitterHandle = charity.twitter[0] ? charity.twitter[0] : charity.name;
-  var queryString = `?trigger=${trigger.name}&charity=${charity._id}`;
-  var shareUrl = `https://www.donatefordonald.org/${encodeURIComponent(queryString)}`;
-  var status = `#DonateForDonald turned this @realDonaldTrump tweet into $${trigger.amount} for @${charityTwitterHandle} ${shareUrl}`
+  var queryString = `?trigger=${trigger.name.replace(/\s/g, '+')}&charity=${charity._id}`;
+  var shareUrl = `https://www.donatefordonald.org/${queryString}`;
+  var status = `#DonateForDonald turned this @realDonaldTrump tweet into $${trigger.amount} for ${charityTwitterHandle} ${shareUrl}`
   log.info(`created tweet: ${status}`);
   return status;
 }
