@@ -106,8 +106,10 @@ function processTriggers(tweet, aggregateDonations, triggers, sentLimitEmails, t
     }
     if (!checkUserLimit(user, aggregateDonations, trigger)) {
       if (sentLimitEmails[user.id]) {
+        log.info('already sent user email for ', user.name, ' going to next trigger')
         return nextTrigger()
       } else {
+        log.info('have not sent user email for ', user.name, ' sending it')
         return monthlyLimitEmail(user.name || user.email, user.email, function(err, body) {
           sentLimitEmails[user.id] = true
           nextTrigger()
