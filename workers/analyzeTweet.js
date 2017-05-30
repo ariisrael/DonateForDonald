@@ -156,6 +156,9 @@ function checkUserLimit(user, aggregateDonations, trigger) {
 }
 
 function getAggregateDonations(callback) {
+  // This is a test log to ensure this works
+  // remove if it does work
+  log.info('the first day of the month is: ', firstDayOfMonth())
   Donation.aggregate([{
       $match: {
         createdAt: { $gte: firstDayOfMonth() },
