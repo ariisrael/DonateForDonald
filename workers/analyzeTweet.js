@@ -104,6 +104,10 @@ function processTriggers(tweet, aggregateDonations, triggers, sentLimitEmails, t
       log.info('user ', user.name || user.email, ' does not have a panda user id')
       return nextTrigger()
     }
+    if (!trigger.active) {
+      log.info('trigger ', trigger.name, ' for user ', user.name || user.email, ' is not active')
+      return nextTrigger()
+    }
     if (!checkUserLimit(user, aggregateDonations, trigger)) {
       if (sentLimitEmails[user.id]) {
         log.info('already sent user email for ', user.name, ' going to next trigger')
