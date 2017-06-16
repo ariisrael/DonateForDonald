@@ -291,7 +291,7 @@ function noLinkReload() {
 }
 
 function setupLandingTerms() {
-  var whitelist = ['Ocare', 'North Korea', 'Kim Jung Un', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice', 'unmasking'];
+  var whitelist = ['Witch Hunt', 'Ocare', 'North Korea', 'Kim Jung Un', 'Chicago', 'inner cities', 'sad', 'total scam', 'Obama', 'Jobs, Jobs, Jobs', 'ratings', 'The Apprentice', 'unmasking'];
   var blacklist = ['washinon', 'jobs jobs jobs'];
 
   jQuery.getJSON('/api/terms', function (data) {
